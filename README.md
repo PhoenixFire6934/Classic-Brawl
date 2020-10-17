@@ -49,7 +49,7 @@ To connect to your server, you need a custom client. Here the only solution is t
 * Discord: Vitalik#1685
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/PhoenixFire6879/brawl-downloader/issues).
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/PhoenixFire6879/Classic-Brawl/issues).
 
 ## Show your support
 
