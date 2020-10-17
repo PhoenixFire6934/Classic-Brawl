@@ -1,4 +1,8 @@
 class Players:
+
+	resourcesList = {
+
+	}
 	
 	HighID = 0
 	LowID = 0

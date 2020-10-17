@@ -13,16 +13,19 @@ class OwnHomeData(Writer):
         DataBase.loadAccount(self)
 
         self.writeVint(2020007)
-        self.writeVint(75158)
-        self.writeVint(self.player.trophies)
+        self.writeVint(75158) # timestamp
 
-        self.writeVint(99999)
+        self.writeVint(self.player.trophies) # trophies
+        self.writeVint(self.player.trophies) # max reached trophies
+
         self.writeVint(122)
         self.writeVint(100)  # reward for trophy road
 
         self.writeVint(1262469)  # starting level (exp points)
+
         self.writeVint(28)
         self.writeVint(self.player.profileIcon)  # player icon ID
+
         self.writeVint(43)
         self.writeVint(self.player.namecolor)  # player name color ID
 
@@ -40,15 +43,14 @@ class OwnHomeData(Writer):
         self.writeVint(29)
         self.writeVint(14)
         self.writeVint(29)
-        self.writeVint(self.player.skinID)
+
+        self.writeVint(self.player.skinID) # skinID
         self.writeVint(29)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)  # "token limit reached message" if value is 1
+
+        for i in range(0,6):
+            self.writeVint(0)
+
+        self.writeVint(0)  # "token limit reached message" if 1
         self.writeVint(1)
         self.writeVint(1)
         self.writeVint(0)
@@ -67,25 +69,29 @@ class OwnHomeData(Writer):
         self.writeVint(2)
         self.writeVint(2)
         self.writeVint(2)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(140)
+
+        for i in range(0,4):
+            self.writeVint(0)
+
+        self.writeVint(100) # available tokens
         self.writeVint(1140)
+
         self.writeBoolean(True)  # tickets enabled
         self.writeVint(0)
         self.writeVint(self.player.tickets)  # tickets number
         self.writeVint(-21)
         self.writeVint(16)
+
         self.writeVint(self.player.brawlerID)
-        self.writeString("IL")  # location
-        self.writeString("Vitalik & Phoenix")
+
+        self.writeString("RO")  # location
+        self.writeString("") # supported content creator
+
         self.writeVint(-133169153)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
+
+        for i in range(0,4):
+            self.writeVint(0)
+
         self.writeVint(2019053)
         self.writeVint(100)
         self.writeVint(10)
@@ -124,196 +130,33 @@ class OwnHomeData(Writer):
         self.writeVint(23)
         self.writeVint(24)
 
-        self.writeVint(9)  # slots count
+        totalSlots = 9
+        mapsList = [7, 32, 17, 24, 0, 202, 97, 167, 174]
+        self.writeVint(totalSlots)  # map slots count
 
-        self.writeVint(-133000102)  # map slot starts here (i think)
-        self.writeVint(1)
-        self.writeVint(0)
-        self.writeVint(75992)
-        self.writeVint(10)
-        self.writeVint(15)
+        for i in range(0, totalSlots):
 
-        self.writeVint(7)  # game mode slot map id
+            self.writeVint(-133000102)  # map slot starts here
+            self.writeVint(i)
+            self.writeVint(0)
+            self.writeVint(75992)
+            self.writeVint(10)
+            self.writeVint(15)
 
-        self.writeVint(3)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)  # # map slot ends here
+            self.writeVint(int(mapsList[i]))  # game mode slot map id
 
-        self.writeVint(-133000102)
-        self.writeVint(2)
-        self.writeVint(0)
-        self.writeVint(75992)
-        self.writeVint(10)
-        self.writeVint(15)
+            self.writeVint(3)
+            self.writeVint(0)
+            self.writeVint(0)
+            self.writeVint(0)
+            self.writeVint(0)
+            self.writeVint(0)
+            self.writeVint(0)
+            self.writeVint(0)
+            self.writeVint(0)
+            self.writeVint(0)
+            self.writeVint(0)  # map slot ends here
 
-        self.writeVint(32)
-
-        self.writeVint(3)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-
-        self.writeVint(-133000102)
-        self.writeVint(3)
-        self.writeVint(0)
-        self.writeVint(75992)
-        self.writeVint(10)
-        self.writeVint(15)
-
-        self.writeVint(17)
-
-        self.writeVint(3)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-
-        self.writeVint(-133000102)
-        self.writeVint(4)
-        self.writeVint(0)
-        self.writeVint(75992)
-        self.writeVint(10)
-        self.writeVint(15)
-
-        self.writeVint(0)
-
-        self.writeVint(3)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-
-        self.writeVint(-133000102)
-        self.writeVint(5)
-        self.writeVint(0)
-        self.writeVint(75992)
-        self.writeVint(10)
-        self.writeVint(15)
-
-        self.writeVint(24)
-
-        self.writeVint(3)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-
-        self.writeVint(-133000102)
-        self.writeVint(6)
-        self.writeVint(0)
-        self.writeVint(75992)
-        self.writeVint(10)
-        self.writeVint(15)
-
-        self.writeVint(202)
-
-        self.writeVint(3)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-
-        self.writeVint(-133000102)
-        self.writeVint(7)
-        self.writeVint(0)
-        self.writeVint(75992)
-        self.writeVint(10)
-        self.writeVint(15)
-
-        self.writeVint(97)
-
-        self.writeVint(3)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-
-        self.writeVint(-133000102)
-        self.writeVint(8)
-        self.writeVint(0)
-        self.writeVint(75992)
-        self.writeVint(10)
-        self.writeVint(15)
-
-        self.writeVint(167)
-
-        self.writeVint(3)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-
-        self.writeVint(-133000102)
-        self.writeVint(9)
-        self.writeVint(0)
-        self.writeVint(75992)
-        self.writeVint(10)
-        self.writeVint(15)
-
-        self.writeVint(174)
-
-        self.writeVint(3)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(3)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
 
         self.writeVint(0)
         self.writeVint(8)
@@ -404,7 +247,8 @@ class OwnHomeData(Writer):
             self.writeVint(1)
 
         self.writeVint(1207959551)
-        self.writeVint(38)
+        self.writeVint(38) # brawlers count
+
         self.writeVint(23)
         self.writeVint(0)
         self.writeVint(1)
@@ -512,11 +356,15 @@ class OwnHomeData(Writer):
         self.writeVint(1)
         self.writeVint(5)
         self.writeVint(1)
+
+
         self.writeVint(99999)  # brawl box tokens (100 tokens = 1 brawl box)
         self.writeVint(5)
+
         self.writeVint(8)
         self.writeVint(self.player.gold)  # gold
         self.writeVint(5)
+        
         self.writeVint(9)
         self.writeVint(99999)  # big box tokens (10 tokens = 1 big box)
 
@@ -1317,7 +1165,7 @@ class OwnHomeData(Writer):
 
         self.writeVint(16)
         self.writeVint(0)
-        self.writeVint(2)  # shelly "new" tag (value shows in game +1, so value 2 = power 9)
+        self.writeVint(2)  # shelly "new" tag
         self.writeVint(16)
         self.writeVint(1)
         self.writeVint(2)  # colt "new" tag
@@ -1422,38 +1270,29 @@ class OwnHomeData(Writer):
 
         self.writeVint(2)
 
-        self.writeVint(self.player.gems)
+        self.writeVint(self.player.gems) # gems
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(100)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
+
+        for i in range(0, 7):
+            self.writeVint(0)
+
         self.writeVint(2)
         self.writeVint(1550832808)
         self.writeVint(-1040385)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
+        for i in range(0, 4):
+            self.writeVint(0)
         self.writeVint(-33)
         self.writeVint(-49)
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(2)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
+        for i in range(0, 4):
+            self.writeVint(0)
         self.writeVint(-1040385)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
+        for i in range(0, 4):
+            self.writeVint(0)
 
 
 

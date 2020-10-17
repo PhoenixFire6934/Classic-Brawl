@@ -20,10 +20,12 @@ class LoginOk(Writer):
         self.writeString(self.player.Token)  # Token
         self.writeString()
         self.writeString()
-        self.writeInt(27)  # MajorVersion
-        self.writeInt(140)  # Build
+
+        self.writeInt(26)  # MajorVersion
+        self.writeInt(165)  # Build
         self.writeInt(1)  # MinorVersion
-        self.writeString("prod")  # Environment
+
+        self.writeString("dev")  # Environment
         self.writeInt(1) 
         self.writeInt(1)  
         self.writeInt(62) 
@@ -32,7 +34,7 @@ class LoginOk(Writer):
         self.writeString()  
         self.writeInt(0)
         self.writeString() 
-        self.writeString("IL")
+        self.writeString("RO")
         self.writeString()
         self.writeInt(1)
         self.writeString()  
