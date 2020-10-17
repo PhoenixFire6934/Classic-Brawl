@@ -4,7 +4,7 @@
 
 ### 🏠 [Homepage](https://github.com/PhoenixFire6879/Classic-Brawl/blob/master/README.md)
 
-![ScreenShot](https://cdn.discordapp.com/attachments/704364452891590778/766966907927527424/Screenshot_20201017-131137_BS_v26.jpg) 
+![ScreenShot](https://cdn.discordapp.com/attachments/704364452891590778/767068467966377985/Screenshot_20201017-195220_Classic_Brawl.jpg) 
 
 ## Prerequisites
 
