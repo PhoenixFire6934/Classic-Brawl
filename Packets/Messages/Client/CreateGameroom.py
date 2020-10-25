@@ -17,7 +17,7 @@ class CreateGameroom(BSMessageReader):
     def decode(self):
         self.read_Vint()
         self.mapID = self.read_Vint()
-        print(mapID)
+
         
 
     def process(self):
