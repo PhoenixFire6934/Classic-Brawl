@@ -1,5 +1,5 @@
 from Utils.Writer import Writer
-from database.DataBase import DataBase
+from Database.DataBase import DataBase
 
 class SetNameResponse(Writer):
 

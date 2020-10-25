@@ -1,6 +1,6 @@
 from Utils.Writer import Writer
 import random
-from database.DataBase import DataBase
+from Database.DataBase import DataBase
 
 class ServerBox(Writer):
 

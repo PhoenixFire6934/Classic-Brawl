@@ -7,6 +7,7 @@ from threading import *
 from Logic.Device import Device
 from Logic.Player import Players
 from Packets.Factory import packets
+from Utils.Config import Config
 
 logging.basicConfig(filename="errors.log", level=logging.INFO, filemode="w")
 
@@ -26,7 +27,12 @@ class Server:
 
 	def start(self):
 		if not os.path.exists('./data.db'):
-			os.mknod('./data.db') # create database file if does not exist
+			open('data.db', 'w').close()
+		if not os.path.exists('./config.json'):
+			print("Creating config.json...")
+			Config.create_config(self)
+
+
 
 		self.server.bind((self.ip, self.port))
 		_(f'Server started! Ip: {self.ip}, Port: {self.port}')

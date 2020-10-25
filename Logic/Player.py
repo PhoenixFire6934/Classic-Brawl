@@ -1,8 +1,23 @@
+import json
+import sys
+from Utils.Config import Config
+
 class Players:
 
-	resourcesList = {
 
-	}
+	try:
+		config = open('config.json', 'r')
+		content = config.read()
+	except FileNotFoundError:
+		print("Creating config.json...")
+		Config.create_config()
+		config = open('config.json', 'r')
+		content = config.read()
+
+
+
+	settings = json.loads(content)
+
 	
 	HighID = 0
 	LowID = 0
@@ -13,9 +28,9 @@ class Players:
 	brawlerID = 0
 	skinID = 0
 	trophies = 99999
-	gems = 99999
-	gold = 99999
-	tickets = 99999
+	gems = settings['Gems']
+	gold = settings['Gold']
+	tickets = settings['Tickets']
 	name = None
 	profileIcon = 0
 	brawlBoxes = 99999

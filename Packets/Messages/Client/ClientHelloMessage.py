@@ -3,12 +3,11 @@ from string import ascii_uppercase
 import json
 
 from Logic.Player import Players
-from Packets.Messages.Server.KeepAliveOK import KeepAliveOk
+from Packets.Messages.Server.LoginFailedMessage import LoginFailed
 
 from Utils.Reader import BSMessageReader
 
-
-class KeepAlive(BSMessageReader):
+class ClientHello(BSMessageReader):
     def __init__(self, client, player, initial_bytes):
         super().__init__(initial_bytes)
         self.player = player
@@ -18,4 +17,6 @@ class KeepAlive(BSMessageReader):
         pass
 
     def process(self):
-        KeepAliveOk(self.client, self.player).send()
+        self.player.errorID = 8 
+        self.player.errorText = "The server does not support your version"
+        LoginFailed(self.client, self.player).send()

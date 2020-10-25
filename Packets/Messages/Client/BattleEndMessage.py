@@ -3,8 +3,8 @@ from string import ascii_uppercase
 import json
 
 from Logic.Player import Players
-from Packets.Messages.Server.BattleResult import BattleResult
-from Packets.Messages.Server.Battle2Result import Battle2Result
+from Packets.Messages.Server.BattleResultMessage import BattleResult
+from Packets.Messages.Server.BattleResult2Message import Battle2Result
 
 from Utils.Reader import BSMessageReader
 

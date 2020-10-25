@@ -1,7 +1,7 @@
 from Utils.Reader import BSMessageReader
-from Packets.Messages.Server.ServerBox import ServerBox
-from Packets.Messages.Server.GameroomData import GameroomData
-from database.DataBase import DataBase
+from Packets.Commands.Server.Buy_Brawl_Box_Callback import ServerBox
+from Packets.Messages.Server.TeamGameroomDataMessage import GameroomData
+from Database.DataBase import DataBase
 
 
 class EndClientTurn(BSMessageReader):

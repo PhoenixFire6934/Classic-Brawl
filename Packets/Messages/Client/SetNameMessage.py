@@ -3,7 +3,7 @@ from string import ascii_uppercase
 import json
 
 from Logic.Player import Players
-from Packets.Messages.Server.SetNameResponse import SetNameResponse
+from Packets.Commands.Server.Change_Name_Callback import SetNameResponse
 
 from Utils.Reader import BSMessageReader
 

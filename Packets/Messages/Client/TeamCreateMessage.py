@@ -3,7 +3,7 @@ from string import ascii_uppercase
 import json
 
 from Logic.Player import Players
-from Packets.Messages.Server.GameroomData import GameroomData
+from Packets.Messages.Server.TeamGameroomDataMessage import GameroomData
 
 from Utils.Reader import BSMessageReader
 
@@ -17,7 +17,7 @@ class CreateGameroom(BSMessageReader):
     def decode(self):
         self.read_Vint()
         self.mapID = self.read_Vint()
-        print(mapID)
+
         
 
     def process(self):

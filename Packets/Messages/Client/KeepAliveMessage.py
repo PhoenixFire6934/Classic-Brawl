@@ -3,19 +3,19 @@ from string import ascii_uppercase
 import json
 
 from Logic.Player import Players
-from Packets.Messages.Server.GameroomData import GameroomData
+from Packets.Messages.Server.KeepAliveOkMessage import KeepAliveOk
 
 from Utils.Reader import BSMessageReader
 
 
-class GameroomGadget(BSMessageReader):
+class KeepAlive(BSMessageReader):
     def __init__(self, client, player, initial_bytes):
         super().__init__(initial_bytes)
         self.player = player
         self.client = client
 
     def decode(self):
-        self.player.useGadget = self.read_Vint()
+        pass
 
     def process(self):
-        GameroomData(self.client, self.player).send()
+        KeepAliveOk(self.client, self.player).send()

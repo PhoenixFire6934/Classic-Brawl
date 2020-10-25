@@ -4,15 +4,15 @@ import json
 import time
 
 from Logic.Player import Players
-from Packets.Messages.Server.LoginOk import LoginOk
-from Packets.Messages.Server.OwnHomeData import OwnHomeData
-from Packets.Messages.Server.DoNotDistrubServer import DoNotDistrubServer
-from Packets.Messages.Server.GameroomData import GameroomData
+from Packets.Messages.Server.LoginOkMessage import LoginOk
+from Packets.Messages.Server.OwnHomeDataMessage import OwnHomeData
+from Packets.Messages.Server.DoNotDistrubServerMessage import DoNotDistrubServer
+from Packets.Messages.Server.TeamGameroomDataMessage import GameroomData
 
-from Packets.Messages.Server.LoginFailed import LoginFailed
+from Packets.Messages.Server.LoginFailedMessage import LoginFailed
 from Utils.Reader import BSMessageReader
 from Utils.Helpers import Helpers
-from database.DataBase import DataBase
+from Database.DataBase import DataBase
 
 class Login(BSMessageReader):
     def __init__(self, client, player, initial_bytes):

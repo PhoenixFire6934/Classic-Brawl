@@ -1,14 +1,15 @@
 from random import choice
 from string import ascii_uppercase
+from Database.DataBase import DataBase
 import json
 
 from Logic.Player import Players
-from Packets.Messages.Server.ClubProfileMessage import ClubProfileMessage
+from Packets.Messages.Server.TeamLeftMessage import RoomDisconnect
 
 from Utils.Reader import BSMessageReader
 
 
-class OpenClubMessage(BSMessageReader):
+class QuitRoom(BSMessageReader):
     def __init__(self, client, player, initial_bytes):
         super().__init__(initial_bytes)
         self.player = player
@@ -18,4 +19,6 @@ class OpenClubMessage(BSMessageReader):
         pass
 
     def process(self):
-        ClubProfileMessage(self.client, self.player).send()
+        self.player.roomID = 0
+        DataBase.replaceValue(self, 'roomID', self.player.roomID)
+        RoomDisconnect(self.client, self.player).send()

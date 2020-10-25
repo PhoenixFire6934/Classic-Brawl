@@ -3,11 +3,12 @@ from string import ascii_uppercase
 import json
 
 from Logic.Player import Players
-from Packets.Messages.Server.LoginFailed import LoginFailed
+from Packets.Messages.Server.AllianceDataMessage import ClubProfileMessage
 
 from Utils.Reader import BSMessageReader
 
-class ClientHello(BSMessageReader):
+
+class OpenClubMessage(BSMessageReader):
     def __init__(self, client, player, initial_bytes):
         super().__init__(initial_bytes)
         self.player = player
@@ -17,6 +18,4 @@ class ClientHello(BSMessageReader):
         pass
 
     def process(self):
-        self.player.errorID = 8 
-        self.player.errorText = "The server does not support your version"
-        LoginFailed(self.client, self.player).send()
+        ClubProfileMessage(self.client, self.player).send()
