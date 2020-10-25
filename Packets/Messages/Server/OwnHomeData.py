@@ -379,7 +379,7 @@ class OwnHomeData(Writer):
 
 
         for i in range(76, 95):
-            print(i)
+ 
 
             self.writeVint(23)
             self.writeVint(i)
@@ -396,7 +396,7 @@ class OwnHomeData(Writer):
         i = 109
 
         for x in range(0, 5):
-            print(i)
+
 
             self.writeVint(23)
             self.writeVint(i)
@@ -404,7 +404,7 @@ class OwnHomeData(Writer):
             i+=5
 
         for i in range(134, 172):
-            print(i)
+
 
             self.writeVint(23)
             self.writeVint(i)
@@ -417,7 +417,7 @@ class OwnHomeData(Writer):
 
 
         for i in range(174, 176):
-            print(i)
+
 
             self.writeVint(23)
             self.writeVint(i)
