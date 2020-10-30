@@ -344,7 +344,9 @@ class OwnHomeData(Writer):
         for i in range(0,32):
             self.writeVint(16)
             self.writeVint(i)
-            self.writeVint(1440)  # hmm what could this be?
+            self.writeVint(1440)  # Upgrade poitns
+   
+
         self.writeVint(16)
         self.writeVint(32)
         self.writeVint(1440)
