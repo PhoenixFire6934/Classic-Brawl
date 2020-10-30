@@ -27,14 +27,21 @@ class Players:
 	roomID = 0
 	brawlerID = 0
 	skinID = 0
-	trophies = 99999
+
+	brawler_power_level = settings['BrawlerPowerLevel']
+	brawler_trophies_for_rank = settings['BrawlerTrophiesForRank']
+	brawler_trophies = settings['BrawlerTrophies']
+	brawler_upgrade_points = settings['BrawlerUpgradePoints']
+	trophies = settings['Trophies']
 	gems = settings['Gems']
 	gold = settings['Gold']
 	tickets = settings['Tickets']
 	name = None
 	profileIcon = 0
-	brawlBoxes = 99999
-	bigBoxes = 99999
+	brawlBoxes = settings['BrawlBoxTokens']
+	bigBoxes = settings['BigBoxTokens']
+	starPoints = settings['Starpoints']
+
 	shellySkin = 0
 	nitaSkin = 0
 	coltSkin = 0
