@@ -48,7 +48,7 @@ To connect to your server, you need a custom client. Here the only solution is t
 
 👤 **Vitalik**
 * Github: [@VitalikObject](https://github.com/VitalikObject)
-* Discord: Vitalik#1685
+* Discord: Vitalik Uchiha#1685
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/PhoenixFire6879/Classic-Brawl/issues).
