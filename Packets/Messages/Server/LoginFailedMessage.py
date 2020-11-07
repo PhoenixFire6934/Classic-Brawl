@@ -3,22 +3,33 @@ from Utils.Writer import Writer
 
 class LoginFailed(Writer):
 
-    def __init__(self, client, player):
+    def __init__(self, client, player, msg):
         super().__init__(client)
         self.id = 20103
         self.player = player
+        self.msg = msg
 
     def encode(self):
-        self.writeInt(8)
-        self.writeString()
-        self.writeString()
-        self.writeString()
-        self.writeString("https://github.com/VitalikObject")
-        self.writeString("The server does not support your version")
-        self.writeHexa('''2E0000012C000000000000000000''')
-        self.writeString()
-        self.writeString()
-        self.writeString()
-        self.writeString()
-        self.writeHexa('''00FFFF0000000000''')
+        self.writeInt(self.player.err_code) # error code
+        self.writeString() # fingerprint
+
+        self.writeString() # null
+
+        self.writeString() # patch url
+        self.writeString(self.player.updateUrl) # update url
+        self.writeString(self.msg) # message
+
+        self.writeHexa('''00 00 00 00 00 FF FF FF FF 00 00 00 02''') # unknown
+
+        self.writeString() # patch url
+        self.writeString() # rackcdn url
+
+        self.writeInt(0)
+        self.writeInt(0) # time left ?
+
+        self.writeString() # null
+        self.writeString() # null
+
+        self.writeHexa('''02 00 00 00 00 00 00 00 00 00''') # unknown
+
         print("[INFO] Message LoginFailed has been sent.")

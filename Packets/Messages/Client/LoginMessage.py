@@ -31,7 +31,10 @@ class Login(BSMessageReader):
 
     def process(self):
         if self.major != 26:
-            LoginFailed(self.client, self.player).send()
+            LoginFailed(self.client, self.player, "The server does not support your version").send()
+        if self.player.maintenance:
+            LoginFailed(self.client, self.player, "").send()
+
         elif self.player.LowID != 0:
             LoginOk(self.client, self.player).send()
             DataBase.loadAccount(self) # load account

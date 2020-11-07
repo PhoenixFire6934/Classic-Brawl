@@ -42,6 +42,16 @@ class Players:
 	bigBoxes = settings['BigBoxTokens']
 	starPoints = settings['Starpoints']
 
+	updateUrl = "https://github.com/PhoenixFire6879/Classic-Brawl"
+
+	err_code = 7
+	maintenance = False
+
+
+	if settings['Maintenance']:
+		err_code = 10
+		maintenance = True
+
 	messageTick = 0
 
 	shellySkin = 0
