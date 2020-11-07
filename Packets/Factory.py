@@ -1,5 +1,6 @@
 from Packets.Messages.Client.ClientHelloMessage import ClientHello
 from Packets.Messages.Client.LoginMessage import Login
+from Packets.Messages.Client.AllianceChatMessage import AllianceChat
 from Packets.Messages.Client.KeepAliveMessage import KeepAlive
 from Packets.Messages.Client.TeamCreateMessage import CreateGameroom
 from Packets.Messages.Client.GoHomeFromOfflinePractiseMessage import Exit
@@ -28,12 +29,14 @@ packets = {
     14109: Exit,
     14110: BattleEnd,
     14113: AskProfile,
-    14303: OpenClubMessage,
+    14302: OpenClubMessage,
+    14315: AllianceChat,
     14350: CreateGameroom,
     14353: QuitRoom,
     14363: ChangeMap,
     14354: ChangeBrawlerInRoom,
     14372: GameroomGadget,
     14600: ChangeName,
-    14777: DoNotDistrub
+    14777: DoNotDistrub,
+
 }

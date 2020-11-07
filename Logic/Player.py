@@ -42,6 +42,8 @@ class Players:
 	bigBoxes = settings['BigBoxTokens']
 	starPoints = settings['Starpoints']
 
+	messageTick = 0
+
 	shellySkin = 0
 	nitaSkin = 0
 	coltSkin = 0

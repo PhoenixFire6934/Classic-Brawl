@@ -6,6 +6,7 @@ import time
 from Logic.Player import Players
 from Packets.Messages.Server.LoginOkMessage import LoginOk
 from Packets.Messages.Server.OwnHomeDataMessage import OwnHomeData
+from Packets.Messages.Server.AllianceOwnHomeDataMessage import AllianceOwnHomeData
 from Packets.Messages.Server.DoNotDistrubServerMessage import DoNotDistrubServer
 from Packets.Messages.Server.TeamGameroomDataMessage import GameroomData
 
@@ -35,6 +36,7 @@ class Login(BSMessageReader):
             LoginOk(self.client, self.player).send()
             DataBase.loadAccount(self) # load account
             OwnHomeData(self.client, self.player).send()
+            AllianceOwnHomeData(self.client, self.player).send()
             if self.player.DoNotDistrub == 1:
                 DoNotDistrubServer(self.client, self.player).send()
             if self.player.roomID > 0:
@@ -46,4 +48,5 @@ class Login(BSMessageReader):
             self.player.Token = Helpers.randomStringDigits(self)
             LoginOk(self.client, self.player).send()
             OwnHomeData(self.client, self.player).send()
+            AllianceOwnHomeData(self.client, self.player).send()
             
