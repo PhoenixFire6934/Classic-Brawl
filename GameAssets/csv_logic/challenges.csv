@@ -1,0 +1,8 @@
+"Name","ChallengeId","FileName","Locale","LogoAsset","EventAsset","BannerSWF","EventBanner","RewardItem","RewardUnlockedItem","HeaderFrame","TID","StageTID","RewardTID","CompletedTID","RewardPopupTID","BattleEndHeaderTID","BattleEndWinLabelTID","BattleEndWinTID","StartNotification","ReminderNotification","TeaserTitleTID","TeaserInfoTID"
+"string","int","string","StringArray","StringArray","string","string","string","string","string","string","string","string","string","string","string","string","string","string","string","string","string","string"
+"ChampionShip",0,"sc/ui.sc","EN","bsc_logo_en","event_info_championship_challenge","sc/events.sc","event_bs_challenge_banner","championship_challenge_qualify","championship_challenge_qualify","basic","TID_CC_POPUP_TITLE","TID_CC_POPUP_WINS_FOR_EVENT","TID_CC_POPUP_QUALIFY_INFO","TID_CC_POPUP_QUALIFY_INFO_COMPLETED","TID_QUALIFIED_INFO","TID_EVENT_LABEL_CHAMPIONSHIP_CHALLENGE","TID_BATTLE_END_CC_QUALIFY_LABEL","TID_BATTLE_END_CC_QUALIFY_INFO","CCStart","CCReminder","TID_CC_TEASER_TITLE","TID_CC_TEASER_INFO"
+,,,"JP","bsc_logo_jp",,,,,,,,,,,,,,,,,,
+,,,"KR","bsc_logo_kr",,,,,,,,,,,,,,,,,,
+,,,"CN","bsc_logo_cns",,,,,,,,,,,,,,,,,,
+,,,"CNT","bsc_logo_cnt",,,,,,,,,,,,,,,,,,
+"PSG",1,"sc/ui.sc",,"psg_logo","event_info_psg_challenge","sc/events.sc","event_psg_challenge_banner","championship_challenge_qualify_psg","psg_logo","psg","TID_CC_POPUP_1_TITLE","TID_POPUP_WINS_FOR_EVENT_PSG","TID_CC_POPUP_QUALIFY_INFO_PSG","TID_CC_POPUP_QUALIFY_INFO_COMPLETED","TID_QUALIFIED_INFO_PSG","TID_CC_POPUP_1_TITLE","TID_BATTLE_END_CHALLENGE_WIN_LABEL","TID_BATTLE_END_PSG_CHALLENGE_WIN_INFO","PSGStart","PSGReminder","TID_PSG_TEASER_TITLE","TID_PSG_TEASER_INFO"

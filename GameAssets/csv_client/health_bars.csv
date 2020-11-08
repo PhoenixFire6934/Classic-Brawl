@@ -1,0 +1,3 @@
+"Name","FileName","PlayerExportNameTop","PlayerExportNameBot","EnemyExportNameTop","EnemyExportNameBot","YourTeamExportNameTop","YourTeamExportNameBot"
+"String","String","String","String","String","String","String","String"
+"Medium","sc/ui.sc","player_info_badge","player_info_badge_btm","enemy_info_badge","enemy_info_badge_btm","yourteam_info_badge","teammate_info_badge_btm"

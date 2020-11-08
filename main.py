@@ -78,7 +78,8 @@ class ClientThread(Thread):
 						message.decode()
 						message.process()
 					else:
-						_(f'Packet don\'t handled! Id: {packet_id}')
+						_(f'Packet not handled! Id: {packet_id}')
+
 				if time.time() - last_packet > 10:
 					print(f"[INFO] Ip: {self.address[0]} disconnected!")
 					self.client.close()

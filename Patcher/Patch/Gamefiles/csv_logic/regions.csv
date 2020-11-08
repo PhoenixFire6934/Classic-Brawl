@@ -1,0 +1,268 @@
+Name,TID,DisplayName,IsCountry
+String,String,String,boolean
+_EU,,Europe,FALSE
+_NA,,North America,FALSE
+_SA,,South America,FALSE
+_AS,,Asia,FALSE
+_AU,,Australia,FALSE
+_AF,,Africa,FALSE
+_INT,TID_REGION_INT,International,FALSE
+AF,,Afghanistan,TRUE
+AX,,Åland Islands,TRUE
+AL,,Albania,TRUE
+DZ,,Algeria,TRUE
+AS,,American Samoa,TRUE
+AD,,Andorra,TRUE
+AO,,Angola,TRUE
+AI,,Anguilla,TRUE
+AQ,,Antarctica,TRUE
+AG,,Antigua and Barbuda,TRUE
+AR,,Argentina,TRUE
+AM,,Armenia,TRUE
+AW,,Aruba,TRUE
+AC,,Ascension Island,TRUE
+AU,,Australia,TRUE
+AT,,Austria,TRUE
+AZ,,Azerbaijan,TRUE
+BS,,Bahamas,TRUE
+BH,,Bahrain,TRUE
+BD,,Bangladesh,TRUE
+BB,,Barbados,TRUE
+BY,,Belarus,TRUE
+BE,,Belgium,TRUE
+BZ,,Belize,TRUE
+BJ,,Benin,TRUE
+BM,,Bermuda,TRUE
+BT,,Bhutan,TRUE
+BO,,Bolivia,TRUE
+BA,,Bosnia and Herzegovina,TRUE
+BW,,Botswana,TRUE
+BV,,Bouvet Island,TRUE
+BR,,Brazil,TRUE
+IO,,British Indian Ocean Territory,TRUE
+VG,,British Virgin Islands,TRUE
+BN,,Brunei,TRUE
+BG,,Bulgaria,TRUE
+BF,,Burkina Faso,TRUE
+BI,,Burundi,TRUE
+KH,,Cambodia,TRUE
+CM,,Cameroon,TRUE
+CA,,Canada,TRUE
+IC,,Canary Islands,TRUE
+CV,,Cape Verde,TRUE
+BQ,,Caribbean Netherlands,TRUE
+KY,,Cayman Islands,TRUE
+CF,,Central African Republic,TRUE
+EA,,Ceuta and Melilla,TRUE
+TD,,Chad,TRUE
+CL,,Chile,TRUE
+CN,,China,TRUE
+CX,,Christmas Island,TRUE
+CC,,Cocos (Keeling) Islands,TRUE
+CO,,Colombia,TRUE
+KM,,Comoros,TRUE
+CG,,Congo (DRC),TRUE
+CD,,Congo (Republic),TRUE
+CK,,Cook Islands,TRUE
+CR,,Costa Rica,TRUE
+CI,,Côte d’Ivoire,TRUE
+HR,,Croatia,TRUE
+CU,,Cuba,TRUE
+CW,,Curaçao,TRUE
+CY,,Cyprus,TRUE
+CZ,,Czech Republic,TRUE
+DK,,Denmark,TRUE
+DG,,Diego Garcia,TRUE
+DJ,,Djibouti,TRUE
+DM,,Dominica,TRUE
+DO,,Dominican Republic,TRUE
+EC,,Ecuador,TRUE
+EG,,Egypt,TRUE
+SV,,El Salvador,TRUE
+GQ,,Equatorial Guinea,TRUE
+ER,,Eritrea,TRUE
+EE,,Estonia,TRUE
+ET,,Ethiopia,TRUE
+FK,,Falkland Islands,TRUE
+FO,,Faroe Islands,TRUE
+FJ,,Fiji,TRUE
+FI,,Finland,TRUE
+FR,,France,TRUE
+GF,,French Guiana,TRUE
+PF,,French Polynesia,TRUE
+TF,,French Southern Territories,TRUE
+GA,,Gabon,TRUE
+GM,,Gambia,TRUE
+GE,,Georgia,TRUE
+DE,,Germany,TRUE
+GH,,Ghana,TRUE
+GI,,Gibraltar,TRUE
+GR,,Greece,TRUE
+GL,,Greenland,TRUE
+GD,,Grenada,TRUE
+GP,,Guadeloupe,TRUE
+GU,,Guam,TRUE
+GT,,Guatemala,TRUE
+GG,,Guernsey,TRUE
+GN,,Guinea,TRUE
+GW,,Guinea-Bissau,TRUE
+GY,,Guyana,TRUE
+HT,,Haiti,TRUE
+HM,,Heard & McDonald Islands,TRUE
+HN,,Honduras,TRUE
+HK,,Hong Kong,TRUE
+HU,,Hungary,TRUE
+IS,,Iceland,TRUE
+IN,,India,TRUE
+ID,,Indonesia,TRUE
+IR,,Iran,TRUE
+IQ,,Iraq,TRUE
+IE,,Ireland,TRUE
+IM,,Isle of Man,TRUE
+IL,,Israel,TRUE
+IT,,Italy,TRUE
+JM,,Jamaica,TRUE
+JP,,Japan,TRUE
+JE,,Jersey,TRUE
+JO,,Jordan,TRUE
+KZ,,Kazakhstan,TRUE
+KE,,Kenya,TRUE
+KI,,Kiribati,TRUE
+XK,,Kosovo,TRUE
+KW,,Kuwait,TRUE
+KG,,Kyrgyzstan,TRUE
+LA,,Laos,TRUE
+LV,,Latvia,TRUE
+LB,,Lebanon,TRUE
+LS,,Lesotho,TRUE
+LR,,Liberia,TRUE
+LY,,Libya,TRUE
+LI,,Liechtenstein,TRUE
+LT,,Lithuania,TRUE
+LU,,Luxembourg,TRUE
+MO,,Macau,TRUE
+MK,,Macedonia (FYROM),TRUE
+MG,,Madagascar,TRUE
+MW,,Malawi,TRUE
+MY,,Malaysia,TRUE
+MV,,Maldives,TRUE
+ML,,Mali,TRUE
+MT,,Malta,TRUE
+MH,,Marshall Islands,TRUE
+MQ,,Martinique,TRUE
+MR,,Mauritania,TRUE
+MU,,Mauritius,TRUE
+YT,,Mayotte,TRUE
+MX,,Mexico,TRUE
+FM,,Micronesia,TRUE
+MD,,Moldova,TRUE
+MC,,Monaco,TRUE
+MN,,Mongolia,TRUE
+ME,,Montenegro,TRUE
+MS,,Montserrat,TRUE
+MA,,Morocco,TRUE
+MZ,,Mozambique,TRUE
+MM,,Myanmar (Burma),TRUE
+NA,,Namibia,TRUE
+NR,,Nauru,TRUE
+NP,,Nepal,TRUE
+NL,,Netherlands,TRUE
+NC,,New Caledonia,TRUE
+NZ,,New Zealand,TRUE
+NI,,Nicaragua,TRUE
+NE,,Niger,TRUE
+NG,,Nigeria,TRUE
+NU,,Niue,TRUE
+NF,,Norfolk Island,TRUE
+KP,,North Korea,TRUE
+MP,,Northern Mariana Islands,TRUE
+NO,,Norway,TRUE
+OM,,Oman,TRUE
+PK,,Pakistan,TRUE
+PW,,Palau,TRUE
+PS,,Palestine,TRUE
+PA,,Panama,TRUE
+PG,,Papua New Guinea,TRUE
+PY,,Paraguay,TRUE
+PE,,Peru,TRUE
+PH,,Philippines,TRUE
+PN,,Pitcairn Islands,TRUE
+PL,,Poland,TRUE
+PT,,Portugal,TRUE
+PR,,Puerto Rico,TRUE
+QA,,Qatar,TRUE
+RE,,Réunion,TRUE
+RO,,Romania,TRUE
+RU,,Russia,TRUE
+RW,,Rwanda,TRUE
+BL,,Saint Barthélemy,TRUE
+SH,,Saint Helena,TRUE
+KN,,Saint Kitts and Nevis,TRUE
+LC,,Saint Lucia,TRUE
+MF,,Saint Martin,TRUE
+PM,,Saint Pierre and Miquelon,TRUE
+WS,,Samoa,TRUE
+SM,,San Marino,TRUE
+ST,,São Tomé and Príncipe,TRUE
+SA,,Saudi Arabia,TRUE
+SN,,Senegal,TRUE
+RS,,Serbia,TRUE
+SC,,Seychelles,TRUE
+SL,,Sierra Leone,TRUE
+SG,,Singapore,TRUE
+SX,,Sint Maarten,TRUE
+SK,,Slovakia,TRUE
+SI,,Slovenia,TRUE
+SB,,Solomon Islands,TRUE
+SO,,Somalia,TRUE
+ZA,,South Africa,TRUE
+KR,,South Korea,TRUE
+SS,,South Sudan,TRUE
+ES,,Spain,TRUE
+LK,,Sri Lanka,TRUE
+VC,,St. Vincent & Grenadines,TRUE
+SD,,Sudan,TRUE
+SR,,Suriname,TRUE
+SJ,,Svalbard and Jan Mayen,TRUE
+SZ,,Swaziland,TRUE
+SE,,Sweden,TRUE
+CH,,Switzerland,TRUE
+SY,,Syria,TRUE
+TW,,Taiwan,TRUE
+TJ,,Tajikistan,TRUE
+TZ,,Tanzania,TRUE
+TH,,Thailand,TRUE
+TL,,Timor-Leste,TRUE
+TG,,Togo,TRUE
+TK,,Tokelau,TRUE
+TO,,Tonga,TRUE
+TT,,Trinidad and Tobago,TRUE
+TA,,Tristan da Cunha,TRUE
+TN,,Tunisia,TRUE
+TR,,Turkey,TRUE
+TM,,Turkmenistan,TRUE
+TC,,Turks and Caicos Islands,TRUE
+TV,,Tuvalu,TRUE
+UM,,U.S. Outlying Islands,TRUE
+VI,,U.S. Virgin Islands,TRUE
+UG,,Uganda,TRUE
+UA,,Ukraine,TRUE
+AE,,United Arab Emirates,TRUE
+GB,,United Kingdom,TRUE
+US,,United States,TRUE
+UY,,Uruguay,TRUE
+UZ,,Uzbekistan,TRUE
+VU,,Vanuatu,TRUE
+VA,,Vatican City,TRUE
+VE,,Venezuela,TRUE
+VN,,Vietnam,TRUE
+WF,,Wallis and Futuna,TRUE
+EH,,Western Sahara,TRUE
+YE,,Yemen,TRUE
+ZM,,Zambia,TRUE
+ZW,,Zimbabwe,TRUE
+CUSTOM1,TID_REGION_CUSTOM1,,FALSE
+CUSTOM2,TID_REGION_CUSTOM2,,FALSE
+CUSTOM3,TID_REGION_CUSTOM3,,FALSE
+CUSTOM4,TID_REGION_CUSTOM4,,FALSE
+CUSTOM5,TID_REGION_CUSTOM5,,FALSE

@@ -4,7 +4,7 @@
 
 ### 🏠 [Homepage](https://github.com/PhoenixFire6879/Classic-Brawl/blob/master/README.md)
 
-![ScreenShot](https://cdn.discordapp.com/attachments/704364452891590778/767068467966377985/Screenshot_20201017-195220_Classic_Brawl.jpg) 
+![ScreenShot](https://cdn.discordapp.com/attachments/704364452891590778/771794463793872966/Screenshot_20201030-195527_Brawl_Client.jpg) 
 
 ## Prerequisites
 
@@ -34,7 +34,7 @@
 
 
 ## Configure client
-To connect to your server, you need a custom client. Here the only solution is to use a [pre-made client](https://www.dropbox.com/s/tjjhv2dzmh2542f/BS-Client.apk?dl=0). Just replace the IP in the frida-gadget config with yours (```/lib/armeabi-v7a/libgg.config.so```) ```{"interaction":{"interaction":{"type":"script","path":"libscript.so","on_change":"reload","parameters":{"redirectHost":"YOUR_IP","relocate":true}}}```
+To connect to your server, you need a custom client. Here the only solution is to use a [pre-made client](https://mega.nz/file/7eADFSoK#OCUfaKBD2EfMLZ6sIE5i60A7A53mCZr7l45KixgsRHU). Just replace the IP in the frida-gadget config with yours (```/lib/armeabi-v7a/libgg.config.so```) ```{"interaction":{"interaction":{"type":"script","path":"libscript.so","on_change":"reload","parameters":{"redirectHost":"YOUR_IP","relocate":true}}}```
 
 
 
@@ -48,7 +48,7 @@ To connect to your server, you need a custom client. Here the only solution is t
 
 👤 **Vitalik**
 * Github: [@VitalikObject](https://github.com/VitalikObject)
-* Discord: Vitalik#1685
+* Discord: Vitalik Uchiha#1685
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/PhoenixFire6879/Classic-Brawl/issues).

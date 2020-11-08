@@ -39,8 +39,10 @@ class OwnHomeData(Writer):
         self.writeVint(8)
         self.writeVint(9)
         self.writeVint(10)
+
         self.writeVint(3)
         self.writeVint(29)
+
         self.writeVint(14)
         self.writeVint(29)
 
@@ -50,7 +52,7 @@ class OwnHomeData(Writer):
         for i in range(0,6):
             self.writeVint(0)
 
-        self.writeVint(0)  # "token limit reached message" if true
+        self.writeBoolean(False)  # "token limit reached message" if true
 
         self.writeVint(1)
         self.writeVint(1)
@@ -122,12 +124,12 @@ class OwnHomeData(Writer):
         for i in range(20, 25):
             self.writeVint(i)
 
-        totalSlots = 9
-        mapsList = [7, 32, 17, 24, 0, 202, 97, 167, 174]
-        self.writeVint(totalSlots)  # map slots count
+        totalSlots = 10
+        mapsList = [7, 32, 17, 0,  24, 202, 97, 167, 174]
+        self.writeVint(totalSlots -1 )  # map slots count
 
-        for i in range(0, totalSlots):
-
+        for i in range(1, totalSlots):
+            
             self.writeVint(-133000102)  # map slot starts here
             self.writeVint(i)
             self.writeVint(0)
@@ -135,7 +137,7 @@ class OwnHomeData(Writer):
             self.writeVint(10)
             self.writeVint(15)
 
-            self.writeVint(int(mapsList[i]))  # game mode slot map id
+            self.writeVint(int(mapsList[i - 1]))  # game mode slot map id
 
             self.writeVint(3)
             self.writeVint(0)
@@ -184,15 +186,15 @@ class OwnHomeData(Writer):
 
         self.writeVint(4)
 
-        self.writeVint(20)  # first coin pack price
-        self.writeVint(50)  # second coin pack price
-        self.writeVint(140)  # third coin pack price
-        self.writeVint(280)  # fourth coin pack price
+        self.writeVint(20)    # first coin pack price
+        self.writeVint(50)    # second coin pack price
+        self.writeVint(140)   # third coin pack price
+        self.writeVint(280)   # fourth coin pack price
 
         self.writeVint(4)
 
-        self.writeVint(150)  # first coin pack amount
-        self.writeVint(400)  # second coin pack amount
+        self.writeVint(150)   # first coin pack amount
+        self.writeVint(400)   # second coin pack amount
         self.writeVint(1200)  # third  coin pack amount
         self.writeVint(2600)  # fourth  coin pack amount
 
@@ -240,7 +242,7 @@ class OwnHomeData(Writer):
 
         self.writeVint(1207959551)
 
-        self.writeVint(38) # brawlers count
+        self.writeVint(39)
 
 
         i = 0
@@ -283,98 +285,92 @@ class OwnHomeData(Writer):
             self.writeVint(1)
             i += 18            
 
-
         self.writeVint(5)
         self.writeVint(1)
 
 
-        self.writeVint(99999)  # brawl box tokens (100 tokens = 1 brawl box)
-        self.writeVint(5)
+        self.writeVint(self.player.brawlBoxes)  # brawl box tokens (100 tokens = 1 brawl box)
 
+        self.writeVint(5)
         self.writeVint(8)
+
         self.writeVint(self.player.gold)  # gold
         self.writeVint(5)
-        
         self.writeVint(9)
-        self.writeVint(99999)  # big box tokens (10 tokens = 1 big box)
+
+        self.writeVint(self.player.bigBoxes)  # big box tokens (10 tokens = 1 big box)
+
+        self.writeVint(5)
+        self.writeVint(10)
+
+        self.writeVint(self.player.starPoints)
 
 
         # brawlers trophies 
         self.writeVint(35)  # brawlers count
 
-        for i in range(0, 32):
+        for i in range(0, 33):
             self.writeVint(16)
             self.writeVint(i)
-            self.writeVint(99999)
+            self.writeVint(self.player.brawler_trophies)
         # exceptions
         self.writeVint(16)
-        self.writeVint(32)
-        self.writeVint(99999)  # max trophies
-        self.writeVint(16)
         self.writeVint(34)
-        self.writeVint(99999)  # jacky trophies
+        self.writeVint(self.player.brawler_trophies)  # jacky trophies
         self.writeVint(16)
         self.writeVint(37)
-        self.writeVint(99999)  # sprout trophies
+        self.writeVint(self.player.brawler_trophies)  # sprout trophies
 
 
         # brawlers trophies for rank
         self.writeVint(35)  # brawlers count
 
-        for i in range(0,32):
+        for i in range(0,33):
             self.writeVint(16)
             self.writeVint(i)
-            self.writeVint(99999)
+            self.writeVint(self.player.brawler_trophies_for_rank)
         # exceptions
         self.writeVint(16)
-        self.writeVint(32)
-        self.writeVint(99999)  # max trophies for rank
-        self.writeVint(16)
         self.writeVint(34)
-        self.writeVint(99999)  # jacky trophies for rank
+        self.writeVint(self.player.brawler_trophies_for_rank)  # jacky trophies for rank
         self.writeVint(16)
         self.writeVint(37)
-        self.writeVint(99999)  # sprout trophies for rank
+        self.writeVint(self.player.brawler_trophies_for_rank)  # sprout trophies for rank
 
         self.writeVint(0)
 
-       # unkown part
+       # upgrade poitns
         self.writeVint(35)  # brawlers count
 
-        for i in range(0,32):
+        for i in range(0,33):
             self.writeVint(16)
             self.writeVint(i)
-            self.writeVint(1440)  # Upgrade poitns
+            self.writeVint(self.player.brawler_upgrade_points)  # Upgrade poitns
    
-
-        self.writeVint(16)
-        self.writeVint(32)
-        self.writeVint(1440)
+        # exceptions
         self.writeVint(16)
         self.writeVint(34)
-        self.writeVint(1440)
+        self.writeVint(self.player.brawler_upgrade_points)
         self.writeVint(16)
         self.writeVint(37)
-        self.writeVint(1440)
+        self.writeVint(self.player.brawler_upgrade_points)
 
 
         # brawlers power level
         self.writeVint(35)  # brawlers count
 
-        for i in range(0,32):
+        for i in range(0,33):
             self.writeVint(16)
             self.writeVint(i)
-            self.writeVint(8)  # shelly power level (value shows in game +1, so value 8 = power 9)
+            self.writeVint(self.player.brawler_power_level)
 
-        self.writeVint(16)
-        self.writeVint(32)
-        self.writeVint(8)  # max power level
+        # exceptions
         self.writeVint(16)
         self.writeVint(34)
-        self.writeVint(8)  # jacky power level
+        self.writeVint(self.player.brawler_power_level)  # jacky power level
         self.writeVint(16)
         self.writeVint(37)
-        self.writeVint(8)  # sprout power level
+        self.writeVint(self.player.brawler_power_level)  # sprout power level
 
 
         self.writeVint(119)  # gadgets and star powers

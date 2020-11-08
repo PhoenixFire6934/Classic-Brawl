@@ -1,6 +1,7 @@
 import json
 import sys
 from Utils.Config import Config
+from Utils.Fingerprint import Fingerprint
 
 class Players:
 
@@ -27,14 +28,42 @@ class Players:
 	roomID = 0
 	brawlerID = 0
 	skinID = 0
-	trophies = 99999
+
+	brawler_power_level = settings['BrawlerPowerLevel']
+	brawler_trophies_for_rank = settings['BrawlerTrophiesForRank']
+	brawler_trophies = settings['BrawlerTrophies']
+	brawler_upgrade_points = settings['BrawlerUpgradePoints']
+	trophies = settings['Trophies']
 	gems = settings['Gems']
 	gold = settings['Gold']
 	tickets = settings['Tickets']
 	name = None
 	profileIcon = 0
-	brawlBoxes = 99999
-	bigBoxes = 99999
+	brawlBoxes = settings['BrawlBoxTokens']
+	bigBoxes = settings['BigBoxTokens']
+	starPoints = settings['Starpoints']
+
+	updateUrl = settings['UpdateUrl']
+	patchUrl = settings['PatchUrl']
+	patch_sha = Fingerprint.loadFinger("GameAssets/fingerprint.json")
+
+	err_code = 7
+	maintenance = False
+	patch = False
+
+	patching = settings['Patch']
+
+	if patching:
+		error_code = 7
+		patch = True
+
+
+	if settings['Maintenance']:
+		err_code = 10
+		maintenance = True
+
+	messageTick = 0
+
 	shellySkin = 0
 	nitaSkin = 0
 	coltSkin = 0

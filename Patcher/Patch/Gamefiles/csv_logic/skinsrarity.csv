@@ -1,0 +1,6 @@
+"Name","Price","Rarity"
+"String","int","int"
+"Common","30","1"
+"Rare","80","2"
+"Epic","150","3"
+"Legendary","300","4"
