@@ -1,6 +1,7 @@
 import json
 import sys
 from Utils.Config import Config
+from Utils.Fingerprint import Fingerprint
 
 class Players:
 
@@ -42,10 +43,19 @@ class Players:
 	bigBoxes = settings['BigBoxTokens']
 	starPoints = settings['Starpoints']
 
-	updateUrl = "https://github.com/PhoenixFire6879/Classic-Brawl"
+	updateUrl = settings['UpdateUrl']
+	patchUrl = settings['PatchUrl']
+	patch_sha = Fingerprint.loadFinger("GameAssets/fingerprint.json")
 
 	err_code = 7
 	maintenance = False
+	patch = False
+
+	patching = settings['Patch']
+
+	if patching:
+		error_code = 7
+		patch = True
 
 
 	if settings['Maintenance']:

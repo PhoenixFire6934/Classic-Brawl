@@ -1,0 +1,13 @@
+1. Put your files in Patch/GameAssets folder + fingerprint.json
+2. Run GL - Patcher.exe and wait until your patch it's done
+3. You'll find your patch in /Patchs folder
+4. Open hfs.exe
+5. Add /Patchs folder to hfs
+6. Copy the link from hfs. Example: "http://192.168.0.103:8080/Patchs/"
+7. Do NOT CLOSE hfs
+8. Open server config.json and paste the link from hfs in 
+"PatchUrl": "Your_Link", and set boolean "Patch" to true
+
+9. Copy fingerprint from Patcher\Patch\Patchs\'masterhash'\fingerprint.json to \Classic-Brawl\GameAssets\
+10. Restart the server and have fun!
+

@@ -28,14 +28,23 @@ class Login(BSMessageReader):
         self.major = self.read_int()
         self.minor = self.read_int()
         self.build = self.read_int()
+        self.fingerprint_sha = self.read_string()
 
     def process(self):
         if self.major != 26:
             LoginFailed(self.client, self.player, "The server does not support your version").send()
-        if self.player.maintenance:
-            LoginFailed(self.client, self.player, "").send()
+
+
 
         elif self.player.LowID != 0:
+
+            if self.player.maintenance:
+                LoginFailed(self.client, self.player, "").send()
+
+            if self.player.patch:
+                if self.fingerprint_sha != self.player.patch_sha:
+                    LoginFailed(self.client, self.player, "").send()
+                    
             LoginOk(self.client, self.player).send()
             DataBase.loadAccount(self) # load account
             OwnHomeData(self.client, self.player).send()

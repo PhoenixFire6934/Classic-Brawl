@@ -1,0 +1,9 @@
+"Name","TID","PlayerCount","RequiredCampaignProgressToUnlock","Location","AllowedHeroes","Reward","LevelGenerationSeed","Map","Boss","BossLevel"
+"string","string","int","int","string","string","String","int","string","string","int"
+"boss1","TID_BOSS_1",3,6,"Planet1","Trooper,Techie,Vanguard,Sniper,PoisonDude,Healer","Diamonds:10:",,"Pvp4","Boss2",1
+"boss2","TID_BOSS_2",3,12,"Planet2","Trooper,Techie,Vanguard,Sniper,PoisonDude,Healer","Diamonds:10:",,"Pvp4","Boss1",5
+"boss3","TID_BOSS_3",3,18,"Planet3","Trooper,Techie,Vanguard,Sniper,PoisonDude,Healer","Diamonds:10:",,"Pvp4","Boss2",9
+"boss4","TID_BOSS_4",3,24,"Planet4","Trooper,Techie,Vanguard,Sniper,PoisonDude,Healer","Diamonds:10:",,"Pvp4","Boss1",12
+"boss5","TID_BOSS_5",3,30,"Planet5","Trooper,Techie,Vanguard,Sniper,PoisonDude,Healer","Diamonds:10:",,"Pvp4","Boss2",15
+"boss6","TID_BOSS_6",3,36,"Planet6","Trooper,Techie,Vanguard,Sniper,PoisonDude,Healer","Diamonds:10:",,"Pvp4","Boss1",18
+"boss7",,3,54,"Planet7","Trooper,Techie,Vanguard,Sniper,PoisonDude,Healer","Diamonds:10:",,"Pvp4","Boss2",20

@@ -125,7 +125,7 @@ class OwnHomeData(Writer):
             self.writeVint(i)
 
         totalSlots = 9
-        mapsList = [7, 32, 17, 24, 0, 202, 97, 167, 174]
+        mapsList = [7, 32, 17, 57, 38, 24, 202, 97, 167]
         self.writeVint(totalSlots)  # map slots count
 
         for i in range(0, totalSlots):

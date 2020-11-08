@@ -1,0 +1,13 @@
+"Name","TID","IconSWF","CollectEffect","IconExportName","Type","Rarity","PremiumCurrency","TextRed","TextGreen","TextBlue","Cap"
+"String","String","String","String","String","String","String","Boolean","int","int","int","int"
+"Diamonds","TID_DIAMONDS","sc/ui.sc",,"genicon_gem",,,"TRUE",,255,92,
+"Gold","TID_TOKENS","sc/ui.sc","Collect Gold","genicon_coin",,,,192,,192,
+"owcAny",,"sc/ui.sc",,"icon_owcAny",,,,,,,
+"owcRareOrBetter",,"sc/ui.sc",,"icon_owcRareOrBetter",,,,,,,
+"owcEpicOrBetter",,"sc/ui.sc",,"icon_owcEpicOrBetter",,,,,,,
+"Dust",,"sc/ui.sc",,"genicon_dust",,,,,,,
+"Upgradium",,"sc/ui.sc",,"genicon_upgradium",,,,,,,
+"Bolts",,"sc/ui.sc",,"genicon_upgradium",,,,,,,
+"HeroLvlUpMaterial","TID_HERO_LVL_UP_MATERIAL","sc/ui.sc",,"genicon_upgradium",,,,,,,
+"FirstWins","TID_FIRST_WINS","sc/ui.sc",,"genicon_upgradium",,,,,,,
+"LegendaryTrophies","TID_LEGENDARY_TROPHIES","sc/ui.sc",,"genicon_upgradium",,,,,,,

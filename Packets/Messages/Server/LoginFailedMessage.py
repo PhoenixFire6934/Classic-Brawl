@@ -1,4 +1,5 @@
 from Utils.Writer import Writer
+from Utils.Fingerprint import Fingerprint
 
 
 class LoginFailed(Writer):
@@ -11,17 +12,17 @@ class LoginFailed(Writer):
 
     def encode(self):
         self.writeInt(self.player.err_code) # error code
-        self.writeString() # fingerprint
+        self.writeString(Fingerprint.loadFinger_full("GameAssets/fingerprint.json")) # fingerprint
 
         self.writeString() # null
 
-        self.writeString() # patch url
+        self.writeString(self.player.patchUrl) # patch url
         self.writeString(self.player.updateUrl) # update url
         self.writeString(self.msg) # message
 
         self.writeHexa('''00 00 00 00 00 FF FF FF FF 00 00 00 02''') # unknown
 
-        self.writeString() # patch url
+        self.writeString(self.player.patchUrl) # patch url
         self.writeString() # rackcdn url
 
         self.writeInt(0)
@@ -33,3 +34,15 @@ class LoginFailed(Writer):
         self.writeHexa('''02 00 00 00 00 00 00 00 00 00''') # unknown
 
         print("[INFO] Message LoginFailed has been sent.")
+
+        # Error code list
+
+        # 1  = Custom Message
+        # 7  = Patch
+        # 8  = Update Available
+        # 9  = Failed to Connect
+        # 10 = Maintenance
+        # 11 = Banned
+        # 13 = Acc Locked PopUp
+        # 16 = Updating Cr/Maintenance
+        # 18 = Chinese Text?
