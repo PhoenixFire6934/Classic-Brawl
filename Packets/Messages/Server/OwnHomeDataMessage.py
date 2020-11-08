@@ -124,12 +124,12 @@ class OwnHomeData(Writer):
         for i in range(20, 25):
             self.writeVint(i)
 
-        totalSlots = 9
-        mapsList = [7, 32, 17, 57, 38, 24, 202, 97, 167]
-        self.writeVint(totalSlots)  # map slots count
+        totalSlots = 10
+        mapsList = [7, 32, 17, 0,  24, 202, 97, 167, 174]
+        self.writeVint(totalSlots -1 )  # map slots count
 
-        for i in range(0, totalSlots):
-
+        for i in range(1, totalSlots):
+            
             self.writeVint(-133000102)  # map slot starts here
             self.writeVint(i)
             self.writeVint(0)
@@ -137,7 +137,7 @@ class OwnHomeData(Writer):
             self.writeVint(10)
             self.writeVint(15)
 
-            self.writeVint(int(mapsList[i]))  # game mode slot map id
+            self.writeVint(int(mapsList[i - 1]))  # game mode slot map id
 
             self.writeVint(3)
             self.writeVint(0)
