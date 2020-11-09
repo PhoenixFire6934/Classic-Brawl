@@ -3,12 +3,12 @@ from string import ascii_uppercase
 import json
 
 from Logic.Player import Players
-from Packets.Messages.Server.AvatarNameCheckResponseMessage import ChangeNameResponse
+from Packets.Messages.Server.AvatarNameCheckResponseMessage import AvatarNameCheckResponseMessage
 
 from Utils.Reader import BSMessageReader
 
 
-class ChangeName(BSMessageReader):
+class AvatarNameCheckRequestMessage(BSMessageReader):
     def __init__(self, client, player, initial_bytes):
         super().__init__(initial_bytes)
         self.player = player
@@ -18,4 +18,4 @@ class ChangeName(BSMessageReader):
         self.player.name = self.read_string()
 
     def process(self):
-        ChangeNameResponse(self.client, self.player).send()
+        AvatarNameCheckResponseMessage(self.client, self.player).send()

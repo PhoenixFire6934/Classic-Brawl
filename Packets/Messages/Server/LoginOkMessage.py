@@ -3,7 +3,7 @@ import time
 from Utils.Writer import Writer
 
 
-class LoginOk(Writer):
+class LoginOkMessage(Writer):
     def __init__(self, client, player):
         super().__init__(client)
         self.player = player

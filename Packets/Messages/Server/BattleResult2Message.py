@@ -1,7 +1,7 @@
 from Utils.Writer import Writer
 
 
-class Battle2Result(Writer):
+class BattleResult2Message(Writer):
 
     def __init__(self, client, player):
         super().__init__(client)

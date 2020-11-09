@@ -2,7 +2,7 @@ from Utils.Writer import Writer
 from Database.DataBase import DataBase
 import random
 
-class GameroomData(Writer):
+class TeamGameroomDataMessage(Writer):
 
     def __init__(self, client, player):
         super().__init__(client)

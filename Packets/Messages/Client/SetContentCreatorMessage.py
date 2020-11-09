@@ -4,12 +4,12 @@ import json
 
 from Logic.Player import Players
 from Database.DataBase import DataBase
-from Packets.Messages.Server.OutOfSyncMessage import OutOfSync
+from Packets.Messages.Server.OutOfSyncMessage import OutOfSyncMessage
 
 from Utils.Reader import BSMessageReader
 
 
-class SetContentCreator(BSMessageReader):
+class SetContentCreatorMessage(BSMessageReader):
     def __init__(self, client, player, initial_bytes):
         super().__init__(initial_bytes)
         self.player = player
@@ -51,4 +51,4 @@ class SetContentCreator(BSMessageReader):
 
     def process(self):
         if self.send_ofs:
-            OutOfSync(self.client, self.player, 'Changes have been applied').send()
+            OutOfSyncMessage(self.client, self.player, 'Changes have been applied').send()

@@ -63,7 +63,7 @@ class DataBase:
                     self.player.namecolor = dict[str(self.player.Token)]["namecolor"]
                     self.player.gadget = dict[str(self.player.Token)]["gadget"]
                     self.player.starpower = dict[str(self.player.Token)]["starpower"]
-                    self.player.DoNotDistrub = dict[str(self.player.Token)]["DoNotDistrub"]
+                    self.player.DoNotDistrubMessage = dict[str(self.player.Token)]["DoNotDistrub"]
                     self.player.roomID = dict[str(self.player.Token)]["roomID"]
 
     def createAccount(self):

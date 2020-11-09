@@ -2,7 +2,7 @@ from Utils.Writer import Writer
 from Utils.Fingerprint import Fingerprint
 
 
-class LoginFailed(Writer):
+class LoginFailedMessage(Writer):
 
     def __init__(self, client, player, msg):
         super().__init__(client)

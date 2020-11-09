@@ -1,7 +1,7 @@
 from Utils.Writer import Writer
 
 
-class DoNotDistrubServer(Writer):
+class DoNotDistrubOkMessage(Writer):
 
     def __init__(self, client, player):
         super().__init__(client)
@@ -10,7 +10,7 @@ class DoNotDistrubServer(Writer):
 
     def encode(self):
         self.writeVint(213)
-        self.writeVint(self.player.DoNotDistrub)
+        self.writeVint(self.player.DoNotDistrubMessage)
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(0)

@@ -3,12 +3,12 @@ from string import ascii_uppercase
 import json
 
 from Logic.Player import Players
-from Packets.Messages.Server.TeamGameroomDataMessage import GameroomData
+from Packets.Messages.Server.TeamGameroomDataMessage import TeamGameroomDataMessage
 
 from Utils.Reader import BSMessageReader
 
 
-class CreateGameroom(BSMessageReader):
+class TeamCreateMessage(BSMessageReader):
     def __init__(self, client, player, initial_bytes):
         super().__init__(initial_bytes)
         self.player = player
@@ -17,7 +17,7 @@ class CreateGameroom(BSMessageReader):
     def decode(self):
         self.read_Vint()
         self.mapID = self.read_Vint()
-        print("MapID is", self.mapID)
+
 
 
     def process(self):
@@ -39,4 +39,4 @@ class CreateGameroom(BSMessageReader):
             self.player.mapID = 167 # takedown
         elif self.mapID == 9:
             self.player.mapID = 174 # lone star
-        GameroomData(self.client, self.player).send()
+        TeamGameroomDataMessage(self.client, self.player).send()

@@ -4,12 +4,12 @@ from Database.DataBase import DataBase
 import json
 
 from Logic.Player import Players
-from Packets.Messages.Server.TeamLeftMessage import RoomDisconnect
+from Packets.Messages.Server.TeamLeftMessage import TeamLeftMessage
 
 from Utils.Reader import BSMessageReader
 
 
-class QuitRoom(BSMessageReader):
+class TeamLeaveMessage(BSMessageReader):
     def __init__(self, client, player, initial_bytes):
         super().__init__(initial_bytes)
         self.player = player
@@ -21,4 +21,4 @@ class QuitRoom(BSMessageReader):
     def process(self):
         self.player.roomID = 0
         DataBase.replaceValue(self, 'roomID', self.player.roomID)
-        RoomDisconnect(self.client, self.player).send()
+        TeamLeftMessage(self.client, self.player).send()

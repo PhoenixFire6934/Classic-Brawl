@@ -1,7 +1,7 @@
 from Utils.Writer import Writer
 
 
-class OutOfSync(Writer):
+class OutOfSyncMessage(Writer):
 
     def __init__(self, client, player, message):
         super().__init__(client)

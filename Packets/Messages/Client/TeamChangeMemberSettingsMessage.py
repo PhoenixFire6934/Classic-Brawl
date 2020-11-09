@@ -3,13 +3,13 @@ from string import ascii_uppercase
 import json
 
 from Logic.Player import Players
-from Packets.Messages.Server.TeamGameroomDataMessage import GameroomData
+from Packets.Messages.Server.TeamGameroomDataMessage import TeamGameroomDataMessage
 from Database.DataBase import DataBase
 
 from Utils.Reader import BSMessageReader
 
 
-class ChangeBrawlerInRoom(BSMessageReader):
+class TeamChangeMemberSettingsMessage(BSMessageReader):
     def __init__(self, client, player, initial_bytes):
         super().__init__(initial_bytes)
         self.player = player
@@ -558,4 +558,4 @@ class ChangeBrawlerInRoom(BSMessageReader):
             DataBase.replaceValue(self, 'starpower', self.player.starpower)
             DataBase.replaceValue(self, 'gadget', self.player.gadget)
 
-            GameroomData(self.client, self.player).send()
+            TeamGameroomDataMessage(self.client, self.player).send()

@@ -1,7 +1,7 @@
 from Utils.Writer import Writer
 
 
-class RoomDisconnect(Writer):
+class TeamLeftMessage(Writer):
 
     def __init__(self, client, player):
         super().__init__(client)

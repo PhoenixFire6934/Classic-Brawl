@@ -1,7 +1,7 @@
 from Utils.Writer import Writer
 
 
-class PlayerProfile(Writer):
+class PlayerProfileMessage(Writer):
 
     def __init__(self, client, player):
         super().__init__(client)

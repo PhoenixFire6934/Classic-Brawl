@@ -1,7 +1,7 @@
 from Utils.Writer import Writer
 
 
-class AllianceChatServer(Writer):
+class AllianceChatServerMessage(Writer):
 
     def __init__(self, client, player, msg_content):
         super().__init__(client)

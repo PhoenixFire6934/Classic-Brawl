@@ -3,13 +3,13 @@ from string import ascii_uppercase
 import json
 
 from Logic.Player import Players
-from Packets.Messages.Server.BattleResultMessage import BattleResult
-from Packets.Messages.Server.BattleResult2Message import Battle2Result
+from Packets.Messages.Server.BattleResultMessage import BattleResultMessage
+from Packets.Messages.Server.BattleResult2Message import BattleResult2Message
 
 from Utils.Reader import BSMessageReader
 
 
-class BattleEnd(BSMessageReader):
+class BattleEndMessage(BSMessageReader):
     def __init__(self, client, player, initial_bytes):
         super().__init__(initial_bytes)
         self.player = player
@@ -73,7 +73,7 @@ class BattleEnd(BSMessageReader):
 
     def process(self):
     	if self.player.Rank != 0:
-    		BattleResult(self.client, self.player).send()
+    		BattleResultMessage(self.client, self.player).send()
     	else:
     		if self.player.Team == 0:
     			self.player.Bot1N = self.Bot1N
@@ -86,7 +86,7 @@ class BattleEnd(BSMessageReader):
     			self.player.Bot3 = self.Bot3
     			self.player.Bot4 = self.Bot4
     			self.player.Bot5 = self.Bot5
-    			Battle2Result(self.client, self.player).send()
+    			BattleResult2Message(self.client, self.player).send()
     		else:
     			self.player.Bot1N = self.Bot4N
     			self.player.Bot2N = self.Bot5N
@@ -98,4 +98,4 @@ class BattleEnd(BSMessageReader):
     			self.player.Bot3 = self.Bot3
     			self.player.Bot4 = self.Bot1
     			self.player.Bot5 = self.Bot2
-    			Battle2Result(self.client, self.player).send()
+    			BattleResult2Message(self.client, self.player).send()

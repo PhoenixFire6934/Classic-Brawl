@@ -7,7 +7,7 @@ from Logic.Player import Players
 from Utils.Reader import BSMessageReader
 
 
-class AnalyticsEvent(BSMessageReader):
+class AnalyticsEventMessage(BSMessageReader):
     def __init__(self, client, player, initial_bytes):
         super().__init__(initial_bytes)
         self.player = player

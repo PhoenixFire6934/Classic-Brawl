@@ -2,7 +2,7 @@ from Utils.Writer import Writer
 from Database.DataBase import DataBase
 
 
-class OwnHomeData(Writer):
+class OwnHomeDataMessage(Writer):
 
     def __init__(self, client, player):
         super().__init__(client)

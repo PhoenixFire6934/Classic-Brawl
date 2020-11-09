@@ -3,12 +3,12 @@ from string import ascii_uppercase
 import json
 
 from Logic.Player import Players
-from Packets.Messages.Server.AllianceChatServerMessage import AllianceChatServer
+from Packets.Messages.Server.AllianceChatServerMessage import AllianceChatServerMessage
 
 from Utils.Reader import BSMessageReader
 
 
-class AllianceChat(BSMessageReader):
+class AllianceChatMessage(BSMessageReader):
     def __init__(self, client, player, initial_bytes):
         super().__init__(initial_bytes)
         self.player = player
@@ -20,5 +20,5 @@ class AllianceChat(BSMessageReader):
 
 
     def process(self):
-        AllianceChatServer(self.client, self.player, self.msg).send()
+        AllianceChatServerMessage(self.client, self.player, self.msg).send()
         self.player.messageTick += 1

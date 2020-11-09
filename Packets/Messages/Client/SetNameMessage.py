@@ -8,7 +8,7 @@ from Packets.Commands.Server.Change_Name_Callback import SetNameResponse
 from Utils.Reader import BSMessageReader
 
 
-class SetName(BSMessageReader):
+class SetNameMessage(BSMessageReader):
     def __init__(self, client, player, initial_bytes):
         super().__init__(initial_bytes)
         self.player = player

@@ -3,12 +3,12 @@ from string import ascii_uppercase
 import json
 
 from Logic.Player import Players
-from Packets.Messages.Server.PlayerProfileMessage import PlayerProfile
+from Packets.Messages.Server.PlayerProfileMessage import PlayerProfileMessage
 
 from Utils.Reader import BSMessageReader
 
 
-class AskProfile(BSMessageReader):
+class AskProfileMessage(BSMessageReader):
     def __init__(self, client, player, initial_bytes):
         super().__init__(initial_bytes)
         self.player = player
@@ -18,4 +18,4 @@ class AskProfile(BSMessageReader):
         pass
 
     def process(self):
-        PlayerProfile(self.client, self.player).send()
+        PlayerProfileMessage(self.client, self.player).send()

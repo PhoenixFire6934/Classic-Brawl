@@ -1,6 +1,6 @@
 from Utils.Reader import BSMessageReader
 from Packets.Commands.Server.Buy_Brawl_Box_Callback import ServerBox
-from Packets.Messages.Server.TeamGameroomDataMessage import GameroomData
+from Packets.Messages.Server.TeamGameroomDataMessage import TeamGameroomDataMessage
 from Database.DataBase import DataBase
 
 
@@ -370,7 +370,7 @@ class EndClientTurn(BSMessageReader):
             self.player.starpower = self.read_Vint()
             DataBase.replaceValue(self, 'starpower', self.player.starpower)
             if self.player.roomID > 0:
-            	GameroomData(self.client, self.player).send()
+            	TeamGameroomDataMessage(self.client, self.player).send()
             print("Command ID", self.commandID, "has been handled")
 
 
