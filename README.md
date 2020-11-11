@@ -38,6 +38,12 @@ To connect to your server, you need a custom client. Here the only solution is t
 
 
 
+
+#### Need help? Join [our Discord support server](https://discord.gg/2t4QXyuSKW)
+
+
+
+
 ## Authors
 
 👤 **Phoenix**
