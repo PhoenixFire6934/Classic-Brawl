@@ -97,11 +97,13 @@ class OwnHomeDataMessage(Writer):
 
         self.writeVint(2019053)
         self.writeVint(100)
-        self.writeVint(10)
 
+        self.writeVint(10)
         self.writeVint(30)  # shop big box price
+
         self.writeVint(3)
         self.writeVint(80)  # shop mega box price
+
         self.writeVint(10)
         self.writeVint(50)  # shop token doubler price
         self.writeVint(1000)  # shop token doubler amount
@@ -109,6 +111,8 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(500)
         self.writeVint(50)
         self.writeVint(999900)
+
+
         self.writeVint(6)
         self.writeVint(0)
         self.writeVint(30)
@@ -216,16 +220,20 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(14)
         self.writeVint(0)
         self.writeVint(3193)
+
         self.writeVint(-8)
         self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
+
         self.writeVint(0)
         self.writeVint(0)
 
-        self.writeVint(0)  # Low Id
-        self.writeVint(1)  # High Id
+        self.writeVint(0) # bool
+
+        self.writeVint(0)
+        self.writeVint(0)
+
+        self.writeVint(0)  # High Id
+        self.writeVint(1)  # Low Id
 
         for i in range(0, 4):
             self.writeVint(0)
@@ -285,25 +293,18 @@ class OwnHomeDataMessage(Writer):
             self.writeVint(1)
             i += 18            
 
-        self.writeVint(5)
-        self.writeVint(1)
 
+        resources = {
+            'brawlbox': {'id': 1, 'amount': self.player.brawlBoxes},
+            'gold': {'id': 8, 'amount': self.player.gold},
+            'bigbox': {'id': 9, 'amount': self.player.bigBoxes},
+            'starpoints': {'id': 10, 'amount': self.player.starPoints}
+        }
 
-        self.writeVint(self.player.brawlBoxes)  # brawl box tokens (100 tokens = 1 brawl box)
-
-        self.writeVint(5)
-        self.writeVint(8)
-
-        self.writeVint(self.player.gold)  # gold
-        self.writeVint(5)
-        self.writeVint(9)
-
-        self.writeVint(self.player.bigBoxes)  # big box tokens (10 tokens = 1 big box)
-
-        self.writeVint(5)
-        self.writeVint(10)
-
-        self.writeVint(self.player.starPoints)
+        for resource in resources:
+            self.writeVint(5) # csv id
+            self.writeVint(resources[resource]['id']) # resource id
+            self.writeVint(resources[resource]['amount']) # resource amount
 
 
         # brawlers trophies 
