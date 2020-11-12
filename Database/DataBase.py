@@ -16,6 +16,7 @@ class DataBase:
                     self.player.name = dict[str(self.player.Token)]["name"]
                     self.player.gems = dict[str(self.player.Token)]["gems"]
                     self.player.gold = dict[str(self.player.Token)]["gold"]
+                    self.player.starPoints = dict[str(self.player.Token)]["starpoints"]
                     self.player.tickets = dict[str(self.player.Token)]["tickets"]
                     self.player.brawlerID = dict[str(self.player.Token)]["brawlerID"]
                     self.player.skinID = dict[str(self.player.Token)]["skinID"]
@@ -73,6 +74,7 @@ class DataBase:
                 "name": self.player.name,
                 "gems": self.player.gems,
                 "gold": self.player.gold,
+                "starpoints": self.player.starPoints,
                 "tickets": self.player.tickets,
                 "brawlerID": 0,
                 "skinID": 0,

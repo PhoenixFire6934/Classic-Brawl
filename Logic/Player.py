@@ -63,6 +63,7 @@ class Players:
 		maintenance = True
 
 	messageTick = 0
+	botMessageTick = 0
 
 	shellySkin = 0
 	nitaSkin = 0

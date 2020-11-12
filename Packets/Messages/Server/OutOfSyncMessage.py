@@ -22,4 +22,3 @@ class OutOfSyncMessage(Writer):
         self.writeString()
         self.writeString()
         self.writeHexa('''00FFFF0000000000''')
-        print("[INFO] Message LoginFailed has been sent.")

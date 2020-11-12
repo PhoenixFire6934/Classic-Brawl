@@ -1,6 +1,6 @@
 from Utils.Reader import BSMessageReader
 from Packets.Commands.Server.Buy_Brawl_Box_Callback import ServerBox
-from Packets.Messages.Server.TeamGameroomDataMessage import TeamGameroomDataMessage
+from Packets.Messages.Server.Gameroom.TeamGameroomDataMessage import TeamGameroomDataMessage
 from Database.DataBase import DataBase
 
 
