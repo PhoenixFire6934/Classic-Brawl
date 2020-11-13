@@ -78,3 +78,7 @@ class Writer:
 
     def writeInt16(self, data):
         self.writeInt(data, 2)
+
+    def writeScId(self, x, y):
+        self.writeVint(x)
+        self.writeVint(y)
