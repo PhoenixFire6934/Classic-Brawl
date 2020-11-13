@@ -19,14 +19,14 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(self.player.trophies) # max reached trophies
 
         self.writeVint(122)
-        self.writeVint(100)  # reward for trophy road
+        self.writeVint(99)  # reward for trophy road
 
         self.writeVint(1262469)  # starting level (exp points)
 
-        self.writeVint(28)
+        self.writeVint(28) # csv id
         self.writeVint(self.player.profileIcon)  # player icon ID
 
-        self.writeVint(43)
+        self.writeVint(43) # csv id
         self.writeVint(self.player.namecolor)  # player name color ID
 
         self.writeVint(9)
@@ -49,19 +49,34 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(self.player.skinID) # skinID
         self.writeVint(29)
 
-        for i in range(0,6):
-            self.writeVint(0)
+        self.writeVint(0)
+
+
+        self.writeVint(self.player.skins_count) # unlocked skins array
+
+        for i in range(0, self.player.skins_count):
+            self.writeScId(29, i)
+
+
+        self.writeVint(0)
+        self.writeVint(0)
+        self.writeVint(0)
+        self.writeVint(0)
 
         self.writeBoolean(False)  # "token limit reached message" if true
 
         self.writeVint(1)
         self.writeVint(1)
         self.writeVint(0)
-        self.writeVint(248791)
+
+        self.writeVint(248791) # season ends timer
+
         self.writeVint(0)
         self.writeVint(0)
+
         self.writeVint(200)
         self.writeVint(200)
+
         self.writeVint(5)
         self.writeVint(93)
         self.writeVint(206)
@@ -77,7 +92,7 @@ class OwnHomeDataMessage(Writer):
             self.writeVint(0)
 
         self.writeVint(100) # available tokens
-        self.writeVint(1140)
+        self.writeVint(99999) # time till bonus tokens (seconds)
 
         self.writeBoolean(True)  # tickets enabled
         self.writeVint(0)
@@ -85,10 +100,10 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(-21)
         self.writeVint(16)
 
-        self.writeVint(self.player.brawlerID)
+        self.writeVint(self.player.brawlerID) # selected brawler
 
         self.writeString("RO")  # location
-        self.writeString("") # supported content creator
+        self.writeString("26.165") # supported content creator
 
         self.writeVint(-133169153)
 
@@ -133,17 +148,17 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(totalSlots -1 )  # map slots count
 
         for i in range(1, totalSlots):
-            
+
             self.writeVint(-133000102)  # map slot starts here
             self.writeVint(i)
             self.writeVint(0)
-            self.writeVint(75992)
+            self.writeVint(75992) # timer
             self.writeVint(10)
             self.writeVint(15)
 
             self.writeVint(int(mapsList[i - 1]))  # game mode slot map id
 
-            self.writeVint(3)
+            self.writeVint(2) # [3 = nothing, 2 = star token, 1 = new event]
             self.writeVint(0)
             self.writeVint(0)
             self.writeVint(0)
@@ -155,56 +170,39 @@ class OwnHomeDataMessage(Writer):
             self.writeVint(0)
             self.writeVint(0)  # map slot ends here
 
-
+        # shop
         self.writeVint(0)
-        self.writeVint(8)
-        self.writeVint(20)
-        self.writeVint(35)
-        self.writeVint(75)
-
-        self.writeVint(140)
-        self.writeVint(290)
-        self.writeVint(480)
-        self.writeVint(800)
-        self.writeVint(1250)
 
         self.writeVint(8)
-        self.writeVint(1)
-        self.writeVint(2)
-        self.writeVint(3)
-        self.writeVint(4)
-        self.writeVint(5)
-        self.writeVint(10)
-        self.writeVint(15)
-        self.writeVint(20)
-        self.writeVint(3)
-        self.writeVint(10)
+        for i in [20, 35, 75, 140, 290, 480, 800, 1250]:
+            self.writeVint(i)
 
-        self.writeVint(30)
-        self.writeVint(80)
+        self.writeVint(8)
+        for i in [1, 2, 3, 4, 5, 10, 15, 20]:
+            self.writeVint(i)
 
         self.writeVint(3)
-        self.writeVint(6)
-        self.writeVint(20)
-        self.writeVint(60)
+        for i in [10, 30, 80]: # Tickets price
+            self.writeVint(i)
+
+        self.writeVint(3)
+        for i in [6, 20, 60]: # Tickets amount
+            self.writeVint(i)
 
         self.writeVint(4)
-
-        self.writeVint(20)    # first coin pack price
-        self.writeVint(50)    # second coin pack price
-        self.writeVint(140)   # third coin pack price
-        self.writeVint(280)   # fourth coin pack price
+        for i in [20, 50, 140, 280]: # Gold price
+            self.writeVint(i)
 
         self.writeVint(4)
+        for i in [150, 400, 1200, 2600]: # Gold amount
+            self.writeVint(i)
 
-        self.writeVint(150)   # first coin pack amount
-        self.writeVint(400)   # second coin pack amount
-        self.writeVint(1200)  # third  coin pack amount
-        self.writeVint(2600)  # fourth  coin pack amount
 
         self.writeVint(2)
-        self.writeVint(200)
-        self.writeVint(20)
+
+        self.writeVint(999) # max tokens
+        self.writeVint(20) # plus tokens
+
         self.writeVint(8640)
         self.writeVint(10)
         self.writeVint(5)
@@ -227,7 +225,7 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(0)
         self.writeVint(0)
 
-        self.writeVint(0) # bool
+        self.writeVint(0)
 
         self.writeVint(0)
         self.writeVint(0)
@@ -250,7 +248,7 @@ class OwnHomeDataMessage(Writer):
 
         self.writeVint(1207959551)
 
-        self.writeVint(39)
+        self.writeVint(39) # array
 
 
         i = 0
@@ -260,22 +258,22 @@ class OwnHomeDataMessage(Writer):
             self.writeVint(i)
             self.writeVint(1)
             i += 4
-        
+
         i = 95
 
         for x in range(0,8):
             self.writeVint(23)
             self.writeVint(i)
             self.writeVint(1)
-            i += 5      
-        
+            i += 5
+
         i = 177
 
         for x in range(0,2):
             self.writeVint(23)
             self.writeVint(i)
             self.writeVint(1)
-            i += 5 
+            i += 5
 
         i = 188
 
@@ -291,7 +289,7 @@ class OwnHomeDataMessage(Writer):
             self.writeVint(23)
             self.writeVint(i)
             self.writeVint(1)
-            i += 18            
+            i += 18
 
 
         resources = {
@@ -307,19 +305,16 @@ class OwnHomeDataMessage(Writer):
             self.writeVint(resources[resource]['amount']) # resource amount
 
 
-        # brawlers trophies 
+        # brawlers trophies
         self.writeVint(35)  # brawlers count
 
         for i in range(0, 33):
-            self.writeVint(16)
-            self.writeVint(i)
+            self.writeScId(16, i)
             self.writeVint(self.player.brawler_trophies)
         # exceptions
-        self.writeVint(16)
-        self.writeVint(34)
+        self.writeScId(16, 34)
         self.writeVint(self.player.brawler_trophies)  # jacky trophies
-        self.writeVint(16)
-        self.writeVint(37)
+        self.writeScId(16, 37)
         self.writeVint(self.player.brawler_trophies)  # sprout trophies
 
 
@@ -327,33 +322,28 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(35)  # brawlers count
 
         for i in range(0,33):
-            self.writeVint(16)
-            self.writeVint(i)
+            self.writeScId(16, i)
             self.writeVint(self.player.brawler_trophies_for_rank)
         # exceptions
-        self.writeVint(16)
-        self.writeVint(34)
+        self.writeScId(16, 34)
         self.writeVint(self.player.brawler_trophies_for_rank)  # jacky trophies for rank
-        self.writeVint(16)
-        self.writeVint(37)
+        self.writeScId(16, 37)
         self.writeVint(self.player.brawler_trophies_for_rank)  # sprout trophies for rank
 
+
         self.writeVint(0)
+
 
        # upgrade poitns
         self.writeVint(35)  # brawlers count
 
         for i in range(0,33):
-            self.writeVint(16)
-            self.writeVint(i)
+            self.writeScId(16, i)
             self.writeVint(self.player.brawler_upgrade_points)  # Upgrade poitns
-   
         # exceptions
-        self.writeVint(16)
-        self.writeVint(34)
+        self.writeScId(16, 34)
         self.writeVint(self.player.brawler_upgrade_points)
-        self.writeVint(16)
-        self.writeVint(37)
+        self.writeScId(16, 37)
         self.writeVint(self.player.brawler_upgrade_points)
 
 
@@ -361,16 +351,12 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(35)  # brawlers count
 
         for i in range(0,33):
-            self.writeVint(16)
-            self.writeVint(i)
+            self.writeScId(16, i)
             self.writeVint(self.player.brawler_power_level)
-
         # exceptions
-        self.writeVint(16)
-        self.writeVint(34)
+        self.writeScId(16, 34)
         self.writeVint(self.player.brawler_power_level)  # jacky power level
-        self.writeVint(16)
-        self.writeVint(37)
+        self.writeScId(16, 37)
         self.writeVint(self.player.brawler_power_level)  # sprout power level
 
 
@@ -378,8 +364,6 @@ class OwnHomeDataMessage(Writer):
 
 
         for i in range(76, 95):
- 
-
             self.writeVint(23)
             self.writeVint(i)
             self.writeVint(1)
@@ -390,24 +374,20 @@ class OwnHomeDataMessage(Writer):
 
         self.writeVint(23)
         self.writeVint(104)
-        self.writeVint(1)   
-        
+        self.writeVint(1)
+
         i = 109
 
         for x in range(0, 5):
-
-
             self.writeVint(23)
             self.writeVint(i)
             self.writeVint(1)
             i+=5
 
         for i in range(134, 172):
-
-
             self.writeVint(23)
             self.writeVint(i)
-            self.writeVint(1) 
+            self.writeVint(1)
 
 
         self.writeVint(23)
@@ -416,12 +396,9 @@ class OwnHomeDataMessage(Writer):
 
 
         for i in range(174, 176):
-
-
             self.writeVint(23)
             self.writeVint(i)
-            self.writeVint(1) 
-
+            self.writeVint(1)
 
 
         self.writeVint(23)
@@ -475,29 +452,23 @@ class OwnHomeDataMessage(Writer):
             self.writeVint(23)
             self.writeVint(i)
             self.writeVint(1)
-        
+
         for i in range(240, 277):
             self.writeVint(23)
             self.writeVint(i)
             self.writeVint(1)
 
 
-
         # "new" brawler tag
         self.writeVint(35)  # brawlers count
 
         for i in range(0, 33):
- 
-            self.writeVint(16)
-            self.writeVint(i)
-            self.writeVint(2)  # mr p  "new" tag           
-
+            self.writeScId(16, i)
+            self.writeVint(2)  # mr p  "new" tag
         # exceptions
-        self.writeVint(16)
-        self.writeVint(34)
+        self.writeScId(16, 34)
         self.writeVint(2)  # jacky "new" tag
-        self.writeVint(16)
-        self.writeVint(37)
+        self.writeScId(16, 37)
         self.writeVint(2) # sprout "new" tag
 
 
@@ -505,29 +476,16 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(100)
-
-        for i in range(0, 7):
-            self.writeVint(0)
-
-        self.writeVint(2)
-        self.writeVint(1550832808)
-        self.writeVint(-1040385)
-
-        for i in range(0, 4):
-            self.writeVint(0)
-
-        self.writeVint(-33)
-        self.writeVint(-49)
+        self.writeVint(0)
+        self.writeVint(0)
+        self.writeVint(0)
+        self.writeVint(0)
+        self.writeVint(0)
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(2)
-        for i in range(0, 4):
-            self.writeVint(0)
+        self.writeVint(0)
 
-        self.writeVint(-1040385)
-
-        for i in range(0, 4):
-            self.writeVint(0)
 
 
 
