@@ -2,9 +2,11 @@ import json
 import sys
 from Utils.Config import Config
 from Utils.Fingerprint import Fingerprint
+from Files.CsvLogic.Characters import Characters
+from Files.CsvLogic.Skins import Skins
+from Files.CsvLogic.Cards import Cards
 
 class Players:
-
 
 	try:
 		config = open('config.json', 'r')
@@ -14,8 +16,6 @@ class Players:
 		Config.create_config()
 		config = open('config.json', 'r')
 		content = config.read()
-
-
 
 	settings = json.loads(content)
 
@@ -29,8 +29,12 @@ class Players:
 	brawlerID = 0
 	skinID = 0
 
-	skins = open("GameAssets/csv_logic/skins.csv")
-	skins_count = len(skins.readlines()) - 1
+
+	SkinsCount = Skins.get_skins_id()
+	BrawlersCount = Characters.get_brawlers_id()
+	CardSkillsID = Cards.get_spg_id()
+	CardUnlockID = Cards.get_brawler_unlock()
+
 
 	brawler_power_level = settings['BrawlerPowerLevel']
 	brawler_trophies_for_rank = settings['BrawlerTrophiesForRank']
@@ -45,6 +49,15 @@ class Players:
 	brawlBoxes = settings['BrawlBoxTokens']
 	bigBoxes = settings['BigBoxTokens']
 	starPoints = settings['Starpoints']
+
+
+	Resources = {
+		'brawlbox': {'id': 1, 'amount': brawlBoxes},
+		'gold': {'id': 8, 'amount': gold},
+		'bigbox': {'id': 9, 'amount':bigBoxes},
+		'starpoints': {'id': 10, 'amount': starPoints}
+	}
+
 
 	updateUrl = settings['UpdateUrl']
 	patchUrl = settings['PatchUrl']
