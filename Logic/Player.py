@@ -29,6 +29,9 @@ class Players:
 	brawlerID = 0
 	skinID = 0
 
+	skins = open("GameAssets/csv_logic/skins.csv")
+	skins_count = len(skins.readlines()) - 1
+
 	brawler_power_level = settings['BrawlerPowerLevel']
 	brawler_trophies_for_rank = settings['BrawlerTrophiesForRank']
 	brawler_trophies = settings['BrawlerTrophies']
