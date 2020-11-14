@@ -33,7 +33,7 @@ class AllianceDataMessage(Writer):
         self.writeVint(0)
 
         self.writeVint(0) # High Id
-        self.writeInt(1)  # Low Id
+        self.writeInt(self.player.LowID)  # Low Id
         self.writeVint(2)
         self.writeVint(self.player.trophies)
         self.writeVint(0)
