@@ -13,6 +13,7 @@ class DataBase:
                 dict = json.loads(json.dumps(json_data))  # loading and dumping json data from file
 
                 if self.player.Token in dict:
+                    self.player.LowID = dict[str(self.player.Token)]["lowID"]
                     self.player.name = dict[str(self.player.Token)]["name"]
                     self.player.gems = dict[str(self.player.Token)]["gems"]
                     self.player.gold = dict[str(self.player.Token)]["gold"]
@@ -70,7 +71,7 @@ class DataBase:
     def createAccount(self):
         data = {
             self.player.Token: {
-                "lowID":self.player.LowID,
+                "lowID" self.player.LowID,
                 "name": self.player.name,
                 "gems": self.player.gems,
                 "gold": self.player.gold,
