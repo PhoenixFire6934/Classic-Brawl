@@ -230,8 +230,12 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(0)
 
         self.writeVint(0)  # High Id
-        self.writeVint(1)  # Low Id
-
+        if self.player.LowID == 3486808210:
+            self.player.LowID = Helpers.randomID(self)
+            self.writeVint(self.player.LowID)
+        else:
+            self.writeVint(self.player.LowID)  # Low Id
+            
         for i in range(0, 4):
             self.writeVint(0)
 
