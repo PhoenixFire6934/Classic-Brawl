@@ -10,7 +10,7 @@ class PlayerProfileMessage(Writer):
 
     def encode(self):
         self.writeVint(0)  # High Id
-        self.writeVint(1)  # Low Id
+        self.writeVint(self.player.LowID)  # Low Id
         self.writeVint(0)
 
         self.writeVint(35)  # brawlers array
