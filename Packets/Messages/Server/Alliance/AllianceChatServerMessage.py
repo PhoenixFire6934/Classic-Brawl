@@ -14,7 +14,7 @@ class AllianceChatServerMessage(Writer):
         self.writeVint(0)
         self.writeVint(self.player.messageTick)
         self.writeVint(0)
-        self.writeVint(1)
+        self.writeVint(self.player.LowID)
         self.writeString(self.player.name)
         self.writeVint(2)
         self.writeVint(0)
