@@ -129,7 +129,7 @@ class MyAllianceMessage(Writer):
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(0)
-        self.writeInt(1)
+        self.writeInt(self.player.LowID)
         self.writeVint(2)
         self.writeVint(99999)
         self.writeVint(0)
