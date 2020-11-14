@@ -12,10 +12,10 @@ class LoginOkMessage(Writer):
 
     def encode(self):
         self.writeInt(self.player.HighID)
-        self.writeInt(1)
+        self.writeInt(self.player.LowID)
         # HighID, lowID
         self.writeInt(self.player.HighID)
-        self.writeInt(1)
+        self.writeInt(self.player.LowID)
         # HighID, lowID
         self.writeString(self.player.Token)  # Token
         self.writeString()
