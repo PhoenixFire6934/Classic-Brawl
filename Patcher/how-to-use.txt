@@ -1,4 +1,4 @@
-1. Put your files in Patch/GameAssets folder + fingerprint.json
+1. Put your files in Patch/Gamefiles folder + fingerprint.json
 2. Run GL - Patcher.exe and wait until your patch it's done
 3. You'll find your patch in /Patchs folder
 4. Open hfs.exe

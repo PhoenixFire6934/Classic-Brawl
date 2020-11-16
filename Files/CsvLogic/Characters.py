@@ -12,7 +12,6 @@ class Characters:
             for row in csv_reader:
 
                 if line_count == 0 or line_count == 1:
-                    # print(row.index('Type'))
                     line_count += 1
                 else:
                     if row[20] == 'Hero' and row[2].lower() != 'true' and row[1].lower() != 'true':

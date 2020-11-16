@@ -49,6 +49,14 @@ class SetContentCreatorMessage(BSMessageReader):
             except ValueError:
                 pass
 
+        elif self.string.lower().startswith('starpoints'):
+            newStarpoints = self.string.split(" ", 10)[1:]
+            try:
+                DataBase.replaceValue(self, 'starpoints', int(newStarpoints[0]))
+                self.send_ofs = True
+            except ValueError:
+                pass
+
     def process(self):
         if self.send_ofs:
             OutOfSyncMessage(self.client, self.player, 'Changes have been applied').send()

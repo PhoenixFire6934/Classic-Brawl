@@ -55,7 +55,8 @@ class Players:
 		'brawlbox': {'id': 1, 'amount': brawlBoxes},
 		'gold': {'id': 8, 'amount': gold},
 		'bigbox': {'id': 9, 'amount':bigBoxes},
-		'starpoints': {'id': 10, 'amount': starPoints}
+		'starpoints': {'id': 10, 'amount': starPoints},
+
 	}
 
 
