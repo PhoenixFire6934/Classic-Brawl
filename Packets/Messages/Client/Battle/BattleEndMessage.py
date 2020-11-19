@@ -27,7 +27,7 @@ class BattleEndMessage(BSMessageReader):
         self.read_string() #Your Name
 
         self.read_Vint()
-        self.Bot1 = self.read_Vint() #bot brawer
+        self.Bot1 = self.read_Vint() #bot brawler
         self.read_Vint()
         self.read_Vint() #red or blue
         self.read_Vint()
@@ -35,7 +35,7 @@ class BattleEndMessage(BSMessageReader):
         self.Bot1N = self.read_string()
 
         self.read_Vint()
-        self.Bot2 = self.read_Vint() #bot brawer
+        self.Bot2 = self.read_Vint() #bot brawler
         self.read_Vint()
         self.read_Vint() #red or blue
         self.read_Vint()
@@ -43,7 +43,7 @@ class BattleEndMessage(BSMessageReader):
         self.Bot2N = self.read_string()
 
         self.read_Vint()
-        self.Bot3 = self.read_Vint() #bot brawer
+        self.Bot3 = self.read_Vint() #bot brawler
         self.read_Vint()
         self.read_Vint() #red or blue
         self.read_Vint()
@@ -51,7 +51,7 @@ class BattleEndMessage(BSMessageReader):
         self.Bot3N = self.read_string()
 
         self.read_Vint()
-        self.Bot4 = self.read_Vint() #bot brawer
+        self.Bot4 = self.read_Vint() #bot brawler
         self.read_Vint()
         self.read_Vint() #red or blue
         self.read_Vint()
@@ -59,7 +59,7 @@ class BattleEndMessage(BSMessageReader):
         self.Bot4N = self.read_string()
 
         self.read_Vint()
-        self.Bot5 = self.read_Vint() #bot brawer
+        self.Bot5 = self.read_Vint() #bot brawler
         self.read_Vint()
         self.read_Vint() #red or blue
         self.read_Vint()

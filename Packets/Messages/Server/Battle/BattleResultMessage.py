@@ -10,7 +10,7 @@ class BattleResultMessage(Writer):
 
     def encode(self):
         self.writeVint(2)
-        self.writeVint(1)
+        self.writeVint(self.player.Rank) # player rank
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(0)
