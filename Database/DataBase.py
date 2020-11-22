@@ -66,6 +66,8 @@ class DataBase:
                     self.player.starpower = dict[str(self.player.Token)]["starpower"]
                     self.player.DoNotDistrubMessage = dict[str(self.player.Token)]["DoNotDistrub"]
                     self.player.roomID = dict[str(self.player.Token)]["roomID"]
+                    self.player.BrawlersTrophies = dict[str(self.player.Token)]["brawlersTrophies"]
+
 
     def createAccount(self):
         data = {
@@ -123,7 +125,8 @@ class DataBase:
                 "gadget":255,
                 "starpower":76,
                 "DoNotDistrub":0,
-                "roomID": 0
+                "roomID": 0,
+                "brawlersTrophies": self.player.BrawlersTrophies
             }
         }
 

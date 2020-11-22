@@ -82,6 +82,46 @@ class Players:
 	messageTick = 0
 	botMessageTick = 0
 
+
+	BrawlersTrophies = {
+		'0':  brawler_trophies_for_rank,
+		'1':  brawler_trophies_for_rank,
+		'2':  brawler_trophies_for_rank,
+		'3':  brawler_trophies_for_rank,
+		'4':  brawler_trophies_for_rank,
+		'5':  brawler_trophies_for_rank,
+		'6':  brawler_trophies_for_rank,
+		'7':  brawler_trophies_for_rank,
+		'8':  brawler_trophies_for_rank,
+		'9':  brawler_trophies_for_rank,
+		'10': brawler_trophies_for_rank,
+		'11': brawler_trophies_for_rank,
+		'12': brawler_trophies_for_rank,
+		'13': brawler_trophies_for_rank,
+		'14': brawler_trophies_for_rank,
+		'15': brawler_trophies_for_rank,
+		'16': brawler_trophies_for_rank,
+		'17': brawler_trophies_for_rank,
+		'18': brawler_trophies_for_rank,
+		'19': brawler_trophies_for_rank,
+		'20': brawler_trophies_for_rank,
+		'21': brawler_trophies_for_rank,
+		'22': brawler_trophies_for_rank,
+		'23': brawler_trophies_for_rank,
+		'24': brawler_trophies_for_rank,
+		'25': brawler_trophies_for_rank,
+		'26': brawler_trophies_for_rank,
+		'27': brawler_trophies_for_rank,
+		'28': brawler_trophies_for_rank,
+		'29': brawler_trophies_for_rank,
+		'30': brawler_trophies_for_rank,
+		'31': brawler_trophies_for_rank,
+		'32': brawler_trophies_for_rank,
+		'34': brawler_trophies_for_rank,
+		'37': brawler_trophies_for_rank
+	}
+
+
 	shellySkin = 0
 	nitaSkin = 0
 	coltSkin = 0
@@ -137,6 +177,8 @@ class Players:
 	Bot5N = None
 	useGadget = 1
 	DoNotDistrub = 0
+
+
 
 
 	def __init__(self, device):

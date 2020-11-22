@@ -259,7 +259,7 @@ class OwnHomeDataMessage(Writer):
 
         for brawler_id in self.player.BrawlersCount:
             self.writeScId(16, brawler_id)
-            self.writeVint(self.player.brawler_trophies)
+            self.writeVint(self.player.BrawlersTrophies[str(brawler_id)])
 
 
         # Brawlers Trophies for Rank array
@@ -267,7 +267,7 @@ class OwnHomeDataMessage(Writer):
 
         for brawler_id in self.player.BrawlersCount:
             self.writeScId(16, brawler_id)
-            self.writeVint(self.player.brawler_trophies_for_rank)
+            self.writeVint(self.player.BrawlersTrophies[str(brawler_id)])
 
         self.writeVint(0)
 
