@@ -4,6 +4,7 @@ import socket
 import subprocess
 import os
 import shutil
+import Lib.ATPatchmaker as pm
 
 def all_subdirs_of(b='.') -> list:
   result = []
@@ -23,13 +24,15 @@ port = 8080
 current_path = os.getcwd() # backing this up for later use
 
 os.chdir(current_path + "\\Patch")
-print("Please wait until the patcher finishes running")
-os.system(os.getcwd() + '"/GL - Patcher.exe"')
-print("Done!")
 
+print("Please wait until the patcher finishes running")
+pm.Make()
+print("Patching done!")
+
+os.chdir(current_path)
 
 # Copy the output to the correct folder
-patch_folder = max(all_subdirs_of("Patchs"), key=os.path.getctime) # select the newest created folder
+patch_folder = max(all_subdirs_of(os.getcwd() + "/Patch/Patchs"), key=os.path.getctime) # select the newest created folder
 
 latest_finger = patch_folder + "\\fingerprint.json"
 
@@ -38,7 +41,7 @@ parent = os.path.dirname(current_path) # classic brawl parent dir
 shutil.copy(latest_finger, parent + "\\GameAssets") 
 
 
-os.chdir(current_path) # get back to the original folder
+os.chdir(current_path + "/Patch") # get back to the original folder/patch
 handler = http.server.SimpleHTTPRequestHandler
 
 with socketserver.TCPServer((ip, port), handler) as httpserver:
