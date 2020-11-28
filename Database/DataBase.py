@@ -1,162 +1,164 @@
 import json
 import string
 import random
+from tinydb import TinyDB, Query
 from Utils.Helpers import Helpers
 
 class DataBase:
 
+
+
     def loadAccount(self):
-        with open('data.db', 'r') as read_data:
-            for line in read_data.readlines():
+        db = TinyDB('data.db')
+        query = Query()
+        user_data = db.search(query.token == str(self.player.Token))
+        if user_data:
+            self.player.name = user_data[0]["info"]["name"]
+            self.player.gems = user_data[0]["info"]["gems"]
+            self.player.gold = user_data[0]["info"]["gold"]
+            self.player.starPoints = user_data[0]["info"]["starpoints"]
+            self.player.tickets = user_data[0]["info"]["tickets"]
+            self.player.brawlerID = user_data[0]["info"]["brawlerID"]
+            self.player.skinID = user_data[0]["info"]["skinID"]
+            self.player.trophies = user_data[0]["info"]["trophies"]
+            self.player.profileIcon = user_data[0]["info"]["profileIcon"]
+            self.player.brawlBoxes = user_data[0]["info"]["brawlBoxes"]
+            self.player.bigBoxes = user_data[0]["info"]["bigBoxes"]
+            self.player.shellySkin = user_data[0]["info"]["shellySkin"]
+            self.player.nitaSkin = user_data[0]["info"]["nitaSkin"]
+            self.player.coltSkin = user_data[0]["info"]["coltSkin"]
+            self.player.bullSkin = user_data[0]["info"]["bullSkin"]
+            self.player.jessieSkin = user_data[0]["info"]["jessieSkin"]
+            self.player.brockSkin = user_data[0]["info"]["brockSkin"]
+            self.player.dynamikeSkin = user_data[0]["info"]["dynamikeSkin"]
+            self.player.boSkin = user_data[0]["info"]["boSkin"]
+            self.player.elprimoSkin = user_data[0]["info"]["elprimoSkin"]
+            self.player.barleySkin = user_data[0]["info"]["barleySkin"]
+            self.player.pocoSkin = user_data[0]["info"]["pocoSkin"]
+            self.player.ricoSkin = user_data[0]["info"]["ricoSkin"]
+            self.player.darrylSkin = user_data[0]["info"]["darrylSkin"]
+            self.player.pennySkin = user_data[0]["info"]["pennySkin"]
+            self.player.piperSkin = user_data[0]["info"]["piperSkin"]
+            self.player.pamSkin = user_data[0]["info"]["pamSkin"]
+            self.player.frankSkin = user_data[0]["info"]["frankSkin"]
+            self.player.mortisSkin = user_data[0]["info"]["mortisSkin"]
+            self.player.taraSkin = user_data[0]["info"]["taraSkin"]
+            self.player.spikeSkin = user_data[0]["info"]["spikeSkin"]
+            self.player.crowSkin = user_data[0]["info"]["crowSkin"]
+            self.player.geneSkin = user_data[0]["info"]["geneSkin"]
+            self.player.tickSkin = user_data[0]["info"]["tickSkin"]
+            self.player.leonSkin = user_data[0]["info"]["leonSkin"]
+            self.player.rosaSkin = user_data[0]["info"]["rosaSkin"]
+            self.player.carlSkin = user_data[0]["info"]["carlSkin"]
+            self.player.bibiSkin = user_data[0]["info"]["bibiSkin"]
+            self.player.bitSkin = user_data[0]["info"]["8bitSkin"]
+            self.player.sandySkin = user_data[0]["info"]["sandySkin"]
+            self.player.beaSkin = user_data[0]["info"]["beaSkin"]
+            self.player.emzSkin = user_data[0]["info"]["emzSkin"]
+            self.player.mrpSkin = user_data[0]["info"]["mrpSkin"]
+            self.player.maxSkin = user_data[0]["info"]["maxSkin"]
+            self.player.jackySkin = user_data[0]["info"]["jackySkin"]
+            self.player.galeSkin = user_data[0]["info"]["galeSkin"]
+            self.player.naniSkin = user_data[0]["info"]["naniSkin"]
+            self.player.sproutSkin = user_data[0]["info"]["sproutSkin"]
+            self.player.namecolor = user_data[0]["info"]["namecolor"]
+            self.player.gadget = user_data[0]["info"]["gadget"]
+            self.player.starpower = user_data[0]["info"]["starpower"]
+            self.player.DoNotDistrubMessage = user_data[0]["info"]["DoNotDistrub"]
+            self.player.roomID = user_data[0]["info"]["roomID"]
+            self.player.BrawlersTrophies = user_data[0]["info"]["brawlersTrophies"]
 
-                json_data = json.loads(line)
-                dict = json.loads(json.dumps(json_data))  # loading and dumping json data from file
 
-                if self.player.Token in dict:
-                    self.player.name = dict[str(self.player.Token)]["name"]
-                    self.player.gems = dict[str(self.player.Token)]["gems"]
-                    self.player.gold = dict[str(self.player.Token)]["gold"]
-                    self.player.starPoints = dict[str(self.player.Token)]["starpoints"]
-                    self.player.tickets = dict[str(self.player.Token)]["tickets"]
-                    self.player.brawlerID = dict[str(self.player.Token)]["brawlerID"]
-                    self.player.skinID = dict[str(self.player.Token)]["skinID"]
-                    self.player.trophies = dict[str(self.player.Token)]["trophies"]
-                    self.player.profileIcon = dict[str(self.player.Token)]["profileIcon"]
-                    self.player.brawlBoxes = dict[str(self.player.Token)]["brawlBoxes"]
-                    self.player.bigBoxes = dict[str(self.player.Token)]["bigBoxes"]
-                    self.player.shellySkin = dict[str(self.player.Token)]["shellySkin"]
-                    self.player.nitaSkin = dict[str(self.player.Token)]["nitaSkin"]
-                    self.player.coltSkin = dict[str(self.player.Token)]["coltSkin"]
-                    self.player.bullSkin = dict[str(self.player.Token)]["bullSkin"]
-                    self.player.jessieSkin = dict[str(self.player.Token)]["jessieSkin"]
-                    self.player.brockSkin = dict[str(self.player.Token)]["brockSkin"]
-                    self.player.dynamikeSkin = dict[str(self.player.Token)]["dynamikeSkin"]
-                    self.player.boSkin = dict[str(self.player.Token)]["boSkin"]
-                    self.player.elprimoSkin = dict[str(self.player.Token)]["elprimoSkin"]
-                    self.player.barleySkin = dict[str(self.player.Token)]["barleySkin"]
-                    self.player.pocoSkin = dict[str(self.player.Token)]["pocoSkin"]
-                    self.player.ricoSkin = dict[str(self.player.Token)]["ricoSkin"]
-                    self.player.darrylSkin = dict[str(self.player.Token)]["darrylSkin"]
-                    self.player.pennySkin = dict[str(self.player.Token)]["pennySkin"]
-                    self.player.piperSkin = dict[str(self.player.Token)]["piperSkin"]
-                    self.player.pamSkin = dict[str(self.player.Token)]["pamSkin"]
-                    self.player.frankSkin = dict[str(self.player.Token)]["frankSkin"]
-                    self.player.mortisSkin = dict[str(self.player.Token)]["mortisSkin"]
-                    self.player.taraSkin = dict[str(self.player.Token)]["taraSkin"]
-                    self.player.spikeSkin = dict[str(self.player.Token)]["spikeSkin"]
-                    self.player.crowSkin = dict[str(self.player.Token)]["crowSkin"]
-                    self.player.geneSkin = dict[str(self.player.Token)]["geneSkin"]
-                    self.player.tickSkin = dict[str(self.player.Token)]["tickSkin"]
-                    self.player.leonSkin = dict[str(self.player.Token)]["leonSkin"]
-                    self.player.rosaSkin = dict[str(self.player.Token)]["rosaSkin"]
-                    self.player.carlSkin = dict[str(self.player.Token)]["carlSkin"]
-                    self.player.bibiSkin = dict[str(self.player.Token)]["bibiSkin"]
-                    self.player.bitSkin = dict[str(self.player.Token)]["8bitSkin"]
-                    self.player.sandySkin = dict[str(self.player.Token)]["sandySkin"]
-                    self.player.beaSkin = dict[str(self.player.Token)]["beaSkin"]
-                    self.player.emzSkin = dict[str(self.player.Token)]["emzSkin"]
-                    self.player.mrpSkin = dict[str(self.player.Token)]["mrpSkin"]
-                    self.player.maxSkin = dict[str(self.player.Token)]["maxSkin"]
-                    self.player.jackySkin = dict[str(self.player.Token)]["jackySkin"]
-                    self.player.galeSkin = dict[str(self.player.Token)]["galeSkin"]
-                    self.player.naniSkin = dict[str(self.player.Token)]["naniSkin"]
-                    self.player.sproutSkin = dict[str(self.player.Token)]["sproutSkin"]
-                    self.player.namecolor = dict[str(self.player.Token)]["namecolor"]
-                    self.player.gadget = dict[str(self.player.Token)]["gadget"]
-                    self.player.starpower = dict[str(self.player.Token)]["starpower"]
-                    self.player.DoNotDistrubMessage = dict[str(self.player.Token)]["DoNotDistrub"]
-                    self.player.roomID = dict[str(self.player.Token)]["roomID"]
-                    self.player.BrawlersTrophies = dict[str(self.player.Token)]["brawlersTrophies"]
 
 
     def createAccount(self):
+
+        db = TinyDB('data.db')
+
         data = {
-            self.player.Token: {
-                "lowID":self.player.LowID,
-                "name": self.player.name,
-                "gems": self.player.gems,
-                "gold": self.player.gold,
-                "starpoints": self.player.starPoints,
-                "tickets": self.player.tickets,
-                "brawlerID": 0,
-                "skinID": 0,
-                "trophies": self.player.trophies,
-                "profileIcon": 0,
-                "namecolor":12,
-                "brawlBoxes": self.player.brawlBoxes,
-                "bigBoxes": self.player.bigBoxes,
-                "shellySkin": 0,
-                "nitaSkin": 0,
-                "coltSkin": 0,
-                "bullSkin": 0,
-                "jessieSkin": 0,
-                "brockSkin": 0,
-                "dynamikeSkin": 0,
-                "boSkin": 0,
-                "elprimoSkin": 0,
-                "barleySkin": 0,
-                "pocoSkin": 0,
-                "ricoSkin": 0,
-                "darrylSkin": 0,
-                "pennySkin": 0,
-                "piperSkin": 0,
-                "pamSkin": 0,
-                "frankSkin": 0,
-                "mortisSkin": 0,
-                "taraSkin": 0,
-                "spikeSkin": 0,
-                "crowSkin": 0,
-                "geneSkin":0,
-                "tickSkin":0,
-                "leonSkin":0,
-                "rosaSkin":0,
-                "carlSkin":0,
-                "bibiSkin":0,
-                "8bitSkin":0,
-                "sandySkin":0,
-                "beaSkin":0,
-                "emzSkin":0,
-                "mrpSkin":0,
-                "maxSkin":0,
-                "jackySkin":0,
-                "galeSkin":0,
-                "naniSkin":0,
-                "sproutSkin":0,
-                "gadget":255,
-                "starpower":76,
-                "DoNotDistrub":0,
-                "roomID": 0,
-                "brawlersTrophies": self.player.BrawlersTrophies
-            }
+            "token": str(self.player.Token),
+
+            "info":
+                {
+                    "name": self.player.name,
+                    "lowID": self.player.LowID,
+                    "gems": self.player.gems,
+                    "gold": self.player.gold,
+                    "starpoints": self.player.starPoints,
+                    "tickets": self.player.tickets,
+                    "brawlerID": 0,
+                    "skinID": 0,
+                    "trophies": self.player.trophies,
+                    "profileIcon": 0,
+                    "namecolor": 12,
+                    "brawlBoxes": self.player.brawlBoxes,
+                    "bigBoxes": self.player.bigBoxes,
+                    "shellySkin": 0,
+                    "nitaSkin": 0,
+                    "coltSkin": 0,
+                    "bullSkin": 0,
+                    "jessieSkin": 0,
+                    "brockSkin": 0,
+                    "dynamikeSkin": 0,
+                    "boSkin": 0,
+                    "elprimoSkin": 0,
+                    "barleySkin": 0,
+                    "pocoSkin": 0,
+                    "ricoSkin": 0,
+                    "darrylSkin": 0,
+                    "pennySkin": 0,
+                    "piperSkin": 0,
+                    "pamSkin": 0,
+                    "frankSkin": 0,
+                    "mortisSkin": 0,
+                    "taraSkin": 0,
+                    "spikeSkin": 0,
+                    "crowSkin": 0,
+                    "geneSkin": 0,
+                    "tickSkin": 0,
+                    "leonSkin": 0,
+                    "rosaSkin": 0,
+                    "carlSkin": 0,
+                    "bibiSkin": 0,
+                    "8bitSkin": 0,
+                    "sandySkin": 0,
+                    "beaSkin": 0,
+                    "emzSkin": 0,
+                    "mrpSkin": 0,
+                    "maxSkin": 0,
+                    "jackySkin": 0,
+                    "galeSkin": 0,
+                    "naniSkin": 0,
+                    "sproutSkin": 0,
+                    "gadget": 255,
+                    "starpower": 76,
+                    "DoNotDistrub": 0,
+                    "roomID": 0,
+                    "brawlersTrophies": self.player.BrawlersTrophies
+
+                }
+
         }
 
-        with open('data.db', 'a+') as data_file:
-            json.dump(data, data_file)  # writing data for new account
-            data_file.write('\n')  # writing a new line
+        db.insert(data)
+
+
 
 
 
     def replaceValue(self, value_name, new_value):
-        with open('data.db', 'r+') as file:
-            list = []
-
-            for line in file.readlines():
-                json_data = json.loads(line)
-                dict = json.loads(json.dumps(json_data))  # loading and dumping json data from file
-                if self.player.Token in dict:
-                    dict[str(self.player.Token)][str(value_name)] = new_value
-                list.append(dict)
-                file.close()
-
-        with open('data.db', 'w') as o:
-            for i in list:
-                o.write(str(i).replace("'", '"') + '\n')
-            o.close()
+        db = TinyDB('data.db')
+        query = Query()
+        data = db.search(query.token == str(self.player.Token))
+        user_data = data[0]
+        user_data["info"][str(value_name)] = new_value
+        db.update(user_data, query.token == str(self.player.Token))
 
 
 
 
-        # example usage: replaceValue(self, 'gems', 7777)
+
+
 
 
 

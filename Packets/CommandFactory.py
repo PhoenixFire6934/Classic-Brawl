@@ -26,7 +26,6 @@ class EndClientTurn(BSMessageReader):
             self.read_Vint()
             self.read_Vint()
             self.player.boxID = self.read_Vint()
-            print(self.player.boxID)
             print("Command ID", self.commandID, "has been handled")
             ServerBox(self.client, self.player).send()
 

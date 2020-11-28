@@ -226,7 +226,7 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(0)
         self.writeVint(0)
 
-        if self.player.name is None:
+        if self.player.name  == "Guest":
 
             self.writeString("Guest")  # player name
             self.writeVint(0)
@@ -248,11 +248,22 @@ class OwnHomeDataMessage(Writer):
             self.writeVint(unlock_id)
             self.writeVint(1)
 
-        for resource in self.player.Resources:
-            self.writeVint(5) # csv id
-            self.writeVint(self.player.Resources[resource]['id']) # resource id
-            self.writeVint(self.player.Resources[resource]['amount']) # resource amount
 
+        self.writeVint(5)  # csv id
+        self.writeVint(1)  # resource id
+        self.writeVint(self.player.brawlBoxes)  # resource amount
+
+        self.writeVint(5)  # csv id
+        self.writeVint(8)  # resource id
+        self.writeVint(self.player.gold)  # resource amount
+
+        self.writeVint(5)  # csv id
+        self.writeVint(9)  # resource id
+        self.writeVint(self.player.bigBoxes)  # resource amount
+
+        self.writeVint(5)  # csv id
+        self.writeVint(10)  # resource id
+        self.writeVint(self.player.starPoints)  # resource amount
 
         # Brawlers Trophies array
         self.writeVint(len(self.player.BrawlersCount)) # brawlers count
@@ -306,8 +317,8 @@ class OwnHomeDataMessage(Writer):
 
         self.writeVint(self.player.gems) # Player Gems
         self.writeVint(0)
-        self.writeVint(99)
-        self.writeVint(100)
+        self.writeVint(9)
+        self.writeVint(0)
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(0)

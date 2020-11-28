@@ -44,20 +44,11 @@ class Players:
 	gems = settings['Gems']
 	gold = settings['Gold']
 	tickets = settings['Tickets']
-	name = None
+	name = "Guest"
 	profileIcon = 0
 	brawlBoxes = settings['BrawlBoxTokens']
 	bigBoxes = settings['BigBoxTokens']
 	starPoints = settings['Starpoints']
-
-
-	Resources = {
-		'brawlbox': {'id': 1, 'amount': brawlBoxes},
-		'gold': {'id': 8, 'amount': gold},
-		'bigbox': {'id': 9, 'amount':bigBoxes},
-		'starpoints': {'id': 10, 'amount': starPoints},
-
-	}
 
 
 	updateUrl = settings['UpdateUrl']

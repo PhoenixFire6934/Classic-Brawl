@@ -31,8 +31,6 @@ class ServerBox(Writer):
                 totalreward = 1
                 value = 0
 
-            newBrawlBoxes = self.player.brawlBoxes - 100
-            DataBase.replaceValue(self, 'brawlBoxes', newBrawlBoxes)
 
             self.writeVint(203)
             self.writeVint(0)
@@ -94,8 +92,6 @@ class ServerBox(Writer):
                 totalreward = 1
                 value = 0
 
-            newBigBox = self.player.bigBoxes - 10
-            DataBase.replaceValue(self, 'bigBoxes', newBigBox)
             self.writeVint(203)
             self.writeVint(0)
             self.writeVint(1)
