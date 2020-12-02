@@ -16,7 +16,8 @@ def Make():
       r = []
       for root, dirs, files in os.walk(path, topdown=False):
          for name in files:
-            r.append(os.path.join(root, name))
+            if name != 'fingerprint.json':
+               r.append(os.path.join(root, name))
       return r
 
 
