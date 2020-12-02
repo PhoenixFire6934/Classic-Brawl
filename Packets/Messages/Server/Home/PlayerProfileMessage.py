@@ -13,9 +13,9 @@ class PlayerProfileMessage(Writer):
         self.writeVint(1)  # Low Id
         self.writeVint(0)
 
-        self.writeVint(len(self.player.BrawlersCount))  # brawlers array
+        self.writeVint(len(self.player.brawlers_id))  # brawlers array
 
-        for brawler_id in self.player.BrawlersCount:
+        for brawler_id in self.player.brawlers_id:
             self.writeScId(16, brawler_id)
             self.writeVint(0)
             self.writeVint(99999)
@@ -34,8 +34,8 @@ class PlayerProfileMessage(Writer):
         self.writeVint(self.player.trophies)  # highest trophies
         self.writeVint(5)
 
-        self.writeVint(len(self.player.BrawlersCount))
-        self.writeVint(len(self.player.BrawlersCount))
+        self.writeVint(len(self.player.brawlers_id))
+        self.writeVint(len(self.player.brawlers_id))
 
         self.writeVint(28000000)
         self.writeVint(8)

@@ -16,13 +16,13 @@ class LoginFailedMessage(Writer):
 
         self.writeString() # null
 
-        self.writeString(self.player.patchUrl) # patch url
-        self.writeString(self.player.updateUrl) # update url
+        self.writeString(self.player.patch_url) # patch url
+        self.writeString(self.player.update_url) # update url
         self.writeString(self.msg) # message
 
         self.writeHexa('''00 00 00 00 00 FF FF FF FF 00 00 00 02''') # unknown
 
-        self.writeString(self.player.patchUrl) # patch url
+        self.writeString(self.player.patch_url) # patch url
         self.writeString() # rackcdn url
 
         self.writeInt(0)

@@ -10,7 +10,7 @@ class TeamSetLocationMessage(BSMessageReader):
 
     def decode(self):
         self.read_Vint()
-        self.player.mapID = self.read_Vint()
+        self.player.map_id = self.read_Vint()
 
 
     def process(self):

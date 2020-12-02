@@ -12,7 +12,7 @@ class AllianceBotChatServerMessage(Writer):
     def encode(self):
         self.writeVint(2)
         self.writeVint(0)
-        self.writeVint(self.player.messageTick)
+        self.writeVint(self.player.message_tick)
         self.writeVint(1)
         self.writeVint(1)
         self.writeString("Bot")

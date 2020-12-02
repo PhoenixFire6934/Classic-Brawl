@@ -11,15 +11,15 @@ class DataBase:
     def loadAccount(self):
         db = TinyDB('data.db')
         query = Query()
-        user_data = db.search(query.token == str(self.player.Token))
+        user_data = db.search(query.token == str(self.player.token))
         if user_data:
             self.player.name = user_data[0]["info"]["name"]
             self.player.gems = user_data[0]["info"]["gems"]
             self.player.gold = user_data[0]["info"]["gold"]
             self.player.starPoints = user_data[0]["info"]["starpoints"]
             self.player.tickets = user_data[0]["info"]["tickets"]
-            self.player.brawlerID = user_data[0]["info"]["brawlerID"]
-            self.player.skinID = user_data[0]["info"]["skinID"]
+            self.player.brawler_id = user_data[0]["info"]["brawlerID"]
+            self.player.skin_id = user_data[0]["info"]["skinID"]
             self.player.trophies = user_data[0]["info"]["trophies"]
             self.player.profileIcon = user_data[0]["info"]["profileIcon"]
             self.player.brawlBoxes = user_data[0]["info"]["brawlBoxes"]
@@ -65,8 +65,8 @@ class DataBase:
             self.player.gadget = user_data[0]["info"]["gadget"]
             self.player.starpower = user_data[0]["info"]["starpower"]
             self.player.DoNotDistrubMessage = user_data[0]["info"]["DoNotDistrub"]
-            self.player.roomID = user_data[0]["info"]["roomID"]
-            self.player.BrawlersTrophies = user_data[0]["info"]["brawlersTrophies"]
+            self.player.room_id = user_data[0]["info"]["roomID"]
+            self.player.brawlers_trophies = user_data[0]["info"]["brawlersTrophies"]
 
 
 
@@ -76,12 +76,12 @@ class DataBase:
         db = TinyDB('data.db')
 
         data = {
-            "token": str(self.player.Token),
+            "token": str(self.player.token),
 
             "info":
                 {
                     "name": self.player.name,
-                    "lowID": self.player.LowID,
+                    "lowID": self.player.low_id,
                     "gems": self.player.gems,
                     "gold": self.player.gold,
                     "starpoints": self.player.starPoints,
@@ -134,7 +134,7 @@ class DataBase:
                     "starpower": 76,
                     "DoNotDistrub": 0,
                     "roomID": 0,
-                    "brawlersTrophies": self.player.BrawlersTrophies
+                    "brawlersTrophies": self.player.brawlers_trophies
 
                 }
 
@@ -149,10 +149,10 @@ class DataBase:
     def replaceValue(self, value_name, new_value):
         db = TinyDB('data.db')
         query = Query()
-        data = db.search(query.token == str(self.player.Token))
+        data = db.search(query.token == str(self.player.token))
         user_data = data[0]
         user_data["info"][str(value_name)] = new_value
-        db.update(user_data, query.token == str(self.player.Token))
+        db.update(user_data, query.token == str(self.player.token))
 
 
 

@@ -16,9 +16,9 @@ class LoginMessage(BSMessageReader):
         self.client = client
 
     def decode(self):
-        self.player.HighID = self.read_int()
-        self.player.LowID = self.read_int()
-        self.player.Token = self.read_string()
+        self.player.high_id = self.read_int()
+        self.player.low_id = self.read_int()
+        self.player.token = self.read_string()
         self.major = self.read_int()
         self.minor = self.read_int()
         self.build = self.read_int()
@@ -28,7 +28,7 @@ class LoginMessage(BSMessageReader):
         if self.major != 26:
             LoginFailedMessage(self.client, self.player, "The server does not support your version").send()
 
-        elif self.player.LowID != 0:
+        elif self.player.low_id != 0:
 
             if self.player.maintenance:
                 LoginFailedMessage(self.client, self.player, "").send()
@@ -43,13 +43,13 @@ class LoginMessage(BSMessageReader):
             MyAllianceMessage(self.client, self.player).send()
             if self.player.DoNotDistrub == 1:
                 DoNotDistrubOkMessage(self.client, self.player).send()
-            if self.player.roomID > 0:
+            if self.player.room_id > 0:
                 TeamGameroomDataMessage(self.client, self.player).send()
             
         else:
-            self.player.LowID = Helpers.randomID(self)
-            self.player.HighID = 0
-            self.player.Token = Helpers.randomStringDigits(self)
+            self.player.low_id = Helpers.randomID(self)
+            self.player.high_id = 0
+            self.player.token = Helpers.randomStringDigits(self)
             LoginOkMessage(self.client, self.player).send()
             OwnHomeDataMessage(self.client, self.player).send()
             MyAllianceMessage(self.client, self.player).send()

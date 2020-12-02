@@ -20,20 +20,20 @@ class Players:
 	settings = json.loads(content)
 
 	
-	HighID = 0
-	LowID = 0
-	Token = None
-	boxID = 0
-	mapID = 7
-	roomID = 0
-	brawlerID = 0
-	skinID = 0
+	high_id = 0
+	low_id = 0
+	token = None
+	box_id = 0
+	map_id = 7
+	room_id = 0
+	brawler_id = 0
+	skin_id = 0
 
 
-	SkinsCount = Skins.get_skins_id()
-	BrawlersCount = Characters.get_brawlers_id()
-	CardSkillsID = Cards.get_spg_id()
-	CardUnlockID = Cards.get_brawler_unlock()
+	skins_id = Skins.get_skins_id()
+	brawlers_id = Characters.get_brawlers_id()
+	card_skills_id = Cards.get_spg_id()
+	card_unlock_id = Cards.get_brawler_unlock()
 
 
 	brawler_power_level = settings['BrawlerPowerLevel']
@@ -51,8 +51,8 @@ class Players:
 	starPoints = settings['Starpoints']
 
 
-	updateUrl = settings['UpdateUrl']
-	patchUrl = settings['PatchUrl']
+	update_url = settings['UpdateUrl']
+	patch_url = settings['PatchUrl']
 	patch_sha = Fingerprint.loadFinger("GameAssets/fingerprint.json")
 
 	err_code = 7
@@ -70,47 +70,13 @@ class Players:
 		err_code = 10
 		maintenance = True
 
-	messageTick = 0
-	botMessageTick = 0
+	message_tick = 0
+	bot_message_tick = 0
 
+	brawlers_trophies = {}
 
-	BrawlersTrophies = {
-		'0':  brawler_trophies_for_rank,
-		'1':  brawler_trophies_for_rank,
-		'2':  brawler_trophies_for_rank,
-		'3':  brawler_trophies_for_rank,
-		'4':  brawler_trophies_for_rank,
-		'5':  brawler_trophies_for_rank,
-		'6':  brawler_trophies_for_rank,
-		'7':  brawler_trophies_for_rank,
-		'8':  brawler_trophies_for_rank,
-		'9':  brawler_trophies_for_rank,
-		'10': brawler_trophies_for_rank,
-		'11': brawler_trophies_for_rank,
-		'12': brawler_trophies_for_rank,
-		'13': brawler_trophies_for_rank,
-		'14': brawler_trophies_for_rank,
-		'15': brawler_trophies_for_rank,
-		'16': brawler_trophies_for_rank,
-		'17': brawler_trophies_for_rank,
-		'18': brawler_trophies_for_rank,
-		'19': brawler_trophies_for_rank,
-		'20': brawler_trophies_for_rank,
-		'21': brawler_trophies_for_rank,
-		'22': brawler_trophies_for_rank,
-		'23': brawler_trophies_for_rank,
-		'24': brawler_trophies_for_rank,
-		'25': brawler_trophies_for_rank,
-		'26': brawler_trophies_for_rank,
-		'27': brawler_trophies_for_rank,
-		'28': brawler_trophies_for_rank,
-		'29': brawler_trophies_for_rank,
-		'30': brawler_trophies_for_rank,
-		'31': brawler_trophies_for_rank,
-		'32': brawler_trophies_for_rank,
-		'34': brawler_trophies_for_rank,
-		'37': brawler_trophies_for_rank
-	}
+	for id in brawlers_id:
+		brawlers_trophies.update({f'{id}': brawler_trophies_for_rank})
 
 
 	shellySkin = 0

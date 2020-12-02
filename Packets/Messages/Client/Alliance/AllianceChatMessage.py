@@ -66,11 +66,11 @@ class AllianceChatMessage(BSMessageReader):
 
     def process(self):
         AllianceChatServerMessage(self.client, self.player, self.msg).send()
-        self.player.messageTick += 1
+        self.player.message_tick += 1
 
         if self.bot_msg != '':
             AllianceBotChatServerMessage(self.client, self.player, self.bot_msg).send()
-            self.player.messageTick += 1
+            self.player.message_tick += 1
 
         if self.send_ofs:
             OutOfSyncMessage(self.client, self.player, 'Changes have been applied').send()

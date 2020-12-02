@@ -15,6 +15,6 @@ class TeamLeaveMessage(BSMessageReader):
         pass
 
     def process(self):
-        self.player.roomID = 0
-        DataBase.replaceValue(self, 'roomID', self.player.roomID)
+        self.player.room_id = 0
+        DataBase.replaceValue(self, 'roomID', self.player.room_id)
         TeamLeftMessage(self.client, self.player).send()

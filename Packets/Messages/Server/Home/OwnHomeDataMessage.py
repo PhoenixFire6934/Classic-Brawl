@@ -37,15 +37,15 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(14)
         self.writeVint(29)
 
-        self.writeVint(self.player.skinID) # skinID
+        self.writeVint(self.player.skin_id) # skinID
         self.writeVint(29)
 
         self.writeVint(0)
 
         # Unlocked Skins array
-        self.writeVint(len(self.player.SkinsCount))
+        self.writeVint(len(self.player.skins_id))
 
-        for skin_id in self.player.SkinsCount:
+        for skin_id in self.player.skins_id:
             self.writeScId(29, skin_id)
 
         self.writeVint(0)
@@ -92,7 +92,7 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(self.player.tickets)  # Tickets value
         self.writeVint(-21)
 
-        self.writeScId(16, self.player.brawlerID) # Selected Brawler
+        self.writeScId(16, self.player.brawler_id) # Selected Brawler
 
         self.writeString("RO")  # Location
         self.writeString("26.165") # Supported Content Creator
@@ -241,9 +241,9 @@ class OwnHomeDataMessage(Writer):
 
 
         # Unlocked Brawlers & Resources array
-        self.writeVint(len(self.player.CardUnlockID) + 4) # count
+        self.writeVint(len(self.player.card_unlock_id) + 4) # count
 
-        for unlock_id in self.player.CardUnlockID:
+        for unlock_id in self.player.card_unlock_id:
             self.writeVint(23)
             self.writeVint(unlock_id)
             self.writeVint(1)
@@ -266,51 +266,61 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(self.player.starPoints)  # resource amount
 
         # Brawlers Trophies array
-        self.writeVint(len(self.player.BrawlersCount)) # brawlers count
+        self.writeVint(len(self.player.brawlers_id)) # brawlers count
 
-        for brawler_id in self.player.BrawlersCount:
+        for brawler_id in self.player.brawlers_id:
             self.writeScId(16, brawler_id)
-            self.writeVint(self.player.BrawlersTrophies[str(brawler_id)])
+            try:
+                self.writeVint(self.player.brawlers_trophies[str(brawler_id)])
+            except KeyError:
+                self.player.brawlers_trophies.update({f'{brawler_id}': self.player.brawler_trophies_for_rank})
+                DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
+                self.writeVint(self.player.brawlers_trophies[str(brawler_id)])
 
 
         # Brawlers Trophies for Rank array
-        self.writeVint(len(self.player.BrawlersCount))  # brawlers count
+        self.writeVint(len(self.player.brawlers_id))  # brawlers count
 
-        for brawler_id in self.player.BrawlersCount:
+        for brawler_id in self.player.brawlers_id:
             self.writeScId(16, brawler_id)
-            self.writeVint(self.player.BrawlersTrophies[str(brawler_id)])
+            try:
+                self.writeVint(self.player.brawlers_trophies[str(brawler_id)])
+            except KeyError:
+                self.player.brawlers_trophies.update({f'{brawler_id}': self.player.brawler_trophies_for_rank})
+                DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
+                self.writeVint(self.player.brawlers_trophies[str(brawler_id)])
 
         self.writeVint(0)
 
        # Brawlers Upgrade Poitns array
-        self.writeVint(len(self.player.BrawlersCount))  # brawlers count
+        self.writeVint(len(self.player.brawlers_id))  # brawlers count
 
-        for brawler_id in self.player.BrawlersCount:
+        for brawler_id in self.player.brawlers_id:
             self.writeScId(16, brawler_id)
             self.writeVint(self.player.brawler_upgrade_points)
 
 
         # Brawlers Power Level array
-        self.writeVint(len(self.player.BrawlersCount))  # brawlers count
+        self.writeVint(len(self.player.brawlers_id))  # brawlers count
 
-        for brawler_id in self.player.BrawlersCount:
+        for brawler_id in self.player.brawlers_id:
             self.writeScId(16, brawler_id)
             self.writeVint(self.player.brawler_power_level)
 
 
         # Gadgets and Star Powers array
-        self.writeVint(len(self.player.CardSkillsID))  # count
+        self.writeVint(len(self.player.card_skills_id))  # count
 
-        for skill_id in self.player.CardSkillsID:
+        for skill_id in self.player.card_skills_id:
             self.writeVint(23)
             self.writeVint(skill_id)
             self.writeVint(1)
 
 
         # "new" Brawler Tag array
-        self.writeVint(len(self.player.BrawlersCount))  # brawlers count
+        self.writeVint(len(self.player.brawlers_id))  # brawlers count
 
-        for brawler_id in self.player.BrawlersCount:
+        for brawler_id in self.player.brawlers_id:
             self.writeScId(16, brawler_id)
             self.writeVint(2)
 

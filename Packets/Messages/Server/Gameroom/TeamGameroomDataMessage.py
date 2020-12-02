@@ -18,20 +18,20 @@ class TeamGameroomDataMessage(Writer):
         self.writeVint(0)
         self.writeVint(0)
 
-        if (self.player.roomID == 0):
-            self.player.roomID = random.randint(0, 2147483647)
-            self.writeInt(self.player.roomID)
-            DataBase.replaceValue(self, 'roomID', self.player.roomID)
+        if (self.player.room_id == 0):
+            self.player.room_id = random.randint(0, 2147483647)
+            self.writeInt(self.player.room_id)
+            DataBase.replaceValue(self, 'roomID', self.player.room_id)
 
         else:
-           self.writeInt(self.player.roomID)
+           self.writeInt(self.player.room_id)
 
         self.writeVint(1557129593)
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(15)
-        self.writeVint(self.player.mapID) # map ID
+        self.writeVint(self.player.map_id) # map ID
         self.writeVint(1)
         self.writeVint(1)
         self.writeVint(0)
@@ -40,7 +40,7 @@ class TeamGameroomDataMessage(Writer):
         self.writeVint(0)  # high id
         self.writeInt(1)  # low id
         self.writeVint(16)
-        self.writeVint(self.player.brawlerID)
+        self.writeVint(self.player.brawler_id)
         self.writeVint(0)
         self.writeVint(99999)
         self.writeVint(99999)

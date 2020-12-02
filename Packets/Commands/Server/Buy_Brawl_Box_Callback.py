@@ -12,7 +12,7 @@ class ServerBox(Writer):
     def encode(self):
         reward_list = [0, 0, 3, 2, 8, 2, 8, 8, 0, 3, 3, 0, 0, 2, 3, 0, 0, 0, 0, 3]
 
-        if self.player.boxID == 5:        
+        if self.player.box_id == 5:
             reward = random.choice(reward_list)
             value = random.randrange(5, 20)
             GoldValue = random.randrange(10, 50)
@@ -73,7 +73,7 @@ class ServerBox(Writer):
             self.writeVint(0)
 
 
-        if self.player.boxID == 4:
+        if self.player.box_id == 4:
             tokendoublerlist = [200, 400, 200, 600, 200, 200, 400, 200, 200, 400, 200, 200, 400, 600, 200, 200, 600, 400, 200, 600]
             reward = random.choice(reward_list)
             value = random.randrange(5, 20)
@@ -132,7 +132,7 @@ class ServerBox(Writer):
             self.writeVint(0)
 
 
-        if self.player.boxID == 3:
+        if self.player.box_id == 3:
             tokendoublerlist = [200, 400, 200, 600, 200, 200, 400, 200, 200, 400, 200, 200, 400, 600, 200, 200, 600, 400, 200, 600]
             reward = random.choice(reward_list)
             value = random.randrange(1, 20)
@@ -198,7 +198,7 @@ class ServerBox(Writer):
             self.writeVint(0)
 
 
-        if self.player.boxID == 1 or self.player.boxID == 10 :
+        if self.player.box_id == 1 or self.player.box_id == 10 :
             tokendoublerlist = [200, 400, 200, 600, 200, 200, 400, 200, 200, 400, 200, 200, 400, 600, 200, 200, 600, 400, 200, 600] 
             reward = random.choice(reward_list)
             value = random.randrange(5, 20)

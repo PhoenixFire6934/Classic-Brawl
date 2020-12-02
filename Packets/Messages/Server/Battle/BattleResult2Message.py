@@ -14,7 +14,7 @@ class BattleResult2Message(Writer):
         self.writeVint(1)
         self.writeVint(self.player.BattleResult)
 
-        brawler_trophies = self.player.BrawlersTrophies[str(self.player.brawlerID)]
+        brawler_trophies = self.player.brawlers_trophies[str(self.player.brawler_id)]
 
 
         if 0 <= brawler_trophies <= 49:
@@ -76,13 +76,13 @@ class BattleResult2Message(Writer):
 
         if self.player.BattleResult == 0:
             new_trophies = self.player.trophies + win_val
-            self.player.BrawlersTrophies[str(self.player.brawlerID)] = brawler_trophies + win_val
-            DataBase.replaceValue(self, 'brawlersTrophies', self.player.BrawlersTrophies)
+            self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + win_val
+            DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
             DataBase.replaceValue(self, 'trophies', new_trophies)
         else:
             new_trophies = self.player.trophies + lose_val
-            self.player.BrawlersTrophies[str(self.player.brawlerID)] = brawler_trophies + lose_val
-            DataBase.replaceValue(self, 'brawlersTrophies', self.player.BrawlersTrophies)
+            self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + lose_val
+            DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
             DataBase.replaceValue(self, 'trophies', new_trophies)
 
 
@@ -107,9 +107,9 @@ class BattleResult2Message(Writer):
         self.writeVint(6)
         self.writeVint(1)
         self.writeVint(16)
-        self.writeVint(self.player.brawlerID)
+        self.writeVint(self.player.brawler_id)
         self.writeVint(29)
-        self.writeVint(self.player.skinID)
+        self.writeVint(self.player.skin_id)
         self.writeVint(99999)
         self.writeVint(0)
         self.writeVint(10)
