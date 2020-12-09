@@ -72,6 +72,9 @@ class Players:
 
 	message_tick = 0
 	bot_message_tick = 0
+	
+  BattleResult = 0
+  
 
 	brawlers_trophies = {}
 
