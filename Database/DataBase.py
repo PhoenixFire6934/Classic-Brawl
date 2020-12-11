@@ -143,7 +143,17 @@ class DataBase:
         db.insert(data)
 
 
+    def getAllPlayers(self):
+        db = TinyDB('data.db')
+        query = Query()
+        name_list =[]
 
+        for i in db.all():
+            token = i['token']
+            name = db.search(query.token == str(token))[0]['info']
+            name_list.append(name)
+
+        return name_list
 
 
     def replaceValue(self, value_name, new_value):

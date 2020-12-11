@@ -1,4 +1,5 @@
 from Utils.Writer import Writer
+from Database.DataBase import DataBase
 
 
 class GetLeaderboardOkMessage(Writer):
@@ -15,7 +16,30 @@ class GetLeaderboardOkMessage(Writer):
 
         self.writeString()
 
-        self.writeVint(0)
+        players = DataBase.getAllPlayers(self)
+
+        self.writeVint(len(players)) # players count
+
+        for player in players:
+
+            self.writeVint(0)
+            self.writeVint(1)
+
+            self.writeVint(1)
+
+            self.writeVint(player['trophies']) # trophies
+
+            self.writeVint(1)
+
+            self.writeString()
+
+            self.writeString(player['name'])
+
+            self.writeVint(1)
+            self.writeVint(28000000)
+            self.writeVint(43000000)
+            self.writeVint(0)
+
 
         self.writeVint(0)
         self.writeVint(0)

@@ -26,7 +26,8 @@ class LoginMessage(BSMessageReader):
 
     def process(self):
         if self.major != 26:
-            LoginFailedMessage(self.client, self.player, "The server does not support your version").send()
+            self.player.err_code = 8
+            LoginFailedMessage(self.client, self.player, "Your client is outdated, click below to download the new version!").send()
 
         elif self.player.low_id != 0:
 
@@ -36,7 +37,8 @@ class LoginMessage(BSMessageReader):
             if self.player.patch:
                 if self.fingerprint_sha != self.player.patch_sha:
                     LoginFailedMessage(self.client, self.player, "").send()
-                    
+
+
             LoginOkMessage(self.client, self.player).send()
             DataBase.loadAccount(self) # load account
             OwnHomeDataMessage(self.client, self.player).send()
@@ -50,6 +52,7 @@ class LoginMessage(BSMessageReader):
             self.player.low_id = Helpers.randomID(self)
             self.player.high_id = 0
             self.player.token = Helpers.randomStringDigits(self)
+
             LoginOkMessage(self.client, self.player).send()
             OwnHomeDataMessage(self.client, self.player).send()
             MyAllianceMessage(self.client, self.player).send()
