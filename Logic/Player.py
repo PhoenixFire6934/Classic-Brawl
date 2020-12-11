@@ -72,11 +72,10 @@ class Players:
 
 	message_tick = 0
 	bot_message_tick = 0
-	
-  BattleResult = 0
-  
 
 	brawlers_trophies = {}
+
+	BattleResult = 0
 
 	for id in brawlers_id:
 		brawlers_trophies.update({f'{id}': brawler_trophies_for_rank})
