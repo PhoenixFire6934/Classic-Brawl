@@ -120,7 +120,7 @@ class Players:
 	sproutSkin =0
 	gadget = 255
 	starpower = 76
-	namecolor = 12
+	namecolor = 0
 	GameType = 0
 	Rank = 0
 	Team = 0
