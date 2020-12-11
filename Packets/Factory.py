@@ -12,6 +12,7 @@ from Packets.Messages.Client.Gameroom.TeamChangeMemberSettingsMessage import Tea
 from Packets.Messages.Client.AnalyticsEventMessage import AnalyticsEventMessage
 from Packets.Messages.Client.Battle.BattleEndMessage import BattleEndMessage
 from Packets.Messages.Client.SetNameMessage import SetNameMessage
+from Packets.Messages.Client.Home.GetLeaderboardMessage import GetLeaderboardMessage
 from Packets.Messages.Client.SetContentCreatorMessage import SetContentCreatorMessage
 from Packets.Messages.Client.Home.AvatarNameCheckRequestMessage import AvatarNameCheckRequestMessage
 from Packets.Messages.Client.Gameroom.TeamUseGadgetMessage import TeamUseGadgetMessage
@@ -29,6 +30,7 @@ packets = {
     14109: GoHomeFromOfflinePractiseMessage,
     14110: BattleEndMessage,
     14113: AskProfileMessage,
+    14403: GetLeaderboardMessage,
     14302: AskForAllianceDataMessage,
     14315: AllianceChatMessage,
     14350: TeamCreateMessage,

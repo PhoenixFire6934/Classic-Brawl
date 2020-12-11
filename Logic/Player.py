@@ -19,7 +19,7 @@ class Players:
 
 	settings = json.loads(content)
 
-	
+
 	high_id = 0
 	low_id = 0
 	token = None
@@ -74,6 +74,8 @@ class Players:
 	bot_message_tick = 0
 
 	brawlers_trophies = {}
+
+	BattleResult = 0
 
 	for id in brawlers_id:
 		brawlers_trophies.update({f'{id}': brawler_trophies_for_rank})
