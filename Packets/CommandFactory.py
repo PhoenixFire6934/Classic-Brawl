@@ -20,7 +20,7 @@ class EndClientTurn(BSMessageReader):
 
     def process(self):
 
-        if self.commandID == 500 or self.commandID == 517 or self.commandID == 535:
+        if self.commandID == 500 or self.commandID == 517 or self.commandID == 535 or self.commandID == 519:
             self.read_Vint()
             self.read_Vint()
             self.read_Vint()

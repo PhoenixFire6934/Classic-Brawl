@@ -22,8 +22,8 @@ class GetLeaderboardOkMessage(Writer):
 
         for player in players:
 
-            self.writeVint(0)
-            self.writeVint(1)
+            self.writeVint(0) # high ID
+            self.writeVint(1) # low ID
 
             self.writeVint(1)
 
@@ -36,8 +36,8 @@ class GetLeaderboardOkMessage(Writer):
             self.writeString(player['name'])
 
             self.writeVint(1)
-            self.writeVint(28000000)
-            self.writeVint(43000000)
+            self.writeVint(28000000 + player['profileIcon'])
+            self.writeVint(43000000 + int(player['namecolor']))
             self.writeVint(0)
 
 
