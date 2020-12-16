@@ -37,7 +37,7 @@ class GetLeaderboardOkMessage(Writer):
 
             self.writeVint(1)
             self.writeVint(28000000 + player['profileIcon'])
-            self.writeVint(43000000 + int(player['namecolor']))
+            self.writeVint(43000000 + player['namecolor'])
             self.writeVint(0)
 
 

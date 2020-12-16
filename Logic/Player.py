@@ -1,5 +1,4 @@
 import json
-import sys
 from Utils.Config import Config
 from Utils.Fingerprint import Fingerprint
 from Files.CsvLogic.Characters import Characters
@@ -73,51 +72,19 @@ class Players:
 	message_tick = 0
 	bot_message_tick = 0
 
-	brawlers_trophies = {}
-
 	BattleResult = 0
+
+	brawlers_trophies = {}
 
 	for id in brawlers_id:
 		brawlers_trophies.update({f'{id}': brawler_trophies_for_rank})
 
+	brawlers_skins = {}
 
-	shellySkin = 0
-	nitaSkin = 0
-	coltSkin = 0
-	bullSkin = 0
-	jessieSkin = 0
-	brockSkin = 0
-	dynamikeSkin = 0
-	boSkin = 0
-	elprimoSkin = 0
-	barleySkin = 0
-	pocoSkin = 0
-	ricoSkin = 0
-	darrylSkin = 0
-	pennySkin = 0
-	piperSkin = 0
-	pamSkin = 0
-	frankSkin = 0
-	mortisSkin = 0
-	taraSkin = 0
-	spikeSkin = 0
-	crowSkin = 0
-	geneSkin = 0
-	tickSkin = 0
-	leonSkin = 0
-	rosaSkin = 0
-	carlSkin = 0
-	bibiSkin = 0
-	bitSkin = 0
-	sandySkin =0
-	beaSkin = 0
-	emzSkin = 0
-	mrpSkin = 0
-	maxSkin = 0
-	jackySkin =0
-	galeSkin = 0
-	naniSkin = 0
-	sproutSkin =0
+	for id in brawlers_id:
+		brawlers_skins.update({f'{id}': 0})
+
+
 	gadget = 255
 	starpower = 76
 	namecolor = 0

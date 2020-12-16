@@ -28,9 +28,11 @@ class OwnHomeDataMessage(Writer):
 
         self.writeVint(0) # array
 
-        self.writeVint(1) # array
-        self.writeVint(29)
-        self.writeVint(self.player.skin_id) # skinID
+        # Selected Skins array
+        self.writeVint(len(self.player.brawlers_skins))
+        for brawler_id in self.player.brawlers_skins:
+            self.writeVint(29)
+            self.writeVint(self.player.brawlers_skins[brawler_id]) # skinID
 
         # Unlocked Skins array
         self.writeVint(len(self.player.skins_id))
@@ -56,7 +58,7 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(0)
         self.writeVint(0) # array
 
-        self.writeVint(8) # related to shop token doubler
+        self.writeByte(8) # related to shop token doubler
 
         self.writeBoolean(True)
         self.writeBoolean(True)
