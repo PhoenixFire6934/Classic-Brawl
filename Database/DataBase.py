@@ -90,7 +90,7 @@ class DataBase:
                     "skinID": 0,
                     "trophies": self.player.trophies,
                     "profileIcon": 0,
-                    "namecolor": 12,
+                    "namecolor": self.player.namecolor,
                     "brawlBoxes": self.player.brawlBoxes,
                     "bigBoxes": self.player.bigBoxes,
                     "shellySkin": 0,
