@@ -68,7 +68,8 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(0)
 
         # Shop Offers
-
+        
+        # [Item ID, 'Offers title', Cost, Skin ID]
         items = [
             [6, 'Free Brawl Box', 0, 0],
             [14, 'Free Big Box', 0, 0],
