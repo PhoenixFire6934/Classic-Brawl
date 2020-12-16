@@ -41,8 +41,8 @@ class GetLeaderboardOkMessage(Writer):
             self.writeVint(0)
 
 
-        self.writeVint(0)
-        self.writeVint(0)
+        self.writeVint(player['trophies'])
+        self.writeVint(0) # Position
         self.writeVint(0)
         self.writeVint(0)
 
