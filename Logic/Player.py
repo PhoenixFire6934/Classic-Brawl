@@ -108,7 +108,6 @@ class Players:
 	Bot4N = None
 	Bot5 = 0
 	Bot5N = None
-	useGadget = 1
 
 
 
