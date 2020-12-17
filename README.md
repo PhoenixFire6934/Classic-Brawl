@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to Brawl-Classic 👋</h1> test
+<h1 align="center">Welcome to Brawl-Classic 👋</h1>
 
 > Open source Brawl Stars server for version 26 of the game! Wrote in Python by Vitalik and PhoenixFire.
 
