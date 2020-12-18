@@ -23,6 +23,11 @@ class LoginMessage(BSMessageReader):
         self.minor = self.read_int()
         self.build = self.read_int()
         self.fingerprint_sha = self.read_string()
+        self.read_int()
+        OpenUDID = self.read_string()
+        AndroidID = self.read_string()
+        OSVersion = self.read_string()
+
 
     def process(self):
         if self.major != 26:

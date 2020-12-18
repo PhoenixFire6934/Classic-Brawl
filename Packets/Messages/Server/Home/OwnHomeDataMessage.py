@@ -1,5 +1,10 @@
+from datetime import datetime
+
 from Utils.Writer import Writer
 from Database.DataBase import DataBase
+
+from Logic.Shop import Shop
+from Logic.EventSlots import EventSlots
 
 
 class OwnHomeDataMessage(Writer):
@@ -13,15 +18,15 @@ class OwnHomeDataMessage(Writer):
         DataBase.loadAccount(self)
 
         self.writeVint(0)
-        self.writeVint(0) # Timestamp
+        self.writeVint(int(datetime.timestamp(datetime.now()))) # Timestamp
 
         self.writeVint(self.player.trophies) # Player Trophies
         self.writeVint(self.player.trophies) # Player Max Reached Trophies
 
-        self.writeVint(122)
-        self.writeVint(99)  # Trophy Road Reward
+        self.writeVint(0)
+        self.writeVint(95)  # Trophy Road Reward
 
-        self.writeVint(1262469) # Starting Level (exp points)
+        self.writeVint(500) # Starting Level (exp points)
 
         self.writeScId(28, self.player.profile_icon) # Player Icon ID
         self.writeScId(43, self.player.name_color)    # Player Name Color ID
@@ -40,7 +45,8 @@ class OwnHomeDataMessage(Writer):
         for skin_id in self.player.skins_id:
             self.writeScId(29, skin_id)
 
-        self.writeVint(0)
+        self.writeVint(0) # array
+
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(0)
@@ -67,33 +73,28 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(0)
         self.writeVint(0)
 
-        # Shop Offers
-        
-        # [Item ID, 'Offers title', Cost, Skin ID]
-        items = [
-            [6, 'Free Brawl Box', 0, 0],
-            [14, 'Free Big Box', 0, 0],
-            [10, 'Free Mega Box', 0, 0],
-        ]
-        count = len(items)
+        # Shop Offers array
+
+        count = len(Shop.offers)
 
         self.writeVint(count) # Count
         for i in range(count):
-            item = items[i]
+            item = Shop.offers[i]
+            print(item)
 
             count2 = 1
             self.writeVint(count2) # Count2
 
             for i in range(count2):
-                self.writeVint(item[0]) # Item Id
-                self.writeVint(1)       # Multiplier
+                self.writeVint(item['ID'])
+                self.writeVint(1) # Multiplier
                 self.writeVint(0)
-                self.writeVint(item[3]) # Skin Id
+                self.writeVint(item['SkinID'])
                 self.writeVint(0)
 
-            self.writeVint(item[2]) # Cost
-            self.writeVint(86400)   # Timer
-            self.writeVint(1)       # "New" Offer
+            self.writeVint(item['Cost'])
+            self.writeVint(86400) # Timer
+            self.writeVint(1)     # "New" Offer
             self.writeVint(100)
             self.writeVint(0)
 
@@ -104,7 +105,7 @@ class OwnHomeDataMessage(Writer):
 
             self.writeInt(0)
 
-            self.write_string_reference(item[1]) # Text
+            self.write_string_reference(item['OfferTitle']) # Text
 
             self.writeBoolean(True)
             self.writeString()
@@ -127,11 +128,7 @@ class OwnHomeDataMessage(Writer):
         self.writeString("RO") # Location
         self.writeString("26.165") # Supported Content Creator
 
-        self.writeVint(1) # array
-        for i in range(1):
-            self.writeInt(7)
-            self.writeInt(0)
-
+        self.writeVint(0) # array
         self.writeVint(0) # array
         self.writeVint(0) # array
         self.writeVint(0) # array
@@ -139,17 +136,16 @@ class OwnHomeDataMessage(Writer):
         self.writeBoolean(False)
 
         self.writeVint(2019049)
+
         self.writeVint(100)
         self.writeVint(10)
 
-        self.writeVint(30)  # Shop Big Box price
-        self.writeVint(3)
+        for item in Shop.boxes:
+            self.writeVint(item['Cost'])
+            self.writeVint(item['Multiplier'])
 
-        self.writeVint(80)  # Shop Mega Box price
-        self.writeVint(10)
-
-        self.writeVint(50)  # Shop Token Doubler price
-        self.writeVint(1000)# Shop Token Doubler amount
+        self.writeVint(Shop.token_doubler['Cost'])
+        self.writeVint(Shop.token_doubler['Amount'])
 
         self.writeVint(500)
         self.writeVint(50)
@@ -162,20 +158,20 @@ class OwnHomeDataMessage(Writer):
             self.writeVint(i)
 
         # Logic Events
-        mapsList = [7, 32, 17, 0,  24, 202, 97, 167, 174]
-        self.writeVint(8)  # map slots count
+        count = len(EventSlots.maps)
+        self.writeVint(count)
 
-        for i in range(1, 8 + 1):
+        for map in EventSlots.maps:
 
-            self.writeVint(8 + i)
-            self.writeVint(i)
+            self.writeVint(8)
+            self.writeVint(EventSlots.maps.index(map) + 1)
             self.writeVint(0)
             self.writeVint(2802)
             self.writeVint(0)
 
-            self.writeScId(15, int(mapsList[i - 1]) )
+            self.writeScId(15, map['ID'])
 
-            self.writeVint(2)
+            self.writeVint(map['Status'])
 
             self.writeString()
             self.writeVint(0)
@@ -205,13 +201,13 @@ class OwnHomeDataMessage(Writer):
         for i in [6, 20, 60]: # Tickets amount
             self.writeVint(i)
 
-        self.writeVint(4)
-        for i in [20, 50, 140, 280]: # Gold price
-            self.writeVint(i)
+        self.writeVint(len(Shop.gold))
+        for item in Shop.gold:
+            self.writeVint(item['Cost'])
 
-        self.writeVint(4)
-        for i in [150, 400, 1200, 2600]: # Gold amount
-            self.writeVint(i)
+        self.writeVint(len(Shop.gold))
+        for item in Shop.gold:
+            self.writeVint(item['Amount'])
 
         self.writeVint(2)
 
@@ -233,7 +229,7 @@ class OwnHomeDataMessage(Writer):
 
         self.writeVint(2) # Menu Theme
         self.writeInt(1)
-        self.writeInt(41000011) # theme ID
+        self.writeInt(41000011) # Theme ID
         self.writeInt(30)
         self.writeInt(1)
 
@@ -244,9 +240,9 @@ class OwnHomeDataMessage(Writer):
 
         self.writeVint(0) # array
 
-        self.writeVint(-64)
+        self.writeVint(1)
 
-        self.writeBoolean(False)
+        self.writeBoolean(True)
 
         self.writeVint(0)
         self.writeVint(0)
@@ -261,11 +257,11 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(0)
 
         if self.player.name  == "Guest":
-            self.writeString("Guest")  # player name
+            self.writeString("Guest")  # Player Name
             self.writeVint(0)
-            DataBase.createAccount(self)  # create new account
+            DataBase.createAccount(self)
         else:
-            self.writeString(self.player.name)  # player name
+            self.writeString(self.player.name)  # Player Name
             self.writeVint(1)
 
         self.writeInt(0)
@@ -295,6 +291,7 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(5)  # csv id
         self.writeVint(10)  # resource id
         self.writeVint(self.player.star_points)  # resource amount
+
 
         # Brawlers Trophies array
         self.writeVint(len(self.player.brawlers_id))  # brawlers count
