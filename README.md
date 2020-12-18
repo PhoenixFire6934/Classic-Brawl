@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to Brawl-Classic 👋</h1>
+<h1 align="center">Welcome to Classic-Brawl 👋</h1>
 
 Open source Brawl Stars server emulator for version 26 of the game!
 
