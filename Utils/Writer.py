@@ -73,8 +73,19 @@ class Writer:
             self.writeInt(len(encoded))
             self.buffer += encoded
 
+    def write_string_reference(self, string: str = None):
+
+        encoded = string.encode('utf-8')
+        self.writeInt16(0)
+        self.writeVint(len(encoded))
+        self.buffer += encoded
+
     def writeByte(self, data):
         self.writeInt(data, 1)
 
     def writeInt16(self, data):
         self.writeInt(data, 2)
+
+    def writeScId(self, x, y):
+        self.writeVint(x)
+        self.writeVint(y)

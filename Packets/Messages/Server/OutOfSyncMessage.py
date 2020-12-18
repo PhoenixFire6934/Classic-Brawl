@@ -1,7 +1,7 @@
 from Utils.Writer import Writer
 
 
-class OutOfSync(Writer):
+class OutOfSyncMessage(Writer):
 
     def __init__(self, client, player, message):
         super().__init__(client)
@@ -22,4 +22,3 @@ class OutOfSync(Writer):
         self.writeString()
         self.writeString()
         self.writeHexa('''00FFFF0000000000''')
-        print("[INFO] Message LoginFailed has been sent.")

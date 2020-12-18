@@ -3,12 +3,12 @@ from string import ascii_uppercase
 import json
 
 from Logic.Player import Players
-from Packets.Messages.Server.KeepAliveOkMessage import KeepAliveOk
+from Packets.Messages.Server.KeepAliveOkMessage import KeepAliveOkMessage
 
 from Utils.Reader import BSMessageReader
 
 
-class KeepAlive(BSMessageReader):
+class KeepAliveMessage(BSMessageReader):
     def __init__(self, client, player, initial_bytes):
         super().__init__(initial_bytes)
         self.player = player
@@ -18,4 +18,4 @@ class KeepAlive(BSMessageReader):
         pass
 
     def process(self):
-        KeepAliveOk(self.client, self.player).send()
+        KeepAliveOkMessage(self.client, self.player).send()

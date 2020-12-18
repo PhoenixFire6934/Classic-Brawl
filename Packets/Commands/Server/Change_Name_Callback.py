@@ -18,4 +18,3 @@ class SetNameResponse(Writer):
         self.writeVint(0)
         self.writeVint(0)
         DataBase.replaceValue(self, 'name', self.player.name)
-        print("[INFO] Message SetNameResponse has been sent.")
