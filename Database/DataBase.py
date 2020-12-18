@@ -11,16 +11,16 @@ class DataBase:
             self.player.name = user_data[0]["info"]["name"]
             self.player.gems = user_data[0]["info"]["gems"]
             self.player.gold = user_data[0]["info"]["gold"]
-            self.player.starPoints = user_data[0]["info"]["starpoints"]
+            self.player.star_points = user_data[0]["info"]["starpoints"]
             self.player.tickets = user_data[0]["info"]["tickets"]
             self.player.brawler_id = user_data[0]["info"]["brawlerID"]
             self.player.skin_id = user_data[0]["info"]["skinID"]
             self.player.trophies = user_data[0]["info"]["trophies"]
-            self.player.profileIcon = user_data[0]["info"]["profileIcon"]
-            self.player.brawlBoxes = user_data[0]["info"]["brawlBoxes"]
-            self.player.bigBoxes = user_data[0]["info"]["bigBoxes"]
+            self.player.profile_icon = user_data[0]["info"]["profileIcon"]
+            self.player.brawl_boxes = user_data[0]["info"]["brawlBoxes"]
+            self.player.big_boxes = user_data[0]["info"]["bigBoxes"]
             self.player.brawlers_skins = user_data[0]["info"]["brawlersSkins"]
-            self.player.namecolor = user_data[0]["info"]["namecolor"]
+            self.player.name_color = user_data[0]["info"]["namecolor"]
             self.player.gadget = user_data[0]["info"]["gadget"]
             self.player.starpower = user_data[0]["info"]["starpower"]
             self.player.DoNotDistrubMessage = user_data[0]["info"]["DoNotDistrub"]
@@ -42,15 +42,15 @@ class DataBase:
                     "lowID": self.player.low_id,
                     "gems": self.player.gems,
                     "gold": self.player.gold,
-                    "starpoints": self.player.starPoints,
+                    "starpoints": self.player.star_points,
                     "tickets": self.player.tickets,
                     "brawlerID": 0,
                     "skinID": 0,
                     "trophies": self.player.trophies,
                     "profileIcon": 0,
-                    "namecolor": self.player.namecolor,
-                    "brawlBoxes": self.player.brawlBoxes,
-                    "bigBoxes": self.player.bigBoxes,
+                    "namecolor": self.player.name_color,
+                    "brawlBoxes": self.player.brawl_boxes,
+                    "bigBoxes": self.player.big_boxes,
                     "gadget": 255,
                     "starpower": 76,
                     "DoNotDistrub": 0,

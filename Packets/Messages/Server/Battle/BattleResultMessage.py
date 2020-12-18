@@ -11,7 +11,7 @@ class BattleResultMessage(Writer):
     def encode(self):
         self.writeVint(2)
 
-        self.writeVint(self.player.Rank) # player rank
+        self.writeVint(self.player.rank) # player rank
 
         brawler_trophies = self.player.brawlers_trophies[str(self.player.brawler_id)]
 
@@ -185,61 +185,61 @@ class BattleResultMessage(Writer):
                 rank_10_val = -13
 
 
-        if self.player.Rank == 1:
+        if self.player.rank == 1:
             new_trophies = self.player.trophies + rank_1_val
             self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + rank_1_val
             DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
             DataBase.replaceValue(self, 'trophies', new_trophies)
 
-        elif self.player.Rank == 2:
+        elif self.player.rank == 2:
             new_trophies = self.player.trophies + rank_2_val
             self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + rank_2_val
             DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
             DataBase.replaceValue(self, 'trophies', new_trophies)
 
-        elif self.player.Rank == 3:
+        elif self.player.rank == 3:
             new_trophies = self.player.trophies + rank_3_val
             self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + rank_3_val
             DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
             DataBase.replaceValue(self, 'trophies', new_trophies)
 
-        elif self.player.Rank == 4:
+        elif self.player.rank == 4:
             new_trophies = self.player.trophies + rank_4_val
             self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + rank_4_val
             DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
             DataBase.replaceValue(self, 'trophies', new_trophies)
 
-        elif self.player.Rank == 5:
+        elif self.player.rank == 5:
             new_trophies = self.player.trophies + rank_5_val
             self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + rank_5_val
             DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
             DataBase.replaceValue(self, 'trophies', new_trophies)
 
-        elif self.player.Rank == 6:
+        elif self.player.rank == 6:
             new_trophies = self.player.trophies + rank_6_val
             self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + rank_6_val
             DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
             DataBase.replaceValue(self, 'trophies', new_trophies)
 
-        elif self.player.Rank == 7:
+        elif self.player.rank == 7:
             new_trophies = self.player.trophies + rank_7_val
             self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + rank_7_val
             DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
             DataBase.replaceValue(self, 'trophies', new_trophies)
 
-        elif self.player.Rank == 8:
+        elif self.player.rank == 8:
             new_trophies = self.player.trophies + rank_8_val
             self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + rank_8_val
             DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
             DataBase.replaceValue(self, 'trophies', new_trophies)
 
-        elif self.player.Rank == 9:
+        elif self.player.rank == 9:
             new_trophies = self.player.trophies + rank_9_val
             self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + rank_9_val
             DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
             DataBase.replaceValue(self, 'trophies', new_trophies)
 
-        elif self.player.Rank == 10:
+        elif self.player.rank == 10:
             new_trophies = self.player.trophies + rank_10_val
             self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + rank_10_val
             DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)

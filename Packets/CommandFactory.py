@@ -35,8 +35,8 @@ class EndClientTurn(BSMessageReader):
             self.read_Vint()
             self.read_Vint()
             self.read_Vint()
-            self.player.profileIcon = self.read_Vint()
-            DataBase.replaceValue(self, 'profileIcon', self.player.profileIcon)
+            self.player.profile_icon = self.read_Vint()
+            DataBase.replaceValue(self, 'profileIcon', self.player.profile_icon)
             print("Command ID", self.commandID, "has been handled")
 
         elif self.commandID == 506:

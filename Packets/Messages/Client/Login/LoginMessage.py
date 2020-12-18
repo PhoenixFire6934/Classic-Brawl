@@ -43,7 +43,7 @@ class LoginMessage(BSMessageReader):
             DataBase.loadAccount(self) # load account
             OwnHomeDataMessage(self.client, self.player).send()
             MyAllianceMessage(self.client, self.player).send()
-            if self.player.DoNotDistrub == 1:
+            if self.player.do_not_distrub == 1:
                 DoNotDistrubOkMessage(self.client, self.player).send()
             if self.player.room_id > 0:
                 TeamGameroomDataMessage(self.client, self.player).send()

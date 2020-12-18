@@ -23,8 +23,8 @@ class OwnHomeDataMessage(Writer):
 
         self.writeVint(1262469) # Starting Level (exp points)
 
-        self.writeScId(28, self.player.profileIcon ) # Player Icon ID
-        self.writeScId(43, self.player.namecolor)    # Player Name Color ID
+        self.writeScId(28, self.player.profile_icon) # Player Icon ID
+        self.writeScId(43, self.player.name_color)    # Player Name Color ID
 
         self.writeVint(0) # array
 
@@ -282,7 +282,7 @@ class OwnHomeDataMessage(Writer):
 
         self.writeVint(5)  # csv id
         self.writeVint(1)  # resource id
-        self.writeVint(self.player.brawlBoxes)  # resource amount
+        self.writeVint(self.player.brawl_boxes)  # resource amount
 
         self.writeVint(5)  # csv id
         self.writeVint(8)  # resource id
@@ -290,11 +290,11 @@ class OwnHomeDataMessage(Writer):
 
         self.writeVint(5)  # csv id
         self.writeVint(9)  # resource id
-        self.writeVint(self.player.bigBoxes)  # resource amount
+        self.writeVint(self.player.big_boxes)  # resource amount
 
         self.writeVint(5)  # csv id
         self.writeVint(10)  # resource id
-        self.writeVint(self.player.starPoints)  # resource amount
+        self.writeVint(self.player.star_points)  # resource amount
 
         # Brawlers Trophies array
         self.writeVint(len(self.player.brawlers_id))  # brawlers count

@@ -12,7 +12,7 @@ class BattleResult2Message(Writer):
 
     def encode(self):
         self.writeVint(1)
-        self.writeVint(self.player.BattleResult)
+        self.writeVint(self.player.battle_result)
 
         brawler_trophies = self.player.brawlers_trophies[str(self.player.brawler_id)]
 
@@ -74,7 +74,7 @@ class BattleResult2Message(Writer):
                 win_val = 3
                 lose_val = -12
 
-        if self.player.BattleResult == 0:
+        if self.player.battle_result == 0:
             new_trophies = self.player.trophies + win_val
             self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + win_val
             DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
@@ -122,70 +122,70 @@ class BattleResult2Message(Writer):
         self.writeVint(43000000)
         self.writeVint(0)
         self.writeVint(16)
-        self.writeVint(self.player.Bot1)
+        self.writeVint(self.player.bot1)
         self.writeVint(0)
         self.writeVint(99999)
         self.writeVint(0)
         self.writeVint(10)
         self.writeVint(0)
 
-        self.writeString(self.player.Bot1N)
+        self.writeString(self.player.bot1_n)
 
         self.writeVint(100)
         self.writeVint(28000000)
         self.writeVint(43000000)
         self.writeVint(0)
         self.writeVint(16)
-        self.writeVint(self.player.Bot2)
+        self.writeVint(self.player.bot2)
         self.writeVint(0)
         self.writeVint(99999)
         self.writeVint(0)
         self.writeVint(10)
         self.writeVint(0)
 
-        self.writeString(self.player.Bot2N)
-
-        self.writeVint(100)
-        self.writeVint(28000000)
-        self.writeVint(43000000)
-        self.writeVint(2)
-        self.writeVint(16)
-        self.writeVint(self.player.Bot3)
-        self.writeVint(0)
-        self.writeVint(99999)
-        self.writeVint(0)
-        self.writeVint(10)
-        self.writeVint(0)
-
-        self.writeString(self.player.Bot3N)
+        self.writeString(self.player.bot2_n)
 
         self.writeVint(100)
         self.writeVint(28000000)
         self.writeVint(43000000)
         self.writeVint(2)
         self.writeVint(16)
-        self.writeVint(self.player.Bot4)
+        self.writeVint(self.player.bot3)
         self.writeVint(0)
         self.writeVint(99999)
         self.writeVint(0)
         self.writeVint(10)
         self.writeVint(0)
 
-        self.writeString(self.player.Bot4N)
+        self.writeString(self.player.bot3_n)
 
         self.writeVint(100)
         self.writeVint(28000000)
         self.writeVint(43000000)
         self.writeVint(2)
         self.writeVint(16)
-        self.writeVint(self.player.Bot5)
+        self.writeVint(self.player.bot4)
         self.writeVint(0)
         self.writeVint(99999)
         self.writeVint(0)
         self.writeVint(10)
         self.writeVint(0)
 
-        self.writeString(self.player.Bot5N)
+        self.writeString(self.player.bot4_n)
+
+        self.writeVint(100)
+        self.writeVint(28000000)
+        self.writeVint(43000000)
+        self.writeVint(2)
+        self.writeVint(16)
+        self.writeVint(self.player.bot5)
+        self.writeVint(0)
+        self.writeVint(99999)
+        self.writeVint(0)
+        self.writeVint(10)
+        self.writeVint(0)
+
+        self.writeString(self.player.bot5_n)
 
         self.writeVint(100)
         self.writeVint(28000000)

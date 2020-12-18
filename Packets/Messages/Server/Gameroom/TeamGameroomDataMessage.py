@@ -56,7 +56,7 @@ class TeamGameroomDataMessage(Writer):
         self.writeVint(43000000)
         self.writeVint(23)
         self.writeVint(self.player.starpower)
-        if self.player.useGadget == 1:
+        if self.player.use_gadget == 1:
             self.writeVint(23)
             self.writeVint(self.player.gadget)
         else:

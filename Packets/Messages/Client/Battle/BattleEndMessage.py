@@ -12,9 +12,9 @@ class BattleEndMessage(BSMessageReader):
 
 
     def decode(self):
-        self.player.BattleResult = self.read_Vint()
+        self.player.battle_result = self.read_Vint()
         self.read_Vint()
-        self.player.Rank = self.read_Vint()
+        self.player.rank = self.read_Vint()
         self.read_Vint()
         self.read_Vint()
         self.read_Vint()
@@ -23,7 +23,7 @@ class BattleEndMessage(BSMessageReader):
         self.read_Vint()
         self.read_Vint()
 
-        self.player.Team = self.read_Vint() #red or blue
+        self.player.team = self.read_Vint() #red or blue
 
         self.read_Vint()
 
@@ -71,33 +71,33 @@ class BattleEndMessage(BSMessageReader):
 
     def process(self):
 
-    	if self.player.Rank != 0:
+    	if self.player.rank != 0:
     		BattleResultMessage(self.client, self.player).send()
     	else:
-    		if self.player.Team == 0:
+    		if self.player.team == 0:
 
-    			self.player.Bot1N = self.Bot1N
-    			self.player.Bot2N = self.Bot2N
-    			self.player.Bot3N = self.Bot3N
-    			self.player.Bot4N = self.Bot4N
-    			self.player.Bot5N = self.Bot5N
-    			self.player.Bot1 = self.Bot1
-    			self.player.Bot2 = self.Bot2
-    			self.player.Bot3 = self.Bot3
-    			self.player.Bot4 = self.Bot4
-    			self.player.Bot5 = self.Bot5
+    			self.player.bot1_n = self.Bot1N
+    			self.player.bot2_n = self.Bot2N
+    			self.player.bot3_n = self.Bot3N
+    			self.player.bot4_n = self.Bot4N
+    			self.player.bot5_n = self.Bot5N
+    			self.player.bot1 = self.Bot1
+    			self.player.bot2 = self.Bot2
+    			self.player.bot3 = self.Bot3
+    			self.player.bot4 = self.Bot4
+    			self.player.bot5 = self.Bot5
 
     			BattleResult2Message(self.client, self.player).send()
     		else:
 
-    			self.player.Bot1N = self.Bot4N
-    			self.player.Bot2N = self.Bot5N
-    			self.player.Bot3N = self.Bot3N
-    			self.player.Bot4N = self.Bot1N
-    			self.player.Bot5N = self.Bot2N
-    			self.player.Bot1 = self.Bot4
-    			self.player.Bot2 = self.Bot5
-    			self.player.Bot3 = self.Bot3
-    			self.player.Bot4 = self.Bot1
-    			self.player.Bot5 = self.Bot2
+    			self.player.bot1_n = self.Bot4N
+    			self.player.bot2_n = self.Bot5N
+    			self.player.bot3_n = self.Bot3N
+    			self.player.bot4_n = self.Bot1N
+    			self.player.bot5_n = self.Bot2N
+    			self.player.bot1 = self.Bot4
+    			self.player.bot2 = self.Bot5
+    			self.player.bot3 = self.Bot3
+    			self.player.bot4 = self.Bot1
+    			self.player.bot5 = self.Bot2
     			BattleResult2Message(self.client, self.player).send()

@@ -10,7 +10,7 @@ class TeamUseGadgetMessage(BSMessageReader):
         self.client = client
 
     def decode(self):
-        self.player.useGadget = self.read_Vint()
+        self.player.use_gadget = self.read_Vint()
 
     def process(self):
         TeamGameroomDataMessage(self.client, self.player).send()

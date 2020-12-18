@@ -6,7 +6,6 @@ from Files.CsvLogic.Skins import Skins
 from Files.CsvLogic.Cards import Cards
 
 class Players:
-
 	try:
 		config = open('config.json', 'r')
 		content = config.read()
@@ -40,17 +39,25 @@ class Players:
 	brawler_upgrade_points = settings['BrawlerUpgradePoints']
 	gadget = 255
 	starpower = 76
+
+	brawlers_trophies = {}
+	for id in brawlers_id:
+		brawlers_trophies.update({f'{id}': brawler_trophies_for_rank})
+
+	brawlers_skins = {}
+	for id in brawlers_id:
+		brawlers_skins.update({f'{id}': 0})
 	
 	
 	
 	# Player info
 	name = "Guest"
-	profileIcon = 0
-	namecolor = 0
-	DoNotDistrub = 0
-	brawlBoxes = settings['BrawlBoxTokens']
-	bigBoxes = settings['BigBoxTokens']
-	starPoints = settings['Starpoints']
+	profile_icon = 0
+	name_color = 0
+	do_not_distrub = 0
+	brawl_boxes = settings['BrawlBoxTokens']
+	big_boxes = settings['BigBoxTokens']
+	star_points = settings['Starpoints']
 	trophies = settings['Trophies']
 	gems = settings['Gems']
 	gold = settings['Gold']
@@ -82,34 +89,24 @@ class Players:
 	message_tick = 0
 	bot_message_tick = 0
 
+
 	# Friendly game data & info
-	brawlers_trophies = {}
+	battle_result = 0
+	game_type = 0
+	use_gadget = 1
+	rank = 0
+	team = 0
 
-	for id in brawlers_id:
-		brawlers_trophies.update({f'{id}': brawler_trophies_for_rank})
-
-	brawlers_skins = {}
-
-	for id in brawlers_id:
-		brawlers_skins.update({f'{id}': 0})
-
-	BattleResult = 0
-	GameType = 0
-	useGadget = 1
-	Rank = 0
-	Team = 0
-	Bot1 = 0
-	Bot1N = None
-	Bot2 = 0
-	Bot2N = None
-	Bot3 = 0
-	Bot3N = None
-	Bot4 = 0
-	Bot4N = None
-	Bot5 = 0
-	Bot5N = None
-
-
+	bot1 = 0
+	bot1_n = None
+	bot2 = 0
+	bot2_n = None
+	bot3 = 0
+	bot3_n = None
+	bot4 = 0
+	bot4_n = None
+	bot5 = 0
+	bot5_n = None
 
 
 	def __init__(self, device):
