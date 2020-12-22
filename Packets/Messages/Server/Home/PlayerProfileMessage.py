@@ -60,8 +60,4 @@ class PlayerProfileMessage(Writer):
         self.writeVint(43000000)
         self.writeVint(0)
         self.writeVint(0)
-        self.writeVint(-1040385)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
+

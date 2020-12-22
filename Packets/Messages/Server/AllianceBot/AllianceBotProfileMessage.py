@@ -54,14 +54,10 @@ class BotProfileMessage(Writer):
         self.writeVint(1)
         self.writeVint(15)
         self.writeVint(99999)  # most challenge wins
-        self.writeString("Bot")
+        self.writeString("Club Bot")
         self.writeVint(100)
         self.writeVint(28000000)
         self.writeVint(43000000)
         self.writeVint(0)
         self.writeVint(0)
-        self.writeVint(-1040385)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
+

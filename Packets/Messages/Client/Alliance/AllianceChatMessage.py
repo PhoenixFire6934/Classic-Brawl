@@ -27,35 +27,35 @@ class AllianceChatMessage(BSMessageReader):
             DataBase.replaceValue(self, 'tickets', 99999)
 
         elif self.msg.lower().startswith('/gems'):
-            newGems = self.msg.split(" ", 4)[1:]
             try:
+                newGems = self.msg.split(" ", 4)[1:]
                 DataBase.replaceValue(self, 'gems', int(newGems[0]))
                 self.send_ofs = True
-            except ValueError:
+            except:
                 pass
 
         elif self.msg.lower().startswith('/gold'):
-            newGold = self.msg.split(" ", 4)[1:]
             try:
+                newGold = self.msg.split(" ", 4)[1:]
                 DataBase.replaceValue(self, 'gold', int(newGold[0]))
                 self.send_ofs = True
-            except ValueError:
+            except:
                 pass
 
         elif self.msg.lower().startswith('/tickets'):
-            newTickets = self.msg.split(" ", 7)[1:]
             try:
+                newTickets = self.msg.split(" ", 7)[1:]
                 DataBase.replaceValue(self, 'tickets', int(newTickets[0]))
                 self.send_ofs = True
-            except ValueError:
+            except:
                 pass
 
         elif self.msg.lower().startswith('/starpoints'):
-            newStarpoints = self.msg.split(" ", 10)[1:]
             try:
+                newStarpoints = self.msg.split(" ", 10)[1:]
                 DataBase.replaceValue(self, 'starpoints', int(newStarpoints[0]))
                 self.send_ofs = True
-            except ValueError:
+            except:
                 pass
 
         elif self.msg.lower() == '/help':

@@ -20,9 +20,4 @@ class AllianceChatServerMessage(Writer):
         self.writeVint(0)
         self.writeVint(0)
         self.writeString(self.msg_content)
-        self.writeVint(-1040385)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
 

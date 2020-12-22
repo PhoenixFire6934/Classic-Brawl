@@ -15,14 +15,10 @@ class AllianceBotChatServerMessage(Writer):
         self.writeVint(self.player.message_tick)
         self.writeVint(1)
         self.writeVint(1)
-        self.writeString("Bot")
+        self.writeString("Club Bot")
         self.writeVint(3)
         self.writeVint(0)
         self.writeVint(0)
         self.writeString(self.bot_msg_content)
-        self.writeVint(-1040385)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
+
 
