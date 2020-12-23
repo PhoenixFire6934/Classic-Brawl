@@ -19,45 +19,67 @@ class Players:
 
 	settings = json.loads(content)
 
+	# Player and objects ID
+	HighID = 0
+	LowID = 0
+	Token = None
+	boxID = 0
+	mapID = 7
+	roomID = 0
+	brawlerID = 0
+	skinID = 0
 
-	high_id = 0
-	low_id = 0
-	token = None
-	box_id = 0
-	map_id = 7
-	room_id = 0
-	brawler_id = 0
-	skin_id = 0
+	# Brawler and skins arrays
+	SkinsCount = Skins.get_skins_id()
+	BrawlersCount = Characters.get_brawlers_id()
+	CardSkillsID = Cards.get_spg_id()
+	CardUnlockID = Cards.get_brawler_unlock()
 
-
-	skins_id = Skins.get_skins_id()
-	brawlers_id = Characters.get_brawlers_id()
-	card_skills_id = Cards.get_spg_id()
-	card_unlock_id = Cards.get_brawler_unlock()
-
-
+	# General player (Brawler, Currency, etc..)
 	brawler_power_level = settings['BrawlerPowerLevel']
 	brawler_trophies_for_rank = settings['BrawlerTrophiesForRank']
 	brawler_trophies = settings['BrawlerTrophies']
 	brawler_upgrade_points = settings['BrawlerUpgradePoints']
-	trophies = settings['Trophies']
 	gems = settings['Gems']
 	gold = settings['Gold']
 	tickets = settings['Tickets']
-	name = "Guest"
-	profileIcon = 0
+	highesttrophies = 0
+	trophies = 0
+	name = None
+	profileIcon = 1
+	namecolor = 5
 	brawlBoxes = settings['BrawlBoxTokens']
 	bigBoxes = settings['BigBoxTokens']
 	starPoints = settings['Starpoints']
 
+	# Alliances
+	ClubID = 0
+	ClubRole = 0
+	ClubAction = 0
+	ClubMessageCount = 0
+	OldMessageCount = 0
 
-	update_url = settings['UpdateUrl']
-	patch_url = settings['PatchUrl']
+	# Ignore it
+	# contentCreator = None
+
+
+	Resources = {
+		'brawlbox': {'id': 1, 'amount': brawlBoxes},
+		'gold': {'id': 8, 'amount': gold},
+		'bigbox': {'id': 9, 'amount':bigBoxes},
+		'starpoints': {'id': 10, 'amount': starPoints},
+
+	}
+
+	# Message stuff...
+	updateUrl = settings['UpdateUrl']
+	patchUrl = settings['PatchUrl']
 	patch_sha = Fingerprint.loadFinger("GameAssets/fingerprint.json")
 
 	err_code = 7
 	maintenance = False
 	patch = False
+	debug = False
 
 	patching = settings['Patch']
 
@@ -70,17 +92,87 @@ class Players:
 		err_code = 10
 		maintenance = True
 
-	message_tick = 0
-	bot_message_tick = 0
+	# Chat
+	messageTick = 0
+	botMessageTick = 0
 
-	brawlers_trophies = {}
+	BrawlersTrophies = {
+		'0':  brawler_trophies,
+		'1':  brawler_trophies,
+		'2':  brawler_trophies,
+		'3':  brawler_trophies,
+		'4':  brawler_trophies,
+		'5':  brawler_trophies,
+		'6':  brawler_trophies,
+		'7':  brawler_trophies,
+		'8':  brawler_trophies,
+		'9':  brawler_trophies,
+		'10': brawler_trophies,
+		'11': brawler_trophies,
+		'12': brawler_trophies,
+		'13': brawler_trophies,
+		'14': brawler_trophies,
+		'15': brawler_trophies,
+		'16': brawler_trophies,
+		'17': brawler_trophies,
+		'18': brawler_trophies,
+		'19': brawler_trophies,
+		'20': brawler_trophies,
+		'21': brawler_trophies,
+		'22': brawler_trophies,
+		'23': brawler_trophies,
+		'24': brawler_trophies,
+		'25': brawler_trophies,
+		'26': brawler_trophies,
+		'27': brawler_trophies,
+		'28': brawler_trophies,
+		'29': brawler_trophies,
+		'30': brawler_trophies,
+		'31': brawler_trophies,
+		'32': brawler_trophies,
+		'34': brawler_trophies,
+		'37': brawler_trophies
+	}
 
-	BattleResult = 0
+	BrawlersTrophiesForRank = {
+		'0':  brawler_trophies_for_rank,
+		'1':  brawler_trophies_for_rank,
+		'2':  brawler_trophies_for_rank,
+		'3':  brawler_trophies_for_rank,
+		'4':  brawler_trophies_for_rank,
+		'5':  brawler_trophies_for_rank,
+		'6':  brawler_trophies_for_rank,
+		'7':  brawler_trophies_for_rank,
+		'8':  brawler_trophies_for_rank,
+		'9':  brawler_trophies_for_rank,
+		'10': brawler_trophies_for_rank,
+		'11': brawler_trophies_for_rank,
+		'12': brawler_trophies_for_rank,
+		'13': brawler_trophies_for_rank,
+		'14': brawler_trophies_for_rank,
+		'15': brawler_trophies_for_rank,
+		'16': brawler_trophies_for_rank,
+		'17': brawler_trophies_for_rank,
+		'18': brawler_trophies_for_rank,
+		'19': brawler_trophies_for_rank,
+		'20': brawler_trophies_for_rank,
+		'21': brawler_trophies_for_rank,
+		'22': brawler_trophies_for_rank,
+		'23': brawler_trophies_for_rank,
+		'24': brawler_trophies_for_rank,
+		'25': brawler_trophies_for_rank,
+		'26': brawler_trophies_for_rank,
+		'27': brawler_trophies_for_rank,
+		'28': brawler_trophies_for_rank,
+		'29': brawler_trophies_for_rank,
+		'30': brawler_trophies_for_rank,
+		'31': brawler_trophies_for_rank,
+		'32': brawler_trophies_for_rank,
+		'34': brawler_trophies_for_rank,
+		'37': brawler_trophies_for_rank
+	}
 
-	for id in brawlers_id:
-		brawlers_trophies.update({f'{id}': brawler_trophies_for_rank})
-
-
+	# Brawler stats and more..
 	shellySkin = 0
 	nitaSkin = 0
 	coltSkin = 0
@@ -120,7 +212,8 @@ class Players:
 	sproutSkin =0
 	gadget = 255
 	starpower = 76
-	namecolor = 0
+
+    # Friendly game (Teams, info, result)
 	GameType = 0
 	Rank = 0
 	Team = 0
@@ -136,8 +229,6 @@ class Players:
 	Bot5N = None
 	useGadget = 1
 	DoNotDistrub = 0
-
-
 
 
 	def __init__(self, device):

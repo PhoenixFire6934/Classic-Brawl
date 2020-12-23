@@ -14,16 +14,15 @@ class LoginFailedMessage(Writer):
         self.writeInt(self.player.err_code) # error code
         self.writeString(Fingerprint.loadFinger_full("GameAssets/fingerprint.json")) # fingerprint
 
-        self.writeString() # null
-
-        self.writeString(self.player.patch_url) # patch url
-        self.writeString(self.player.update_url) # update url
+        self.writeString() # server hostname
+        self.writeString(self.player.patchUrl) # patch hostname
+        self.writeString(self.player.updateUrl) # update hostname
         self.writeString(self.msg) # message
 
         self.writeHexa('''00 00 00 00 00 FF FF FF FF 00 00 00 02''') # unknown
 
-        self.writeString(self.player.patch_url) # patch url
-        self.writeString() # rackcdn url
+        self.writeString(self.player.patchUrl) # patch hostname
+        self.writeString() # rackcdn hostname
 
         self.writeInt(0)
         self.writeInt(0) # time left ?

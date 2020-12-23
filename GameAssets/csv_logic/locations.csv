@@ -286,7 +286,7 @@ KingOfHill6,,TID_KING_OF_HILL_6,,Arcade,sc3d/bgr_arcade_ground.scw,,sc3d/bgr_arc
 KingOfHill7,,TID_KING_OF_HILL_7,,Arcade,sc3d/bgr_arcade_ground.scw,,sc3d/bgr_arcade.scw,sc/events.sc,event_arcade,KingOfHill,KingOfHill_7,Brawlcade_Ingame,Mordeus
 Ball26,,TID_BALL_30,,BBArena,sc3d/bgr_bb_arena_ground.scw,,sc3d/bgr_bb_arena.scw+sc3d/bgr_bb_arena_decos_default.scw,sc/events.sc,event_brawlball_arena,LaserBall,Laserball_26,Footbrawl_ingame_muzak,Hypahn
 Ball27,,TID_BALL_31,,BBArena,sc3d/bgr_bb_arena_ground.scw,,sc3d/bgr_bb_arena.scw+sc3d/bgr_bb_arena_decos_default.scw,sc/events.sc,event_brawlball_arena,LaserBall,Laserball_27,Footbrawl_ingame_muzak,DustyBud
-Ball28,,TID_BALL_32,,BBArena,sc3d/bgr_bb_arena_ground.scw,,sc3d/bgr_bb_arena.scw+sc3d/bgr_bb_arena_decos_default.scw,sc/events.sc,event_brawlball_arena,LaserBall,Laserball_28,Footbrawl_ingame_muzak,S3nNy ツ
+Ball28,,TID_BALL_32,,BBArena,sc3d/bgr_bb_arena_ground.scw,,sc3d/bgr_bb_arena.scw+sc3d/bgr_bb_arena_decos_default.scw,sc/events.sc,event_brawlball_arena,LaserBall,Laserball_28,Footbrawl_ingame_muzak,S3nNy ???
 Ball29,,TID_BALL_33,,BBArena,sc3d/bgr_bb_arena_ground.scw,,sc3d/bgr_bb_arena.scw+sc3d/bgr_bb_arena_decos_default.scw,sc/events.sc,event_brawlball_arena,LaserBall,Laserball_29,Footbrawl_ingame_muzak,brawl123456789
 Ball30,,TID_BALL_34,,BBArena,sc3d/bgr_bb_arena_ground.scw,,sc3d/bgr_bb_arena.scw+sc3d/bgr_bb_arena_decos_default.scw,sc/events.sc,event_brawlball_arena,LaserBall,Laserball_30,Footbrawl_ingame_muzak,Cloudy
 Survival34,,TID_BATTLE_ROYALE_44,survival_,Default,sc3d/bgr_canyon_showdown_ground.scw,,sc3d/bgr_canyon_showdown.scw,sc/events.sc,event_stormvalley,BattleRoyale,Survival_34,BattleMusic,Mordeus
@@ -294,3 +294,4 @@ SurvivalTeam34,,TID_BATTLE_ROYALE_44,survival_,Default,sc3d/bgr_canyon_showdown_
 Ball6_PSG,,TID_BALL_6,,BBArenaPSG,sc3d/bgr_bb_arena_ground.scw+sc3d/bgr_bb_arena_ground_decos_psg.scw,,sc3d/bgr_bb_arena.scw+sc3d/bgr_bb_arena_decos_psg.scw,sc/events.sc,event_brawlball_arena,LaserBall,Laserball_6,Footbrawl_ingame_muzak,Mordeus
 Ball9_PSG,,TID_BALL_15,,BBArenaPSG,sc3d/bgr_bb_arena_ground.scw+sc3d/bgr_bb_arena_ground_decos_psg.scw,,sc3d/bgr_bb_arena.scw+sc3d/bgr_bb_arena_decos_psg.scw,sc/events.sc,event_brawlball_arena,LaserBall,Laserball_9,Footbrawl_ingame_muzak,Mordeus
 Ball26_PSG,,TID_BALL_30,,BBArenaPSG,sc3d/bgr_bb_arena_ground.scw+sc3d/bgr_bb_arena_ground_decos_psg.scw,,sc3d/bgr_bb_arena.scw+sc3d/bgr_bb_arena_decos_psg.scw,sc/events.sc,event_brawlball_arena,LaserBall,Laserball_26,Footbrawl_ingame_muzak,Hypahn
+,,,,,,,,,,,,,

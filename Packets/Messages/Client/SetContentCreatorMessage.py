@@ -5,6 +5,7 @@ import json
 from Logic.Player import Players
 from Database.DataBase import DataBase
 from Packets.Messages.Server.OutOfSyncMessage import OutOfSyncMessage
+from Packets.Commands.Server.Change_Content_Creator_Callback import SetContentCreatorResponse
 
 from Utils.Reader import BSMessageReader
 
@@ -56,7 +57,11 @@ class SetContentCreatorMessage(BSMessageReader):
                 self.send_ofs = True
             except ValueError:
                 pass
+        # else:
+            # DataBase.replaceValue(self, 'contentCreator', self.string)
 
     def process(self):
         if self.send_ofs:
             OutOfSyncMessage(self.client, self.player, 'Changes have been applied').send()
+        # else:
+            # SetContentCreatorResponse(self.client, self.player)

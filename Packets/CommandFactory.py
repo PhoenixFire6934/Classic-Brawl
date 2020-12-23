@@ -1,3 +1,4 @@
+from Packets.Messages.Server.Home.PlayerProfileMessage import PlayerProfileMessage
 from Utils.Reader import BSMessageReader
 from Packets.Commands.Server.Buy_Brawl_Box_Callback import ServerBox
 from Packets.Messages.Server.Gameroom.TeamGameroomDataMessage import TeamGameroomDataMessage
@@ -16,17 +17,15 @@ class EndClientTurn(BSMessageReader):
         self.read_Vint()
         self.read_Vint()
         self.commandID = self.read_Vint()
-
-
+            
     def process(self):
-
-        if self.commandID == 500 or self.commandID == 517 or self.commandID == 535 or self.commandID == 519:
+        if self.commandID == 500 or self.commandID == 517 or self.commandID == 535:
             self.read_Vint()
             self.read_Vint()
             self.read_Vint()
             self.read_Vint()
-            self.player.box_id = self.read_Vint()
-            print("Command ID", self.commandID, "has been handled")
+            self.player.boxID = self.read_Vint()
+            print("Command ID", self.commandID, "has been handled", "Box ID:", self.player.boxID)
             ServerBox(self.client, self.player).send()
 
         elif self.commandID == 505:
@@ -37,7 +36,9 @@ class EndClientTurn(BSMessageReader):
             self.read_Vint()
             self.player.profileIcon = self.read_Vint()
             DataBase.replaceValue(self, 'profileIcon', self.player.profileIcon)
-            print("Command ID", self.commandID, "has been handled")
+            PlayerProfileMessage(self.client, self.player, 0, self.player.LowID).send()
+            print("Command ID", self.commandID, "has been handled", "Profile icon ID:", self.player.profileIcon)
+
 
         elif self.commandID == 506:
             self.read_Vint()
@@ -45,282 +46,281 @@ class EndClientTurn(BSMessageReader):
             self.read_Vint()
             self.read_Vint()
             self.read_Vint()
-            self.player.skin_id = self.read_Vint()
+            self.player.skinID = self.read_Vint()
             self.read_Vint()
             self.read_Vint()
             self.read_Vint()
             self.read_Vint()
             self.read_Vint()
             self.read_Vint()
-            self.player.brawler_id = self.read_Vint()
-            DataBase.replaceValue(self, 'skinID', self.player.skin_id)
-            if self.player.brawler_id == 0:
-                DataBase.replaceValue(self, 'shellySkin', self.player.skin_id)
+            self.player.brawlerID = self.read_Vint()
+            DataBase.replaceValue(self, 'skinID', self.player.skinID)
+            if self.player.brawlerID == 0:
+                DataBase.replaceValue(self, 'shellySkin', self.player.skinID)
 
-            elif self.player.brawler_id == 1:
-                DataBase.replaceValue(self, 'coltSkin', self.player.skin_id)
+            elif self.player.brawlerID == 1:
+                DataBase.replaceValue(self, 'coltSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 2:
-                DataBase.replaceValue(self, 'bullSkin', self.player.skin_id)
+            elif self.player.brawlerID == 2:
+                DataBase.replaceValue(self, 'bullSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 3:
-                DataBase.replaceValue(self, 'brockSkin', self.player.skin_id)
+            elif self.player.brawlerID == 3:
+                DataBase.replaceValue(self, 'brockSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 4:
-                DataBase.replaceValue(self, 'ricoSkin', self.player.skin_id)
+            elif self.player.brawlerID == 4:
+                DataBase.replaceValue(self, 'ricoSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 5:
-                DataBase.replaceValue(self, 'spikeSkin', self.player.skin_id)
+            elif self.player.brawlerID == 5:
+                DataBase.replaceValue(self, 'spikeSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 6:
-                DataBase.replaceValue(self, 'barleySkin', self.player.skin_id)
+            elif self.player.brawlerID == 6:
+                DataBase.replaceValue(self, 'barleySkin', self.player.skinID)
 
-            elif self.player.brawler_id == 7:
-                DataBase.replaceValue(self, 'jessieSkin', self.player.skin_id)
+            elif self.player.brawlerID == 7:
+                DataBase.replaceValue(self, 'jessieSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 8:
-                DataBase.replaceValue(self, 'nitaSkin', self.player.skin_id)
+            elif self.player.brawlerID == 8:
+                DataBase.replaceValue(self, 'nitaSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 9:
-                DataBase.replaceValue(self, 'dynamikeSkin', self.player.skin_id)
+            elif self.player.brawlerID == 9:
+                DataBase.replaceValue(self, 'dynamikeSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 10:
-                DataBase.replaceValue(self, 'elprimoSkin', self.player.skin_id)
+            elif self.player.brawlerID == 10:
+                DataBase.replaceValue(self, 'elprimoSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 11:
-                DataBase.replaceValue(self, 'mortisSkin', self.player.skin_id)
+            elif self.player.brawlerID == 11:
+                DataBase.replaceValue(self, 'mortisSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 12:
-                DataBase.replaceValue(self, 'crowSkin', self.player.skin_id)
+            elif self.player.brawlerID == 12:
+                DataBase.replaceValue(self, 'crowSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 13:
-                DataBase.replaceValue(self, 'pocoSkin', self.player.skin_id)
+            elif self.player.brawlerID == 13:
+                DataBase.replaceValue(self, 'pocoSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 14:
-                DataBase.replaceValue(self, 'boSkin', self.player.skin_id)
+            elif self.player.brawlerID == 14:
+                DataBase.replaceValue(self, 'boSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 15:
-                DataBase.replaceValue(self, 'piperSkin', self.player.skin_id)
+            elif self.player.brawlerID == 15:
+                DataBase.replaceValue(self, 'piperSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 16:
-                DataBase.replaceValue(self, 'pamSkin', self.player.skin_id)
+            elif self.player.brawlerID == 16:
+                DataBase.replaceValue(self, 'pamSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 17:
-                DataBase.replaceValue(self, 'taraSkin', self.player.skin_id)
+            elif self.player.brawlerID == 17:
+                DataBase.replaceValue(self, 'taraSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 18:
-                DataBase.replaceValue(self, 'darrylSkin', self.player.skin_id)
+            elif self.player.brawlerID == 18:
+                DataBase.replaceValue(self, 'darrylSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 19:
-                DataBase.replaceValue(self, 'pennySkin', self.player.skin_id)
+            elif self.player.brawlerID == 19:
+                DataBase.replaceValue(self, 'pennySkin', self.player.skinID)
 
-            elif self.player.brawler_id == 20:
-                DataBase.replaceValue(self, 'frankSkin', self.player.skin_id)
+            elif self.player.brawlerID == 20:
+                DataBase.replaceValue(self, 'frankSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 21:
-                DataBase.replaceValue(self, 'geneSkin', self.player.skin_id)
+            elif self.player.brawlerID == 21:
+                DataBase.replaceValue(self, 'geneSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 22:
-                DataBase.replaceValue(self, 'tickSkin', self.player.skin_id)
+            elif self.player.brawlerID == 22:
+                DataBase.replaceValue(self, 'tickSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 23:
-                DataBase.replaceValue(self, 'leonSkin', self.player.skin_id)
+            elif self.player.brawlerID == 23:
+                DataBase.replaceValue(self, 'leonSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 24:
-                DataBase.replaceValue(self, 'rosaSkin', self.player.skin_id)
+            elif self.player.brawlerID == 24:
+                DataBase.replaceValue(self, 'rosaSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 25:
-                DataBase.replaceValue(self, 'carlSkin', self.player.skin_id)
+            elif self.player.brawlerID == 25:
+                DataBase.replaceValue(self, 'carlSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 26:
-                DataBase.replaceValue(self, 'bibiSkin', self.player.skin_id)
+            elif self.player.brawlerID == 26:
+                DataBase.replaceValue(self, 'bibiSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 27:
-                DataBase.replaceValue(self, '8bitSkin', self.player.skin_id)
+            elif self.player.brawlerID == 27:
+                DataBase.replaceValue(self, '8bitSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 28:
-                DataBase.replaceValue(self, 'sandySkin', self.player.skin_id)
+            elif self.player.brawlerID == 28:
+                DataBase.replaceValue(self, 'sandySkin', self.player.skinID)
 
-            elif self.player.brawler_id == 29:
-                DataBase.replaceValue(self, 'beaSkin', self.player.skin_id)
+            elif self.player.brawlerID == 29:
+                DataBase.replaceValue(self, 'beaSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 30:
-                DataBase.replaceValue(self, 'emzSkin', self.player.skin_id)
+            elif self.player.brawlerID == 30:
+                DataBase.replaceValue(self, 'emzSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 31:
-                DataBase.replaceValue(self, 'mrpSkin', self.player.skin_id)
+            elif self.player.brawlerID == 31:
+                DataBase.replaceValue(self, 'mrpSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 32:
-                DataBase.replaceValue(self, 'maxSkin', self.player.skin_id)
+            elif self.player.brawlerID == 32:
+                DataBase.replaceValue(self, 'maxSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 34:
-                DataBase.replaceValue(self, 'jackySkin', self.player.skin_id)
+            elif self.player.brawlerID == 34:
+                DataBase.replaceValue(self, 'jackySkin', self.player.skinID)
 
-            elif self.player.brawler_id == 35:
-                DataBase.replaceValue(self, 'galeSkin', self.player.skin_id)
+            elif self.player.brawlerID == 35:
+                DataBase.replaceValue(self, 'galeSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 36:
-                DataBase.replaceValue(self, 'naniSkin', self.player.skin_id)
+            elif self.player.brawlerID == 36:
+                DataBase.replaceValue(self, 'naniSkin', self.player.skinID)
 
-            elif self.player.brawler_id == 37:
-                DataBase.replaceValue(self, 'sproutSkin', self.player.skin_id)
+            elif self.player.brawlerID == 37:
+                DataBase.replaceValue(self, 'sproutSkin', self.player.skinID)
 
 
-            if self.player.brawler_id == 0: #Shelly
+            if self.player.brawlerID == 0: #Shelly
                 self.player.starpower = 76
                 self.player.gadget = 255
 
-            elif self.player.brawler_id == 1: #Colt
+            elif self.player.brawlerID == 1: #Colt
                 self.player.starpower = 77
                 self.player.gadget = 273
 
-            elif self.player.brawler_id == 2: #Bull
+            elif self.player.brawlerID == 2: #Bull
                 self.player.starpower = 78
                 self.player.gadget = 272
 
-            elif self.player.brawler_id == 3: #Brock
+            elif self.player.brawlerID == 3: #Brock
                 self.player.starpower = 79
                 self.player.gadget = 245
 
-            elif self.player.brawler_id == 4: #Rico
+            elif self.player.brawlerID == 4: #Rico
                 self.player.starpower = 80
                 self.player.gadget = 246
 
-            elif self.player.brawler_id == 5: #Spike
+            elif self.player.brawlerID == 5: #Spike
                 self.player.starpower = 81
                 self.player.gadget = 247
 
-            elif self.player.brawler_id == 6: #Barley
+            elif self.player.brawlerID == 6: #Barley
                 self.player.starpower = 82
                 self.player.gadget = 273
 
-            elif self.player.brawler_id == 7: #Jessie
+            elif self.player.brawlerID == 7: #Jessie
                 self.player.starpower = 83
                 self.player.gadget = 251
 
-            elif self.player.brawler_id == 8: #Nita
+            elif self.player.brawlerID == 8: #Nita
                 self.player.starpower = 84
                 self.player.gadget = 249
 
-            elif self.player.brawler_id == 9: #Dynamike
+            elif self.player.brawlerID == 9: #Dynamike
                 self.player.starpower = 85
                 self.player.gadget = 258
 
-            elif self.player.brawler_id == 10: #El Primo
+            elif self.player.brawlerID == 10: #El Primo
                 self.player.starpower = 86
                 self.player.gadget = 264
 
-            elif self.player.brawler_id == 11: #Mortis
+            elif self.player.brawlerID == 11: #Mortis
                 self.player.starpower = 87
                 self.player.gadget = 265
 
-            elif self.player.brawler_id == 12: #Crow
+            elif self.player.brawlerID == 12: #Crow
                 self.player.starpower = 88
                 self.player.gadget = 243
 
-            elif self.player.brawler_id == 13: #Poco
+            elif self.player.brawlerID == 13: #Poco
                 self.player.starpower = 89
                 self.player.gadget = 267
 
-            elif self.player.brawler_id == 14: #Bo
+            elif self.player.brawlerID == 14: #Bo
                 self.player.starpower = 90
                 self.player.gadget = 263
 
-            elif self.player.brawler_id == 15: #Piper
+            elif self.player.brawlerID == 15: #Piper
                 self.player.starpower = 91
                 self.player.gadget = 268
 
-            elif self.player.brawler_id == 16: #PAM
+            elif self.player.brawlerID == 16: #PAM
                 self.player.starpower = 92
                 self.player.gadget = 257
 
-            elif self.player.brawler_id == 17: #Tara
+            elif self.player.brawlerID == 17: #Tara
                 self.player.starpower = 93
                 self.player.gadget = 266
 
-            elif self.player.brawler_id == 18: #Darryl
+            elif self.player.brawlerID == 18: #Darryl
                 self.player.starpower = 94
                 self.player.gadget = 260
 
-            elif self.player.brawler_id == 19: #Penny
+            elif self.player.brawlerID == 19: #Penny
                 self.player.starpower = 99
                 self.player.gadget = 248
 
-            elif self.player.brawler_id == 20: #Frank
+            elif self.player.brawlerID == 20: #Frank
                 self.player.starpower = 104
                 self.player.gadget = 261
 
-            elif self.player.brawler_id == 21: #Gene
+            elif self.player.brawlerID == 21: #Gene
                 self.player.starpower = 109
                 self.player.gadget = 252
 
-            elif self.player.brawler_id == 22: #Tick
+            elif self.player.brawlerID == 22: #Tick
                 self.player.starpower = 114
                 self.player.gadget = 253
 
-            elif self.player.brawler_id == 23: #Leon
+            elif self.player.brawlerID == 23: #Leon
                 self.player.starpower = 119
                 self.player.gadget = 276
 
-            elif self.player.brawler_id == 24: #Rosa
+            elif self.player.brawlerID == 24: #Rosa
                 self.player.starpower = 124
                 self.player.gadget = 242
 
-            elif self.player.brawler_id == 25: #Carl
+            elif self.player.brawlerID == 25: #Carl
                 self.player.starpower = 129
                 self.player.gadget = 262
 
-            elif self.player.brawler_id == 26: #Bibi
+            elif self.player.brawlerID == 26: #Bibi
                 self.player.starpower = 134
                 self.player.gadget = 275
 
-            elif self.player.brawler_id == 27: #8-Bit
+            elif self.player.brawlerID == 27: #8-Bit
                 self.player.starpower = 168
                 self.player.gadget = 259
 
-            elif self.player.brawler_id == 28: #Sandy
+            elif self.player.brawlerID == 28: #Sandy
                 self.player.starpower = 186
                 self.player.gadget = 270
 
-            elif self.player.brawler_id == 29: #Bea
+            elif self.player.brawlerID == 29: #Bea
                 self.player.starpower = 192
                 self.player.gadget = 271
 
-            elif self.player.brawler_id == 30: #EMZ
+            elif self.player.brawlerID == 30: #EMZ
                 self.player.starpower = 198
                 self.player.gadget = 274
 
-            elif self.player.brawler_id == 31: #Mr. P
+            elif self.player.brawlerID == 31: #Mr. P
                 self.player.starpower = 204
                 self.player.gadget = 269
 
-            elif self.player.brawler_id == 32: #Max
+            elif self.player.brawlerID == 32: #Max
                 self.player.starpower = 210
                 self.player.gadget = 254
 
-            elif self.player.brawler_id == 34: #Jacky
+            elif self.player.brawlerID == 34: #Jacky
                 self.player.starpower = 222
                 self.player.gadget = 256
 
-            elif self.player.brawler_id == 35: #Gale
+            elif self.player.brawlerID == 35: #Gale
                 self.player.starpower = 228
                 self.player.gadget = 277
 
-            elif self.player.brawler_id == 36: #Nani
+            elif self.player.brawlerID == 36: #Nani
                 self.player.starpower = 234
                 self.player.gadget = 278
 
-            elif self.player.brawler_id == 37: #Sprout
+            elif self.player.brawlerID == 37: #Sprout
                 self.player.starpower = 240
                 self.player.gadget = 244
 
             DataBase.replaceValue(self, 'starpower', self.player.starpower)
             DataBase.replaceValue(self, 'gadget', self.player.gadget)
 
+            DataBase.replaceValue(self, 'brawlerID', self.player.brawlerID)
 
-            DataBase.replaceValue(self, 'brawlerID', self.player.brawler_id)
-
-            print("Command ID", self.commandID, "has been handled")
+            print("Command ID", self.commandID, "has been handled", "Brawler ID:", self.player.brawlerID, "Skin ID:", self.player.skinID)
 
         elif self.commandID == 521:
             self.read_Vint()
@@ -343,12 +343,12 @@ class EndClientTurn(BSMessageReader):
                 newGems = self.player.gems - 140
                 DataBase.replaceValue(self, 'gold', newGold)
                 DataBase.replaceValue(self, 'gems', newGems)
-            print("Command ID", self.commandID, "has been handled")
+            print("Command ID", self.commandID, "has been handled", "Gold:", self.gold)
 
         elif self.commandID == 509:
             newGems = self.player.gems - 50
             DataBase.replaceValue(self, 'gems', newGems)
-            print("Command ID", self.commandID, "has been handled")
+            print("Command ID", self.commandID, "has been handled", "Gems:", newGems)
 
         elif self.commandID == 527:
             self.read_Vint()
@@ -356,9 +356,10 @@ class EndClientTurn(BSMessageReader):
             self.read_Vint()
             self.read_Vint()
             self.read_Vint()
-            self.namecolor = self.read_Vint()
-            DataBase.replaceValue(self, 'namecolor', self.namecolor)
-            print("Command ID", self.commandID, "has been handled")
+            self.player.namecolor = self.read_Vint()
+            DataBase.replaceValue(self, 'namecolor', self.player.namecolor)
+            PlayerProfileMessage(self.client, self.player, 0, self.player.LowID).send()
+            print("Command ID", self.commandID, "has been handled", "Namecolor ID:", self.player.namecolor)
 
         elif self.commandID == 529:
             self.read_Vint()
@@ -368,10 +369,27 @@ class EndClientTurn(BSMessageReader):
             self.read_Vint()
             self.player.starpower = self.read_Vint()
             DataBase.replaceValue(self, 'starpower', self.player.starpower)
-            if self.player.room_id > 0:
-            	TeamGameroomDataMessage(self.client, self.player).send()
-            print("Command ID", self.commandID, "has been handled")
+            if self.player.roomID > 0:
+                TeamGameroomDataMessage(self.client, self.player).send()
+            print("Command ID", self.commandID, "has been handled", "Starpower ID:", self.player.starpower)
 
 
+        elif self.commandID == 515:
+            if self.player.debug == True:
+                data = []
+                for i in range(50):
+                    data.append(self.read_Vint())
+                print(data)
+                print("Command ID", self.commandID, "Has been handled!")
+            else:
+                print("Command ID", self.commandID, "Has been handled!")
+                
         elif self.commandID >= 0:
             print("Command ID", self.commandID, "is not handled!")
+            if self.player.debug == True:
+                print("Command ID", self.commandID, "is not handled!")
+                for i in range(50):
+                    data = []
+                    data.append(self.read_Vint())
+            else:
+                print("Command ID", self.commandID, "is not handled!")

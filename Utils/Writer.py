@@ -1,3 +1,5 @@
+import itertools
+
 class Writer:
     def __init__(self, client, endian: str = 'big'):
         self.client = client
@@ -41,6 +43,7 @@ class Writer:
             self.writeInt16(0)
         self.buffer += packet + b'\xff\xff\x00\x00\x00\x00\x00'
         self.client.send(self.buffer)
+        print(self.id, self.__class__.__name__)
 
     def writeVint(self, data, rotate: bool = True):
         final = b''

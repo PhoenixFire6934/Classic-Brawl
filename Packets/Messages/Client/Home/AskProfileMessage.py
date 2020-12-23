@@ -5,20 +5,17 @@ from Utils.Reader import BSMessageReader
 
 
 class AskProfileMessage(BSMessageReader):
-    def __init__(self, client, player, initial_bytes):
-        super().__init__(initial_bytes)
+    def __init__(self, client, player, initial_byte):
+        super().__init__(initial_byte)
         self.player = player
         self.client = client
 
     def decode(self):
-        self.read_Vint()
-        self.read_Vint()
-        self.read_Vint()
-        self.high_id = self.read_Vint()
+        self.high_id = self.read_int() 
+        self.low_id = self.read_int()
 
 
     def process(self):
-        if self.high_id == 0:
-            PlayerProfileMessage(self.client, self.player).send()
-        else:
-            BotProfileMessage(self.client, self.player).send()
+        print("Printed by AskProfileMessage", "High id:", self.high_id, "Low id:", self.low_id)
+        
+        PlayerProfileMessage(self.client, self.player, self.high_id, self.low_id).send()

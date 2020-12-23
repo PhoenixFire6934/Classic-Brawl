@@ -28,6 +28,8 @@ class Server:
 	def start(self):
 		if not os.path.exists('./data.db'):
 			open('data.db', 'w').close()
+		if not os.path.exists('./club.db'):
+			open('club.db', 'w').close()
 		if not os.path.exists('./config.json'):
 			print("Creating config.json...")
 			Config.create_config(self)
@@ -73,12 +75,16 @@ class ClientThread(Thread):
 					data = self.recvall(length)
 
 					if packet_id in packets:
-						_(f'Received packet! Id: {packet_id}')
 						message = packets[packet_id](self.client, self.player, data)
 						message.decode()
 						message.process()
+
+						if self.player.debug == False:	
+							_(f'Received packet! Id: {packet_id}')
+
 					else:
-						_(f'Packet not handled! Id: {packet_id}')
+						if self.player.debug == False:	
+							_(f'Packet not handled! Id: {packet_id}')
 
 				if time.time() - last_packet > 10:
 					print(f"[INFO] Ip: {self.address[0]} disconnected!")

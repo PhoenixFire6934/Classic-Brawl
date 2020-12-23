@@ -11,35 +11,40 @@ class LoginOkMessage(Writer):
         self.version = 1
 
     def encode(self):
-        self.writeInt(self.player.high_id)
-        self.writeInt(1)
+        self.writeInt(self.player.HighID)
+        self.writeInt(self.player.LowID)
         # HighID, lowID
-        self.writeInt(self.player.high_id)
-        self.writeInt(1)
+        self.writeInt(self.player.HighID)
+        self.writeInt(self.player.LowID)
         # HighID, lowID
-        self.writeString(self.player.token)  # Token
-        self.writeString()
-        self.writeString()
+        
+        self.writeString(self.player.Token)  # Token
+
+        self.writeString() # FacebookID
+        self.writeString() # GamecenterID
 
         self.writeInt(26)  # MajorVersion
         self.writeInt(165)  # Build
         self.writeInt(1)  # MinorVersion
 
         self.writeString("dev")  # Environment
+
         self.writeInt(1) 
-        self.writeInt(1)  
-        self.writeInt(62) 
-        self.writeString()  
-        self.writeString() 
-        self.writeString()  
+        self.writeInt(0)  
         self.writeInt(0)
+
+        self.writeString()  
         self.writeString() 
+        self.writeString()
+
+        self.writeInt(0)
+
+        self.writeString() # GoogleID
         self.writeString("RO")
         self.writeString()
+
         self.writeInt(1)
+
         self.writeString()  
         self.writeString() 
-        self.writeString() 
-        self.writeVint(0)
         self.writeString()
-        self.writeVint(1)

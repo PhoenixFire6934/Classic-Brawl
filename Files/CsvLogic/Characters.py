@@ -18,5 +18,4 @@ class Characters:
                         BrawlersID.append(line_count - 2)
                     line_count += 1
 
-
             return BrawlersID

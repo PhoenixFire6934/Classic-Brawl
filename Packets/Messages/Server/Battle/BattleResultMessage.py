@@ -1,6 +1,7 @@
 from Utils.Writer import Writer
 from Database.DataBase import DataBase
 
+
 class BattleResultMessage(Writer):
 
     def __init__(self, client, player):
@@ -10,11 +11,10 @@ class BattleResultMessage(Writer):
 
     def encode(self):
         self.writeVint(2)
-
         self.writeVint(self.player.Rank) # player rank
 
-        brawler_trophies = self.player.brawlers_trophies[str(self.player.brawler_id)]
-
+        brawler_trophies = self.player.BrawlersTrophies[str(self.player.brawlerID)]
+        brawler_trophies_for_rank = self.player.BrawlersTrophiesForRank[str(self.player.brawlerID)]
 
         if 0 <= brawler_trophies <= 49:
             rank_1_val = 10
@@ -187,62 +187,92 @@ class BattleResultMessage(Writer):
 
         if self.player.Rank == 1:
             new_trophies = self.player.trophies + rank_1_val
-            self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + rank_1_val
-            DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
+            self.player.BrawlersTrophies[str(self.player.brawlerID)] = brawler_trophies + rank_1_val
+            if self.player.BrawlersTrophiesForRank[str(self.player.brawlerID)] < self.player.BrawlersTrophies[str(self.player.brawlerID)] and rank_1_val > 0:
+                self.player.BrawlersTrophiesForRank[str(self.player.brawlerID)] = brawler_trophies_for_rank + rank_1_val
+            DataBase.replaceValue(self, 'brawlersTrophies', self.player.BrawlersTrophies)
+            DataBase.replaceValue(self, 'brawlersTrophiesForRank', self.player.BrawlersTrophiesForRank)
             DataBase.replaceValue(self, 'trophies', new_trophies)
 
         elif self.player.Rank == 2:
             new_trophies = self.player.trophies + rank_2_val
-            self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + rank_2_val
-            DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
+            self.player.BrawlersTrophies[str(self.player.brawlerID)] = brawler_trophies + rank_2_val
+            if self.player.BrawlersTrophiesForRank[str(self.player.brawlerID)] < self.player.BrawlersTrophies[str(self.player.brawlerID)] and rank_2_val > 0:
+                self.player.BrawlersTrophiesForRank[str(self.player.brawlerID)] = brawler_trophies_for_rank + rank_2_val
+            DataBase.replaceValue(self, 'brawlersTrophies', self.player.BrawlersTrophies)
+            DataBase.replaceValue(self, 'brawlersTrophiesForRank', self.player.BrawlersTrophiesForRank)
             DataBase.replaceValue(self, 'trophies', new_trophies)
 
         elif self.player.Rank == 3:
             new_trophies = self.player.trophies + rank_3_val
-            self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + rank_3_val
-            DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
+            self.player.BrawlersTrophies[str(self.player.brawlerID)] = brawler_trophies + rank_3_val
+            if self.player.BrawlersTrophiesForRank[str(self.player.brawlerID)] < self.player.BrawlersTrophies[str(self.player.brawlerID)] and rank_3_val > 0:
+                self.player.BrawlersTrophiesForRank[str(self.player.brawlerID)] = brawler_trophies_for_rank + rank_3_val
+            DataBase.replaceValue(self, 'brawlersTrophies', self.player.BrawlersTrophies)
+            DataBase.replaceValue(self, 'brawlersTrophiesForRank', self.player.BrawlersTrophiesForRank)
             DataBase.replaceValue(self, 'trophies', new_trophies)
 
         elif self.player.Rank == 4:
             new_trophies = self.player.trophies + rank_4_val
-            self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + rank_4_val
-            DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
+            self.player.BrawlersTrophies[str(self.player.brawlerID)] = brawler_trophies + rank_4_val
+            if self.player.BrawlersTrophiesForRank[str(self.player.brawlerID)] < self.player.BrawlersTrophies[str(self.player.brawlerID)] and rank_4_val > 0:
+                self.player.BrawlersTrophiesForRank[str(self.player.brawlerID)] = brawler_trophies_for_rank + rank_4_val
+            DataBase.replaceValue(self, 'brawlersTrophies', self.player.BrawlersTrophies)
+            DataBase.replaceValue(self, 'brawlersTrophiesForRank', self.player.BrawlersTrophiesForRank)
             DataBase.replaceValue(self, 'trophies', new_trophies)
 
         elif self.player.Rank == 5:
             new_trophies = self.player.trophies + rank_5_val
-            self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + rank_5_val
-            DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
+            self.player.BrawlersTrophies[str(self.player.brawlerID)] = brawler_trophies + rank_5_val
+            if self.player.BrawlersTrophiesForRank[str(self.player.brawlerID)] < self.player.BrawlersTrophies[str(self.player.brawlerID)] and rank_5_val > 0:
+                self.player.BrawlersTrophiesForRank[str(self.player.brawlerID)] = brawler_trophies_for_rank + rank_5_val
+            DataBase.replaceValue(self, 'brawlersTrophies', self.player.BrawlersTrophies)
+            DataBase.replaceValue(self, 'brawlersTrophiesForRank', self.player.BrawlersTrophiesForRank)
             DataBase.replaceValue(self, 'trophies', new_trophies)
 
         elif self.player.Rank == 6:
             new_trophies = self.player.trophies + rank_6_val
-            self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + rank_6_val
-            DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
+            self.player.BrawlersTrophies[str(self.player.brawlerID)] = brawler_trophies + rank_6_val
+            if self.player.BrawlersTrophiesForRank[str(self.player.brawlerID)] < self.player.BrawlersTrophies[str(self.player.brawlerID)] and rank_6_val > 0:
+                self.player.BrawlersTrophiesForRank[str(self.player.brawlerID)] = brawler_trophies_for_rank + rank_6_val
+            DataBase.replaceValue(self, 'brawlersTrophies', self.player.BrawlersTrophies)
+            DataBase.replaceValue(self, 'brawlersTrophiesForRank', self.player.BrawlersTrophiesForRank)
             DataBase.replaceValue(self, 'trophies', new_trophies)
 
         elif self.player.Rank == 7:
             new_trophies = self.player.trophies + rank_7_val
-            self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + rank_7_val
-            DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
+            self.player.BrawlersTrophies[str(self.player.brawlerID)] = brawler_trophies + rank_7_val
+            if self.player.BrawlersTrophiesForRank[str(self.player.brawlerID)] < self.player.BrawlersTrophies[str(self.player.brawlerID)] and rank_7_val > 0:
+                self.player.BrawlersTrophiesForRank[str(self.player.brawlerID)] = brawler_trophies_for_rank + rank_7_val
+            DataBase.replaceValue(self, 'brawlersTrophies', self.player.BrawlersTrophies)
+            DataBase.replaceValue(self, 'brawlersTrophiesForRank', self.player.BrawlersTrophiesForRank)
             DataBase.replaceValue(self, 'trophies', new_trophies)
 
         elif self.player.Rank == 8:
             new_trophies = self.player.trophies + rank_8_val
-            self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + rank_8_val
-            DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
+            self.player.BrawlersTrophies[str(self.player.brawlerID)] = brawler_trophies + rank_8_val
+            if self.player.BrawlersTrophiesForRank[str(self.player.brawlerID)] < self.player.BrawlersTrophies[str(self.player.brawlerID)] and rank_8_val > 0:
+                self.player.BrawlersTrophiesForRank[str(self.player.brawlerID)] = brawler_trophies_for_rank + rank_8_val
+            DataBase.replaceValue(self, 'brawlersTrophies', self.player.BrawlersTrophies)
+            DataBase.replaceValue(self, 'brawlersTrophiesForRank', self.player.BrawlersTrophiesForRank)
             DataBase.replaceValue(self, 'trophies', new_trophies)
 
         elif self.player.Rank == 9:
             new_trophies = self.player.trophies + rank_9_val
-            self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + rank_9_val
-            DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
+            self.player.BrawlersTrophies[str(self.player.brawlerID)] = brawler_trophies + rank_9_val
+            if self.player.BrawlersTrophiesForRank[str(self.player.brawlerID)] < self.player.BrawlersTrophies[str(self.player.brawlerID)] and rank_9_val > 0:
+                self.player.BrawlersTrophiesForRank[str(self.player.brawlerID)] = brawler_trophies_for_rank + rank_9_val
+            DataBase.replaceValue(self, 'brawlersTrophies', self.player.BrawlersTrophies)
+            DataBase.replaceValue(self, 'brawlersTrophiesForRank', self.player.BrawlersTrophiesForRank)
             DataBase.replaceValue(self, 'trophies', new_trophies)
 
         elif self.player.Rank == 10:
             new_trophies = self.player.trophies + rank_10_val
-            self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + rank_10_val
-            DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
+            self.player.BrawlersTrophies[str(self.player.brawlerID)] = brawler_trophies + rank_10_val
+            if self.player.BrawlersTrophiesForRank[str(self.player.brawlerID)] < self.player.BrawlersTrophies[str(self.player.brawlerID)] and rank_10_val > 0:
+                self.player.BrawlersTrophiesForRank[str(self.player.brawlerID)] = brawler_trophies_for_rank + rank_10_val
+            DataBase.replaceValue(self, 'brawlersTrophies', self.player.BrawlersTrophies)
+            DataBase.replaceValue(self, 'brawlersTrophiesForRank', self.player.BrawlersTrophiesForRank)
             DataBase.replaceValue(self, 'trophies', new_trophies)
 
         self.writeVint(0)
@@ -266,9 +296,9 @@ class BattleResultMessage(Writer):
         self.writeVint(10)
         self.writeVint(1)
         self.writeVint(16)
-        self.writeVint(self.player.brawler_id)
+        self.writeVint(self.player.brawlerID)
         self.writeVint(29)
-        self.writeVint(self.player.skin_id)
+        self.writeVint(self.player.skinID)
         self.writeVint(99999)
         self.writeVint(0)
         self.writeVint(10)

@@ -1,4 +1,5 @@
 import csv
+from time import perf_counter
 
 class Cards:
 
@@ -17,7 +18,6 @@ class Cards:
                     if row[5].lower() == '4' or row[5].lower() == '5':
                         CardSkillsID.append(line_count - 2)
                     line_count += 1
-
 
             return CardSkillsID
 
@@ -39,5 +39,4 @@ class Cards:
                         CardUnlockID.append(line_count - 2)
                     line_count += 1
 
-
-            return CardUnlockID
+            return CardUnlockID 

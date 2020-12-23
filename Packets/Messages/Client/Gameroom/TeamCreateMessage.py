@@ -17,21 +17,21 @@ class TeamCreateMessage(BSMessageReader):
 
     def process(self):
         if self.mapID == 1:
-            self.player.map_id = 7 # gem grab
+            self.player.mapID = 7 # gem grab
         elif self.mapID == 2:
-            self.player.map_id = 32 # solo sd
+            self.player.mapID = 32 # solo sd
         elif self.mapID == 3:
-            self.player.map_id = 17 # heist
+            self.player.mapID = 17 # heist
         elif self.mapID == 4:
-            self.player.map_id = 0 # bounty
+            self.player.mapID = 0 # bounty
         elif self.mapID == 5:
-            self.player.map_id = 24 # brawl ball
+            self.player.mapID = 24 # brawl ball
         elif self.mapID == 6:
-            self.player.map_id = 202 # present plunder
+            self.player.mapID = 202 # present plunder
         elif self.mapID == 7:
-            self.player.map_id = 97 # siege
+            self.player.mapID = 97 # siege
         elif self.mapID == 8:
-            self.player.map_id = 167 # takedown
+            self.player.mapID = 167 # takedown
         elif self.mapID == 9:
-            self.player.map_id = 174 # lone star
+            self.player.mapID = 174 # lone star
         TeamGameroomDataMessage(self.client, self.player).send()
