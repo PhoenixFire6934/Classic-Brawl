@@ -1,14 +1,9 @@
-from random import choice
-from string import ascii_uppercase
-import json
-
-from Logic.Player import Players
-from Packets.Commands.Server.Change_Name_Callback import SetNameResponse
+from Packets.Messages.Server.Home.Avatar_Name_Check_Response_Message import AvatarNameCheckResponseMessage
 
 from Utils.Reader import BSMessageReader
 
 
-class SetNameMessage(BSMessageReader):
+class AvatarNameCheckRequestMessage(BSMessageReader):
     def __init__(self, client, player, initial_bytes):
         super().__init__(initial_bytes)
         self.player = player
@@ -18,4 +13,4 @@ class SetNameMessage(BSMessageReader):
         self.player.name = self.read_string()
 
     def process(self):
-        SetNameResponse(self.client, self.player).send()
+        AvatarNameCheckResponseMessage(self.client, self.player).send()

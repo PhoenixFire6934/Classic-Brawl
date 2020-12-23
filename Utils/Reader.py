@@ -55,3 +55,5 @@ class BSMessageReader(BufferedReader):
 
     def peek_int(self, length=4):
         return int.from_bytes(self.peek(length)[:length], "big")
+
+    

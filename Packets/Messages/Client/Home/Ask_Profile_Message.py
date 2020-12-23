@@ -1,5 +1,5 @@
-from Packets.Messages.Server.Home.PlayerProfileMessage import PlayerProfileMessage
-from Packets.Messages.Server.AllianceBot.AllianceBotProfileMessage import BotProfileMessage
+from Packets.Messages.Server.Home.Player_Profile_Message import PlayerProfileMessage
+from Packets.Messages.Server.AllianceBot.Alliance_Bot_Profile_Message import BotProfileMessage
 
 from Utils.Reader import BSMessageReader
 

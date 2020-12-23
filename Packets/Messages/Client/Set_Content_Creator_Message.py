@@ -4,7 +4,7 @@ import json
 
 from Logic.Player import Players
 from Database.DataBase import DataBase
-from Packets.Messages.Server.OutOfSyncMessage import OutOfSyncMessage
+from Packets.Messages.Server.Out_Of_Sync_Message import OutOfSyncMessage
 
 from Utils.Reader import BSMessageReader
 

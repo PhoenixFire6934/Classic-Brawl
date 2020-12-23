@@ -1,10 +1,10 @@
-from Packets.Messages.Server.Login.LoginOkMessage import LoginOkMessage
-from Packets.Messages.Server.Home.OwnHomeDataMessage import OwnHomeDataMessage
-from Packets.Messages.Server.Alliance.MyAllianceMessage import MyAllianceMessage
-from Packets.Messages.Server.Gameroom.DoNotDistrubOkMessage import DoNotDistrubOkMessage
-from Packets.Messages.Server.Gameroom.TeamGameroomDataMessage import TeamGameroomDataMessage
+from Packets.Messages.Server.Login.Login_Ok_Message import LoginOkMessage
+from Packets.Messages.Server.Home.Own_Home_Data_Message import OwnHomeDataMessage
+from Packets.Messages.Server.Alliance.My_Alliance_Message import MyAllianceMessage
+from Packets.Messages.Server.Gameroom.Do_Not_Distrub_Ok_Message import DoNotDistrubOkMessage
+from Packets.Messages.Server.Gameroom.Team_Gameroom_Data_Message import TeamGameroomDataMessage
 
-from Packets.Messages.Server.Login.LoginFailedMessage import LoginFailedMessage
+from Packets.Messages.Server.Login.Login_Failed_Message import LoginFailedMessage
 from Utils.Reader import BSMessageReader
 from Utils.Helpers import Helpers
 from Database.DataBase import DataBase

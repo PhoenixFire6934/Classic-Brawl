@@ -2,7 +2,7 @@ from Utils.Writer import Writer
 import random
 from Database.DataBase import DataBase
 
-class ServerBox(Writer):
+class BuyBrawlBoxCallback(Writer):
 
     def __init__(self, client, player):
         super().__init__(client)

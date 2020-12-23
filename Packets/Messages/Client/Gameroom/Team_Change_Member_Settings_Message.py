@@ -1,4 +1,4 @@
-from Packets.Messages.Server.Gameroom.TeamGameroomDataMessage import TeamGameroomDataMessage
+from Packets.Messages.Server.Gameroom.Team_Gameroom_Data_Message import TeamGameroomDataMessage
 from Database.DataBase import DataBase
 
 from Utils.Reader import BSMessageReader

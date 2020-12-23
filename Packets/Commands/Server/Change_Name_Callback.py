@@ -1,7 +1,7 @@
 from Utils.Writer import Writer
 from Database.DataBase import DataBase
 
-class SetNameResponse(Writer):
+class ChangeNameCallback(Writer):
 
     def __init__(self, client, player):
         super().__init__(client)

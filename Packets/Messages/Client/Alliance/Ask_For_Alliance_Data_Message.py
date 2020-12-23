@@ -1,9 +1,9 @@
-from Packets.Messages.Server.Home.OwnHomeDataMessage import OwnHomeDataMessage
+from Packets.Messages.Server.Alliance.Alliance_Data_Message import AllianceDataMessage
 
 from Utils.Reader import BSMessageReader
 
 
-class GoHomeFromOfflinePractiseMessage(BSMessageReader):
+class AskForAllianceDataMessage(BSMessageReader):
     def __init__(self, client, player, initial_bytes):
         super().__init__(initial_bytes)
         self.player = player
@@ -13,4 +13,4 @@ class GoHomeFromOfflinePractiseMessage(BSMessageReader):
         pass
 
     def process(self):
-        OwnHomeDataMessage(self.client, self.player).send()
+        AllianceDataMessage(self.client, self.player).send()

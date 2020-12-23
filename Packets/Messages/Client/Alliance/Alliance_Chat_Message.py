@@ -1,6 +1,6 @@
-from Packets.Messages.Server.Alliance.AllianceChatServerMessage import AllianceChatServerMessage
-from Packets.Messages.Server.AllianceBot.AllianceBotChatServerMessage import AllianceBotChatServerMessage
-from Packets.Messages.Server.OutOfSyncMessage import OutOfSyncMessage
+from Packets.Messages.Server.Alliance.Alliance_Chat_Server_Message import AllianceChatServerMessage
+from Packets.Messages.Server.AllianceBot.Alliance_Bot_Chat_Server_Message import AllianceBotChatServerMessage
+from Packets.Messages.Server.Out_Of_Sync_Message import OutOfSyncMessage
 from Database.DataBase import DataBase
 
 from Utils.Reader import BSMessageReader

@@ -1,4 +1,4 @@
-from Packets.Messages.Server.Login.LoginFailedMessage import LoginFailedMessage
+from Packets.Messages.Server.Login.Login_Failed_Message import LoginFailedMessage
 
 from Utils.Reader import BSMessageReader
 

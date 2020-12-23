@@ -3,7 +3,7 @@ from string import ascii_uppercase
 import json
 
 from Logic.Player import Players
-from Packets.Messages.Server.KeepAliveOkMessage import KeepAliveOkMessage
+from Packets.Messages.Server.Keep_Alive_Ok_Message import KeepAliveOkMessage
 
 from Utils.Reader import BSMessageReader
 

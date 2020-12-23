@@ -1,5 +1,5 @@
-from Packets.Messages.Server.Battle.BattleResultMessage import BattleResultMessage
-from Packets.Messages.Server.Battle.BattleResult2Message import BattleResult2Message
+from Packets.Messages.Server.Battle.Battle_Result_Message import BattleResultMessage
+from Packets.Messages.Server.Battle.Battle_Result2_Message import BattleResult2Message
 
 from Utils.Reader import BSMessageReader
 
