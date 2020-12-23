@@ -252,10 +252,7 @@ class OwnHomeDataMessage(Writer):
         for unlock_id in self.player.CardUnlockID:
             self.writeVint(23)
             self.writeVint(unlock_id)
-            if unlock_id == 200:
-                self.writeVint(1)
-            else:
-                self.writeVint(0)
+            self.writeVint(1)
 
         for resource in self.player.Resources:
             self.writeVint(5) # csv id
