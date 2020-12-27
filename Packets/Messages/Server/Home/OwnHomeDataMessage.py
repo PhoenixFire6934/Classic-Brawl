@@ -17,31 +17,23 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(75158) # Timestamp
             
         self.writeVint(self.player.trophies) # Player Trophies
-        self.writeVint(self.player.trophies) # Player Max Reached Trophies
+        self.writeVint(self.player.highesttrophies) # Player Max Reached Trophies
 
-        self.writeVint(122)
-        self.writeVint(50)  # Trophy Road Reward
+        self.writeVint(0)
+        self.writeVint(95)  # Trophy Road Reward
 
-        self.writeVint(99999) # Starting Level (exp points)
+        self.writeVint(500) # Starting Level (exp points)
 
         self.writeScId(28, self.player.profileIcon) # Player Icon ID
         self.writeScId(43, self.player.namecolor) # Player Name Color ID
         
-        self.writeVint(3)
-        self.writeVint(0)
-        self.writeVint(6)
-        self.writeVint(9) # count
+        self.writeVint(0) # array
 
-        self.writeVint(3)
-        self.writeVint(29)
-
-        self.writeVint(14)
-        self.writeVint(29)
-
-        self.writeVint(self.player.skinID) # skinID
-        self.writeVint(29)
-
-        self.writeVint(0)
+        # Selected Skins array
+        self.writeVint(len(self.player.brawlers_skins))
+        for brawler_id in self.player.brawlers_skins:
+            self.writeVint(29)
+            self.writeVint(self.player.brawlers_skins[brawler_id]) # skinID
 
         # Unlocked Skins array
         self.writeVint(len(self.player.SkinsCount))
@@ -49,7 +41,8 @@ class OwnHomeDataMessage(Writer):
         for skin_id in self.player.SkinsCount:
             self.writeScId(29, skin_id)
 
-        self.writeVint(0)
+        self.writeVint(0) # array
+
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(0)
@@ -97,7 +90,7 @@ class OwnHomeDataMessage(Writer):
         self.writeScId(16, self.player.brawlerID) # Selected Brawler
 
         self.writeString("RO")  # Location
-        self.writeString("forum.dnull.xyz") # Supported Content Creator
+        self.writeString("Classic Brawl") # Supported Content Creator
 
 
         self.writeVint(-133169153)
@@ -151,7 +144,7 @@ class OwnHomeDataMessage(Writer):
 
             self.writeScId(15, int(mapsList[i - 1]) ) # Game Mode Slot Map ID
 
-            self.writeVint(1) # [3 = Nothing, 2 = Star Token, 1 = New Event]
+            self.writeVint(3) # [3 = Nothing, 2 = Star Token, 1 = New Event]
 
             self.writeString()
             self.writeVint(0)
@@ -248,11 +241,19 @@ class OwnHomeDataMessage(Writer):
 
         # Unlocked Brawlers & Resources array
         self.writeVint(len(self.player.CardUnlockID) + 4) # count
-
+        
+        index = 0
         for unlock_id in self.player.CardUnlockID:
             self.writeVint(23)
             self.writeVint(unlock_id)
-            self.writeVint(1)
+            self.writeVint(self.player.BrawlersUnlockedState[str(index)])
+
+            if index == 34:
+                index += 3
+            elif index == 32:
+                index += 2
+            else:
+                index += 1
 
         for resource in self.player.Resources:
             self.writeVint(5) # csv id

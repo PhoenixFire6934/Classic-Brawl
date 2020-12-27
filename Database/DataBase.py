@@ -1,3 +1,4 @@
+from Logic.Player import Players
 import json
 from os import read
 import string
@@ -30,6 +31,10 @@ class DataBase:
                     self.player.skinID = dict[str(self.player.Token)]["skinID"]
                     self.player.BrawlersTrophies = dict[str(self.player.Token)]["brawlersTrophies"]
                     self.player.BrawlersTrophiesForRank = dict[str(self.player.Token)]["brawlersTrophiesForRank"]
+                    self.player.BrawlersUpgradePoints = dict[str(self.player.Token)]["brawlersUpgradePoints"]
+                    
+                    if self.player.UnlockType == "Off":
+                        self.player.BrawlersUnlockedState = dict[str(self.player.Token)]["UnlockedBrawlers"]
                     
                     for BrawlerID in self.player.BrawlersTrophies.keys():
                         self.TotalTrophies += self.player.BrawlersTrophies[BrawlerID]
@@ -110,6 +115,7 @@ class DataBase:
                         self.skinID = info["skinID"]
                         self.BrawlersTrophies = info["brawlersTrophies"]
                         self.BrawlersTrophiesForRank = info["brawlersTrophiesForRank"]
+                        self.BrawlersUpgradePoints = info["brawlersUpgradePoints"]
 
                         for BrawlerID in self.BrawlersTrophies.keys():
                             self.TotalTrophies += self.BrawlersTrophies[BrawlerID]
@@ -169,6 +175,7 @@ class DataBase:
                         self.roomID = info["roomID"]
 
     def createAccount(self):
+        self.player.BrawlersUnlockedState = Players.CreateNewBrawlersList()
         data = {
             self.player.Token: {
                 "lowID": self.player.LowID,
@@ -230,7 +237,9 @@ class DataBase:
                 "DoNotDistrub":0,
                 "roomID": 0,
                 "brawlersTrophies": self.player.BrawlersTrophies,
-                "brawlersTrophiesForRank": self.player.BrawlersTrophiesForRank
+                "brawlersTrophiesForRank": self.player.BrawlersTrophiesForRank,
+                "brawlersUpgradePoints": self.player.BrawlersUpgradePoints,
+                "UnlockedBrawlers": self.player.BrawlersUnlockedState
             }
         }
 

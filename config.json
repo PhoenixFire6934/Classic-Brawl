@@ -1,1 +1,66 @@
-{"Gems": 99999, "Gold": 99999, "Tickets": 99999, "Starpoints": 99999, "BrawlBoxTokens": 99999, "BigBoxTokens": 99999, "Trophies": 99999, "BrawlerTrophies": 0, "BrawlerTrophiesForRank": 0, "BrawlerPowerLevel": 8, "BrawlerUpgradePoints": 0, "ShowPacketsInLog": false, "Maintenance": false, "Patch": false, "PatchUrl": "Null", "UpdateUrl": "https://github.com/PhoenixFire6879/Classic-Brawl"}
+{
+    "Gems": 99999,
+    "Gold": 99999,
+    "Tickets": 99999,
+    "Starpoints": 99999,
+    "BrawlBoxTokens": 99999,
+    "BigBoxTokens": 99999,
+    "Trophies": 99999,
+    "ShowPacketsInLog": false,
+    "Maintenance": false,
+    "Patch": false,
+    "PatchUrl": "",
+    "UpdateUrl": "https://github.com/PhoenixFire6879/Classic-Brawl",
+    "BrawlerTrophies": 0,
+    "BrawlerTrophiesForRank": 0,
+    "BrawlerPowerLevel": 0,
+    "BrawlerUpgradePoints": 0,
+    "*** Option type for below config ***":[
+        {
+            "All": "All brawlers are unlocked",
+            "SpecifiedOnly": "in the unlocked brawler option put 1 for unlocked or 0 for locked",
+            "StarterOnly": "Only the starter brawlers (Shelly, Nita, Colt, Bull, Jessie, Brock, 8bit, Emz)",
+            "Off": "off is like the original brawl stars so you you're brawlers will save and you can get it from boxes or offers and club bot"
+        }
+    ],
+    "UnlockedBrawlersOption": "Off",
+    "UnlockedBrawler":[
+        {
+            "shelly": 1,
+            "colt": 0,
+            "bull": 0,
+            "brock": 0,
+            "rico": 0,
+            "spike": 0,
+            "barley": 0,
+            "jessie": 0,
+            "nita": 0, 
+            "dynamike": 0,
+            "primo": 0,
+            "mortis": 0,
+            "crow": 0, 
+            "poco": 0, 
+            "bo": 0, 
+            "piper": 0, 
+            "pam": 0, 
+            "tara": 0, 
+            "darryl": 0,
+            "penny": 0, 
+            "frank": 0, 
+            "gene": 0, 
+            "tick": 0, 
+            "leon": 0, 
+            "rosa": 0, 
+            "carl": 0, 
+            "bibi": 0, 
+            "8bit": 0, 
+            "sandy": 0, 
+            "bea": 0,
+            "emz": 0,
+            "mr.p": 0,
+            "max": 0,
+            "jacky": 0, 
+            "sprout": 0
+        }
+    ]
+  }

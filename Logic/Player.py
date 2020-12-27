@@ -28,6 +28,7 @@ class Players:
 	roomID = 0
 	brawlerID = 0
 	skinID = 0
+	TestVal = 1
 
 	# Brawler and skins arrays
 	SkinsCount = Skins.get_skins_id()
@@ -35,11 +36,43 @@ class Players:
 	CardSkillsID = Cards.get_spg_id()
 	CardUnlockID = Cards.get_brawler_unlock()
 
-	# General player (Brawler, Currency, etc..)
+	# General player (Brawler, Currency, etc..
+	UnlockType = settings['UnlockedBrawlersOption']
+	BrawlersDict = json.loads(json.dumps(settings['UnlockedBrawler'][0]))
+	BrawlersUnlockedState = {}
+
+	if UnlockType == "All":
+		for i in BrawlersCount:
+			BrawlersUnlockedState[str(i)] = 1
+
+	elif UnlockType == "SpecifiedOnly":	
+		index = 0
+		for brawlers_name in BrawlersDict:
+			BrawlersUnlockedState[str(index)] = BrawlersDict[brawlers_name]
+			if index == 34:
+				index += 3
+			elif index == 32:
+				index += 2
+			else:
+				index += 1
+
+	elif UnlockType == "StarterOnly":
+		starter = [0, 1, 2, 3, 7, 8, 9, 14, 22, 27, 30]
+		for i in BrawlersCount:
+			if i in starter:
+				BrawlersUnlockedState[str(i)] = 1
+			else:
+				BrawlersUnlockedState[str(i)] = 0
+
 	brawler_power_level = settings['BrawlerPowerLevel']
 	brawler_trophies_for_rank = settings['BrawlerTrophiesForRank']
 	brawler_trophies = settings['BrawlerTrophies']
 	brawler_upgrade_points = settings['BrawlerUpgradePoints']
+
+	brawlers_skins = {}
+	for id in BrawlersCount:
+		brawlers_skins.update({f'{id}': 0})
+
 	gems = settings['Gems']
 	gold = settings['Gold']
 	tickets = settings['Tickets']
@@ -172,6 +205,44 @@ class Players:
 		'37': brawler_trophies_for_rank
 	}
 
+	BrawlersUpgradePoints = {
+		'0':  brawler_upgrade_points,
+		'1':  brawler_upgrade_points,
+		'2':  brawler_upgrade_points,
+		'3':  brawler_upgrade_points,
+		'4':  brawler_upgrade_points,
+		'5':  brawler_upgrade_points,
+		'6':  brawler_upgrade_points,
+		'7':  brawler_upgrade_points,
+		'8':  brawler_upgrade_points,
+		'9':  brawler_upgrade_points,
+		'10': brawler_upgrade_points,
+		'11': brawler_upgrade_points,
+		'12': brawler_upgrade_points,
+		'13': brawler_upgrade_points,
+		'14': brawler_upgrade_points,
+		'15': brawler_upgrade_points,
+		'16': brawler_upgrade_points,
+		'17': brawler_upgrade_points,
+		'18': brawler_upgrade_points,
+		'19': brawler_upgrade_points,
+		'20': brawler_upgrade_points,
+		'21': brawler_upgrade_points,
+		'22': brawler_upgrade_points,
+		'23': brawler_upgrade_points,
+		'24': brawler_upgrade_points,
+		'25': brawler_upgrade_points,
+		'26': brawler_upgrade_points,
+		'27': brawler_upgrade_points,
+		'28': brawler_upgrade_points,
+		'29': brawler_upgrade_points,
+		'30': brawler_upgrade_points,
+		'31': brawler_upgrade_points,
+		'32': brawler_upgrade_points,
+		'34': brawler_upgrade_points,
+		'37': brawler_upgrade_points
+	}
+
 	# Brawler stats and more..
 	shellySkin = 0
 	nitaSkin = 0
@@ -230,6 +301,14 @@ class Players:
 	useGadget = 1
 	DoNotDistrub = 0
 
-
+	def CreateNewBrawlersList():
+		BrawlersDict = {}
+		for id in Players.BrawlersCount:
+			if id == 0:
+				BrawlersDict[str(id)] = 1
+			else:
+				BrawlersDict[str(id)] = 0
+		return BrawlersDict
+		
 	def __init__(self, device):
 		self.device = device

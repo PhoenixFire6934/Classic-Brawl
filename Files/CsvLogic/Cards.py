@@ -35,8 +35,7 @@ class Cards:
                 if line_count == 0 or line_count == 1:
                     line_count += 1
                 else:
-                    if row[5].lower() == '0':
+                    if row[5].lower() == '0' and row[3].lower() != "homer" and row[3].lower() != "blower" and row[3].lower() != "controller":
                         CardUnlockID.append(line_count - 2)
                     line_count += 1
-
             return CardUnlockID 
