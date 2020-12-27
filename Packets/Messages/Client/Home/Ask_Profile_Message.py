@@ -11,10 +11,8 @@ class AskProfileMessage(BSMessageReader):
         self.client = client
 
     def decode(self):
-        self.read_Vint()
-        self.read_Vint()
-        self.read_Vint()
-        self.high_id = self.read_Vint()
+        self.high_id = self.read_int()
+        self.low_id = self.read_int()
 
 
     def process(self):
