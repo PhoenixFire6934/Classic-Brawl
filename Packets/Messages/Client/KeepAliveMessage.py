@@ -21,10 +21,3 @@ class KeepAliveMessage(BSMessageReader):
 
     def process(self):
         KeepAliveOkMessage(self.client, self.player).send()
-        if self.player.ClubID != 0:
-            self.player.OldMessageCount = self.player.messageTick - 1
-            DataBase.GetmsgCount(self, self.player.ClubID)
-
-            if self.MessageCount > self.player.ClubMessageCount:
-                self.player.ClubMessageCount = self.MessageCount
-                AllianceStreamMessage(self.client, self.player, self.player.ClubID, 1).send()

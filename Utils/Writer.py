@@ -1,5 +1,3 @@
-import itertools
-
 class Writer:
     def __init__(self, client, endian: str = 'big'):
         self.client = client
@@ -44,6 +42,21 @@ class Writer:
         self.buffer += packet + b'\xff\xff\x00\x00\x00\x00\x00'
         self.client.send(self.buffer)
         print(self.id, self.__class__.__name__)
+
+    def sendToAll(self):
+        self.encode()
+        packet = self.buffer
+        self.buffer = self.id.to_bytes(2, 'big', signed=True)
+        self.writeInt(len(packet), 3)
+        if hasattr(self, 'version'):
+            self.writeInt16(self.version)
+        else:
+            self.writeInt16(0)
+        self.buffer += packet + b'\xff\xff\x00\x00\x00\x00\x00'
+        for i in range(1, self.player.ClientDict["ClientCounts"] + 1):
+            self.player.ClientDict["Clients"][str(i)]["SocketInfo"].send(self.buffer)
+        print(self.id, self.__class__.__name__)
+        
 
     def writeVint(self, data, rotate: bool = True):
         final = b''

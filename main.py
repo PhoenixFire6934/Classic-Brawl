@@ -1,15 +1,10 @@
-import logging
 import socket
 import time
-import os
 from threading import *
 
 from Logic.Device import Device
 from Logic.Player import Players
 from Packets.Factory import packets
-from Utils.Config import Config
-
-logging.basicConfig(filename="errors.log", level=logging.INFO, filemode="w")
 
 
 def _(*args):
@@ -20,22 +15,15 @@ def _(*args):
 
 
 class Server:
+	Clients = {"ClientCounts": 0, "Clients": {}}
+	ThreadCount = 0
+
 	def __init__(self, ip: str, port: int):
 		self.server = socket.socket()
 		self.port = port
 		self.ip = ip
 
 	def start(self):
-		if not os.path.exists('./data.db'):
-			open('data.db', 'w').close()
-		if not os.path.exists('./club.db'):
-			open('club.db', 'w').close()
-		if not os.path.exists('./config.json'):
-			print("Creating config.json...")
-			Config.create_config(self)
-
-
-
 		self.server.bind((self.ip, self.port))
 		_(f'Server started! Ip: {self.ip}, Port: {self.port}')
 		while True:
@@ -43,6 +31,8 @@ class Server:
 			client, address = self.server.accept()
 			_(f'New connection! Ip: {address[0]}')
 			ClientThread(client, address).start()
+			Server.Clients["Clients"][str(Server.ThreadCount)] = {"SocketInfo": client}
+			Server.Clients["ClientCounts"] = Server.ThreadCount
 
 
 class ClientThread(Thread):
@@ -52,6 +42,7 @@ class ClientThread(Thread):
 		self.address = address
 		self.device = Device(self.client)
 		self.player = Players(self.device)
+		Server.ThreadCount += 1
 
 	def recvall(self, length: int):
 		data = b''
@@ -75,31 +66,40 @@ class ClientThread(Thread):
 					data = self.recvall(length)
 
 					if packet_id in packets:
+						print(f'Received packet! Id: {packet_id}')
 						message = packets[packet_id](self.client, self.player, data)
 						message.decode()
 						message.process()
 
-						if self.player.debug == False:	
-							_(f'Received packet! Id: {packet_id}')
-
 					else:
-						if self.player.debug == False:	
-							_(f'Packet not handled! Id: {packet_id}')
+						print(f'Packet not handled! Id: {packet_id}')
 
-				if time.time() - last_packet > 10:
+					Server.Clients["Clients"][str(Server.ThreadCount)]["PlayerID"] = self.player.LowID
+					self.player.ClientDict = Server.Clients
+					self.player.ThreadNumber = Server.ThreadCount
+
+				if time.time() - last_packet > 1:
 					print(f"[INFO] Ip: {self.address[0]} disconnected!")
+					Server.Clients["Clients"].pop(str(Server.ThreadCount))
+					Server.ThreadCount -= 1
 					self.client.close()
 					break
+
 		except ConnectionAbortedError:
 			print(f"[INFO] Ip: {self.address[0]} disconnected!")
+			Server.Clients["Clients"].pop(str(Server.ThreadCount))
+			Server.ThreadCount -= 1
 			self.client.close()
 		except ConnectionResetError:
 			print(f"[INFO] Ip: {self.address[0]} disconnected!")
+			Server.Clients["Clients"].pop(str(Server.ThreadCount))
+			Server.ThreadCount -= 1
 			self.client.close()
 		except TimeoutError:
 			print(f"[INFO] Ip: {self.address[0]} disconnected!")
+			Server.Clients["Clients"].pop(str(Server.ThreadCount))
+			Server.ThreadCount -= 1
 			self.client.close()
-
 
 if __name__ == '__main__':
 	server = Server('0.0.0.0', 9339)

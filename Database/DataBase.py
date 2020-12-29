@@ -19,6 +19,7 @@ class DataBase:
                 if self.player.Token in dict:
                     self.TotalTrophies = 0
 
+                    #self.player.SocketInfo = dict[str(self.player.Token)]["socketInfo"]
                     self.player.LowID = dict[str(self.player.Token)]["lowID"]
                     self.player.ClubID = dict[str(self.player.Token)]["clubID"]
                     self.player.ClubRole = dict[str(self.player.Token)]["clubRole"]
@@ -91,7 +92,8 @@ class DataBase:
                     self.player.starpower = dict[str(self.player.Token)]["starpower"]
                     self.player.DoNotDistrubMessage = dict[str(self.player.Token)]["DoNotDistrub"]
                     self.player.roomID = dict[str(self.player.Token)]["roomID"]
-    
+                read_data.close()
+
     def loadOtherAccount(self, plrLow_id):
         with open('data.db', 'r') as read_data:
             for line in read_data.readlines():
@@ -102,7 +104,6 @@ class DataBase:
                 for playertoken, info in dict.items():
                     if plrLow_id == info["lowID"]:
                         self.TotalTrophies = 0
-
                         self.ClubID = info["clubID"]
                         self.ClubRole = info["clubRole"]
                         self.name = info["name"]
@@ -173,11 +174,14 @@ class DataBase:
                         self.starpower = info["starpower"]
                         self.DoNotDistrubMessage = info["DoNotDistrub"]
                         self.roomID = info["roomID"]
+                        break
+                read_data.close()
 
     def createAccount(self):
         self.player.BrawlersUnlockedState = Players.CreateNewBrawlersList()
         data = {
             self.player.Token: {
+                "threadNumber": self.player.ThreadNumber,
                 "lowID": self.player.LowID,
                 "clubID": 0,
                 "clubRole": 0,
@@ -242,7 +246,7 @@ class DataBase:
                 "UnlockedBrawlers": self.player.BrawlersUnlockedState
             }
         }
-
+        
         with open('data.db', 'a+') as data_file:
             json.dump(data, data_file)  # writing data for new account
             data_file.write('\n')  # writing a new line
@@ -257,7 +261,12 @@ class DataBase:
                 json_data = json.loads(line)
                 dict = json.loads(json.dumps(json_data))  # loading and dumping json data from file
                 if self.player.Token in dict:
-                    dict[str(self.player.Token)][str(value_name)] = new_value
+                    if value_name == 'IP' or value_name == 'PORT':
+                        dict[str(self.player.Token)]["SocketInfo"]["RemoteAdresse"][value_name] = new_value
+                    elif value_name == 'Fileno':
+                        dict[str(self.player.Token)]["SocketInfo"]["Fileno"] = new_value
+                    else:
+                        dict[str(self.player.Token)][str(value_name)] = new_value
                 list.append(dict)
                 file.close()
 
@@ -336,6 +345,8 @@ class DataBase:
                     for plridentifier, data in dict[str(self.clubidstr)]["members"].items():
                         if plridentifier != "totalmembers":
                             self.plrids.append(int(plridentifier))
+
+                read_data.close()
     
 
     def replaceClubValue(self, target, inf1, inf2, inf3, inf4, inf5):
@@ -392,6 +403,8 @@ class DataBase:
                     for Identifier, data in dict.items():
                         if int(Identifier) != AllianceID:
                             newData.append(club)
+                            break
+                    file.close()
                                                                                                     
         elif Action == 1:
             with open('club.db', 'r+') as file:
@@ -404,6 +417,7 @@ class DataBase:
                         if int(Identifier) == AllianceID:
                             dict[Identifier]['members']['totalmembers'] += 1    
                             dict[Identifier]['members'][PlayerID] = PlayerName
+                            break
 
                     newData.append(json.dumps(dict))
                     file.close()  
@@ -443,6 +457,7 @@ class DataBase:
                         self.plrname = data["name"]
                         self.plricon = data["profileIcon"]
                         self.plrnamecolor = data["namecolor"]
+                read_data.close()
     
     # Club message
 
@@ -457,6 +472,7 @@ class DataBase:
                     self.MessageCount = dict[str(clubID)]['Total']
                     if self.MessageCount != 0:
                         self.player.messageTick = dict[str(clubID)][str(self.MessageCount)]['Tick'] + 1
+                read_data.close()
 
     def Addmsg(self, event, tick, Low_id, name, role, msg):
         self.updatedDict = []

@@ -7,6 +7,7 @@ import json
 from Logic.Player import Players
 from Packets.Messages.Server.Alliance.MyAllianceMessage import MyAllianceMessage
 from Packets.Messages.Server.Alliance.Events.AllianceLeaveOkMessage import AllianceLeaveOkMessage
+from Packets.Messages.Server.Alliance.AllianceChatServerMessage import AllianceChatServerMessage
 
 from Utils.Reader import BSMessageReader
 
@@ -35,6 +36,9 @@ class Leave_Message(BSMessageReader):
         else:
             DataBase.AddMember(self, self.player.ClubID, self.player.LowID, self.player.name, 2)
             DataBase.Addmsg(self, 4, 0, self.player.LowID, self.player.name, self.player.ClubRole, 4)
+            DataBase.GetmsgCount(self, self.player.ClubID)
+            for i in range(len(self.clientList)):
+            	AllianceChatServerMessage(self.clientList[i], self.player, 4).send()
 
         DataBase.replaceValue(self, 'clubID', 0)
         self.player.ClubID = 0

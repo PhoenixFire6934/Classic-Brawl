@@ -19,6 +19,7 @@ class Players:
 
 	settings = json.loads(content)
 
+
 	# Player and objects ID
 	HighID = 0
 	LowID = 0
@@ -28,7 +29,10 @@ class Players:
 	roomID = 0
 	brawlerID = 0
 	skinID = 0
-	TestVal = 1
+
+	# Socket
+	ClientDict = {}
+	ThreadNumber = 0
 
 	# Brawler and skins arrays
 	SkinsCount = Skins.get_skins_id()
@@ -78,7 +82,7 @@ class Players:
 	tickets = settings['Tickets']
 	highesttrophies = 0
 	trophies = 0
-	name = None
+	name = "None"
 	profileIcon = 1
 	namecolor = 5
 	brawlBoxes = settings['BrawlBoxTokens']

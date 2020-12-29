@@ -29,12 +29,16 @@ class ServerBox(Writer):
 
         if self.player.boxID == 4:
             reward = random.choices(reward_list, weights=[7, 0.8, 0.7, 1])
-            print(reward[0])
             BoxData = Boxes.boxes
             GoldValue = random.randrange(BoxData[1]['MinCoins'], BoxData[1]['MaxCoins'])
+            BrawlersRewarded = random.sample(unlocked_brawlers, k=len(unlocked_brawlers))
 
-            if reward[0] == 0:
+            if reward[0] == 0 and len(unlocked_brawlers) >= 3:
                 totalreward = 4
+
+            elif reward[0] == 0 and len(unlocked_brawlers) < 3:
+                totalreward = 2 + len(unlocked_brawlers)
+
             else:
                 totalreward = 5
 
@@ -64,9 +68,11 @@ class ServerBox(Writer):
             self.writeVint(0)
             self.writeVint(0) # Reward end
 
-            BrawlersRewarded = random.sample(unlocked_brawlers, k=3)
-            for i in range(1, 4):
-                if i == 3 and len(unlockable_brawlers) > 0:
+            for i in range(1, totalreward):
+                print(i)
+                if i == 4:
+                    break
+                elif i == totalreward - 1 and len(unlockable_brawlers) > 0:
                     for unlocked_brawlers in self.player.BrawlersUnlockedState:
                         if self.player.BrawlersUnlockedState[unlocked_brawlers] == 0:
                             
@@ -82,7 +88,6 @@ class ServerBox(Writer):
 
                             DataBase.replaceValue(self, 'UnlockedBrawlers', self.player.BrawlersUnlockedState)
                             break
-
                 else:
                     self.writeVint(100) # Ammount
                     self.writeVint(16)

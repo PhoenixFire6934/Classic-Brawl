@@ -35,27 +35,26 @@ class LoginMessage(BSMessageReader):
 
             if self.player.maintenance:
                 LoginFailedMessage(self.client, self.player, "").send()
-
-            if self.player.patch:
+            elif self.player.patch:
                 if self.fingerprint_sha != self.player.patch_sha:
                     LoginFailedMessage(self.client, self.player, "").send()
-
-            LoginOkMessage(self.client, self.player).send()
-            DataBase.loadAccount(self) # load account
-            OwnHomeDataMessage(self.client, self.player).send()
-
-            if self.player.ClubID > 0:
-                MyAllianceMessage(self.client, self.player, self.player.ClubID).send()
-                AllianceStreamMessage(self.client, self.player, self.player.ClubID, 0).send()
-                DataBase.GetmsgCount(self, self.player.ClubID)
-                self.player.ClubMessageCount = self.MessageCount
             else:
-                MyAllianceMessage(self.client, self.player, 0).send()
+                LoginOkMessage(self.client, self.player).send()
+                DataBase.loadAccount(self) # load account
+                OwnHomeDataMessage(self.client, self.player).send()
 
-            if self.player.DoNotDistrub == 1:
-                DoNotDistrubOkMessage(self.client, self.player).send()
-            if self.player.roomID > 0:
-                TeamGameroomDataMessage(self.client, self.player).send()
+                if self.player.ClubID > 0:
+                    MyAllianceMessage(self.client, self.player, self.player.ClubID).send()
+                    AllianceStreamMessage(self.client, self.player, self.player.ClubID, 0).send()
+                    DataBase.GetmsgCount(self, self.player.ClubID)
+                    self.player.ClubMessageCount = self.MessageCount
+                else:
+                    MyAllianceMessage(self.client, self.player, 0).send()
+
+                if self.player.DoNotDistrub == 1:
+                    DoNotDistrubOkMessage(self.client, self.player).send()
+                if self.player.roomID > 0:
+                    TeamGameroomDataMessage(self.client, self.player).send()
             
         else:
             self.player.LowID = Helpers.randomID(self)

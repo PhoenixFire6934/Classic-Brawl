@@ -225,8 +225,7 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(0)
         self.writeVint(0)
 
-        if self.player.name is None:
-
+        if self.player.name == "None":
             self.writeString("Guest")  # player name
             self.writeVint(0)
             DataBase.createAccount(self)  # create new account
@@ -234,7 +233,6 @@ class OwnHomeDataMessage(Writer):
         else:
             self.writeString(self.player.name)  # player name
             self.writeVint(1)
-
 
         self.writeVint(1207959551)
 

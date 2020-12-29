@@ -5,6 +5,7 @@ class Device:
 	OSVersion = None
 	isAndroid = False
 	Language = None
+	AllClient = []
 	
 	def __init__(self, socket):
 		self.socket = socket
