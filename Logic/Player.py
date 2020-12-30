@@ -32,7 +32,6 @@ class Players:
 
 	# Socket
 	ClientDict = {}
-	ThreadNumber = 0
 
 	# Brawler and skins arrays
 	SkinsCount = Skins.get_skins_id()

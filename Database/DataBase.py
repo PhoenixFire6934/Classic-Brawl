@@ -18,8 +18,6 @@ class DataBase:
                 
                 if self.player.Token in dict:
                     self.TotalTrophies = 0
-
-                    #self.player.SocketInfo = dict[str(self.player.Token)]["socketInfo"]
                     self.player.LowID = dict[str(self.player.Token)]["lowID"]
                     self.player.ClubID = dict[str(self.player.Token)]["clubID"]
                     self.player.ClubRole = dict[str(self.player.Token)]["clubRole"]
@@ -181,7 +179,6 @@ class DataBase:
         self.player.BrawlersUnlockedState = Players.CreateNewBrawlersList()
         data = {
             self.player.Token: {
-                "threadNumber": self.player.ThreadNumber,
                 "lowID": self.player.LowID,
                 "clubID": 0,
                 "clubRole": 0,
@@ -261,12 +258,7 @@ class DataBase:
                 json_data = json.loads(line)
                 dict = json.loads(json.dumps(json_data))  # loading and dumping json data from file
                 if self.player.Token in dict:
-                    if value_name == 'IP' or value_name == 'PORT':
-                        dict[str(self.player.Token)]["SocketInfo"]["RemoteAdresse"][value_name] = new_value
-                    elif value_name == 'Fileno':
-                        dict[str(self.player.Token)]["SocketInfo"]["Fileno"] = new_value
-                    else:
-                        dict[str(self.player.Token)][str(value_name)] = new_value
+                    dict[str(self.player.Token)][str(value_name)] = new_value
                 list.append(dict)
                 file.close()
 
@@ -496,13 +488,13 @@ class DataBase:
                                     dict[str(clubIdentifier)][str(i + 1)] = {"Event": 2, "Tick": dict[str(clubIdentifier)][str(i)]['Tick'] + 1, "PlayerID": Low_id, "PlayerName": name, "PlayerRole": role, "Message": msg}
                                     dict[str(clubIdentifier)]['Total'] = i + 1
                                     self.player.ClubMessageCount = dict[str(clubIdentifier)]['Total'] = i + 1
-                                    self.player.messageTick = dict[str(clubIdentifier)][str(i)]['Tick']
+                                    self.player.messageTick = dict[str(clubIdentifier)][str(i + 1)]['Tick']
                                     break
                                 else:
                                     dict[str(clubIdentifier)][str(i + 1)] = {"Event": event, "Tick": dict[str(clubIdentifier)][str(i)]['Tick'] + 1, "PlayerID": Low_id, "PlayerName": name, "PlayerRole": role, "Message": msg}
                                     dict[str(clubIdentifier)]['Total'] = i + 1
                                     self.player.ClubMessageCount = dict[str(clubIdentifier)]['Total'] = i + 1
-                                    self.player.messageTick = dict[str(clubIdentifier)][str(i)]['Tick']
+                                    self.player.messageTick = dict[str(clubIdentifier)][str(i + 1)]['Tick']
                                     break
 
                 self.updatedDict.append(json.dumps(dict))            

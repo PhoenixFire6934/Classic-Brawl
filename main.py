@@ -4,6 +4,7 @@ from threading import *
 
 from Logic.Device import Device
 from Logic.Player import Players
+from Database.DataBase import DataBase
 from Packets.Factory import packets
 
 
@@ -31,9 +32,7 @@ class Server:
 			client, address = self.server.accept()
 			_(f'New connection! Ip: {address[0]}')
 			ClientThread(client, address).start()
-			Server.Clients["Clients"][str(Server.ThreadCount)] = {"SocketInfo": client}
-			Server.Clients["ClientCounts"] = Server.ThreadCount
-
+			Server.ThreadCount += 1
 
 class ClientThread(Thread):
 	def __init__(self, client, address):
@@ -42,7 +41,6 @@ class ClientThread(Thread):
 		self.address = address
 		self.device = Device(self.client)
 		self.player = Players(self.device)
-		Server.ThreadCount += 1
 
 	def recvall(self, length: int):
 		data = b''
@@ -71,33 +69,43 @@ class ClientThread(Thread):
 						message.decode()
 						message.process()
 
+						if packet_id == 10101:
+							Server.Clients["Clients"][str(self.player.LowID)] = {"SocketInfo": self.client}
+							Server.Clients["ClientCounts"] = Server.ThreadCount
+							self.player.ClientDict = Server.Clients
+							print(self.player.ClientDict)
+
 					else:
 						print(f'Packet not handled! Id: {packet_id}')
 
-					Server.Clients["Clients"][str(Server.ThreadCount)]["PlayerID"] = self.player.LowID
-					self.player.ClientDict = Server.Clients
-					self.player.ThreadNumber = Server.ThreadCount
-
-				if time.time() - last_packet > 1:
+				if time.time() - last_packet > 5:
 					print(f"[INFO] Ip: {self.address[0]} disconnected!")
-					Server.Clients["Clients"].pop(str(Server.ThreadCount))
+					Server.Clients["Clients"].pop(str(self.player.LowID))
+					Server.Clients["ClientCounts"] -= 1
+					self.player.ClientDict = Server.Clients
 					Server.ThreadCount -= 1
 					self.client.close()
 					break
 
 		except ConnectionAbortedError:
 			print(f"[INFO] Ip: {self.address[0]} disconnected!")
-			Server.Clients["Clients"].pop(str(Server.ThreadCount))
+			Server.Clients["Clients"].pop(str(self.player.LowID))
+			Server.Clients["ClientCounts"] -= 1
+			self.player.ClientDict = Server.Clients
 			Server.ThreadCount -= 1
 			self.client.close()
 		except ConnectionResetError:
 			print(f"[INFO] Ip: {self.address[0]} disconnected!")
-			Server.Clients["Clients"].pop(str(Server.ThreadCount))
+			Server.Clients["Clients"].pop(str(self.player.LowID))
+			Server.Clients["ClientCounts"] -= 1
+			self.player.ClientDict = Server.Clients
 			Server.ThreadCount -= 1
 			self.client.close()
 		except TimeoutError:
 			print(f"[INFO] Ip: {self.address[0]} disconnected!")
-			Server.Clients["Clients"].pop(str(Server.ThreadCount))
+			Server.Clients["Clients"].pop(str(self.player.LowID))
+			Server.Clients["ClientCounts"] -= 1
+			self.player.ClientDict = Server.Clients
 			Server.ThreadCount -= 1
 			self.client.close()
 

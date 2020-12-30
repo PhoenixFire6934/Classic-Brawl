@@ -1,3 +1,6 @@
+from Database.DataBase import DataBase
+
+
 class Writer:
     def __init__(self, client, endian: str = 'big'):
         self.client = client
@@ -44,18 +47,44 @@ class Writer:
         print(self.id, self.__class__.__name__)
 
     def sendToAll(self):
-        self.encode()
-        packet = self.buffer
-        self.buffer = self.id.to_bytes(2, 'big', signed=True)
-        self.writeInt(len(packet), 3)
-        if hasattr(self, 'version'):
-            self.writeInt16(self.version)
-        else:
-            self.writeInt16(0)
-        self.buffer += packet + b'\xff\xff\x00\x00\x00\x00\x00'
-        for i in range(1, self.player.ClientDict["ClientCounts"] + 1):
-            self.player.ClientDict["Clients"][str(i)]["SocketInfo"].send(self.buffer)
-        print(self.id, self.__class__.__name__)
+        if self.player.ClubID != 0:
+            self.encode()
+            packet = self.buffer
+            self.buffer = self.id.to_bytes(2, 'big', signed=True)
+            self.writeInt(len(packet), 3)
+            if hasattr(self, 'version'):
+                self.writeInt16(self.version)
+            else:
+                self.writeInt16(0)
+            self.buffer += packet + b'\xff\xff\x00\x00\x00\x00\x00'
+            print(self.player.ClientDict)
+            for Client in range(self.player.ClientDict["ClientCounts"]):
+                for client_id, value in self.player.ClientDict["Clients"].items():
+                    DataBase.loadOtherAccount(self, int(client_id))
+                    if self.ClubID == self.player.ClubID:
+                        self.player.ClientDict["Clients"][str(client_id)]["SocketInfo"].send(self.buffer)
+                break
+            print(self.id, self.__class__.__name__)
+
+    def sendToOthers(self):
+        if self.player.ClubID != 0:
+            self.encode()
+            packet = self.buffer
+            self.buffer = self.id.to_bytes(2, 'big', signed=True)
+            self.writeInt(len(packet), 3)
+            if hasattr(self, 'version'):
+                self.writeInt16(self.version)
+            else:
+                self.writeInt16(0)
+            self.buffer += packet + b'\xff\xff\x00\x00\x00\x00\x00'
+            print(self.player.ClientDict)
+            for Client in range(self.player.ClientDict["ClientCounts"]):
+                for client_id, value in self.player.ClientDict["Clients"].items():
+                    DataBase.loadOtherAccount(self, int(client_id))
+                    if client_id != self.player.LowID and self.ClubID == self.player.ClubID:
+                        self.player.ClientDict["Clients"][str(client_id)]["SocketInfo"].send(self.buffer)
+                break
+            print(self.id, self.__class__.__name__)
         
 
     def writeVint(self, data, rotate: bool = True):

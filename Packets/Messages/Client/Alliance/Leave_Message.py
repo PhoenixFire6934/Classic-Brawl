@@ -36,9 +36,7 @@ class Leave_Message(BSMessageReader):
         else:
             DataBase.AddMember(self, self.player.ClubID, self.player.LowID, self.player.name, 2)
             DataBase.Addmsg(self, 4, 0, self.player.LowID, self.player.name, self.player.ClubRole, 4)
-            DataBase.GetmsgCount(self, self.player.ClubID)
-            for i in range(len(self.clientList)):
-            	AllianceChatServerMessage(self.clientList[i], self.player, 4).send()
+            AllianceChatServerMessage(self.client, self.player, 4).sendToOthers()
 
         DataBase.replaceValue(self, 'clubID', 0)
         self.player.ClubID = 0

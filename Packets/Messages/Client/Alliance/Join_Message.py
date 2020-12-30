@@ -5,6 +5,7 @@ from string import ascii_uppercase
 from Packets.Messages.Server.Alliance.MyAllianceMessage import MyAllianceMessage
 from Packets.Messages.Server.Alliance.AllianceStreamMessage import AllianceStreamMessage
 from Packets.Messages.Server.Alliance.Events.AllianceJoinOkMessage import AllianceJoinOkMessage
+from Packets.Messages.Server.Alliance.AllianceChatServerMessage import AllianceChatServerMessage
 
 from Logic.Player import Players
 from Database.DataBase import DataBase
@@ -29,9 +30,11 @@ class Join_Message(BSMessageReader):
 
         # Member adding
         DataBase.AddMember(self, self.ClubLowID, self.player.LowID, self.player.name, 1)
+        DataBase.GetmsgCount(self, self.player.ClubID)
         DataBase.Addmsg(self, 4, 0, self.player.LowID, self.player.name, self.player.ClubRole, 3)
 
         # Info
         AllianceJoinOkMessage(self.client, self.player).send()
         MyAllianceMessage(self.client, self.player, self.ClubLowID).send()
         AllianceStreamMessage(self.client, self.player, self.ClubLowID, 0).send()
+        AllianceChatServerMessage(self.client, self.player, 3).sendToOthers()
