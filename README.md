@@ -72,6 +72,8 @@ To connect to your server, you need a custom client. Here the only solution is t
 👤 **Vitalik**
 * Github: [@VitalikObject](https://github.com/VitalikObject)
 * Discord: Mr Vitalik#1685
+
+Also thanks to [Rostik](https://github.com/RostikDevv) and [Vorono4ka](https://github.com/Vorono4ka) for their [scdocs](https://github.com/RostikDevv/scdocs)
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/PhoenixFire6879/Classic-Brawl/issues).
