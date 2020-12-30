@@ -289,6 +289,7 @@ class Players:
 
     # Friendly game (Teams, info, result)
 	GameType = 0
+	BattleResult = 0
 	Rank = 0
 	Team = 0
 	Bot1 = 0
