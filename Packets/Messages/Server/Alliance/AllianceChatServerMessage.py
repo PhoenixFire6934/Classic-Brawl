@@ -35,3 +35,4 @@ class AllianceChatServerMessage(Writer):
                         self.writeString(dict[str(self.player.ClubID)][str(self.player.messageTick)]['PlayerName'])
                     elif dict[str(self.player.ClubID)][str(self.player.messageTick)]['Event'] == 2:
                         self.writeString(dict[str(self.player.ClubID)][str(self.player.messageTick)]['Message'])
+            read_data.close()

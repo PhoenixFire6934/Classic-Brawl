@@ -1,6 +1,4 @@
-from Packets.Messages.Server.Alliance.AllianceStreamMessage import AllianceStreamMessage
 from Packets.Messages.Server.Alliance.AllianceDataMessage import AllianceDataMessage
-from Database.DataBase import DataBase
 
 from Utils.Reader import BSMessageReader
 

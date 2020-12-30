@@ -13,7 +13,7 @@ class LoginFailedMessage(Writer):
     def encode(self):
         self.writeInt(self.player.err_code) # error code
         self.writeString(Fingerprint.loadFinger_full("GameAssets/fingerprint.json")) # fingerprint
-
+        
         self.writeString() # server hostname
         self.writeString(self.player.patchUrl) # patch hostname
         self.writeString(self.player.updateUrl) # update hostname
@@ -43,5 +43,5 @@ class LoginFailedMessage(Writer):
         # 10 = Maintenance
         # 11 = Banned
         # 13 = Acc Locked PopUp
-        # 16 = Updating Cr/Maintenance
+        # 16 = Updating bs/Maintenance
         # 18 = Chinese Text?

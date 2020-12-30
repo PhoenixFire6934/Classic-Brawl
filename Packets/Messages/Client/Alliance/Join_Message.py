@@ -30,7 +30,6 @@ class Join_Message(BSMessageReader):
 
         # Member adding
         DataBase.AddMember(self, self.ClubLowID, self.player.LowID, self.player.name, 1)
-        DataBase.GetmsgCount(self, self.player.ClubID)
         DataBase.Addmsg(self, 4, 0, self.player.LowID, self.player.name, self.player.ClubRole, 3)
 
         # Info

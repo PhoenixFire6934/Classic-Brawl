@@ -8,14 +8,8 @@ from Files.CsvLogic.Cards import Cards
 
 class Players:
 
-	try:
-		config = open('config.json', 'r')
-		content = config.read()
-	except FileNotFoundError:
-		print("Creating config.json...")
-		Config.create_config()
-		config = open('config.json', 'r')
-		content = config.read()
+	config = open('config.json', 'r')
+	content = config.read()
 
 	settings = json.loads(content)
 

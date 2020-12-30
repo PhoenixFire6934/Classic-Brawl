@@ -78,5 +78,5 @@ packets = {
     14372: TeamUseGadgetMessage,
 
     14600: AvatarNameCheckRequestMessage,
-    14777: DoNotDistrubMessage,
+    14777: DoNotDistrubMessage
 }

@@ -1,3 +1,4 @@
+from Packets.Messages.Server.Alliance.AllianceStreamMessage import AllianceStreamMessage
 from Utils.Helpers import Helpers
 from Database.DataBase import DataBase
 from random import choice
@@ -23,10 +24,6 @@ class Leave_Message(BSMessageReader):
 
     def process(self):
 
-        # Info
-        AllianceLeaveOkMessage(self.client, self.player).send()
-        MyAllianceMessage(self.client, self.player, 0).send()
-
         # Removing member 
         DataBase.loadClub(self, self.player.ClubID)
 
@@ -36,7 +33,11 @@ class Leave_Message(BSMessageReader):
         else:
             DataBase.AddMember(self, self.player.ClubID, self.player.LowID, self.player.name, 2)
             DataBase.Addmsg(self, 4, 0, self.player.LowID, self.player.name, self.player.ClubRole, 4)
-            AllianceChatServerMessage(self.client, self.player, 4).sendToOthers()
+            AllianceChatServerMessage(self.client, self.player, 4).sendToAll()
+
+        # Info
+        AllianceLeaveOkMessage(self.client, self.player).send()
+        MyAllianceMessage(self.client, self.player, 0).send()
 
         DataBase.replaceValue(self, 'clubID', 0)
         self.player.ClubID = 0

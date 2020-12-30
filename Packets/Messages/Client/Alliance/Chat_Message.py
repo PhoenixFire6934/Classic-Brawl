@@ -1,4 +1,3 @@
-from Packets.Messages.Server.Alliance.AllianceStreamMessage import AllianceStreamMessage
 from Packets.Messages.Server.Alliance.AllianceChatServerMessage import AllianceChatServerMessage
 from Packets.Messages.Server.AllianceBot.AllianceBotChatServerMessage import AllianceBotChatServerMessage
 from Packets.Messages.Server.OutOfSyncMessage import OutOfSyncMessage

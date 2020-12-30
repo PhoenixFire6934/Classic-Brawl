@@ -350,14 +350,12 @@ class DataBase:
                 json_data = json.loads(line)
                 dict = json.loads(json.dumps(json_data))  # loading and dumping json data from file
 
-                print("Scaning...", target)
                 if str(target) in dict:
                     dict[str(target)]['description'] = inf1
                     dict[str(target)]['badgeID'] = inf2
                     dict[str(target)]['type'] = inf3
                     dict[str(target)]['trophiesneeded'] = inf4
                     dict[str(target)]['friendlyfamily'] = inf5
-                    print("Done!")
                 list.append(dict)
                 file.close()
 
@@ -462,9 +460,7 @@ class DataBase:
 
                 if str(clubID) in dict:
                     self.MessageCount = dict[str(clubID)]['Total']
-                    if self.MessageCount != 0:
-                        self.player.messageTick = dict[str(clubID)][str(self.MessageCount)]['Tick'] + 1
-                read_data.close()
+            read_data.close()
 
     def Addmsg(self, event, tick, Low_id, name, role, msg):
         self.updatedDict = []
@@ -489,12 +485,14 @@ class DataBase:
                                     dict[str(clubIdentifier)]['Total'] = i + 1
                                     self.player.ClubMessageCount = dict[str(clubIdentifier)]['Total'] = i + 1
                                     self.player.messageTick = dict[str(clubIdentifier)][str(i + 1)]['Tick']
+                                    file.close()
                                     break
                                 else:
                                     dict[str(clubIdentifier)][str(i + 1)] = {"Event": event, "Tick": dict[str(clubIdentifier)][str(i)]['Tick'] + 1, "PlayerID": Low_id, "PlayerName": name, "PlayerRole": role, "Message": msg}
                                     dict[str(clubIdentifier)]['Total'] = i + 1
                                     self.player.ClubMessageCount = dict[str(clubIdentifier)]['Total'] = i + 1
                                     self.player.messageTick = dict[str(clubIdentifier)][str(i + 1)]['Tick']
+                                    file.close()
                                     break
 
                 self.updatedDict.append(json.dumps(dict))            

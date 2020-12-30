@@ -73,7 +73,6 @@ class ClientThread(Thread):
 							Server.Clients["Clients"][str(self.player.LowID)] = {"SocketInfo": self.client}
 							Server.Clients["ClientCounts"] = Server.ThreadCount
 							self.player.ClientDict = Server.Clients
-							print(self.player.ClientDict)
 
 					else:
 						print(f'Packet not handled! Id: {packet_id}')
