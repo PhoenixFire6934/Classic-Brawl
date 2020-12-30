@@ -11,7 +11,7 @@ class BattleEndMessage(BSMessageReader):
         self.client = client
 
     def decode(self):
-        self.player.GameType = self.read_Vint()
+        self.player.BattleResult = self.read_Vint()
         self.read_Vint()
         self.player.Rank = self.read_Vint()
         self.read_Vint()
