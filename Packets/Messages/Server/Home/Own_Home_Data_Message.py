@@ -246,7 +246,7 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(0)
 
         self.writeVint(0)  # High Id
-        self.writeVint(self.player.low_id)  # Low Id
+        self.writeVint(1)  # Low Id
 
         self.writeVint(0)
         self.writeVint(0)
@@ -330,8 +330,6 @@ class OwnHomeDataMessage(Writer):
         for brawler_id in self.player.brawlers_id:
             self.writeScId(16, brawler_id)
             self.writeVint(self.player.brawler_power_level)
-
-        self.writeVint(0)
 
         # Gadgets and Star Powers array
         self.writeVint(len(self.player.card_skills_id))  # count
