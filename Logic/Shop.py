@@ -1,28 +1,66 @@
 class Shop:
+    """
+    << Shop Offers IDs List >>
+
+    0 = Free Brawl Box
+    1 = Gold
+    2 = Random Brawler
+    3 = Brawler
+    4 = Skin
+    5 = StarPower/ Gadget
+    6 = Brawl Box
+    7 = Tickets
+    8 = Power Points (for a specific brawler)
+    9 = Token Doubler
+    10 = Mega Box
+    11 = Keys (???)
+    12 = Power Points
+    13 = EventSlot (???)
+    14 = Big Box
+    15 = AdBox (not working anymore)
+    16 = Gems
+
+    """
 
 
 
     offers = [
+
+        # Star Shop
         {
-            'ID': 6,
-            'OfferTitle': 'Free Brawl Box',
+            'ID': 14, # Big Box
+            'OfferTitle': 'SPECIAL OFFER',
             'Cost': 0,
-            'SkinID': 0
+            'Multiplier': 5,
+            'SkinID': 0,
+            'ShopType': 3,
+            'ShopDisplay': 0,
+            'Timer': 99999
         },
 
         {
-            'ID': 14,
-            'OfferTitle': 'Free Big Box',
+            'ID': 10, # Mega Box
+            'OfferTitle': 'SPECIAL OFFER',
             'Cost': 0,
-            'SkinID': 0
+            'Multiplier': 3,
+            'SkinID': 0,
+            'ShopType': 3,
+            'ShopDisplay': 0,
+            'Timer': 99999
         },
 
         {
-            'ID': 10,
-            'OfferTitle': 'Free Mega Box',
+            'ID': 7,  # Mega Box
+            'OfferTitle': 'SPECIAL OFFER',
             'Cost': 0,
-            'SkinID': 0
-        }
+            'Multiplier': 3,
+            'SkinID': 0,
+            'ShopType': 1,
+            'ShopDisplay': 1,
+            'Timer': 99999
+        },
+
+
 
     ]
 

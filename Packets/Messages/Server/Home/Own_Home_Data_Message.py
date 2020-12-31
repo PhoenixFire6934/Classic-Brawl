@@ -77,37 +77,35 @@ class OwnHomeDataMessage(Writer):
 
         count = len(Shop.offers)
 
-        self.writeVint(count) # Count
+        self.writeVint(count)
         for i in range(count):
             item = Shop.offers[i]
-            print(item)
 
-            count2 = 1
-            self.writeVint(count2) # Count2
+            self.writeVint(1)
 
-            for i in range(count2):
-                self.writeVint(item['ID'])
-                self.writeVint(1) # Multiplier
-                self.writeVint(0)
-                self.writeVint(item['SkinID'])
-                self.writeVint(0)
-
-            self.writeVint(item['Cost'])
-            self.writeVint(86400) # Timer
-            self.writeVint(1)     # "New" Offer
-            self.writeVint(100)
+            self.writeVint(item['ID'])
+            self.writeVint(item['Multiplier'])
             self.writeVint(0)
+            self.writeVint(item['SkinID'])
+            self.writeVint(item['ShopType']) # [0 = Offer, 2 = Skins 3 = Star Shop]
 
-            self.writeBoolean(True)
-            self.writeVint(0) # [0 = Normal, 1 = Daily Deals]
-            self.writeBoolean(True)
+            self.writeVint(item['Cost']) # Cost
+            self.writeVint(item['Timer'])
+
+            self.writeVint(1)
+            self.writeVint(100)
+            self.writeBoolean(False) # is Offer Purchased
+
+            self.writeBoolean(False)
+            self.writeVint(item['ShopDisplay']) # [0 = Normal, 1 = Daily Deals]
+            self.writeBoolean(False)
             self.writeVint(0)
 
             self.writeInt(0)
 
-            self.write_string_reference(item['OfferTitle']) # Text
+            self.write_string_reference(item['OfferTitle'])
 
-            self.writeBoolean(True)
+            self.writeBoolean(False)
             self.writeString()
             self.writeVint(0)
             self.writeBoolean(False)
@@ -248,7 +246,7 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(0)
 
         self.writeVint(0)  # High Id
-        self.writeVint(1)  # Low Id
+        self.writeVint(self.player.low_id)  # Low Id
 
         self.writeVint(0)
         self.writeVint(0)
@@ -333,6 +331,8 @@ class OwnHomeDataMessage(Writer):
             self.writeScId(16, brawler_id)
             self.writeVint(self.player.brawler_power_level)
 
+        self.writeVint(0)
+
         # Gadgets and Star Powers array
         self.writeVint(len(self.player.card_skills_id))  # count
 
@@ -361,20 +361,3 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(0)
         self.writeVint(2)
         self.writeVint(1585502369)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

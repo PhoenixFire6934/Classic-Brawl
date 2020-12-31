@@ -10,7 +10,7 @@ class PlayerProfileMessage(Writer):
 
     def encode(self):
         self.writeVint(0)  # High Id
-        self.writeVint(1)  # Low Id
+        self.writeVint(self.player.low_id)  # Low Id
 
         self.writeBoolean(False)
 

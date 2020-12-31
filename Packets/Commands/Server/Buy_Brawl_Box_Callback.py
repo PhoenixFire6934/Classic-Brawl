@@ -12,9 +12,8 @@ class BuyBrawlBoxCallback(Writer):
     def encode(self):
         reward_list = [0, 0, 3, 2, 8, 2, 8, 8, 0, 3, 3, 0, 0, 2, 3, 0, 0, 0, 0, 3]
 
-        print(self.player.box_id)
 
-        if self.player.box_id == 5 or self.player.box_id == 0:
+        if self.player.box_id == 5:
             reward = random.choice(reward_list)
             value = random.randrange(5, 20)
             GoldValue = random.randrange(10, 50)
@@ -32,7 +31,6 @@ class BuyBrawlBoxCallback(Writer):
             elif reward == 0:
                 totalreward = 1
                 value = 0
-
 
             self.writeVint(203)
             self.writeVint(0)

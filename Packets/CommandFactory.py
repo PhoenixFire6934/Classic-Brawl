@@ -2,6 +2,7 @@ from Utils.Reader import BSMessageReader
 from Packets.Commands.Client.Select_Thumbnail import SelectThumbnail
 from Packets.Commands.Client.Select_Name_Color import SelectNameColor
 from Packets.Commands.Client.Buy_Brawl_Box import BuyBrawlBox
+from Packets.Commands.Client.Buy_Offer import BuyOffer
 from Packets.Commands.Client.Select_Brawler import SelectBrawler
 from Packets.Commands.Client.Select_Starpower import SelectStarpower
 from Packets.Commands.Client.Buy_Gold import BuyGold
@@ -24,9 +25,13 @@ class EndClientTurn(BSMessageReader):
 
 
     def process(self):
-        if self.commandID == 500 or self.commandID == 517 or self.commandID == 535 or self.commandID == 519:
+        if self.commandID == 500 or self.commandID == 517 or self.commandID == 535:
             BuyBrawlBox.decode(self)
             BuyBrawlBox.process(self)
+
+        elif self.commandID == 519:
+            BuyOffer.decode(self)
+            BuyOffer.process(self)
 
         elif self.commandID == 505:
             SelectThumbnail.decode(self)

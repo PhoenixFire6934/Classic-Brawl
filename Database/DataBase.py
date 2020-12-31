@@ -9,6 +9,7 @@ class DataBase:
         user_data = db.search(query.token == str(self.player.token))
         if user_data:
             self.player.name = user_data[0]["info"]["name"]
+            self.player.low_id = user_data[0]["info"]["lowID"]
             self.player.gems = user_data[0]["info"]["gems"]
             self.player.gold = user_data[0]["info"]["gold"]
             self.player.star_points = user_data[0]["info"]["starpoints"]
