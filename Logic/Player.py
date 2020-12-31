@@ -65,6 +65,7 @@ class Players:
 	brawler_trophies_for_rank = settings['BrawlerTrophiesForRank']
 	brawler_trophies = settings['BrawlerTrophies']
 	brawler_upgrade_points = settings['BrawlerUpgradePoints']
+	brawler_power_level = settings['BrawlerPowerLevel']
 
 	brawlers_skins = {}
 	for id in BrawlersCount:
@@ -239,6 +240,43 @@ class Players:
 		'32': brawler_upgrade_points,
 		'34': brawler_upgrade_points,
 		'37': brawler_upgrade_points
+	}
+	BrawlerPowerLevel = {
+		'0':  brawler_power_level,
+		'1':  brawler_power_level,
+		'2':  brawler_power_level,
+		'3':  brawler_power_level,
+		'4':  brawler_power_level,
+		'5':  brawler_power_level,
+		'6':  brawler_power_level,
+		'7':  brawler_power_level,
+		'8':  brawler_power_level,
+		'9':  brawler_power_level,
+		'10': brawler_power_level,
+		'11': brawler_power_level,
+		'12': brawler_power_level,
+		'13': brawler_power_level,
+		'14': brawler_power_level,
+		'15': brawler_power_level,
+		'16': brawler_power_level,
+		'17': brawler_power_level,
+		'18': brawler_power_level,
+		'19': brawler_power_level,
+		'20': brawler_power_level,
+		'21': brawler_power_level,
+		'22': brawler_power_level,
+		'23': brawler_power_level,
+		'24': brawler_power_level,
+		'25': brawler_power_level,
+		'26': brawler_power_level,
+		'27': brawler_power_level,
+		'28': brawler_power_level,
+		'29': brawler_power_level,
+		'30': brawler_power_level,
+		'31': brawler_power_level,
+		'32': brawler_power_level,
+		'34': brawler_power_level,
+		'37': brawler_power_level
 	}
 
 	# Brawler stats and more..

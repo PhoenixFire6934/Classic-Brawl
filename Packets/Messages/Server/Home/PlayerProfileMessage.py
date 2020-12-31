@@ -19,14 +19,14 @@ class PlayerProfileMessage(Writer):
 
         DataBase.loadOtherAccount(self, self.low_id)
 
-        self.writeVint(len(self.BrawlersCount))  # Brawlers array
+        self.writeVint(len(self.UnlockedBrawlersList))  # Brawlers array
 
-        for brawler_id in self.BrawlersCount:
-            self.writeScId(16, brawler_id)
+        for brawler_id in self.UnlockedBrawlersList:
+            self.writeScId(16, int(brawler_id))
             self.writeVint(0)
-            self.writeVint(99999)
-            self.writeVint(99999)
-            self.writeVint(10) # power lvl
+            self.writeVint(self.BrawlersTrophiesForRank[brawler_id]) # Trophies for rank
+            self.writeVint(self.BrawlersTrophies[brawler_id]) # Trophies
+            self.writeVint(self.BrawlerPowerLevel[brawler_id] + 1) # power lvl
 
 
         self.writeVint(15)
@@ -44,7 +44,7 @@ class PlayerProfileMessage(Writer):
         self.writeVint(self.maxTrophiesReached)  # Highest trophies
 
         self.writeVint(5)
-        self.writeVint(len(self.BrawlersCount)) # Brawlers list
+        self.writeVint(len(self.UnlockedBrawlersList)) # Brawlers list
         
         self.writeVint(7)
         self.writeVint(28000000 + self.profileIcon) # Profile icon??

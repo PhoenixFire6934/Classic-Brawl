@@ -31,6 +31,7 @@ class DataBase:
                     self.player.BrawlersTrophies = dict[str(self.player.Token)]["brawlersTrophies"]
                     self.player.BrawlersTrophiesForRank = dict[str(self.player.Token)]["brawlersTrophiesForRank"]
                     self.player.BrawlersUpgradePoints = dict[str(self.player.Token)]["brawlersUpgradePoints"]
+                    self.player.BrawlerPowerLevel = dict[str(self.player.Token)]["brawlerPowerLevel"]
                     
                     if self.player.UnlockType == "Off":
                         self.player.BrawlersUnlockedState = dict[str(self.player.Token)]["UnlockedBrawlers"]
@@ -109,12 +110,19 @@ class DataBase:
                         self.gold = info["gold"]
                         self.starPoints = info["starpoints"]
                         self.tickets = info["tickets"]
-                        self.BrawlersCount = Characters.get_brawlers_id()
+                        self.BrawlersCount = info["UnlockedBrawlers"]
+
+                        self.UnlockedBrawlersList = []
+                        for brawler_id in self.BrawlersCount:
+                            if self.BrawlersCount[brawler_id] == 1:
+                                self.UnlockedBrawlersList.append(brawler_id)
+                                
                         self.brawlerID = info["brawlerID"]
                         self.skinID = info["skinID"]
                         self.BrawlersTrophies = info["brawlersTrophies"]
                         self.BrawlersTrophiesForRank = info["brawlersTrophiesForRank"]
                         self.BrawlersUpgradePoints = info["brawlersUpgradePoints"]
+                        self.BrawlerPowerLevel = info["brawlerPowerLevel"]
 
                         for BrawlerID in self.BrawlersTrophies.keys():
                             self.TotalTrophies += self.BrawlersTrophies[BrawlerID]
@@ -240,6 +248,7 @@ class DataBase:
                 "brawlersTrophies": self.player.BrawlersTrophies,
                 "brawlersTrophiesForRank": self.player.BrawlersTrophiesForRank,
                 "brawlersUpgradePoints": self.player.BrawlersUpgradePoints,
+                "brawlerPowerLevel": self.player.BrawlerPowerLevel,
                 "UnlockedBrawlers": self.player.BrawlersUnlockedState
             }
         }
