@@ -74,7 +74,7 @@ class Chat_Message(BSMessageReader):
     def process(self):
         
         if self.IsAcmd == False:
-            DataBase.Addmsg(self, 100, 0, self.player.LowID, self.player.name, self.player.ClubRole, self.msg)
+            DataBase.Addmsg(self, 2, 0, self.player.LowID, self.player.name, self.player.ClubRole, self.msg)
             AllianceChatServerMessage(self.client, self.player, self.msg).sendToAll()
 
         if self.bot_msg != '':

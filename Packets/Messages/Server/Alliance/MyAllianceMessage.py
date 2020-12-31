@@ -9,11 +9,11 @@ class MyAllianceMessage(Writer):
         super().__init__(client)
         self.id = 24399
         self.player = player
-        self.ClubLowID = LowID
+        self.clubid = LowID
 
     def encode(self):
-        if self.ClubLowID != 0:
-            DataBase.loadClub(self, self.ClubLowID)
+        if self.clubid != 0:
+            DataBase.loadClub(self, self.clubid)
             self.writeVint(self.clubmembercount)
             self.writeVint(1)
             self.writeVint(25)
@@ -22,7 +22,7 @@ class MyAllianceMessage(Writer):
 
             # Club info
             self.writeInt(0)                            # Club high id
-            self.writeInt(self.ClubLowID)               # Club low id
+            self.writeInt(self.clubid)               # Club low id
             self.writeString(self.clubName)             # Club name
 
             # Badge

@@ -60,7 +60,7 @@ class Writer:
             for Client in range(self.player.ClientDict["ClientCounts"]):
                 for client_id, value in self.player.ClientDict["Clients"].items():
                     DataBase.loadOtherAccount(self, int(client_id))
-                    if client_id != 0 and self.ClubID == self.player.ClubID:
+                    if self.ClubID == self.player.ClubID:
                         self.player.ClientDict["Clients"][str(client_id)]["SocketInfo"].send(self.buffer)
                 break
             print(self.id, self.__class__.__name__)

@@ -83,6 +83,7 @@ class Players:
 	starPoints = settings['Starpoints']
 
 	# Alliances
+	ClubHighID = 0
 	ClubID = 0
 	ClubRole = 0
 	ClubAction = 0

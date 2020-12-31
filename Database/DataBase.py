@@ -253,12 +253,30 @@ class DataBase:
     def replaceValue(self, value_name, new_value):
         with open('data.db', 'r+') as file:
             list = []
-
             for line in file.readlines():
                 json_data = json.loads(line)
                 dict = json.loads(json.dumps(json_data))  # loading and dumping json data from file
                 if self.player.Token in dict:
                     dict[str(self.player.Token)][str(value_name)] = new_value
+                list.append(dict)
+                file.close()
+
+        with open('data.db', 'w') as o:
+            for i in list:
+                o.write(str(i).replace("'", '"') + '\n')
+            o.close()
+
+    
+    def replaceOtherValue(self, LowID, value_name, new_value):
+        with open('data.db', 'r+') as file:
+            list = []
+            for line in file.readlines():
+                json_data = json.loads(line)
+                dict = json.loads(json.dumps(json_data))  # loading and dumping json data from file
+                for playertoken, info in dict.items():
+                    if LowID == info["lowID"]:
+                        dict[playertoken][str(value_name)] = new_value
+                        break
                 list.append(dict)
                 file.close()
 
@@ -320,10 +338,8 @@ class DataBase:
         self.clubidstr = str(clubid)
         with open('club.db', 'r') as read_data:
             for line in read_data.readlines():
-                
                 json_data = json.loads(line)
                 dict = json.loads(json.dumps(json_data))
-
                 if self.clubidstr in dict:
                     self.clubName = dict[str(self.clubidstr)]["name"]
                     self.clubdescription = dict[str(self.clubidstr)]["description"]
@@ -344,12 +360,9 @@ class DataBase:
     def replaceClubValue(self, target, inf1, inf2, inf3, inf4, inf5):
         with open('club.db', 'r+') as file:
             list = []
-
             for line in file.readlines():
-
                 json_data = json.loads(line)
                 dict = json.loads(json.dumps(json_data))  # loading and dumping json data from file
-
                 if str(target) in dict:
                     dict[str(target)]['description'] = inf1
                     dict[str(target)]['badgeID'] = inf2
@@ -368,63 +381,57 @@ class DataBase:
         self.AllianceCount = 0
         with open('club.db', 'r') as read_data:
             for club in read_data.readlines():
-
                 clubData = json.loads(club)
                 dict = json.loads(json.dumps(clubData))
-
                 for name, info in dict.items():
                     if info["members"]["totalmembers"] >= minMembers and info["members"]["totalmembers"] < maxMembers and info["type"] <= clubType and self.AllianceCount <= maxListLength:
                         self.AllianceCount += 1
+                read_data.close()
 
-    def AddMember(self, clubid, PlayerLow_ID, plrName, action):
-        PlayerID = str(PlayerLow_ID)
-        PlayerName = plrName
-        AllianceID = clubid
-        Action = action
+    def AddMember(self, AllianceID, PlayerID, PlayerName, Action):
         newData = []
-
         if Action == 0:
             with open('club.db', 'r') as file:
                 for club in file.readlines():
-                    
                     plrData = json.loads(club)
                     dict = json.loads(json.dumps(plrData)) # loading and dumping json data from file
-
                     for Identifier, data in dict.items():
                         if int(Identifier) != AllianceID:
                             newData.append(club)
-                            break
+                    file.close()
+
+            with open('chat.db', 'r') as file:
+                for messages in file.readlines():
+                    plrData = json.loads(messages)
+                    dict = json.loads(json.dumps(plrData)) # loading and dumping json data from file
+                    for Identifier, data in dict.items():
+                        if int(Identifier) != AllianceID:
+                            newData.append(messages)
                     file.close()
                                                                                                     
         elif Action == 1:
             with open('club.db', 'r+') as file:
                 for line in file.readlines():
-
                     json_data = json.loads(line)
                     dict = json.loads(json.dumps(json_data))
-
                     for Identifier, data in dict.items():
                         if int(Identifier) == AllianceID:
                             dict[Identifier]['members']['totalmembers'] += 1    
-                            dict[Identifier]['members'][PlayerID] = PlayerName
+                            dict[Identifier]['members'][str(PlayerID)] = PlayerName
                             break
-
                     newData.append(json.dumps(dict))
                     file.close()  
             
-
         elif Action == 2:
             with open('club.db', 'r+') as file:
                 for line in file.readlines():
-
                     json_data = json.loads(line)
                     dict = json.loads(json.dumps(json_data))
-
                     for Identifier, data in dict.items():
                         if int(Identifier) == AllianceID:
                             dict[Identifier]['members']['totalmembers'] -= 1
-                            dict[Identifier]['members'].pop(PlayerID)
-
+                            dict[Identifier]['members'].pop(str(PlayerID))
+                            break
                     newData.append(json.dumps(dict)) 
                     file.close()        
 
@@ -435,10 +442,8 @@ class DataBase:
     def GetMemberData(self, Low_id):
         with open('data.db', 'r') as read_data:
             for plrtoken in read_data.readlines():
-
                 plrData = json.loads(plrtoken)
                 dict = json.loads(json.dumps(plrData))
-
                 for playertoken, data in dict.items():
                     if Low_id == data["lowID"]:
                         self.lowplrid = data["lowID"]
@@ -449,15 +454,11 @@ class DataBase:
                         self.plrnamecolor = data["namecolor"]
                 read_data.close()
     
-    # Club message
-
     def GetmsgCount(self, clubID):
         with open('chat.db', 'r') as read_data:
             for line in read_data.readlines():
-                
                 json_data = json.loads(line)
                 dict = json.loads(json.dumps(json_data))
-
                 if str(clubID) in dict:
                     self.MessageCount = dict[str(clubID)]['Total']
             read_data.close()
@@ -467,37 +468,22 @@ class DataBase:
         index = 0
         with open('chat.db', 'r+') as file:
             for line in file.readlines():
-
                 json_data = json.loads(line)
                 dict = json.loads(json.dumps(json_data))
-
                 for clubIdentifier, data in dict.items():
-
                     if int(clubIdentifier) == self.player.ClubID:
-
                         for i in range(1, dict[str(clubIdentifier)]['Total'] + 1):
                             index += 1
-
                             if index == dict[str(clubIdentifier)]['Total']:
-                                
-                                if event == 100:
-                                    dict[str(clubIdentifier)][str(i + 1)] = {"Event": 2, "Tick": dict[str(clubIdentifier)][str(i)]['Tick'] + 1, "PlayerID": Low_id, "PlayerName": name, "PlayerRole": role, "Message": msg}
-                                    dict[str(clubIdentifier)]['Total'] = i + 1
-                                    self.player.ClubMessageCount = dict[str(clubIdentifier)]['Total'] = i + 1
-                                    self.player.messageTick = dict[str(clubIdentifier)][str(i + 1)]['Tick']
-                                    file.close()
-                                    break
-                                else:
-                                    dict[str(clubIdentifier)][str(i + 1)] = {"Event": event, "Tick": dict[str(clubIdentifier)][str(i)]['Tick'] + 1, "PlayerID": Low_id, "PlayerName": name, "PlayerRole": role, "Message": msg}
-                                    dict[str(clubIdentifier)]['Total'] = i + 1
-                                    self.player.ClubMessageCount = dict[str(clubIdentifier)]['Total'] = i + 1
-                                    self.player.messageTick = dict[str(clubIdentifier)][str(i + 1)]['Tick']
-                                    file.close()
-                                    break
-
+                                dict[str(clubIdentifier)][str(i + 1)] = {"Event": event, "Tick": dict[str(clubIdentifier)][str(i)]['Tick'] + 1, "PlayerID": Low_id, "PlayerName": name, "PlayerRole": role, "Message": msg}
+                                dict[str(clubIdentifier)]['Total'] = i + 1
+                                self.player.ClubMessageCount = dict[str(clubIdentifier)]['Total'] = i + 1
+                                self.player.messageTick = dict[str(clubIdentifier)][str(i + 1)]['Tick']
+                                file.close()
+                                break
                 self.updatedDict.append(json.dumps(dict))            
                 file.close()
-        
+    
         with open('chat.db', 'w') as o:
             o.writelines('\n'.join(self.updatedDict))
             o.write('\n')

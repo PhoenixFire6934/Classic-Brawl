@@ -31,7 +31,7 @@ from Packets.Messages.Client.Alliance.Create_Message import Create_Message
 from Packets.Messages.Client.Alliance.Ask_Alliance_Data_Message import Ask_Alliance_Data_Message
 from Packets.Messages.Client.Alliance.Ask_Joinable_Alliances_Message import Ask_Joinable_Alliances_Message
 from Packets.Messages.Client.Alliance.Join_Message import Join_Message
-# Promote member
+from Packets.Messages.Client.Alliance.Promote_Alliance_Member_Message import Promote_Alliance_Member_Message
 from Packets.Messages.Client.Alliance.Leave_Message import Leave_Message
 from Packets.Messages.Client.Alliance.Chat_Message import Chat_Message
 from Packets.Messages.Client.Alliance.Edit_Settings_Message import Edit_Settings_Message
@@ -58,7 +58,7 @@ packets = {
     14303: Ask_Joinable_Alliances_Message,
     # 14304: Ask_Stream_Message,
     14305: Join_Message,
-    # 14306: Promote_Member_Message,
+    14306: Promote_Alliance_Member_Message,
     # 14307: Kick_Member_Message,
     14308: Leave_Message,
     14315: Chat_Message,

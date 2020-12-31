@@ -81,9 +81,7 @@ class PlayerProfileMessage(Writer):
         self.writeVint(28000000 + self.profileIcon) # Profile icon
         self.writeVint(43000000 + self.namecolor) # Name color
 
-        print(self.profileIcon, self.namecolor)
-
-        if self.player.ClubID != 0:
+        if self.ClubID != 0:
             DataBase.loadClub(self, self.ClubID)
 
             self.writeBoolean(True)

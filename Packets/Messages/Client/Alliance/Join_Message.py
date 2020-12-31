@@ -1,3 +1,4 @@
+from Packets.Messages.Server.Alliance.AllianceDataMessage import AllianceDataMessage
 from time import daylight, sleep
 from random import choice
 from string import ascii_uppercase
@@ -34,6 +35,6 @@ class Join_Message(BSMessageReader):
 
         # Info
         AllianceJoinOkMessage(self.client, self.player).send()
-        MyAllianceMessage(self.client, self.player, self.ClubLowID).send()
+        MyAllianceMessage(self.client, self.player, self.ClubLowID).sendToAll()
         AllianceStreamMessage(self.client, self.player, self.ClubLowID, 0).send()
         AllianceChatServerMessage(self.client, self.player, 3).sendToOthers()
