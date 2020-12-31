@@ -49,18 +49,6 @@ class Shop:
             'Timer': 99999
         },
 
-        {
-            'ID': 7,  # Mega Box
-            'OfferTitle': 'SPECIAL OFFER',
-            'Cost': 0,
-            'Multiplier': 3,
-            'SkinID': 0,
-            'ShopType': 1,
-            'ShopDisplay': 1,
-            'Timer': 99999
-        },
-
-
 
     ]
 
