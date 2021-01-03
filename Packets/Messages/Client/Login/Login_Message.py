@@ -34,20 +34,19 @@ class LoginMessage(BSMessageReader):
             self.player.err_code = 8
             LoginFailedMessage(self.client, self.player, "Your client is outdated, click below to download the new version!").send()
 
-        elif self.player.low_id != 0:
+        elif self.player.maintenance:
+            LoginFailedMessage(self.client, self.player, "").send()
 
-            if self.player.maintenance:
+        elif self.player.patch:
+            if self.fingerprint_sha != self.player.patch_sha:
                 LoginFailedMessage(self.client, self.player, "").send()
 
-            if self.player.patch:
-                if self.fingerprint_sha != self.player.patch_sha:
-                    LoginFailedMessage(self.client, self.player, "").send()
-
-
+        elif self.player.low_id != 0:
             LoginOkMessage(self.client, self.player).send()
             DataBase.loadAccount(self) # load account
             OwnHomeDataMessage(self.client, self.player).send()
             MyAllianceMessage(self.client, self.player).send()
+
             if self.player.do_not_distrub == 1:
                 DoNotDistrubOkMessage(self.client, self.player).send()
             if self.player.room_id > 0:

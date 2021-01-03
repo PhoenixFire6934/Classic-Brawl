@@ -13,7 +13,6 @@ class BuyTokenDoubler(BSMessageReader):
         pass
 
 
-
     def process(self):
         newGems = self.player.gems - 50
         DataBase.replaceValue(self, 'gems', newGems)

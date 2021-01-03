@@ -9,5 +9,5 @@ class TeamLeftMessage(Writer):
         self.player = player
 
     def encode(self):
-        self.writeHexa('''00000000''')
+        self.writeInt(0)
 

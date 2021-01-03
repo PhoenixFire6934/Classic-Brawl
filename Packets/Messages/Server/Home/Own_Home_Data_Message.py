@@ -41,7 +41,6 @@ class OwnHomeDataMessage(Writer):
 
         # Unlocked Skins array
         self.writeVint(len(self.player.skins_id))
-
         for skin_id in self.player.skins_id:
             self.writeScId(29, skin_id)
 
@@ -207,8 +206,7 @@ class OwnHomeDataMessage(Writer):
         for item in Shop.gold:
             self.writeVint(item['Amount'])
 
-        self.writeVint(2)
-
+        self.writeVint(2)   # array
         self.writeVint(200) # Max Tokens
         self.writeVint(20)  # Plus Tokens
 
@@ -315,7 +313,7 @@ class OwnHomeDataMessage(Writer):
                 DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
                 self.writeVint(self.player.brawlers_trophies[str(brawler_id)])
 
-        self.writeVint(0)
+        self.writeVint(0) # array
 
         # Brawlers Upgrade Poitns array
         self.writeVint(len(self.player.brawlers_id))  # brawlers count

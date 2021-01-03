@@ -9,34 +9,10 @@ class LoginFailedMessage(Writer):
         self.id = 20103
         self.player = player
         self.msg = msg
+        self.fingerprint = Fingerprint.loadFinger_full("GameAssets/fingerprint.json")
 
-    def encode(self):
-        self.writeInt(self.player.err_code) # error code
-        self.writeString(Fingerprint.loadFinger_full("GameAssets/fingerprint.json")) # fingerprint
-
-        self.writeString() # null
-
-        self.writeString(self.player.patch_url) # patch url
-        self.writeString(self.player.update_url) # update url
-        self.writeString(self.msg) # message
-
-        self.writeHexa('''00 00 00 00 00 FF FF FF FF 00 00 00 02''') # unknown
-
-        self.writeString(self.player.patch_url) # patch url
-        self.writeString() # rackcdn url
-
-        self.writeInt(0)
-        self.writeInt(0) # time left ?
-
-        self.writeString() # null
-        self.writeString() # null
-
-        self.writeHexa('''02 00 00 00 00 00 00 00 00 00''') # unknown
-
-
-
-        # Error code list
-
+        """
+        << Error Code List >>
         # 1  = Custom Message
         # 7  = Patch
         # 8  = Update Available
@@ -46,3 +22,30 @@ class LoginFailedMessage(Writer):
         # 13 = Acc Locked PopUp
         # 16 = Updating Cr/Maintenance
         # 18 = Chinese Text?
+        
+        """
+
+    def encode(self):
+        self.writeInt(self.player.err_code) # Error Code
+        self.writeString(self.fingerprint)  # Fingerprint JSON
+
+        self.writeString() # Server Host
+
+        self.writeString(self.player.patch_url)  # Patch URL
+        self.writeString(self.player.update_url) # Update URL
+        self.writeString(self.msg)               # Message
+
+        self.writeInt(3600)     # Estimated Time
+        self.writeBoolean(False)
+
+        self.writeString()
+        self.writeString()
+
+        self.writeInt(0)
+        self.writeInt(0)
+        self.writeInt(0)
+
+        self.writeString()
+
+        self.writeInt(0)
+        self.writeBoolean(False)

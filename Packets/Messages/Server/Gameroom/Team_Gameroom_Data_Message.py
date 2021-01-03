@@ -22,7 +22,6 @@ class TeamGameroomDataMessage(Writer):
             self.player.room_id = random.randint(0, 2147483647)
             self.writeInt(self.player.room_id)
             DataBase.replaceValue(self, 'roomID', self.player.room_id)
-
         else:
            self.writeInt(self.player.room_id)
 
@@ -30,41 +29,49 @@ class TeamGameroomDataMessage(Writer):
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(0)
-        self.writeVint(15)
-        self.writeVint(self.player.map_id) # map ID
+
+        self.writeScId(15, self.player.map_id)
+
         self.writeVint(1)
         self.writeVint(1)
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(0)
-        self.writeVint(0)  # high id
-        self.writeInt(1)  # low id
-        self.writeVint(16)
-        self.writeVint(self.player.brawler_id)
+
+        self.writeVint(0)  # High Id
+        self.writeInt(1)   # Low Id
+
+        self.writeScId(16, self.player.brawler_id)
+
         self.writeVint(0)
+
         self.writeVint(99999)
         self.writeVint(99999)
+
         self.writeVint(1)
         self.writeVint(3)
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(0)
-        self.writeString(self.player.name) # player name
+
+        self.writeString(self.player.name)
+
         self.writeVint(100)
         self.writeVint(28000000)
         self.writeVint(43000000)
-        self.writeVint(23)
-        self.writeVint(self.player.starpower)
+
+        self.writeScId(23, self.player.starpower)
+
         if self.player.use_gadget == 1:
-            self.writeVint(23)
-            self.writeVint(self.player.gadget)
+            self.writeScId(23, self.player.gadget)
         else:
            self.writeVint(0)
            self.writeVint(0)
+
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(6)
-        self.writeHexa('''FF-FF-00-00-00-00-00''')
+
 
