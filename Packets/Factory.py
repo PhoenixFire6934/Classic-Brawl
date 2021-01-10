@@ -13,7 +13,6 @@ from Packets.Messages.Client.Analytics_Event_Message import AnalyticsEventMessag
 from Packets.Messages.Client.Battle.Battle_End_Message import BattleEndMessage
 from Packets.Messages.Client.Set_Name_Message import SetNameMessage
 from Packets.Messages.Client.Home.Get_Leaderboard_Message import GetLeaderboardMessage
-from Packets.Messages.Client.Set_Content_Creator_Message import SetContentCreatorMessage
 from Packets.Messages.Client.Home.Avatar_Name_Check_Request_Message import AvatarNameCheckRequestMessage
 from Packets.Messages.Client.Gameroom.Team_Use_Gadget_Message import TeamUseGadgetMessage
 from Packets.Messages.Client.Gameroom.Do_Not_Distrub_Message import DoNotDistrubMessage
@@ -24,7 +23,6 @@ packets = {
     10101: LoginMessage,
     10108: KeepAliveMessage,
     10110: AnalyticsEventMessage,
-    18686: SetContentCreatorMessage,
     10212: SetNameMessage,
     14102: EndClientTurn,
     14109: GoHomeFromOfflinePractiseMessage,

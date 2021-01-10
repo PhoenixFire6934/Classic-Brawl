@@ -1,5 +1,5 @@
 from Database.DataBase import DataBase
-from Packets.Messages.Server.Gameroom.Team_Gameroom_Data_Message import TeamGameroomDataMessage
+from Logic.Shop import Shop
 
 from Utils.Reader import BSMessageReader
 
@@ -18,18 +18,14 @@ class BuyGold(BSMessageReader):
 
 
     def process(self):
-        if self.gold == 0:
-            newGold = self.player.gold + 150
-            newGems = self.player.gems - 20
-            DataBase.replaceValue(self, 'gold', newGold)
-            DataBase.replaceValue(self, 'gems', newGems)
-        elif self.gold == 1:
-            newGold = self.player.gold + 400
-            newGems = self.player.gems - 50
-            DataBase.replaceValue(self, 'gold', newGold)
-            DataBase.replaceValue(self, 'gems', newGems)
-        elif self.gold == 2:
-            newGold = self.player.gold + 1200
-            newGems = self.player.gems - 140
-            DataBase.replaceValue(self, 'gold', newGold)
-            DataBase.replaceValue(self, 'gems', newGems)
+        cost = Shop.gold[self.gold]['Cost']
+        value = Shop.gold[self.gold]['Amount']
+
+        newGold = self.player.gold + value
+        self.player.gold = newGold
+        newGems = self.player.gems - cost
+        self.player.gems = newGems
+
+        DataBase.replaceValue(self, 'gold', newGold)
+        DataBase.replaceValue(self, 'gems', newGems)
+

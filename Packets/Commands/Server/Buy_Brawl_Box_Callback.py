@@ -1,6 +1,7 @@
 from Utils.Writer import Writer
 import random
 from Database.DataBase import DataBase
+from Logic.Shop import Shop
 
 class BuyBrawlBoxCallback(Writer):
 
@@ -10,314 +11,80 @@ class BuyBrawlBoxCallback(Writer):
         self.player = player
 
     def encode(self):
-        reward_list = [0, 0, 3, 2, 8, 2, 8, 8, 0, 3, 3, 0, 0, 2, 3, 0, 0, 0, 0, 3]
+        reward_list = [0, 2, 3, 8]
+        tokendoublerlist = [200, 400, 200, 600, 200, 200, 400, 200, 200, 400, 200, 200, 400, 600, 200, 200, 600, 400,
+                            200, 600]
 
+        reward = random.choice(reward_list)
+        value = random.randrange(5, 20)
+        gold_value = random.randrange(10, 50)
+        total_reward = 2
 
-        if self.player.box_id == 5:
-            reward = random.choice(reward_list)
-            value = random.randrange(5, 20)
-            GoldValue = random.randrange(10, 50)
-            totalreward = 2
+        if reward == 8:
+            new_gems = self.player.gems + value
+            self.player.gems = new_gems
+            DataBase.replaceValue(self, 'gems', new_gems)
+        elif reward == 3:
+            new_tickets = self.player.tickets + value
+            self.player.tickets = new_tickets
+            DataBase.replaceValue(self, 'tickets', new_tickets)
+        elif reward == 2:
+            value = random.choice(tokendoublerlist)
+            new_tokens = self.player.tokens + value
+            self.player.tokens = new_tokens
+            DataBase.replaceValue(self, 'tokens', new_tokens)
+        elif reward == 0:
+            total_reward = 1
+            value = 0
 
-            if reward == 8:
-                newGems = self.player.gems + value
-                DataBase.replaceValue(self, 'gems', newGems)
-            elif reward == 3:
-                newTickets = self.player.tickets + value
-                DataBase.replaceValue(self, 'tickets', newTickets)
-            elif reward == 2:
-                newTokensDoubler = 200
-                value = newTokensDoubler
-            elif reward == 0:
-                totalreward = 1
-                value = 0
-
-            self.writeVint(203)
-            self.writeVint(0)
-            self.writeVint(1)
-            self.writeVint(10) # brawl box
-            self.writeVint(totalreward)
-
-            self.writeVint(GoldValue)
-            newGold = self.player.gold + GoldValue
-            DataBase.replaceValue(self, 'gold', newGold)
-
-            self.writeVint(0)
-            self.writeVint(7)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(value)
-            self.writeVint(1)
-            self.writeVint(0)
-            self.writeVint(reward)
-
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(-1040385)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-
-
-        if self.player.box_id == 4 or self.player.box_id == 1:
-            tokendoublerlist = [200, 400, 200, 600, 200, 200, 400, 200, 200, 400, 200, 200, 400, 600, 200, 200, 600, 400, 200, 600]
-            reward = random.choice(reward_list)
-            value = random.randrange(5, 20)
-            GoldValue = random.randrange(43, 500)
-            totalreward = 2
-
-            if reward == 8:
-                newGems = self.player.gems + value
-                DataBase.replaceValue(self, 'gems', newGems)
-            elif reward == 3:
-                newTickets = self.player.tickets + value
-                DataBase.replaceValue(self, 'tickets', newTickets)
-            elif reward == 2:
-                value = random.choice(tokendoublerlist)
-            elif reward == 0:
-                totalreward = 1
-                value = 0
-
-            self.writeVint(203)
-            self.writeVint(0)
-            self.writeVint(1)
-            self.writeVint(12)
-            self.writeVint(totalreward)
-            
-            self.writeVint(GoldValue)
-            newGold = self.player.gold + GoldValue
-            DataBase.replaceValue(self, 'gold', newGold)
-
-            self.writeVint(0)
-            self.writeVint(7)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(value)
-            self.writeVint(1)
-            self.writeVint(0)
-            self.writeVint(reward)
-
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(-1040385)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-
+        new_gold = self.player.gold + gold_value
+        self.player.gold = new_gold
+        DataBase.replaceValue(self, 'gold', new_gold)
 
         if self.player.box_id == 3:
-            tokendoublerlist = [200, 400, 200, 600, 200, 200, 400, 200, 200, 400, 200, 200, 400, 600, 200, 200, 600, 400, 200, 600]
-            reward = random.choice(reward_list)
-            value = random.randrange(1, 20)
-            GoldValue = random.randrange(100, 1200)
-            totalreward = 2
+            new_gems = self.player.gems - Shop.boxes[1]['Cost']
+            self.player.gems = new_gems
+            DataBase.replaceValue(self, 'gems', new_gems)
+        elif self.player.box_id == 1:
+            new_gems = self.player.gems - Shop.boxes[0]['Cost']
+            self.player.gems = new_gems
+            DataBase.replaceValue(self, 'gems', new_gems)
 
-            if reward == 8:
-                newGems = self.player.gems + value
-                newGems = self.player.gems - 80
-                DataBase.replaceValue(self, 'gems', newGems)
-            elif reward == 3:
-                newGems = self.player.gems - 80
-                newTickets = self.player.tickets + value
-                DataBase.replaceValue(self, 'tickets', newTickets)
-                DataBase.replaceValue(self, 'gems', newGems)
-            elif reward == 2:
-                newGems = self.player.gems - 80
-                value = random.choice(tokendoublerlist)
-                DataBase.replaceValue(self, 'gems', newGems)
-            elif reward == 0:
-                totalreward = 1
-                value = 0
-                newGems = self.player.gems - 80
-                DataBase.replaceValue(self, 'gems', newGems)
-
-            self.writeVint(203)
-            self.writeVint(0)
-            self.writeVint(1)
-            self.writeVint(11)
-            self.writeVint(totalreward)
-
-            self.writeVint(GoldValue)
-            newGold = self.player.gold + GoldValue
-            DataBase.replaceValue(self, 'gold', newGold)
-
-            self.writeVint(0)
-            self.writeVint(7)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(value)
-            self.writeVint(1)
-            self.writeVint(0)
-            self.writeVint(reward)
-
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(-1040385)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-
-        if self.player.box_id == 2:
-            tokendoublerlist = [200, 400, 200, 600, 200, 200, 400, 200, 200, 400, 200, 200, 400, 600, 200, 200, 600, 400, 200, 600]
-            reward = random.choice(reward_list)
-            value = random.randrange(1, 20)
-            GoldValue = random.randrange(100, 1200)
-            totalreward = 2
-
-            if reward == 8:
-                newGems = self.player.gems + value
-                DataBase.replaceValue(self, 'gems', newGems)
-            elif reward == 3:
-                newTickets = self.player.tickets + value
-                DataBase.replaceValue(self, 'tickets', newTickets)
-            elif reward == 2:
-                value = random.choice(tokendoublerlist)
-            elif reward == 0:
-                totalreward = 1
-                value = 0
+        def get_id(id):
+            if id == 5:   # Brawl Box
+                return 10
+            elif id == 4: # Big Box
+                return 12
+            elif id == 3: # Shop Mega Box
+                return 11
+            elif id == 1: # Shop Big Box
+                return 12
 
 
-            self.writeVint(203)
-            self.writeVint(0)
-            self.writeVint(1)
-            self.writeVint(11)
-            self.writeVint(totalreward)
+        # Box Info
+        self.writeVint(203) # Command ID
+        self.writeVint(0)
+        self.writeVint(1)
+        self.writeVint(get_id(self.player.box_id))  # Box ID
 
-            self.writeVint(GoldValue)
-            newGold = self.player.gold + GoldValue
-            DataBase.replaceValue(self, 'gold', newGold)
+        # Reward Count
+        self.writeVint(total_reward)
 
-            self.writeVint(0)
-            self.writeVint(7)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(value)
-            self.writeVint(1)
-            self.writeVint(0)
-            self.writeVint(reward)
+        # Gold
+        self.writeVint(gold_value)
+        self.writeVint(0)
+        self.writeVint(7) # Reward ID
 
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(-1040385)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
+        self.writeVint(0)
+        self.writeVint(0)
+        self.writeVint(0)
+
+        self.writeVint(value)
+        self.writeVint(1)
+        self.writeVint(0)
+        self.writeVint(reward)
+
+        for i in range(14):
             self.writeVint(0)
 
 
-        if self.player.box_id == 1 or self.player.box_id == 10 :
-            tokendoublerlist = [200, 400, 200, 600, 200, 200, 400, 200, 200, 400, 200, 200, 400, 600, 200, 200, 600, 400, 200, 600] 
-            reward = random.choice(reward_list)
-            value = random.randrange(5, 20)
-            GoldValue = random.randrange(43, 500)
-            totalreward = 2
-
-            if reward == 8:
-                newGems = self.player.gems + value
-                newGems = self.player.gems - 30
-                DataBase.replaceValue(self, 'gems', newGems)
-            elif reward == 3:
-                newTickets = self.player.tickets + value
-                newGems = self.player.gems - 30
-                DataBase.replaceValue(self, 'gems', newGems)
-                DataBase.replaceValue(self, 'tickets', newTickets)
-            elif reward == 2:
-                value = random.choice(tokendoublerlist)
-                newGems = self.player.gems - 30
-                DataBase.replaceValue(self, 'gems', newGems)
-            elif reward == 0:
-                totalreward = 1
-                value = 0
-                newGems = self.player.gems - 30
-                DataBase.replaceValue(self, 'gems', newGems)
-
-            self.writeVint(203)
-            self.writeVint(0)
-            self.writeVint(1)
-            self.writeVint(12)
-            self.writeVint(totalreward)
-            
-            self.writeVint(GoldValue)
-            newGold = self.player.gold + GoldValue
-            DataBase.replaceValue(self, 'gold', newGold)
-
-            self.writeVint(0)
-            self.writeVint(7)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(value)
-            self.writeVint(1)
-            self.writeVint(0)
-            self.writeVint(reward)
-
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(-1040385)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)

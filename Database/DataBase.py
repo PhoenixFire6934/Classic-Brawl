@@ -14,6 +14,7 @@ class DataBase:
             self.player.gold = user_data[0]["info"]["gold"]
             self.player.star_points = user_data[0]["info"]["starpoints"]
             self.player.tickets = user_data[0]["info"]["tickets"]
+            self.player.tokens = user_data[0]["info"]["tokens"]
             self.player.brawler_id = user_data[0]["info"]["brawlerID"]
             self.player.skin_id = user_data[0]["info"]["skinID"]
             self.player.trophies = user_data[0]["info"]["trophies"]
@@ -45,6 +46,7 @@ class DataBase:
                     "gold": self.player.gold,
                     "starpoints": self.player.star_points,
                     "tickets": self.player.tickets,
+                    "tokens": self.player.tokens,
                     "brawlerID": 0,
                     "skinID": 0,
                     "trophies": self.player.trophies,

@@ -1,4 +1,5 @@
 from Database.DataBase import DataBase
+from Logic.Shop import Shop
 from Packets.Messages.Server.Gameroom.Team_Gameroom_Data_Message import TeamGameroomDataMessage
 
 from Utils.Reader import BSMessageReader
@@ -14,5 +15,14 @@ class BuyTokenDoubler(BSMessageReader):
 
 
     def process(self):
-        newGems = self.player.gems - 50
+        cost = Shop.token_doubler['Cost']
+        value = Shop.token_doubler['Amount']
+
+        newGems = self.player.gems - cost
+        self.player.gems = newGems
         DataBase.replaceValue(self, 'gems', newGems)
+
+        newTokens = self.player.tokens + value
+        self.player.tokens = newTokens
+        DataBase.replaceValue(self, 'tokens', newTokens)
+

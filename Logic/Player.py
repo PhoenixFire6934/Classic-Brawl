@@ -62,6 +62,7 @@ class Players:
 	gems = settings['Gems']
 	gold = settings['Gold']
 	tickets = settings['Tickets']
+	tokens = 0
 
 	
 	# Server config

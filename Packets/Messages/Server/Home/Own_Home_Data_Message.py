@@ -54,7 +54,7 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(1)
         self.writeBoolean(True)
 
-        self.writeVint(0) # Remaining Tokens
+        self.writeVint(self.player.tokens) # Remaining Tokens
         self.writeVint(0) # Season End Timer
         self.writeVint(0)
         self.writeVint(0)
