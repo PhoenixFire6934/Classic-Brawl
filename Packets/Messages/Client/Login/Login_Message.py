@@ -34,12 +34,11 @@ class LoginMessage(BSMessageReader):
             self.player.err_code = 8
             LoginFailedMessage(self.client, self.player, "Your client is outdated, click below to download the new version!").send()
 
-        elif self.player.maintenance:
+        if self.player.maintenance:
             LoginFailedMessage(self.client, self.player, "").send()
 
-        elif self.player.patch:
-            if self.fingerprint_sha != self.player.patch_sha:
-                LoginFailedMessage(self.client, self.player, "").send()
+        if self.fingerprint_sha != self.player.patch_sha and self.player.patch:
+            LoginFailedMessage(self.client, self.player, "").send()
 
         elif self.player.low_id != 0:
             LoginOkMessage(self.client, self.player).send()
