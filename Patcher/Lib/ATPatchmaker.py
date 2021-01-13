@@ -4,7 +4,7 @@ import json
 import datetime
 import random
 import shutil
-from Utils.LZMA import compress
+from LZMA import compress
 
 def _(*args):
 	print('[INFO]', end=' ')
