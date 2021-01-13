@@ -22,10 +22,8 @@ def Make():
         return r
 
     def shash(inp) -> str:  # get hash sha1
-        print(inp)
         hash_object = hashlib.sha1(inp)
         pbHash = hash_object.hexdigest()
-        print(pbHash)
         return pbHash
 
     def MasterHasher():

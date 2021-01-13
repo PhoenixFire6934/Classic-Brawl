@@ -23,7 +23,7 @@ port = 8080
 
 current_path = os.getcwd() # backing this up for later use
 
-os.chdir(current_path + "\\Patch")
+os.chdir(current_path + "/Patch")
 
 print("Please wait until the patcher finishes running")
 pm.Make()
@@ -34,11 +34,11 @@ os.chdir(current_path)
 # Copy the output to the correct folder
 patch_folder = max(all_subdirs_of(os.getcwd() + "/Patch/Patchs"), key=os.path.getctime) # select the newest created folder
 
-latest_finger = patch_folder + "\\fingerprint.json"
+latest_finger = patch_folder + "/fingerprint.json"
 
 parent = os.path.dirname(current_path) # classic brawl parent dir
 
-shutil.copy(latest_finger, parent + "\\GameAssets") 
+shutil.copy(latest_finger, parent + "/GameAssets") 
 
 
 os.chdir(current_path + "/Patch/Patchs") # get back to the original folder/patch
