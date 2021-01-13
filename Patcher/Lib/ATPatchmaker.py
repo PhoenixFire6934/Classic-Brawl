@@ -2,9 +2,15 @@ import os
 import hashlib
 import json
 import datetime
-import sys
 import random
 import shutil
+from Utils.LZMA import compress
+
+def _(*args):
+	print('[INFO]', end=' ')
+	for arg in args:
+		print(arg, end=' ')
+	print()
 
 
 def Make():
@@ -27,7 +33,6 @@ def Make():
         return pbHash
 
     def MasterHasher():
-
         time = str(int(datetime.datetime.timestamp(datetime.datetime.now())))
         by = shash(time.encode()).encode()
         return by
@@ -39,16 +44,39 @@ def Make():
 
     out = json.loads(base)
 
+    _(f'MasterHash is {MH}\n')
+
     all_file = iterate_over("Gamefiles")
 
     for file in all_file:
-        file_cont = open(file, "rb").read()
+        _(f'Processing {file} ...')
+
+        if file.endswith('.csv'):
+            file_cont = compress(open(file, "rb").read())
+        else:
+            file_cont = open(file, "rb").read()
+
         sha = shash(file_cont)
         out["files"].append({"file": FP(file), "sha": sha})
+
 
     os.chdir("Patchs")
     shutil.copytree(backup + "/Gamefiles", os.getcwd() + f"/{MH}")
     os.chdir(MH)  # mode write doesnt create file unless this
+
+    all_file = iterate_over('./')
+
+    for file in all_file:
+        if file.endswith('.csv'):
+            file_cont = compress(open(file, "rb").read())
+
+            with open(file, "wb") as new_file:
+                new_file.write(file_cont)
+                new_file.close()
+        else:
+            _(f"Skipping compression for {file}")
+            pass
+
 
     json_out = open("fingerprint.json", "w")
     json_out.write(str(out).replace("'", '"').replace("\\\\", "\\"))  # WRITE fingerprint.json

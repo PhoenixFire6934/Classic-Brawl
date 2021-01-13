@@ -19,15 +19,13 @@ ip = "0.0.0.0"
 port = 8080
 
 
-# Execute GL - Patcher
-
 current_path = os.getcwd() # backing this up for later use
 
 os.chdir(current_path + "/Patch")
 
-print("Please wait until the patcher finishes running")
+print("Please wait until the patcher finishes running\n")
 pm.Make()
-print("Patching done!")
+print("\nPatching done!")
 
 os.chdir(current_path)
 
@@ -48,6 +46,6 @@ with socketserver.TCPServer((ip, port), handler) as httpserver:
     host_name = socket.gethostname() 
     host_ip = socket.gethostbyname(host_name)
     
-    print(f"Patching HTTP server started at URL \nhttp://{host_ip}:{port}/\n")
+    print(f"\nPatching HTTP server started at URL \nhttp://{host_ip}:{port}/\n")
     print("Do not close this window and restart your Classic Brawl server for changes to take effect")
     httpserver.serve_forever()
