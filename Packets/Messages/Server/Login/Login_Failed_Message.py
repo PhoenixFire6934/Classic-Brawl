@@ -26,26 +26,33 @@ class LoginFailedMessage(Writer):
         """
 
     def encode(self):
-        self.writeInt(self.player.err_code) # Error Code
-        self.writeString(self.fingerprint)  # Fingerprint JSON
+        self.writeInt(self.player.err_code)
+
+        self.writeString(self.fingerprint)
 
         self.writeString() # Server Host
 
-        self.writeString(self.player.patch_url)  # Patch URL
-        self.writeString(self.player.update_url) # Update URL
-        self.writeString(self.msg)               # Message
+        self.writeString(self.player.patch_url)
+        self.writeString(self.player.update_url)
+        self.writeString(self.msg)
 
-        self.writeInt(3600)     # Estimated Time
+        self.writeInt(self.player.maintenance_time)
         self.writeBoolean(False)
 
         self.writeString()
         self.writeString()
 
         self.writeInt(0)
-        self.writeInt(0)
-        self.writeInt(0)
+        self.writeInt(3)
 
+        self.writeString()
         self.writeString()
 
         self.writeInt(0)
+        self.writeInt(0)
+
         self.writeBoolean(False)
+        self.writeBoolean(False)
+
+
+
