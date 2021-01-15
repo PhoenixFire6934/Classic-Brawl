@@ -62,6 +62,7 @@ class Players:
 	gems = settings['Gems']
 	gold = settings['Gold']
 	tickets = settings['Tickets']
+	theme_id = 41000000 + settings['ThemeID']
 	tokens = 0
 
 	

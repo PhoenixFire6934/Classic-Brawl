@@ -1,5 +1,6 @@
 from Packets.Commands.Server.Buy_Brawl_Box_Callback import BuyBrawlBoxCallback
 from Packets.Messages.Server.Out_Of_Sync_Message import OutOfSyncMessage
+from Database.DataBase import DataBase
 from Logic.Shop import Shop
 
 from Utils.Reader import BSMessageReader
@@ -20,6 +21,18 @@ class BuyOffer(BSMessageReader):
 
     def process(self):
         id = Shop.offers[self.offer_index]['ID']
+        type = Shop.offers[self.offer_index]['ShopType']
+        cost = Shop.offers[self.offer_index]['Cost']
+
+        def res(type):
+            if type == 0 or type == 2:
+                newGems = self.player.gems - cost
+                self.player.gems = newGems
+                DataBase.replaceValue(self, 'gems', newGems)
+            elif type == 3:
+                newStarPoints = self.player.star_points - cost
+                self.player.star_points = newStarPoints
+                DataBase.replaceValue(self, 'starpoints', newStarPoints)
 
         if id in [0, 6, 10, 14]:
 
@@ -31,6 +44,8 @@ class BuyOffer(BSMessageReader):
 
             elif id == 10:
                 self.player.box_id = 3
+
+            res(type)
 
             BuyBrawlBoxCallback(self.client, self.player).send()
 

@@ -26,22 +26,21 @@ class Shop:
 
     offers = [
 
-        # Star Shop
         {
-            'ID': 14, # Big Box
+            'ID': 6,
             'OfferTitle': 'SPECIAL OFFER',
-            'Cost': 0,
+            'Cost': 20,
             'Multiplier': 1,
             'SkinID': 0,
-            'ShopType': 3,
+            'ShopType': 0,
             'ShopDisplay': 0,
             'Timer': 99999
         },
 
         {
-            'ID': 10, # Mega Box
+            'ID': 10,
             'OfferTitle': 'SPECIAL OFFER',
-            'Cost': 0,
+            'Cost': 1500,
             'Multiplier': 1,
             'SkinID': 0,
             'ShopType': 3,

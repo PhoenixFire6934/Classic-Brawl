@@ -28,7 +28,7 @@ class OwnHomeDataMessage(Writer):
 
         self.writeVint(500) # Starting Level (exp points)
 
-        self.writeScId(28, self.player.profile_icon) # Player Icon ID
+        self.writeScId(28, self.player.profile_icon)  # Player Icon ID
         self.writeScId(43, self.player.name_color)    # Player Name Color ID
 
         self.writeVint(0) # array
@@ -223,11 +223,9 @@ class OwnHomeDataMessage(Writer):
 
         self.writeVint(0) # array
 
-        self.writeVint(2) # Menu Theme
+        self.writeVint(1) # Menu Theme
         self.writeInt(1)
-        self.writeInt(41000011) # Theme ID
-        self.writeInt(30)
-        self.writeInt(1)
+        self.writeInt(self.player.theme_id)
 
         self.writeVint(0) # array
 
