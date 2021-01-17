@@ -16,6 +16,7 @@ from Packets.Messages.Client.Home.Get_Leaderboard_Message import GetLeaderboardM
 from Packets.Messages.Client.Home.Avatar_Name_Check_Request_Message import AvatarNameCheckRequestMessage
 from Packets.Messages.Client.Gameroom.Team_Use_Gadget_Message import TeamUseGadgetMessage
 from Packets.Messages.Client.Gameroom.Do_Not_Distrub_Message import DoNotDistrubMessage
+from Packets.Messages.Client.Home.Player_Status_Message import PlayerStatusMessage
 from Packets.CommandFactory import EndClientTurn
 
 packets = {
@@ -37,6 +38,7 @@ packets = {
     14354: TeamChangeMemberSettingsMessage,
     14372: TeamUseGadgetMessage,
     14600: AvatarNameCheckRequestMessage,
+    14366: PlayerStatusMessage,
     14777: DoNotDistrubMessage,
 
 }
