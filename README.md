@@ -34,16 +34,19 @@ Open source Brawl Stars server emulator for version 26 of the game!
 - On Windows:
     - Download Python 3.7 or newer version from official page.
     - Download the server and extract it.
+    - In a terminal type: pip install tinydb
     - Execute "main.py" file
 - On Linux:
     - Open Terminal and install Python by executing following command:
     ```sudo apt-get update && sudo apt-get install python3 python3-pip```
     - Download the server and extract it.
+    - In a terminal type: pip install tinydb
     - Execute "main.py" file
 - On Android:
     - Download and install PyDroid app from Google Play.
     - Open PyDroid and wait until Python installs.
     - Download the server and extract it.
+    - In PyDroid go in the section pip and type tinydb then click install
     - In PyDroid open and execute "main.py" file
 
 
