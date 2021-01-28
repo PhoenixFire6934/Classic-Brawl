@@ -1,4 +1,4 @@
-from Packets.Messages.Server.Gameroom.Do_Not_Distrub_Ok_Message import DoNotDistrubOkMessage
+from Packets.Messages.Server.Gameroom.DoNotDistrubOkMessage import DoNotDistrubOkMessage
 from Database.DataBase import DataBase
 
 from Utils.Reader import BSMessageReader
