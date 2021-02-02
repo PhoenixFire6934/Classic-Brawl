@@ -20,7 +20,7 @@ Open source Brawl Stars server emulator for version 26 of the game!
 - Club
   - Create club
   - Join your friends club
-  -   
+  - Search for other clubs
   - Chat
   - Bot commands
 
