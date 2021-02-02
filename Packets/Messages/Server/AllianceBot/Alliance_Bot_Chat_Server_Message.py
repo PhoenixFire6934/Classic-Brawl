@@ -1,7 +1,7 @@
 from Utils.Writer import Writer
 
 
-class AllianceBotStreamMessage(Writer):
+class AllianceBotChatServerMessage(Writer):
 
     def __init__(self, client, player, bot_msg_content):
         super().__init__(client)
@@ -12,7 +12,7 @@ class AllianceBotStreamMessage(Writer):
     def encode(self):
         self.writeVint(2)
         self.writeVint(0)
-        self.writeVint(self.player.message_tick)
+        self.writeVint(self.player.messageTick)
         self.writeVint(1)
         self.writeVint(1)
         self.writeString("Club Bot")

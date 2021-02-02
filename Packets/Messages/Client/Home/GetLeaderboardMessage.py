@@ -2,7 +2,7 @@ from Packets.Messages.Server.Leaderboard.TopGlobalPlayersDataMessage import GetL
 from Packets.Messages.Server.Leaderboard.TopLocalPlayersDataMessage import GetLeaderboardLocalOkMessage
 from Packets.Messages.Server.Leaderboard.TopGlobalClubsDataMessage import GetLeaderboardClubGlobalOkMessage
 from Packets.Messages.Server.Leaderboard.TopLocalClubsDataMessage import GetLeaderboardClubLocalOkMessage
-from Database.DataBase import DataBase
+from Database.DatabaseManager import DataBase
 
 from Utils.Reader import BSMessageReader
 

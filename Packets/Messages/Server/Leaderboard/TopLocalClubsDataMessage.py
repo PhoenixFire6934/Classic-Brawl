@@ -1,5 +1,5 @@
 from Utils.Writer import Writer
-from Database.DataBase import DataBase
+from Database.DatabaseManager import DataBase
 
 
 class GetLeaderboardClubLocalOkMessage(Writer):
@@ -16,20 +16,29 @@ class GetLeaderboardClubLocalOkMessage(Writer):
         self.writeVint(0)
         self.writeString("RO") # Player Region
 
-        self.writeVint(1) # Clubs Count
+        DataBase.CountClub(self, 1, 100, 2, 200)
 
-        self.writeVint(0) # Club High ID
-        self.writeVint(1) # Club Low ID
+        def by_trophy(club):
+            print(club)
+            return club['trophies']
 
-        self.writeVint(1)
-        self.writeVint(99999) # Club Trophies
-        self.writeVint(2)
+        self.writeVint(self.AllianceCount)
+        self.club_data.sort(key=by_trophy, reverse=True)
 
-        self.writeString("Classic Brawl") # Club Name
-        self.writeVint(1) # Club Members Count
+        for club in self.club_data:
+            DataBase.loadClub(self, club['clubID'])
+            self.writeVint(0)  # Club High ID
+            self.writeVint(club['clubID'])  # Club Low ID
 
-        self.writeVint(8) # Club Badge
-        self.writeVint(5) # Club Name Color
+            self.writeVint(1)
+            self.writeVint(self.clubtrophies)  # Club Trophies
+            self.writeVint(2)
+
+            self.writeString(self.clubName)  # Club Name
+            self.writeVint(self.clubmembercount)  # Club Members Count
+
+            self.writeVint(8)  # Club Badge
+            self.writeVint(self.clubbadgeID)  # Club Name Color
 
 
         self.writeVint(0)

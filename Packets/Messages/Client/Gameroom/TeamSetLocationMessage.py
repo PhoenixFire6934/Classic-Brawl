@@ -1,4 +1,5 @@
 from Packets.Messages.Server.Gameroom.TeamGameroomDataMessage import TeamGameroomDataMessage
+from Database.DatabaseManager import DataBase
 
 from Utils.Reader import BSMessageReader
 
@@ -12,6 +13,6 @@ class TeamSetLocationMessage(BSMessageReader):
         self.read_Vint()
         self.player.map_id = self.read_Vint()
 
-
     def process(self):
+        DataBase.replaceGameroomValue(self, 'mapID', self.player.map_id, "room")
         TeamGameroomDataMessage(self.client, self.player).send()

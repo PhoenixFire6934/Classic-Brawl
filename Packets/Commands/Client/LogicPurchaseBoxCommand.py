@@ -1,4 +1,4 @@
-from Database.DataBase import DataBase
+from Database.DatabaseManager import DataBase
 from Packets.Commands.Server.LogicBoxDataCommand import LogicBoxDataCommand
 
 from Utils.Reader import BSMessageReader

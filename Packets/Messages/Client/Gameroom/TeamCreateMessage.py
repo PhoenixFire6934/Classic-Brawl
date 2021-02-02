@@ -1,8 +1,8 @@
 from Packets.Messages.Server.Gameroom.TeamGameroomDataMessage import TeamGameroomDataMessage
+from Database.DatabaseManager import DataBase
+import random
 
 from Utils.Reader import BSMessageReader
-
-from Logic.EventSlots import EventSlots
 
 
 class TeamCreateMessage(BSMessageReader):
@@ -12,10 +12,11 @@ class TeamCreateMessage(BSMessageReader):
         self.client = client
 
     def decode(self):
-        self.read_Vint()
-        self.mapID = self.read_Vint()
-
+        self.player.map_id = 1
 
     def process(self):
-        self.player.map_id = EventSlots.maps[self.mapID - 1]['ID']
+        self.player.room_id = random.randint(0, 2147483647)
+        DataBase.replaceValue(self, 'roomID', self.player.room_id)
+
+        DataBase.createGameroomDB(self)
         TeamGameroomDataMessage(self.client, self.player).send()

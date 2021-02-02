@@ -1,4 +1,4 @@
-from Database.DataBase import DataBase
+from Database.DatabaseManager import DataBase
 
 from Utils.Reader import BSMessageReader
 from Files.CsvLogic.Cards import Cards

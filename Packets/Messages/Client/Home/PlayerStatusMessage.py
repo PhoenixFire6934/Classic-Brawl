@@ -14,7 +14,6 @@ class PlayerStatusMessage(BSMessageReader):
     def decode(self):
         self.status = self.read_Vint()
 
-
     def process(self):
         if self.status == 4 or self.status == 12:
             MatchMakingCancelledMessage(self.client, self.player).send()

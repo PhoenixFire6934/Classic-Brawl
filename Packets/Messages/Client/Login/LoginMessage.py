@@ -1,13 +1,15 @@
 from Packets.Messages.Server.Login.LoginOkMessage import LoginOkMessage
 from Packets.Messages.Server.Home.OwnHomeDataMessage import OwnHomeDataMessage
-from Packets.Messages.Server.Alliance.MyAllianceMessage import MyAllianceMessage
+from Packets.Messages.Server.Alliance.My_Alliance_Message import MyAllianceMessage
 from Packets.Messages.Server.Gameroom.DoNotDistrubOkMessage import DoNotDistrubOkMessage
 from Packets.Messages.Server.Gameroom.TeamGameroomDataMessage import TeamGameroomDataMessage
+from Packets.Messages.Server.Alliance.AllianceStreamMessage import AllianceStreamMessage
+from Packets.Messages.Server.Friend.FriendListMessage import FriendListMessage
 
 from Packets.Messages.Server.Login.LoginFailedMessage import LoginFailedMessage
 from Utils.Reader import BSMessageReader
 from Utils.Helpers import Helpers
-from Database.DataBase import DataBase
+from Database.DatabaseManager import DataBase
 
 class LoginMessage(BSMessageReader):
     def __init__(self, client, player, initial_bytes):
@@ -44,7 +46,14 @@ class LoginMessage(BSMessageReader):
             LoginOkMessage(self.client, self.player).send()
             DataBase.loadAccount(self) # load account
             OwnHomeDataMessage(self.client, self.player).send()
-            MyAllianceMessage(self.client, self.player).send()
+            try:
+                MyAllianceMessage(self.client, self.player, self.player.club_low_id).send()
+                AllianceStreamMessage(self.client, self.player, self.player.club_low_id, 0).send()
+                DataBase.GetmsgCount(self, self.player.club_low_id)
+            except:
+                MyAllianceMessage(self.client, self.player, 0).send()
+                AllianceStreamMessage(self.client, self.player, 0, 0).send()
+            FriendListMessage(self.client, self.player).send()
 
             if self.player.do_not_distrub == 1:
                 DoNotDistrubOkMessage(self.client, self.player).send()
@@ -58,5 +67,5 @@ class LoginMessage(BSMessageReader):
 
             LoginOkMessage(self.client, self.player).send()
             OwnHomeDataMessage(self.client, self.player).send()
-            MyAllianceMessage(self.client, self.player).send()
+            MyAllianceMessage(self.client, self.player, self.player.club_low_id).send()
             

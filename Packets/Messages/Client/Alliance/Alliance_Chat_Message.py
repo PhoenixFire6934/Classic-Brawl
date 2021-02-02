@@ -1,18 +1,18 @@
-from Packets.Messages.Server.Alliance.AllianceStreamMessage import AllianceStreamMessage
-from Packets.Messages.Server.AllianceBot.AllianceBotStreamMessage import AllianceBotStreamMessage
+from Packets.Messages.Server.Alliance.Alliance_Chat_Server_Message import AllianceChatServerMessage
+from Packets.Messages.Server.AllianceBot.Alliance_Bot_Chat_Server_Message import AllianceBotChatServerMessage
 from Packets.Messages.Server.OutOfSyncMessage import OutOfSyncMessage
-from Database.DataBase import DataBase
 
+from Database.DatabaseManager import DataBase
 from Utils.Reader import BSMessageReader
 
-
-class ChatToAllianceStreamMessage(BSMessageReader):
+class AllianceChatMessage(BSMessageReader):
     def __init__(self, client, player, initial_bytes):
         super().__init__(initial_bytes)
         self.player = player
         self.client = client
         self.bot_msg = ''
         self.send_ofs = False
+        self.IsAcmd = False
 
     def decode(self):
         self.msg = self.read_string()
@@ -61,16 +61,16 @@ class ChatToAllianceStreamMessage(BSMessageReader):
         elif self.msg.lower() == '/help':
             self.bot_msg = 'Club Commands\n/stats - show server status\n/reset - reset all resources\n/gems [int] - add gems to your account, where int is the number of gems\n/gold [int] - add gold to your account, where int is the number of gold\n/tickets [int] - add tickets to your account, where int is the number of tickets\n/starpoints [int] - add starpoints to your account, where int is the number of starpoints'
 
-
-
-
     def process(self):
-        AllianceStreamMessage(self.client, self.player, self.msg).send()
-        self.player.message_tick += 1
+        
+        if self.send_ofs == False:
+            DataBase.Addmsg(self, self.player.club_low_id, 2, 0, self.player.low_id, self.player.name, self.player.club_role, self.msg)
+            DataBase.loadClub(self, self.player.club_low_id)
+            for i in self.plrids:
+                AllianceChatServerMessage(self.client, self.player, self.msg).sendWithLowID(i)
 
         if self.bot_msg != '':
-            AllianceBotStreamMessage(self.client, self.player, self.bot_msg).send()
-            self.player.message_tick += 1
+            AllianceBotChatServerMessage(self.client, self.player, self.bot_msg).send()
 
         if self.send_ofs:
             OutOfSyncMessage(self.client, self.player, 'Changes have been applied').send()

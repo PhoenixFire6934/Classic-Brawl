@@ -1,108 +1,111 @@
+from os import truncate
 from Utils.Writer import Writer
+from Database.DatabaseManager import DataBase
 
 
 class PlayerProfileMessage(Writer):
 
-    def __init__(self, client, player):
+    def __init__(self, client, player, high_id, low_id, players):
         super().__init__(client)
         self.id = 24113
         self.player = player
+        self.high_id = high_id
+        self.low_id = low_id
+        self.players = players
 
     def encode(self):
-        self.writeVint(0)  # High Id
-        self.writeVint(1)  # Low Id
+        for player in self.players:
+            if self.low_id == player["lowID"]:
+                self.UnlockedBrawlersList = []
+                for brawler_id in player["UnlockedBrawlers"]:
+                    if player["UnlockedBrawlers"][str(brawler_id)] == 1:
+                        self.UnlockedBrawlersList.append(int(brawler_id))
 
-        self.writeBoolean(False)
+                self.writeVint(self.high_id)  # High Id
+                self.writeVint(self.low_id)  # Low Id
+                self.writeVint(0)  # Unknown
 
-        self.writeVint(len(self.player.brawlers_id))  # Unlocked Brawlers Array
+                self.writeVint(len(self.UnlockedBrawlersList))  # Brawlers array
 
-        for brawler_id in self.player.brawlers_id:
-            self.writeScId(16, brawler_id)
-            self.writeVint(0)
-            self.writeVint(99999) # Brawler Trophies
-            self.writeVint(99999) # Brawler Highest Trophies
-            self.writeVint(10)    # Power Level
+                for brawler_id in self.UnlockedBrawlersList:
+                    self.writeScId(16, int(brawler_id))
+                    self.writeVint(0)
+                    self.writeVint(player["brawlersTrophiesForRank"][str(brawler_id)])  # Trophies for rank
+                    self.writeVint(player["brawlersTrophies"][str(brawler_id)])  # Trophies
+                    self.writeVint(player["brawlerPowerLevel"][str(brawler_id)])  # power lvl
 
-        self.writeVint(15) # Count
+                self.writeVint(15)
 
-        self.writeVint(1)
-        self.writeVint(99999)  # 3v3 Victories
+                self.writeVint(1)
+                self.writeVint(player["3vs3Wins"])  # 3v3 victories
 
-        self.writeVint(2)
-        self.writeVint(1262469) # Experience
+                self.writeVint(2)
+                self.writeVint(player["playerExp"])  # Player experience
 
-        self.writeVint(3)
-        self.writeVint(self.player.trophies)  # Trophies
+                self.writeVint(3)
+                self.writeVint(player["trophies"])  # Trophies
 
-        self.writeVint(4)
-        self.writeVint(self.player.trophies)  # Highest Trophies
+                self.writeVint(4)
+                self.writeVint(player["highesttrophies"])  # Highest trophies
 
-        self.writeVint(5)
-        self.writeVint(len(self.player.brawlers_id)) # Brawlers Count
+                self.writeVint(5)
+                self.writeVint(len(self.UnlockedBrawlersList))  # Brawlers list
 
-        self.writeVint(6)
-        self.writeVint(0)
+                self.writeVint(7)
+                self.writeVint(28000000 + player["profileIcon"])  # Profile icon??
 
-        self.writeVint(7)
-        self.writeVint(99999)
+                self.writeVint(8)
+                self.writeVint(player["soloWins"])  # Solo victories
 
-        self.writeVint(8)
-        self.writeVint(99999)  # Solo Victories
+                self.writeVint(9)
+                self.writeVint(794)  # Best robo rumble time
 
-        self.writeVint(9)
-        self.writeVint(99999)  # Best Robo Rumble Time
+                self.writeVint(10)
+                self.writeVint(794)  # Best time as big brawler
 
-        self.writeVint(10)
-        self.writeVint(99999)  # Best Time as Big Brawler
+                self.writeVint(11)
+                self.writeVint(player["duoWins"])  # Duo victories
 
-        self.writeVint(11)
-        self.writeVint(99999)  # Duo Victories
+                self.writeVint(12)
+                self.writeVint(20)  # Highest boss fight lvl passed
 
-        self.writeVint(12)
-        self.writeVint(10)     # Highest Boss Fight Lvl Passed
+                self.writeVint(13)
+                self.writeVint(1246)  # Highest power player points
 
-        self.writeVint(13)
-        self.writeVint(99999)
+                self.writeVint(14)
+                self.writeVint(1)  # Highest power play rank
 
-        self.writeVint(14)
-        self.writeVint(1)      # Highest Power Play Rank
+                self.writeVint(15)
+                self.writeVint(15)  # most challenge wins
 
-        self.writeVint(15)
-        self.writeVint(99999)  # Most Challenge Wins
+                self.writeVint(16)
+                self.writeVint(20)
 
+                self.writeString(player["name"])
+                self.writeVint(100)
+                self.writeVint(28000000 + player["profileIcon"])  # Profile icon
+                self.writeVint(43000000 + player["namecolor"])  # Name color
 
-        self.writeString(self.player.name) # Player Name
+                if player["clubID"] != 0:
+                    DataBase.loadClub(self, player["clubID"])
 
-        self.writeVint(100)
-        self.writeVint(28000000)
-        self.writeVint(43000000)
+                    self.writeBoolean(True)  # Is in club
 
-        in_club = True
-
-        if in_club:
-
-            self.writeBoolean(True) # Player in Club
-
-            self.writeInt(0) # Club High Id
-            self.writeInt(1) # Club Low Id
-
-            self.writeString("Classic Brawl") # Club Name
-
-            self.writeVint(8)
-            self.writeVint(5) # Badge ID
-
-            self.writeVint(3)  # Club Type
-            self.writeVint(2)  # Club Members Count
-
-            self.writeVint(99999) # Club total trophies
-            self.writeVint(99999) # Club required trophies
-            self.writeVint(0)
-
-            self.writeVint(0)
-            self.writeVint(0)
-
-        else:
-            self.writeVint(0)
-            self.writeVint(0)
-
-
+                    self.writeInt(0)
+                    self.writeInt(player["clubID"])
+                    self.writeString(self.clubName)  # club name
+                    self.writeVint(8)
+                    self.writeVint(self.clubbadgeID)  # Club badgeID
+                    self.writeVint(self.clubtype)  # club type | 1 = Open, 2 = invite only, 3 = closed
+                    self.writeVint(self.clubmembercount)  # Current members count
+                    self.writeVint(self.clubtrophies)
+                    self.writeVint(self.clubtrophiesneeded)  # Trophy required
+                    self.writeVint(0)  # (Unknown)
+                    self.writeString(self.clubregion)  # region
+                    self.writeVint(0)  # (Unknown)
+                    self.writeVint(0)  # (Unknown)
+                    self.writeVint(25)
+                    self.writeVint(player["clubRole"])
+                else:
+                    self.writeVint(0)
+                    self.writeVint(0)

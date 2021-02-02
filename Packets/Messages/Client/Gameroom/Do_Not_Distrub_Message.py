@@ -1,5 +1,5 @@
 from Packets.Messages.Server.Gameroom.DoNotDistrubOkMessage import DoNotDistrubOkMessage
-from Database.DataBase import DataBase
+from Database.DatabaseManager import DataBase
 
 from Utils.Reader import BSMessageReader
 
