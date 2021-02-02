@@ -11,12 +11,16 @@ Open source Brawl Stars server emulator for version 26 of the game!
   - Trophies in offline battles
 - Home
   - Unlimited resources
+  - Brawlers from boxes  
   - All brawlers and skins 
   - Gadgets and Star Powers
 - Shop
   - Boxes
   - Gold and other resources 
 - Club
+  - Create club
+  - Join your friends club
+  -   
   - Chat
   - Bot commands
 

@@ -1,5 +1,4 @@
 from Packets.Messages.Client.Login.ClientHelloMessage import ClientHelloMessage
-from Packets.Messages.Client.Unknown import Unknown1
 from Packets.Messages.Client.Login.LoginMessage import LoginMessage
 from Packets.Messages.Client.KeepAliveMessage import KeepAliveMessage
 from Packets.Messages.Client.Gameroom.TeamCreateMessage import TeamCreateMessage
@@ -16,7 +15,6 @@ from Packets.Messages.Client.Home.AvatarNameCheckRequestMessage import AvatarNam
 from Packets.Messages.Client.Gameroom.TeamUseGadgetMessage import TeamUseGadgetMessage
 from Packets.Messages.Client.Gameroom.Do_Not_Distrub_Message import DoNotDistrubMessage
 from Packets.Messages.Client.Gameroom.TeamSetRankedLocationMessage import TeamSetRankedLocationMessage
-from Packets.Messages.Client.Home.PlayerStatusMessage import PlayerStatusMessage
 from Packets.Messages.Client.Home.PlayerStatusMessage import PlayerStatusMessage
 from Packets.Messages.Client.ClientCapabilities import ClientCapabilities
 from Packets.LogicCommandManager import EndClientTurn
@@ -46,7 +44,6 @@ from Packets.Messages.Client.Friend.FacebookConnect import FacebookConnect
 from Packets.Messages.Client.Friend.UnlinkFacebookAcount import UnlinkFacebookAcount
 
 packets = {
-    0: Unknown1,
     10100: ClientHelloMessage,
     10101: LoginMessage,
     10107: ClientCapabilities,
@@ -64,7 +61,6 @@ packets = {
     14113: AskProfileMessage,
     14201: FacebookConnect,
     14211: UnlinkFacebookAcount,
-    14277: Unknown1,
 
     # Alliance
     14301: Create_Message,
@@ -95,7 +91,6 @@ packets = {
     14372: TeamUseGadgetMessage,
 
     14403: GetLeaderboardMessage,
-    14479: Unknown1,
     14600: AvatarNameCheckRequestMessage,
     14777: DoNotDistrubMessage
 }

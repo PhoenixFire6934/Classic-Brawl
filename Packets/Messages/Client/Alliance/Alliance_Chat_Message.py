@@ -19,18 +19,21 @@ class AllianceChatMessage(BSMessageReader):
 
         if self.msg.lower() == '/stats':
             self.bot_msg = f'Server status:\nBuild version: 1.1 (for v26.165)\nFingerprint SHA: {self.player.patch_sha}'
+            self.IsAcmd = True
 
         elif self.msg.lower() == '/reset':
             self.send_ofs = True
             DataBase.replaceValue(self, 'gold', 99999)
             DataBase.replaceValue(self, 'gems', 99999)
             DataBase.replaceValue(self, 'tickets', 99999)
+            self.IsAcmd = True
 
         elif self.msg.lower().startswith('/gems'):
             try:
                 newGems = self.msg.split(" ", 4)[1:]
                 DataBase.replaceValue(self, 'gems', int(newGems[0]))
                 self.send_ofs = True
+                self.IsAcmd = True
             except:
                 pass
 
@@ -39,6 +42,7 @@ class AllianceChatMessage(BSMessageReader):
                 newGold = self.msg.split(" ", 4)[1:]
                 DataBase.replaceValue(self, 'gold', int(newGold[0]))
                 self.send_ofs = True
+                self.IsAcmd = True
             except:
                 pass
 
@@ -47,6 +51,7 @@ class AllianceChatMessage(BSMessageReader):
                 newTickets = self.msg.split(" ", 7)[1:]
                 DataBase.replaceValue(self, 'tickets', int(newTickets[0]))
                 self.send_ofs = True
+                self.IsAcmd = True
             except:
                 pass
 
@@ -55,17 +60,20 @@ class AllianceChatMessage(BSMessageReader):
                 newStarpoints = self.msg.split(" ", 10)[1:]
                 DataBase.replaceValue(self, 'starpoints', int(newStarpoints[0]))
                 self.send_ofs = True
+                self.IsAcmd = True
             except:
                 pass
 
         elif self.msg.lower() == '/help':
             self.bot_msg = 'Club Commands\n/stats - show server status\n/reset - reset all resources\n/gems [int] - add gems to your account, where int is the number of gems\n/gold [int] - add gold to your account, where int is the number of gold\n/tickets [int] - add tickets to your account, where int is the number of tickets\n/starpoints [int] - add starpoints to your account, where int is the number of starpoints'
+            self.IsAcmd = True
 
     def process(self):
         
-        if self.send_ofs == False:
+        if self.send_ofs == False and self.IsAcmd == False:
             DataBase.Addmsg(self, self.player.club_low_id, 2, 0, self.player.low_id, self.player.name, self.player.club_role, self.msg)
             DataBase.loadClub(self, self.player.club_low_id)
+            print(self.plrids)
             for i in self.plrids:
                 AllianceChatServerMessage(self.client, self.player, self.msg).sendWithLowID(i)
 

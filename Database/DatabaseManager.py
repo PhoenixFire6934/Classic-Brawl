@@ -395,6 +395,6 @@ class DataBase:
             if index ==  data['info']['Total']:
                 data['info'][str(i + 1)] = {"Event": event, "Tick":  data['info'][str(i)]['Tick'] + 1, "PlayerID": Low_id, "PlayerName": name, "PlayerRole": role, "Message": msg}
                 data['info']['Total'] = i + 1
-                self.player.message_tick = data['info'][str(i + 1)]['Tick']
+                self.player.message_tick = data['info'][str(i + 1)]['Tick'] + 1
                 db.update(data, query.clubID == self.player.club_low_id)
                 break
