@@ -62,12 +62,17 @@ class Players:
 	gems = settings['Gems']
 	gold = settings['Gold']
 	tickets = settings['Tickets']
+	exp_points = settings['ExperiencePoints']
+	theme_id = 41000000 + settings['ThemeID']
+	content_creator = settings['SupportedContentCreator']
+	tokens = 0
 
 	
 	# Server config
 	update_url = settings['UpdateUrl']
 	patch_url = settings['PatchUrl']
 	patch_sha = Fingerprint.loadFinger("GameAssets/fingerprint.json")
+	maintenance_time = 0
 
 	err_code = 7
 	maintenance = False
@@ -79,10 +84,10 @@ class Players:
 		error_code = 7
 		patch = True
 
-
 	if settings['Maintenance']:
 		err_code = 10
 		maintenance = True
+		maintenance_time = settings['MaintenanceTime']
 	
 	
 	# Chat data
