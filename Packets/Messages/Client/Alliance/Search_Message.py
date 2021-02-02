@@ -19,4 +19,9 @@ class Search_Message(BSMessageReader):
         self.RequestedName = self.read_string()
 
     def process(self):
-        AllianceSearchResultMessage(self.client, self.player, self.RequestedName).send()
+        DataBase.CountClub(self, 1, 100, 2, 30)
+        self.AllianceCount = 0
+        for i in self.club_list:
+            if self.RequestedName.lower() in self.club_data[self.club_list.index(i)]['name'].lower():
+                self.AllianceCount += 1
+        AllianceSearchResultMessage(self.client, self.player, self.RequestedName, self.AllianceCount).send()

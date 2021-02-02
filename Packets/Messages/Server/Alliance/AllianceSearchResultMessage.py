@@ -5,16 +5,17 @@ import json
 
 class AllianceSearchResultMessage(Writer):
 
-    def __init__(self, client, player, requestedName):
+    def __init__(self, client, player, requestedName, count):
         super().__init__(client)
         self.id = 24310
         self.player = player
         self.requestedName = str(requestedName)
+        self.count = count
 
     def encode(self):
         DataBase.CountClub(self, 1, 100, 2, 30)
         self.writeString(self.requestedName)
-        self.writeVint(self.AllianceCount)
+        self.writeVint(self.count)
 
         for i in self.club_list:
             if self.requestedName.lower() in self.club_data[self.club_list.index(i)]['name'].lower():
