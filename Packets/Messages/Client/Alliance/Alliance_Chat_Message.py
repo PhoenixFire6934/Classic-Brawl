@@ -68,11 +68,7 @@ class AllianceChatMessage(BSMessageReader):
             self.bot_msg = 'Club Commands\n/stats - show server status\n/reset - reset all resources\n/gems [int] - add gems to your account, where int is the number of gems\n/gold [int] - add gold to your account, where int is the number of gold\n/tickets [int] - add tickets to your account, where int is the number of tickets\n/starpoints [int] - add starpoints to your account, where int is the number of starpoints'
             self.IsAcmd = True
 
-        else:
-            self.IsAcmd = False
-
     def process(self):
-        
         if self.send_ofs == False and self.IsAcmd == False:
             DataBase.Addmsg(self, self.player.club_low_id, 2, 0, self.player.low_id, self.player.name, self.player.club_role, self.msg)
             DataBase.loadClub(self, self.player.club_low_id)
