@@ -163,7 +163,7 @@ class OwnHomeDataMessage(Writer):
 
         for map in EventSlots.maps:
 
-            self.writeVint(8)
+            self.writeVint(EventSlots.maps.index(map) + 1)
             self.writeVint(EventSlots.maps.index(map) + 1)
             self.writeVint(map['Ended'])  # IsActive | 0 = Active, 1 = Disabled
             self.writeVint(EventSlots.Timer)  # Timer
@@ -354,11 +354,7 @@ class OwnHomeDataMessage(Writer):
                 self.writeVint(0)
 
         # "new" Brawler Tag array
-        self.writeVint(len(self.player.brawlers_id))  # brawlers count
-
-        for brawler_id in self.player.brawlers_id:
-            self.writeScId(16, brawler_id)
-            self.writeVint(2)
+        self.writeVint(0)  # brawlers count
 
         self.writeVint(self.player.gems)  # Player Gems
         self.writeVint(self.player.gems)

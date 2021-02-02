@@ -1,6 +1,3 @@
-from Packets.Commands.Client.Unknown import Unknown
-
-
 from Utils.Reader import BSMessageReader
 from Packets.Commands.Client.LogicUpgradeBrawler import Upgrade_Brawler
 from Packets.Commands.Client.LogicSetPlayerThumbnailCommand import LogicSetPlayerThumbnailCommand
@@ -66,6 +63,4 @@ class EndClientTurn(BSMessageReader):
             LogicSetPlayerStarpowerCommand.process(self)
 
         elif self.commandID >= 0:
-            Unknown.decode(self)
-            Unknown.process(self)
             print(self.commandID, "Is not handled!")

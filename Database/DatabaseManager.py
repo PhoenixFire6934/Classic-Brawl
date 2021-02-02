@@ -392,9 +392,8 @@ class DataBase:
         index = 0
         for i in range(1, data['info']['Total'] + 1):
             index += 1
-            if index ==  data['info']['Total']:
+            if index == data['info']['Total']:
                 data['info'][str(i + 1)] = {"Event": event, "Tick":  data['info'][str(i)]['Tick'] + 1, "PlayerID": Low_id, "PlayerName": name, "PlayerRole": role, "Message": msg}
                 data['info']['Total'] = i + 1
-                self.player.message_tick = data['info'][str(i + 1)]['Tick'] + 1
+                self.player.message_tick = data['info'][str(i + 1)]['Tick']
                 db.update(data, query.clubID == self.player.club_low_id)
-                break
