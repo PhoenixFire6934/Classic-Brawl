@@ -12,16 +12,16 @@ Open source Brawl Stars server emulator for version 26 of the game!
 - Home
   - Unlimited resources
   - Brawlers from boxes  
-  - All brawlers and skins 
+  - All skins unlocked
   - Gadgets and Star Powers
 - Shop
   - Boxes
   - Gold and other resources 
 - Club
-  - Create club
-  - Join your friends club
-  - Search for other clubs
+  - Join
+  - Leave
   - Chat
+  - Update settings
   - Bot commands
 
 ...and much more!
@@ -38,19 +38,19 @@ Open source Brawl Stars server emulator for version 26 of the game!
 - On Windows:
     - Download Python 3.7 or newer version from official page.
     - Download the server and extract it.
-    - In a terminal type: pip install tinydb
+    - In a terminal type: ```pip install tinydb```
     - Execute "main.py" file
 - On Linux:
     - Open Terminal and install Python by executing following command:
     ```sudo apt-get update && sudo apt-get install python3 python3-pip```
     - Download the server and extract it.
-    - In a terminal type: pip install tinydb
+    - In a terminal type: ```pip install tinydb```
     - Execute "main.py" file
 - On Android:
     - Download and install PyDroid app from Google Play.
     - Open PyDroid and wait until Python installs.
     - Download the server and extract it.
-    - In PyDroid go in the section pip and type tinydb then click install
+    - In PyDroid go in the "pip" section, type ```tinydb```, then click install.
     - In PyDroid open and execute "main.py" file
 
 
@@ -70,17 +70,21 @@ To connect to your server, you need a custom client. Here the only solution is t
 
 ## Authors
 
-👤 **Phoenix**
+👤 **PhoenixFire** (main developer)
 
 * Github: [@PhoenixFire6879](https://github.com/PhoenixFire6879)
 * Discord: PhoenixFire#6879
 
+👤 **Crazor**
 
-👤 **Vitalik**
-* Github: [@VitalikObject](https://github.com/VitalikObject)
-* Discord: Mr Vitalik#1685
+* Github: [@CrazorCLB](https://github.com/CrazorCLB)
+* Discord: Crazor#7395
 
-Also thanks to [Rostik](https://github.com/RostikDevv) and [Vorono4ka](https://github.com/Vorono4ka) for their [scdocs](https://github.com/RostikDevv/scdocs)
+Special thanks to:
+- [VitalikObject](https://github.com/VitalikObject)
+- [Rostik](https://github.com/RostikDevv) and [Vorono4ka](https://github.com/Vorono4ka) for their [scdocs](https://github.com/RostikDevv/scdocs)
+
+
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/PhoenixFire6879/Classic-Brawl/issues).
