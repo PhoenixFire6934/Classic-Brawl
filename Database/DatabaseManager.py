@@ -33,7 +33,6 @@ class DataBase:
             self.player.big_boxes = user_data[0]["info"]["bigBoxes"]
             self.player.brawlers_skins = user_data[0]["info"]["brawlersSkins"]
             self.player.name_color = user_data[0]["info"]["namecolor"]
-            self.player.gadget = user_data[0]["info"]["gadget"]
             self.player.starpower = user_data[0]["info"]["starpower"]
             self.player.DoNotDistrubMessage = user_data[0]["info"]["DoNotDistrub"]
             self.player.room_id = user_data[0]["info"]["roomID"]
@@ -91,7 +90,6 @@ class DataBase:
                     "namecolor": self.player.name_color,
                     "brawlBoxes": self.player.brawl_boxes,
                     "bigBoxes": self.player.big_boxes,
-                    "gadget": 255,
                     "starpower": 76,
                     "DoNotDistrub": 0,
                     "roomID": 0,
@@ -152,7 +150,6 @@ class DataBase:
                     "Ready": self.player.isReady,
                     "brawlerID": self.player.brawler_id,
                     "starpower": self.player.starpower,
-                    "gadget": self.player.gadget,
                     "profileIcon": self.player.profile_icon,
                     "namecolor": self.player.name_color
                 }
@@ -182,7 +179,6 @@ class DataBase:
                     self.playersdata[Players]["namecolor"] = info["namecolor"]
                     self.playersdata[Players]["brawlerID"] = info["brawlerID"]
                     self.playersdata[Players]["starpower"] = info["starpower"]
-                    self.playersdata[Players]["gadget"] = info["gadget"]
         else:
             playerdb = TinyDB('Database/Player/data.db')
             query = Query()
@@ -224,7 +220,6 @@ class DataBase:
         gameroom_data["info"][str(low_id)]["Ready"] = self.player.isReady
         gameroom_data["info"][str(low_id)]["brawlerID"] = self.player.brawler_id
         gameroom_data["info"][str(low_id)]["starpower"] = self.player.starpower
-        gameroom_data["info"][str(low_id)]["gadget"] = self.player.gadget
         gameroom_data["info"][str(low_id)]["profileIcon"] = self.player.profile_icon
         gameroom_data["info"][str(low_id)]["namecolor"] = self.player.name_color
 
