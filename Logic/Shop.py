@@ -74,6 +74,29 @@ class Shop:
         },
 
     ]
+    
+    tickets = [
+        {
+            'Cost': 20,
+            'Amount': 150
+        },
+
+        {
+            'Cost': 50,
+            'Amount': 400
+        },
+
+        {
+            'Cost': 140,
+            'Amount': 1200
+        },
+
+        {
+            'Cost': 280,
+            'Amount': 2600
+        },
+
+    ]
 
     boxes = [
         {
