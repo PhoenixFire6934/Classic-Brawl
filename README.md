@@ -3,7 +3,7 @@
 Open source Brawl Stars server emulator for version 22 of the game!
 
 
-![ScreenShot](https://cdn.discordapp.com/attachments/704364452891590778/789482341209866280/Screenshot_20201218-151815_Brawl_Client.jpg) 
+![ScreenShot](https://media.discordapp.net/attachments/711412740199022603/810659435285315625/Screenshot_20210214-185101_Brawl_Stars.png?width=1167&height=656) 
 
 
 ## What's working ?
@@ -55,7 +55,7 @@ Open source Brawl Stars server emulator for version 22 of the game!
 
 
 ## Configure client
-To connect to your server, you need a custom client. Here the only solution is to use a [pre-made client](https://mega.nz/file/vSIDFKaT#pDdGFkevXwp_3LP1wW1wtj23Gj2aADZwzfXAAI8JEs8). Just replace the IP in the frida-gadget config with yours (```/lib/armeabi-v7a/libgg.config.so```) ```{"interaction":{"interaction":{"type":"script","path":"libscript.so","on_change":"reload","parameters":{"redirectHost":"YOUR_IP","relocate":true}}}```
+To connect to your server, you need a custom client. Here the only solution is to use a [pre-made client](https://mega.nz/file/vSIDFKaT#pDdGFkevXwp_3LP1wW1wtj23Gj2aADZwzfXAAI8JEs8). Just replace the IP in the frida-gadget config with yours (```/lib/armeabi-v7a/libgg.config.so```) ```{"interaction":{"interaction":{"type":"script","path":"libscript.so","on_change":"reload","parameters":{"redirectHost":"YOUR_IP"}}}```
 
 
 
