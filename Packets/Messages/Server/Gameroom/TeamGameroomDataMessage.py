@@ -55,7 +55,6 @@ class TeamGameroomDataMessage(Writer):
                 self.writeVint(43000000 + self.playersdata[player]["namecolor"])    # Player name color
 
                 self.writeScId(23, self.playersdata[player]["starpower"])       # Starpower
-                self.writeScId(23, self.playersdata[player]["gadget"])          # Gadget                                        # Gadget
 
             self.writeVint(0)
             self.writeVint(0)

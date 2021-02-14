@@ -37,7 +37,7 @@ class LoginFailedMessage(Writer):
         self.writeString(self.msg)
 
         self.writeInt(self.player.maintenance_time)
-        self.writeBoolean(False)
+        self.writeBoolean(False) # Show support page
 
         self.writeString()
         self.writeString()

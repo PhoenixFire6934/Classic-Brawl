@@ -71,7 +71,7 @@ class Shop:
         {
             'Cost': 280,
             'Amount': 2600
-        },
+        }
 
     ]
     
@@ -94,7 +94,7 @@ class Shop:
         {
             'Cost': 280,
             'Amount': 2600
-        },
+        }
 
     ]
 
@@ -121,3 +121,32 @@ class Shop:
     }
 
 
+    def EncodeShopOffers(self):
+        count = len(Shop.offers)
+        self.writeVint(count)
+        for i in range(count):
+            item = Shop.offers[i]
+
+            self.writeVint(1)
+
+            self.writeVint(item['ID']) # ItemID
+            self.writeVint(item['Multiplier']) # Ammount
+            self.writeScId(0, item['SkinID'])
+            self.writeVint(item['ShopType'])  # [0 = Offer, 2 = Skins 3 = Star Shop]
+
+            self.writeVint(item['Cost'])  # Cost
+            self.writeVint(item['Timer']) # Timer
+
+            self.writeVint(1)
+            self.writeVint(100)
+            self.writeBoolean(False)  # is Offer Purchased
+
+            self.writeBoolean(False)
+            self.writeVint(item['ShopDisplay'])  # [0 = Normal, 1 = Daily Deals]
+            self.writeBoolean(False)
+            self.writeVint(0)
+
+            self.writeInt(0)
+            self.write_string_reference(item['OfferTitle']) # Offers name
+
+            self.writeBoolean(False)

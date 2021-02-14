@@ -40,7 +40,7 @@ class MyAllianceMessage(Writer):
             self.writeString(self.clubregion)           # Region
             
             self.writeVint(0)
-            self.writeVint(self.clubfriendlyfamily)     # Family friendly status | 0 = Can be activated, 1 = Activated  
+            #self.writeVint(self.clubfriendlyfamily)     # Family friendly status | 0 = Can be activated, 1 = Activated
 
         else:
             self.writeVint(0)
