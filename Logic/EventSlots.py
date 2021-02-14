@@ -9,21 +9,24 @@ class EventSlots:
             'ID': 7,
             'Status': 3,
             'Ended': False,
-            'Modifier': 0
+            'Modifier': 0,
+            'CollectReward': 10
         },
 
         {
             'ID': 32,
             'Status': 3,
             'Ended': False,
-            'Modifier': 0
+            'Modifier': 0,
+            'CollectReward': 10
         },
 
         {
             'ID': 17,
             'Status': 3,
             'Ended': False,
-            'Modifier': 0
+            'Modifier': 0,
+            'CollectReward': 10
         },
 
         {
@@ -31,41 +34,47 @@ class EventSlots:
             'Status': 3,
             'Ended': False,
             'Modifier': 0
+            'CollectReward': 10
         },
 
         {
             'ID': 38,
             'Status': 3,
             'Ended': False,
-            'Modifier': 0
+            'Modifier': 0,
+            'CollectReward': 10
         },
 
         {
             'ID': 24,
             'Status': 3,
             'Ended': False,
-            'Modifier': 0
+            'Modifier': 0,
+            'CollectReward': 10
         },
 
         {
             'ID': 202,
             'Status': 3,
             'Ended': False,
-            'Modifier': 0
+            'Modifier': 0,
+            'CollectReward': 10
         },
 
         {
             'ID': 97,
             'Status': 3,
             'Ended': False,
-            'Modifier': 0
+            'Modifier': 0,
+            'CollectReward': 10
         },
 
         {
             'ID': 167,
             'Status': 100,
             'Ended': True,
-            'Modifier': 0
+            'Modifier': 0,
+            'CollectReward': 10
         }
 
 
