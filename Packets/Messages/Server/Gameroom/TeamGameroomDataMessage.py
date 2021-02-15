@@ -15,12 +15,8 @@ class TeamGameroomDataMessage(Writer):
             self.writeVint(1)
             self.writeVint(0)
             self.writeVint(1)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
-            self.writeVint(0)
 
-
+            self.writeInt(0)
             self.writeInt(self.player.room_id)
 
             self.writeVint(1557129593)
@@ -47,7 +43,6 @@ class TeamGameroomDataMessage(Writer):
                 self.writeVint(self.playersdata[player]["Ready"])    # Is ready
                 self.writeVint(self.playersdata[player]["Team"])     # Team | 0: Blue, 1: Red
                 self.writeVint(0)
-                self.writeVint(2)
 
                 self.writeString(self.playersdata[player]["name"])                  # Player name
                 self.writeVint(100)
@@ -55,7 +50,6 @@ class TeamGameroomDataMessage(Writer):
                 self.writeVint(43000000 + self.playersdata[player]["namecolor"])    # Player name color
 
                 self.writeScId(23, self.playersdata[player]["starpower"])       # Starpower
-                self.writeScId(23, self.playersdata[player]["gadget"])          # Gadget                                        # Gadget
 
             self.writeVint(0)
             self.writeVint(0)
