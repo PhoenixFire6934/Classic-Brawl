@@ -3,7 +3,7 @@
 Open source Brawl Stars server emulator for version 19 of the game!
 
 
-![ScreenShot](https://cdn.discordapp.com/attachments/704364452891590778/789482341209866280/Screenshot_20201218-151815_Brawl_Client.jpg) 
+![ScreenShot](https://media.discordapp.net/attachments/711412740199022603/810888977942577222/unknown.png) 
 
 
 ## What's working ?
