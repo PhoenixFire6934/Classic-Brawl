@@ -52,14 +52,9 @@ class Players:
 		index = 0
 		for brawlers_name in BrawlersDict:
 			BrawlersUnlockedState[str(index)] = BrawlersDict[brawlers_name]
-			if index == 34:
-				index += 3
-			elif index == 32:
-				index += 2
-			else:
-				index += 1
+			index += 1
 	elif UnlockType == "StarterOnly":
-		starter = [0, 1, 2, 3, 7, 8, 9, 14, 22, 27, 30]
+		starter = [0, 1, 2, 3, 7, 8, 9, 14, 22]
 		for i in brawlers_id:
 			if i in starter:
 				BrawlersUnlockedState[str(i)] = 1
@@ -72,7 +67,6 @@ class Players:
 	brawler_trophies = settings['BrawlerTrophies']
 	brawler_upgrade_points = settings['BrawlerUpgradePoints']
 	brawlers_spg_unlock = {} # For starpower and gadget
-	gadget = 255
 	starpower = 76
 
 	brawlers_trophies = {}
@@ -102,6 +96,7 @@ class Players:
 	gold = settings['Gold']
 	tickets = settings['Tickets']
 	exp_points = settings['ExperiencePoints']
+	region = "RO"
 	theme_id = 41000000 + settings['ThemeID']
 	content_creator = settings['SupportedContentCreator']
 	tokens = 0
@@ -161,15 +156,7 @@ class Players:
 		'23': brawler_trophies_for_rank,
 		'24': brawler_trophies_for_rank,
 		'25': brawler_trophies_for_rank,
-		'26': brawler_trophies_for_rank,
-		'27': brawler_trophies_for_rank,
-		'28': brawler_trophies_for_rank,
-		'29': brawler_trophies_for_rank,
-		'30': brawler_trophies_for_rank,
-		'31': brawler_trophies_for_rank,
-		'32': brawler_trophies_for_rank,
-		'34': brawler_trophies_for_rank,
-		'37': brawler_trophies_for_rank
+		'26': brawler_trophies_for_rank
 	}
 
 	brawlers_upgradium = {
@@ -199,15 +186,7 @@ class Players:
 		'23': brawler_upgrade_points,
 		'24': brawler_upgrade_points,
 		'25': brawler_upgrade_points,
-		'26': brawler_upgrade_points,
-		'27': brawler_upgrade_points,
-		'28': brawler_upgrade_points,
-		'29': brawler_upgrade_points,
-		'30': brawler_upgrade_points,
-		'31': brawler_upgrade_points,
-		'32': brawler_upgrade_points,
-		'34': brawler_upgrade_points,
-		'37': brawler_upgrade_points
+		'26': brawler_upgrade_points
 	}
 
 	Brawler_level = {
@@ -237,21 +216,12 @@ class Players:
 		'23': brawler_power_level,
 		'24': brawler_power_level,
 		'25': brawler_power_level,
-		'26': brawler_power_level,
-		'27': brawler_power_level,
-		'28': brawler_power_level,
-		'29': brawler_power_level,
-		'30': brawler_power_level,
-		'31': brawler_power_level,
-		'32': brawler_power_level,
-		'34': brawler_power_level,
-		'37': brawler_power_level
+		'26': brawler_power_level
 	}
 
     # Friendly game (Teams, info, result)
 	battle_result = 0
 	game_type = 0
-	use_gadget = 1
 	rank = 0
 	team = 0
 	isReady = 0

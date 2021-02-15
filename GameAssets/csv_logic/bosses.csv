@@ -6,4 +6,4 @@
 "boss4","TID_BOSS_4",3,24,"Planet4","Trooper,Techie,Vanguard,Sniper,PoisonDude,Healer","Diamonds:10:",,"Pvp4","Boss1",12
 "boss5","TID_BOSS_5",3,30,"Planet5","Trooper,Techie,Vanguard,Sniper,PoisonDude,Healer","Diamonds:10:",,"Pvp4","Boss2",15
 "boss6","TID_BOSS_6",3,36,"Planet6","Trooper,Techie,Vanguard,Sniper,PoisonDude,Healer","Diamonds:10:",,"Pvp4","Boss1",18
-"boss7",,3,54,"Planet7","Trooper,Techie,Vanguard,Sniper,PoisonDude,Healer","Diamonds:10:",,"Pvp4","Boss2",20
+"boss7","TID_BOSS_7",3,54,"Planet7","Trooper,Techie,Vanguard,Sniper,PoisonDude,Healer","Diamonds:10:",,"Pvp4","Boss2",20

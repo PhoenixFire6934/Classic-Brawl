@@ -24,5 +24,5 @@ class LogicPurchaseDoubleCoinsCommand(BSMessageReader):
 
         newTokens = self.player.tokens + value
         self.player.tokens = newTokens
-        DataBase.replaceValue(self, 'tokens', newTokens)
+        DataBase.replaceValue(self, 'playerTokens', newTokens)
 

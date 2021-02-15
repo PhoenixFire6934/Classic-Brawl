@@ -26,7 +26,7 @@
             "Off": "off is like the original brawl stars so you you're brawlers will save and you can get it from boxes or offers and club bot"
         }
     ],
-    "UnlockedBrawlersOption": "Off",
+    "UnlockedBrawlersOption": "All",
     "UnlockedBrawler":[
         {
             "shelly": 1,
@@ -55,15 +55,7 @@
             "leon": 0, 
             "rosa": 0, 
             "carl": 0, 
-            "bibi": 0, 
-            "8bit": 0, 
-            "sandy": 0, 
-            "bea": 0,
-            "emz": 0,
-            "mr.p": 0,
-            "max": 0,
-            "jacky": 0, 
-            "sprout": 0
+            "bibi": 0
         }
     ]
   }
