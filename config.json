@@ -9,7 +9,7 @@
     "Trophies": 99999,
     "ShowPacketsInLog": false,
     "ThemeID": 0,
-    "SupportedContentCreator": "Crazor",
+    "SupportedContentCreator": "",
     "Maintenance": false,
     "Patch": false,
     "PatchUrl": "http://192.168.0.103:8080/",
@@ -26,7 +26,7 @@
             "Off": "off is like the original brawl stars so you you're brawlers will save and you can get it from boxes or offers and club bot"
         }
     ],
-    "UnlockedBrawlersOption": "All",
+    "UnlockedBrawlersOption": "Off",
     "UnlockedBrawler":[
         {
             "shelly": 1,
@@ -56,9 +56,7 @@
             "rosa": 0, 
             "carl": 0, 
             "bibi": 0, 
-            "8bit": 0, 
-            "sandy": 0,
-            "emz": 0
+            "8bit": 0,
         }
     ]
   }

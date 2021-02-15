@@ -29,7 +29,7 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(0)
         self.writeVint(95)  # Trophy Road Reward
 
-        self.writeVint(99999)  # Player exp set to high number because of the name and bot battle level restriction
+        self.writeVint(self.player.player_experience)  # Player exp set to high number because of the name and bot battle level restriction
 
         self.writeScId(28, self.player.profile_icon)  # Player Icon ID
         self.writeScId(43, self.player.name_color)  # Player Name Color ID
@@ -57,11 +57,6 @@ class OwnHomeDataMessage(Writer):
 
         self.writeVint(self.player.tokensdoubler)  # Token doubler ammount
         self.writeVint(1209599)  # Season End Timer
-        self.writeVint(0)
-        self.writeVint(0)
-
-        self.writeVint(0)
-        self.writeVint(0)  # array
 
         self.writeByte(8)  # related to shop token doubler
 
@@ -92,8 +87,6 @@ class OwnHomeDataMessage(Writer):
 
         self.writeVint(0)  # array
         self.writeVint(0)  # array
-        self.writeVint(0)  # array
-        self.writeVint(0)  # array
 
         self.writeVint(2019049)
         self.writeVint(100) # Tokens needed for one brawl box
@@ -110,8 +103,7 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(50)
         self.writeVint(999900)
 
-        self.writeVint(1)  # array
-        self.writeVint(1)
+        self.writeVint(0)  # array
 
         self.writeVint(8)  # Event slot count
         for i in range(8):
@@ -195,7 +187,7 @@ class OwnHomeDataMessage(Writer):
             self.writeString(self.player.name)  # Player Name
             self.writeVint(1)
 
-        self.writeString()
+        self.writeInt(0)
 
         self.writeVint(8)
 
@@ -211,6 +203,7 @@ class OwnHomeDataMessage(Writer):
             except:
                 self.writeVint(1)
 
+            print(self.player.brawlers_id)
             if index == 28:
                 index += 2
             else:

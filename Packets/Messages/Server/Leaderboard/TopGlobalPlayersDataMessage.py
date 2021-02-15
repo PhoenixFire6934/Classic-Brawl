@@ -11,18 +11,18 @@ class GetLeaderboardGlobalOkMessage(Writer):
         self.players = players
 
     def encode(self):
-        self.writeBoolean(True)
-        self.writeVint(0)
-        self.writeVint(0)
+        self.indexOfPlayer = 1
+        self.writeVint(1)
+        self.writeVint(0) # SCID
         self.writeString()
-
 
         self.writeVint(len(self.players)) # Players Count
 
         for player in self.players:
-
+            if player["lowID"] == self.player.low_id:
+                self.indexOfPlayer = self.players.index(player) + 1
             self.writeVint(0) # High ID
-            self.writeVint(1) # Low ID
+            self.writeVint(player["lowID"]) # Low ID
 
             self.writeVint(1)
             self.writeVint(player['trophies']) # Player Trophies
@@ -39,8 +39,7 @@ class GetLeaderboardGlobalOkMessage(Writer):
 
 
         self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-
+        self.writeVint(self.indexOfPlayer)
+        self.writeVint(1)
+        self.writeVint(0) # Leaderboard global TID
         self.writeString("RO")

@@ -140,7 +140,6 @@ class DataBase:
             "room_id": self.player.room_id,
             "info": {
                 "mapID": self.player.map_id,
-                "useGadget": 1,
                 "PlayerCount": 1,
                 self.player.low_id: {
                     "host": 1,
@@ -165,7 +164,6 @@ class DataBase:
         self.playersdata = {}
         if gameroom_data:
             self.mapID = gameroom_data[0]["info"]["mapID"]
-            self.useGadget = gameroom_data[0]["info"]["useGadget"]
             self.playerCount = gameroom_data[0]["info"]["PlayerCount"]
             for Players,info in gameroom_data[0]["info"].items():
                 if Players != "PlayerCount" and Players != "mapID" and Players != "useGadget":

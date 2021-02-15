@@ -74,8 +74,6 @@ class EventSlots:
 
             self.writeString()
             self.writeVint(0)
-            self.writeVint(0)  # Powerplay game played
-            self.writeVint(0)  # Powerplay game left maximum
 
             if map['Modifier'] > 0:
                 self.writeBoolean(True)  # Gamemodifier boolean

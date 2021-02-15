@@ -32,7 +32,7 @@ class LoginMessage(BSMessageReader):
 
 
     def process(self):
-        if self.major != 22:
+        if self.major != 20:
             self.player.err_code = 8
             LoginFailedMessage(self.client, self.player, "Your client is outdated, click below to download the new version!").send()
 
