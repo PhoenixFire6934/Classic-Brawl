@@ -7,7 +7,7 @@ class Shop:
     2 = Random Brawler
     3 = Brawler
     4 = Skin
-    5 = StarPower/ Gadget
+    5 = StarPower
     6 = Brawl Box
     7 = Tickets
     8 = Power Points (for a specific brawler)
@@ -27,12 +27,12 @@ class Shop:
     offers = [
 
         {
-            'ID': 6,
+            'ID': 1,
             'OfferTitle': 'SPECIAL OFFER',
             'Cost': 20,
             'Multiplier': 1,
             'SkinID': 0,
-            'ShopType': 3,
+            'ShopType': 0,
             'ShopDisplay': 0,
             'Timer': 99999
         },
@@ -41,10 +41,10 @@ class Shop:
             'ID': 10,
             'OfferTitle': 'SPECIAL OFFER',
             'Cost': 1500,
-            'Multiplier': 1,
+            'Multiplier': 10,
             'SkinID': 0,
-            'ShopType': 3,
-            'ShopDisplay': 1,
+            'ShopType': 0,
+            'ShopDisplay': 0,
             'Timer': 99999
         },
 
