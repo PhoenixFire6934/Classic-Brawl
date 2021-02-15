@@ -29,7 +29,7 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(0)
         self.writeVint(95)  # Trophy Road Reward
 
-        self.writeVint(99999)  # Player exp set to high number because of the name and bot battle level restriction
+        self.writeVint(self.player.player_experience)  # Player exp set to high number because of the name and bot battle level restriction
 
         self.writeScId(28, self.player.profile_icon)  # Player Icon ID
         self.writeScId(43, self.player.name_color)  # Player Name Color ID
