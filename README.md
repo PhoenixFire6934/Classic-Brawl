@@ -13,8 +13,9 @@ Open source Brawl Stars server emulator for version 22 of the game!
   - Unlimited resources
   - Brawlers from boxes  
   - All skins unlocked
-  - Gadgets and Star Powers
+  - Star Powers
 - Shop
+  - Special offers
   - Boxes
   - Gold and other resources 
 - Club
