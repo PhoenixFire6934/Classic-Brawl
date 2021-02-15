@@ -17,10 +17,7 @@ class AllianceDataMessage(Writer):
     def encode(self):
         DataBase.loadClub(self, self.clubLowID)
 
-        if self.player.club_low_id != 0:
-            self.writeVint(0)
-        else:
-            self.writeVint(2)
+        self.writeVint(0)
 
         # ClubID
         self.writeInt(0)                            # Club high id
@@ -44,7 +41,6 @@ class AllianceDataMessage(Writer):
         self.writeVint(0)
         self.writeString(self.clubregion)           # Region
         self.writeVint(0)
-        #self.writeVint(self.clubfriendlyfamily)     # Family friendly status | 0 = Can be activated, 1 = Activated
 
         self.writeString(self.clubdescription)      # Description
 
