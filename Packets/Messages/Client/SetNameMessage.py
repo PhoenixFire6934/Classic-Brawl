@@ -1,9 +1,5 @@
-from random import choice
-from string import ascii_uppercase
-import json
-
-from Logic.Player import Players
-from Packets.Commands.Server.Change_Name_Callback import SetNameResponse
+from Packets.Commands.Server.LogicChangeAvatarNameCommand import LogicChangeAvatarNameCommand
+from Packets.Messages.Server.Home.AvatarNameChangeFailedMessage import AvatarNameChangeFailedMessage
 
 from Utils.Reader import BSMessageReader
 
@@ -15,7 +11,15 @@ class SetNameMessage(BSMessageReader):
         self.client = client
 
     def decode(self):
-        self.player.name = self.read_string()
+        self.username = self.read_string()
+        self.state = self.read_Vint()
 
     def process(self):
-        SetNameResponse(self.client, self.player).send()
+        if self.username != '':
+            if len(self.username) >= 2 and len(self.username) <= 20:
+                self.player.name = self.username
+                LogicChangeAvatarNameCommand(self.client, self.player, self.state).send()
+            else:
+                AvatarNameChangeFailedMessage(self.client, self.player).send()
+        else:
+            AvatarNameChangeFailedMessage(self.client, self.player).send()

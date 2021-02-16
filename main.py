@@ -6,10 +6,10 @@ from threading import *
 
 from Logic.Device import Device
 from Logic.Player import Players
-from Packets.Factory import packets
+from Packets.LogicMessageFactory import packets
 from Utils.Config import Config
 
-logging.basicConfig(filename="errors.log", level=logging.INFO, filemode="w")
+#logging.basicConfig(filename="errors.log", level=logging.INFO, filemode="w")
 
 
 def _(*args):
@@ -20,14 +20,15 @@ def _(*args):
 
 
 class Server:
+	Clients = {"ClientCounts": 0, "Clients": {}}
+	ThreadCount = 0
+
 	def __init__(self, ip: str, port: int):
 		self.server = socket.socket()
 		self.port = port
 		self.ip = ip
 
 	def start(self):
-		if not os.path.exists('./data.db'):
-			open('data.db', 'w').close()
 		if not os.path.exists('./config.json'):
 			print("Creating config.json...")
 			Config.create_config(self)
@@ -41,6 +42,7 @@ class Server:
 			client, address = self.server.accept()
 			_(f'New connection! Ip: {address[0]}')
 			ClientThread(client, address).start()
+			Server.ThreadCount += 1
 
 
 class ClientThread(Thread):
@@ -77,6 +79,12 @@ class ClientThread(Thread):
 						message = packets[packet_id](self.client, self.player, data)
 						message.decode()
 						message.process()
+
+						if packet_id == 10101:
+							Server.Clients["Clients"][str(self.player.low_id)] = {"SocketInfo": self.client}
+							Server.Clients["ClientCounts"] = Server.ThreadCount
+							self.player.ClientDict = Server.Clients
+
 					else:
 						_(f'Packet not handled! Id: {packet_id}')
 

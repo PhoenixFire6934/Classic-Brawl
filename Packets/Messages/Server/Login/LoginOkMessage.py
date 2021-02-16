@@ -11,35 +11,47 @@ class LoginOkMessage(Writer):
         self.version = 1
 
     def encode(self):
-        self.writeInt(self.player.HighID)
+        # Account ID
+        self.writeInt(self.player.high_id)
         self.writeInt(1)
-        # HighID, lowID
-        self.writeInt(self.player.HighID)
-        self.writeInt(1)
-        # HighID, lowID
-        self.writeString(self.player.Token)  # Token
-        self.writeString()
-        self.writeString()
 
-        self.writeInt(26)  # MajorVersion
+        # Home ID
+        self.writeInt(self.player.high_id)
+        self.writeInt(1)
+
+        self.writeString(self.player.token)  # Pass Token
+        self.writeString() # Facebook ID
+        self.writeString() # Gamecenter ID
+
+        self.writeInt(26)   # Major Version
         self.writeInt(165)  # Build
-        self.writeInt(1)  # MinorVersion
+        self.writeInt(1)    # Minor Version
 
         self.writeString("dev")  # Environment
-        self.writeInt(1) 
-        self.writeInt(1)  
-        self.writeInt(62) 
+
+        self.writeInt(0)  # Session Count
+        self.writeInt(0)  # Play Time Seconds
+        self.writeInt(0) # Days Since Started Playing
+
         self.writeString()  
         self.writeString() 
-        self.writeString()  
+        self.writeString()
+
         self.writeInt(0)
-        self.writeString() 
-        self.writeString("RO")
+
         self.writeString()
+
+        self.writeString("RO") # Region
+        self.writeString()
+
         self.writeInt(1)
+
         self.writeString()  
         self.writeString() 
-        self.writeString() 
-        self.writeVint(0)
         self.writeString()
+
+        self.writeVint(0)
+
+        self.writeString()
+
         self.writeVint(1)

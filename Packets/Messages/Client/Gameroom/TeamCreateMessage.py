@@ -1,4 +1,7 @@
 from Packets.Messages.Server.Gameroom.TeamGameroomDataMessage import TeamGameroomDataMessage
+from Logic.EventSlots import EventSlots
+from Database.DatabaseManager import DataBase
+import random
 
 from Utils.Reader import BSMessageReader
 
@@ -10,28 +13,19 @@ class TeamCreateMessage(BSMessageReader):
         self.client = client
 
     def decode(self):
-        self.read_Vint()
-        self.mapID = self.read_Vint()
+        self.mapSlot = self.read_Vint()
+        self.player.map_id = self.read_Vint()
+        self.roomType = self.read_Vint()
 
-
+        if self.player.map_id == -64:
+            self.mapSlot = 0
+            self.mapID = 7
+        else:
+            self.player.map_id = EventSlots.maps[self.mapSlot - 1]['ID']
 
     def process(self):
-        if self.mapID == 1:
-            self.player.mapID = 7 # gem grab
-        elif self.mapID == 2:
-            self.player.mapID = 32 # solo sd
-        elif self.mapID == 3:
-            self.player.mapID = 17 # heist
-        elif self.mapID == 4:
-            self.player.mapID = 0 # bounty
-        elif self.mapID == 5:
-            self.player.mapID = 24 # brawl ball
-        elif self.mapID == 6:
-            self.player.mapID = 202 # present plunder
-        elif self.mapID == 7:
-            self.player.mapID = 97 # siege
-        elif self.mapID == 8:
-            self.player.mapID = 167 # takedown
-        elif self.mapID == 9:
-            self.player.mapID = 174 # lone star
+        self.player.room_id = random.randint(0, 2147483647)
+        DataBase.replaceValue(self, 'roomID', self.player.room_id)
+
+        DataBase.createGameroomDB(self)
         TeamGameroomDataMessage(self.client, self.player).send()

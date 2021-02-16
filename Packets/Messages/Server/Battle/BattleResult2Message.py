@@ -1,5 +1,6 @@
 from Utils.Writer import Writer
-from Database.DataBase import DataBase
+from Database.DatabaseManager import DataBase
+
 
 class BattleResult2Message(Writer):
 
@@ -8,14 +9,14 @@ class BattleResult2Message(Writer):
         self.id = 23456
         self.player = player
 
-
-
     def encode(self):
-        self.writeVint(1)
-        self.writeVint(self.player.BattleResult)
+        self.writeVint(0)
+        self.writeVint(self.player.battle_result)
 
-        brawler_trophies = self.player.BrawlersTrophies[str(self.player.brawlerID)]
-
+        brawler_trophies = self.player.brawlers_trophies[str(self.player.brawler_id)]
+        brawler_trophies_for_rank = self.player.brawlers_trophies_in_rank[str(self.player.brawler_id)]
+        exp_reward = [8, 6, 4]
+        player_tokens_reward = [20, 15, 10]
 
         if 0 <= brawler_trophies <= 49:
             win_val = 8
@@ -74,17 +75,70 @@ class BattleResult2Message(Writer):
                 win_val = 3
                 lose_val = -12
 
-        if self.player.BattleResult == 0:
-            new_trophies = self.player.trophies + win_val
-            self.player.BrawlersTrophies[str(self.player.brawlerID)] = brawler_trophies + win_val
-            DataBase.replaceValue(self, 'brawlersTrophies', self.player.BrawlersTrophies)
-            DataBase.replaceValue(self, 'trophies', new_trophies)
-        else:
-            new_trophies = self.player.trophies + lose_val
-            self.player.BrawlersTrophies[str(self.player.brawlerID)] = brawler_trophies + lose_val
-            DataBase.replaceValue(self, 'brawlersTrophies', self.player.BrawlersTrophies)
-            DataBase.replaceValue(self, 'trophies', new_trophies)
+        if self.player.battle_result == 0:
+            self.player.ThreeVSThree_wins += 1
+            self.player.player_experience += exp_reward[0]
+            if self.player.tokensdoubler > 0:
+                if self.player.tokensdoubler <= player_tokens_reward[0]:
+                     print("OLD", player_tokens_reward[0])
+                     player_tokens_reward[0] += self.player.tokensdoubler
+                     self.player.tokensdoubler = 0
+                     self.player.brawl_boxes += player_tokens_reward[0]
+                     DataBase.replaceValue(self, "tokensdoubler", self.player.tokensdoubler)
+                     DataBase.replaceValue(self, "brawlBoxes", self.player.brawl_boxes)
+                     print("NEW", player_tokens_reward[0])
+                else:
+                    print("OLD", player_tokens_reward[0])
+                    self.player.tokensdoubler -= player_tokens_reward[0]
+                    player_tokens_reward[0] += player_tokens_reward[0]
+                    self.player.brawl_boxes += player_tokens_reward[0]
+                    DataBase.replaceValue(self, "tokensdoubler", self.player.tokensdoubler)
+                    DataBase.replaceValue(self, "brawlBoxes", self.player.brawl_boxes)
+                    print("NEW", player_tokens_reward[0])
+            else:
+                print("OLD", player_tokens_reward[0])
+                self.player.brawl_boxes += player_tokens_reward[0]
+                print("NEW", player_tokens_reward[0])
+            self.player.trophies += win_val
+            self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + win_val
+            if self.player.brawlers_trophies_in_rank[str(self.player.brawler_id)] < self.player.brawlers_trophies[str(self.player.brawler_id)]:
+                self.player.brawlers_trophies_in_rank[str(self.player.brawler_id)] = brawler_trophies_for_rank + win_val
 
+            DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
+            DataBase.replaceValue(self, 'brawlersTrophiesForRank', self.player.brawlers_trophies_in_rank)
+            DataBase.replaceValue(self, 'trophies', self.player.trophies)
+            DataBase.replaceValue(self, '3vs3Wins', self.player.ThreeVSThree_wins)
+            DataBase.replaceValue(self, 'playerExp', self.player.player_experience)
+        else:
+            self.player.player_experience += exp_reward[2]
+            if self.player.tokensdoubler > 0:
+                if self.player.tokensdoubler <= player_tokens_reward[2]:
+                     print("OLD", player_tokens_reward[2])
+                     player_tokens_reward[2] += self.player.tokensdoubler
+                     self.player.tokensdoubler = 0
+                     self.player.brawl_boxes += player_tokens_reward[2]
+                     DataBase.replaceValue(self, "tokensdoubler", self.player.tokensdoubler)
+                     DataBase.replaceValue(self, "brawlBoxes", self.player.brawl_boxes)
+                     print("NEW", player_tokens_reward[2])
+                else:
+                    print("OLD", player_tokens_reward[2])
+                    self.player.tokensdoubler -= player_tokens_reward[2]
+                    player_tokens_reward[2] += player_tokens_reward[2]
+                    self.player.brawl_boxes += player_tokens_reward[2]
+                    DataBase.replaceValue(self, "tokensdoubler", self.player.tokensdoubler)
+                    DataBase.replaceValue(self, "brawlBoxes", self.player.brawl_boxes)
+                    print("NEW", player_tokens_reward[2])
+            else:
+                print("OLD", player_tokens_reward[2])
+                self.player.brawl_boxes += player_tokens_reward[2]
+                print("NEW", player_tokens_reward[2])
+            self.player.trophies -= lose_val
+            self.player.brawlers_trophies[str(self.player.brawler_id)] = brawler_trophies + lose_val
+
+            DataBase.replaceValue(self, 'brawlersTrophies', self.player.brawlers_trophies)
+            DataBase.replaceValue(self, 'brawlersTrophiesForRank', self.player.brawlers_trophies_in_rank)
+            DataBase.replaceValue(self, 'trophies', self.player.trophies)
+            DataBase.replaceValue(self, 'playerExp', self.player.player_experience)
 
         self.writeVint(0)
         self.writeVint(0)
@@ -105,99 +159,81 @@ class BattleResult2Message(Writer):
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(6)
-        self.writeVint(1)
+        self.writeVint(5)
         self.writeVint(16)
-        self.writeVint(self.player.brawlerID)
+        self.writeVint(self.player.brawler_id)
         self.writeVint(29)
-        self.writeVint(self.player.skinID)
+        self.writeVint(self.player.skin_id)
         self.writeVint(99999)
         self.writeVint(0)
         self.writeVint(10)
         self.writeVint(0)
-
         self.writeString(self.player.name)
-
         self.writeVint(100)
         self.writeVint(28000000)
         self.writeVint(43000000)
+
         self.writeVint(0)
         self.writeVint(16)
-        self.writeVint(self.player.Bot1)
+        self.writeVint(self.player.bot1)
         self.writeVint(0)
         self.writeVint(99999)
         self.writeVint(0)
         self.writeVint(10)
         self.writeVint(0)
-
-        self.writeString(self.player.Bot1N)
-
+        self.writeString(self.player.bot1_n)
         self.writeVint(100)
         self.writeVint(28000000)
         self.writeVint(43000000)
+
         self.writeVint(0)
         self.writeVint(16)
-        self.writeVint(self.player.Bot2)
+        self.writeVint(self.player.bot2)
         self.writeVint(0)
         self.writeVint(99999)
         self.writeVint(0)
         self.writeVint(10)
         self.writeVint(0)
-
-        self.writeString(self.player.Bot2N)
-
+        self.writeString(self.player.bot2_n)
         self.writeVint(100)
         self.writeVint(28000000)
         self.writeVint(43000000)
+
         self.writeVint(2)
         self.writeVint(16)
-        self.writeVint(self.player.Bot3)
+        self.writeVint(self.player.bot3)
         self.writeVint(0)
         self.writeVint(99999)
         self.writeVint(0)
         self.writeVint(10)
         self.writeVint(0)
-
-        self.writeString(self.player.Bot3N)
-
+        self.writeString(self.player.bot3_n)
         self.writeVint(100)
         self.writeVint(28000000)
         self.writeVint(43000000)
+
         self.writeVint(2)
         self.writeVint(16)
-        self.writeVint(self.player.Bot4)
+        self.writeVint(self.player.bot4)
         self.writeVint(0)
         self.writeVint(99999)
         self.writeVint(0)
         self.writeVint(10)
         self.writeVint(0)
-
-        self.writeString(self.player.Bot4N)
-
+        self.writeString(self.player.bot4_n)
         self.writeVint(100)
         self.writeVint(28000000)
         self.writeVint(43000000)
+
         self.writeVint(2)
         self.writeVint(16)
-        self.writeVint(self.player.Bot5)
+        self.writeVint(self.player.bot5)
         self.writeVint(0)
         self.writeVint(99999)
         self.writeVint(0)
         self.writeVint(10)
         self.writeVint(0)
-
-        self.writeString(self.player.Bot5N)
-
+        self.writeString(self.player.bot5_n)
         self.writeVint(100)
         self.writeVint(28000000)
         self.writeVint(43000000)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(28)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(-1040385)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
