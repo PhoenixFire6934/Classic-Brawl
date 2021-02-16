@@ -1,21 +1,15 @@
 import json
-from Utils.Config import Config
+
 from Utils.Fingerprint import Fingerprint
 from Files.CsvLogic.Characters import Characters
 from Files.CsvLogic.Skins import Skins
 from Files.CsvLogic.Cards import Cards
 
 class Players:
-	try:
-		config = open('config.json', 'r')
-		content = config.read()
-	except FileNotFoundError:
-		print("Creating config.json...")
-		Config.create_config()
-		config = open('config.json', 'r')
-		content = config.read()
-
+	config = open('config.json', 'r')
+	content = config.read()
 	settings = json.loads(content)
+
 
 	# Player data
 	high_id = 0
@@ -48,7 +42,7 @@ class Players:
 	if UnlockType == "All":
 		for i in brawlers_id:
 			BrawlersUnlockedState[str(i)] = 1
-	elif UnlockType == "SpecifiedOnly":
+	elif UnlockType == "SpecifiedOnly":	
 		index = 0
 		for brawlers_name in BrawlersDict:
 			BrawlersUnlockedState[str(index)] = BrawlersDict[brawlers_name]
@@ -96,15 +90,11 @@ class Players:
 	solo_wins = 0
 	duo_wins = 0
 	ThreeVSThree_wins = 0
-	tokensdoubler = 0
-	player_tokens = 0
 	gems = settings['Gems']
 	gold = settings['Gold']
 	tickets = settings['Tickets']
-	exp_points = settings['ExperiencePoints']
-	theme_id = 41000000 + settings['ThemeID']
-	content_creator = settings['SupportedContentCreator']
-	tokens = 0
+	tokensdoubler = 0
+	player_tokens = 0
 
 	# Alliances
 	club_high_id = 0
@@ -209,7 +199,7 @@ class Players:
 		'34': brawler_upgrade_points,
 		'37': brawler_upgrade_points
 	}
-
+	
 	Brawler_level = {
 		'0':  brawler_power_level,
 		'1':  brawler_power_level,
