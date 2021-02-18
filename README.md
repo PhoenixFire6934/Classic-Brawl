@@ -1,9 +1,9 @@
 <h1 align="center">Welcome to Classic-Brawl 👋</h1>
 
-Open source Brawl Stars server emulator for version 26 of the game!
+Open source Brawl Stars server emulator for version 15 of the game!
 
 
-![ScreenShot](https://cdn.discordapp.com/attachments/704364452891590778/789482341209866280/Screenshot_20201218-151815_Brawl_Client.jpg) 
+![ScreenShot](https://media.discordapp.net/attachments/711412740199022603/811768907920179271/Screenshot_20210217-201941_ObjectBrawl.png) 
 
 
 ## What's working ?
@@ -56,7 +56,7 @@ Open source Brawl Stars server emulator for version 26 of the game!
 
 
 ## Configure client
-To connect to your server, you need a custom client. Here the only solution is to use a [pre-made client](https://mega.nz/file/vSIDFKaT#pDdGFkevXwp_3LP1wW1wtj23Gj2aADZwzfXAAI8JEs8). Just replace the IP in the frida-gadget config with yours (```/lib/armeabi-v7a/libgg.config.so```) ```{"interaction":{"interaction":{"type":"script","path":"libscript.so","on_change":"reload","parameters":{"redirectHost":"YOUR_IP","relocate":true}}}```
+To connect to your server, you need a custom client. Here the only solution is to use a [pre-made client](http://www.mediafire.com/file/pvwbej7vhlo07wt/Classic_Brawl_v15.apk/file). Just replace the IP in the frida-gadget config with yours (```/lib/armeabi-v7a/libmrvitalik.config.so or /lib/arm64-v8a/libmrvitalik.config.so```) ```{"interaction":{"interaction":{"type":"script","path":"libmrvitalik.script.so","on_change":"reload","parameters":{"redirectHost":"YOUR_IP","relocate":true}}}```
 
 
 
@@ -82,7 +82,7 @@ To connect to your server, you need a custom client. Here the only solution is t
 * Discord: Crazor#7395
 
 Special thanks to:
-- [VitalikObject](https://github.com/VitalikObject)
+- [VitalikObject](https://github.com/VitalikObject) for his pre-made client.
 - [Rostik](https://github.com/RostikDevv) and [Vorono4ka](https://github.com/Vorono4ka) for their [scdocs](https://github.com/RostikDevv/scdocs)
 
 
