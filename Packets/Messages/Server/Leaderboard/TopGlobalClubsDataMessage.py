@@ -11,6 +11,7 @@ class  GetLeaderboardClubGlobalOkMessage(Writer):
         self.type = type
 
     def encode(self):
+        self.LocalIndex = 0
         self.writeVint(2)
         self.writeVint(0) # SCID
         self.writeString()
@@ -28,8 +29,6 @@ class  GetLeaderboardClubGlobalOkMessage(Writer):
 
             if club['clubID'] == self.player.club_low_id:
                 self.LocalIndex = self.club_data.index(club) + 1
-            else:
-                self.LocalIndex = 0
 
             DataBase.loadClub(self, club['clubID'])
             self.writeVint(0) # Club High ID
