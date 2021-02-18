@@ -33,7 +33,6 @@ class DataBase:
             self.player.big_boxes = user_data[0]["info"]["bigBoxes"]
             self.player.brawlers_skins = user_data[0]["info"]["brawlersSkins"]
             self.player.name_color = user_data[0]["info"]["namecolor"]
-            self.player.gadget = user_data[0]["info"]["gadget"]
             self.player.starpower = user_data[0]["info"]["starpower"]
             self.player.DoNotDistrubMessage = user_data[0]["info"]["DoNotDistrub"]
             self.player.room_id = user_data[0]["info"]["roomID"]
@@ -91,7 +90,6 @@ class DataBase:
                     "namecolor": self.player.name_color,
                     "brawlBoxes": self.player.brawl_boxes,
                     "bigBoxes": self.player.big_boxes,
-                    "gadget": 255,
                     "starpower": 76,
                     "DoNotDistrub": 0,
                     "roomID": 0,
@@ -141,8 +139,8 @@ class DataBase:
         data = { 
             "room_id": self.player.room_id,
             "info": {
+                "roomType": self.roomType,
                 "mapID": self.player.map_id,
-                "useGadget": 1,
                 "PlayerCount": 1,
                 self.player.low_id: {
                     "host": 1,
@@ -151,10 +149,9 @@ class DataBase:
                     "Team": self.player.team,
                     "Ready": self.player.isReady,
                     "brawlerID": self.player.brawler_id,
+                    "skinID": self.player.skin_id,
                     "starpower": self.player.starpower,
-                    "gadget": self.player.gadget,
-                    "profileIcon": self.player.profile_icon,
-                    "namecolor": self.player.name_color
+                    "profileIcon": self.player.profile_icon
                 }
             }
         }
@@ -167,11 +164,11 @@ class DataBase:
 
         self.playersdata = {}
         if gameroom_data:
+            self.roomType = gameroom_data[0]["info"]["roomType"]
             self.mapID = gameroom_data[0]["info"]["mapID"]
-            self.useGadget = gameroom_data[0]["info"]["useGadget"]
             self.playerCount = gameroom_data[0]["info"]["PlayerCount"]
             for Players,info in gameroom_data[0]["info"].items():
-                if Players != "PlayerCount" and Players != "mapID" and Players != "useGadget":
+                if Players != "PlayerCount" and Players != "mapID" and Players != "roomType":
                     self.playersdata[Players] = {}
                     self.playersdata[Players]["IsHost"] = info["host"]
                     self.playersdata[Players]["name"] = info["name"]
@@ -179,10 +176,9 @@ class DataBase:
                     self.playersdata[Players]["Ready"] = info["Ready"]
                     self.playersdata[Players]["LowID"] = Players
                     self.playersdata[Players]["profileIcon"] = info["profileIcon"]
-                    self.playersdata[Players]["namecolor"] = info["namecolor"]
                     self.playersdata[Players]["brawlerID"] = info["brawlerID"]
+                    self.playersdata[Players]["skinID"] = info["skinID"]
                     self.playersdata[Players]["starpower"] = info["starpower"]
-                    self.playersdata[Players]["gadget"] = info["gadget"]
         else:
             playerdb = TinyDB('Database/Player/data.db')
             query = Query()
@@ -223,8 +219,8 @@ class DataBase:
         gameroom_data["info"][str(low_id)]["Team"] = self.player.team
         gameroom_data["info"][str(low_id)]["Ready"] = self.player.isReady
         gameroom_data["info"][str(low_id)]["brawlerID"] = self.player.brawler_id
+        gameroom_data["info"][str(low_id)]["skinID"] = self.player.skin_id
         gameroom_data["info"][str(low_id)]["starpower"] = self.player.starpower
-        gameroom_data["info"][str(low_id)]["gadget"] = self.player.gadget
         gameroom_data["info"][str(low_id)]["profileIcon"] = self.player.profile_icon
         gameroom_data["info"][str(low_id)]["namecolor"] = self.player.name_color
 
@@ -245,7 +241,6 @@ class DataBase:
                 "badgeID": self.clubbadgeID,
                 "type": self.clubtype,
                 "trophiesneeded": self.clubtrophiesneeded,
-                "friendlyfamily": self.clubfriendlyfamily,
                 "trophies": self.player.trophies,
                 "members": {
                     "totalmembers": 1,
@@ -285,10 +280,6 @@ class DataBase:
                     self.club_list.append(club_id)
                     self.club_data.append(clubInfo)
                     self.AllianceCount += 1
-            else:
-                break
-            #if info["members"]["totalmembers"] >= minMembers and info["members"]["totalmembers"] < maxMembers and info["type"] <= clubType and self.AllianceCount <= maxListLength:
-            
     
     def loadClub(self, clubid):
         db = TinyDB('Database/Club/club.db')
@@ -302,7 +293,6 @@ class DataBase:
         self.clubbadgeID = club_data["info"]["badgeID"]
         self.clubtype = club_data["info"]["type"]
         self.clubtrophiesneeded = club_data["info"]["trophiesneeded"]
-        self.clubfriendlyfamily = club_data["info"]["friendlyfamily"]
         self.clubtrophies = club_data["info"]["trophies"]
         self.clubmembercount = club_data["info"]["members"]["totalmembers"]
         for plridentifier, data in club_data["info"]["members"].items():

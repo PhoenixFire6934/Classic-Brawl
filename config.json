@@ -9,10 +9,9 @@
     "Trophies": 99999,
     "ShowPacketsInLog": false,
     "ThemeID": 0,
-    "SupportedContentCreator": "",
     "Maintenance": false,
     "Patch": false,
-    "PatchUrl": "http://192.168.0.103:8080/",
+    "PatchUrl": "http://192.168.1.98:8080/",
     "UpdateUrl": "https://github.com/PhoenixFire6879/Classic-Brawl/tree/V15",
     "BrawlerTrophies": 0,
     "BrawlerTrophiesForRank": 0,
@@ -26,7 +25,7 @@
             "Off": "off is like the original brawl stars so you you're brawlers will save and you can get it from boxes or offers and club bot"
         }
     ],
-    "UnlockedBrawlersOption": "Off",
+    "UnlockedBrawlersOption": "All",
     "UnlockedBrawler":[
         {
             "shelly": 1,
@@ -52,18 +51,7 @@
             "frank": 0, 
             "gene": 0, 
             "tick": 0, 
-            "leon": 0, 
-            "rosa": 0, 
-            "carl": 0, 
-            "bibi": 0, 
-            "8bit": 0, 
-            "sandy": 0, 
-            "bea": 0,
-            "emz": 0,
-            "mr.p": 0,
-            "max": 0,
-            "jacky": 0, 
-            "sprout": 0
+            "leon": 0
         }
     ]
   }

@@ -9,9 +9,9 @@ class Helpers:
         return ''.join(random.choice(lettersAndDigits) for i in range(40))
 
     def randomID(self):
-        length = 9
-        return int(''.join([str(random.randint(0, 10)) for _ in range(length)]))
+        length = 8
+        return int(''.join([str(random.randint(0, 9)) for _ in range(length)]))
 
     def randomClubID(self):
-        length = 9
+        length = 8
         return int(''.join([str(random.randint(0, 9)) for _ in range(length)]))

@@ -18,4 +18,5 @@ class LogicPurchaseBoxCommand(BSMessageReader):
 
 
     def process(self):
+        print(self.player.box_id)
         LogicBoxDataCommand(self.client, self.player).send()

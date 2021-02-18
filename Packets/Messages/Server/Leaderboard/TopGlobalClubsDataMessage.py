@@ -12,8 +12,7 @@ class  GetLeaderboardClubGlobalOkMessage(Writer):
 
     def encode(self):
         self.writeVint(2)
-        self.writeVint(0)
-        self.writeVint(0)
+        self.writeVint(0) # SCID
         self.writeString()
 
         DataBase.CountClub(self, 1, 100, 2, 200)
@@ -26,6 +25,12 @@ class  GetLeaderboardClubGlobalOkMessage(Writer):
         self.club_data.sort(key = by_trophy, reverse=True)
 
         for club in self.club_data:
+
+            if club['clubID'] == self.player.club_low_id:
+                self.LocalIndex = self.club_data.index(club) + 1
+            else:
+                self.LocalIndex = 0
+
             DataBase.loadClub(self, club['clubID'])
             self.writeVint(0) # Club High ID
             self.writeVint(club['clubID']) # Club Low ID
@@ -40,10 +45,8 @@ class  GetLeaderboardClubGlobalOkMessage(Writer):
             self.writeVint(8) # Club Badge
             self.writeVint(self.clubbadgeID) # Club Name Color
 
-
+        self.writeVint(0)
+        self.writeVint(self.LocalIndex)
         self.writeVint(0)
         self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-
         self.writeString("RO")

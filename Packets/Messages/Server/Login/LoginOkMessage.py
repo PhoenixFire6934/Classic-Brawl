@@ -13,25 +13,25 @@ class LoginOkMessage(Writer):
     def encode(self):
         # Account ID
         self.writeInt(self.player.high_id)
-        self.writeInt(1)
+        self.writeInt(self.player.low_id)
 
         # Home ID
         self.writeInt(self.player.high_id)
-        self.writeInt(1)
+        self.writeInt(self.player.low_id)
 
         self.writeString(self.player.token)  # Pass Token
         self.writeString() # Facebook ID
         self.writeString() # Gamecenter ID
 
-        self.writeInt(26)   # Major Version
-        self.writeInt(165)  # Build
+        self.writeInt(15)   # Major Version
+        self.writeInt(140)  # Build
         self.writeInt(1)    # Minor Version
 
-        self.writeString("dev")  # Environment
+        self.writeString("prod")  # Environment
 
-        self.writeInt(0)  # Session Count
+        self.writeInt(1)  # Session Count
         self.writeInt(0)  # Play Time Seconds
-        self.writeInt(0) # Days Since Started Playing
+        self.writeInt(0)  # Days Since Started Playing
 
         self.writeString()  
         self.writeString() 
@@ -40,7 +40,6 @@ class LoginOkMessage(Writer):
         self.writeInt(0)
 
         self.writeString()
-
         self.writeString("RO") # Region
         self.writeString()
 

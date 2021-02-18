@@ -110,7 +110,7 @@ class LogicBoxDataCommand(Writer):
             self.writeVint(1)                           # Reward amount
             self.writeScId(16, box_content["Brawler"])  # CsvID
             self.writeVint(1)                           # RewardID
-            self.writeHexa('''00 00 00''')              # Reward end
+            self.writeHexa('''00 00''')         # Reward end
             # Brawler end
 
         else:
@@ -118,7 +118,7 @@ class LogicBoxDataCommand(Writer):
             # Gold start
             self.writeVint(box_content["Gold"]) # Reward amount
             self.writeScId(0, 7)                # RewardID
-            self.writeHexa('''00 00 00''')  # Reward end
+            self.writeHexa('''00 00''')         # Reward end
             # Gold end
 
             powerpoints_ammount = [randint(self.BoxData[self.box_index]["UpgradePoints"][0], self.BoxData[self.box_index]["UpgradePoints"][1]) for _ in range(len(brawlers_rewarded))]
@@ -130,16 +130,16 @@ class LogicBoxDataCommand(Writer):
                 self.writeVint(powerpoints_ammount[i]) # Reward amount
                 self.writeScId(16, box_content["Powerpoints" + str(i + 1)]) # BrawlerID
                 self.writeVint(6) # RewardID
-                self.writeHexa('''00 00 00''')  # Reward end
+                self.writeHexa('''00 00''') # Reward end
                 # Upgrade points end
 
             if box_content["RewardType"] == "Brawler":
                 if self.BoxData[self.box_index]["NewCharPosition"] == "End" or self.BoxData[self.box_index]["NewCharPosition"] == "Middle":
                     # Brawler start
-                    self.writeVint(1)  # Reward amount
+                    self.writeVint(1)           # Reward amount
                     self.writeScId(16, box_content["Brawler"])  # CsvID
-                    self.writeVint(1)  # RewardID
-                    self.writeHexa('''00 00 00''')  # Reward end
+                    self.writeVint(1)           # RewardID
+                    self.writeHexa('''00 00''') # Reward end
                     # Brawler end
 
             if box_content["RewardType"] == "Bonus":
@@ -162,5 +162,5 @@ class LogicBoxDataCommand(Writer):
                         break
 
         # Box end
-        for i in range(13):
+        for i in range(8):
             self.writeVint(0)

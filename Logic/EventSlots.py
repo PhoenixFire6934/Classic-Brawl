@@ -45,27 +45,6 @@ class EventSlots:
             'Status': 3,
             'Ended': False,
             'Modifier': 0
-        },
-
-        {
-            'ID': 202,
-            'Status': 3,
-            'Ended': False,
-            'Modifier': 0
-        },
-
-        {
-            'ID': 97,
-            'Status': 3,
-            'Ended': False,
-            'Modifier': 0
-        },
-
-        {
-            'ID': 167,
-            'Status': 100,
-            'Ended': True,
-            'Modifier': 0
         }
 
 

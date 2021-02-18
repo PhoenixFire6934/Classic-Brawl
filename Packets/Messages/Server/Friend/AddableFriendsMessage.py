@@ -14,28 +14,21 @@ class AddableFriendsMessage(Writer):
         self.writeInt(0)  # HighID
         self.writeInt(1)  # LowID
 
-        self.writeString()
-        self.writeString()
-        self.writeString()
-        self.writeString()
-        self.writeString()
-        self.writeString()
+        self.writeString("romashka") # Player name
 
-        self.writeInt(1)  # Trophies
-        self.writeInt(4)  # Friend state 0 = friend, 1 = not friend, 2 = request sent, 3 = you have an invite from him??, 4 = friend list
+        self.writeString() # FacebookID
+        self.writeString()
+        self.writeString()
+        # Friend state 0 = friend, 1 = not friend, 2 = request sent, 3 = you have an invite from him??, 4 = friend list
+        self.writeInt(3)
+        self.writeInt(1000) # Trophies
+        self.writeInt(3)
+        self.writeInt(3)
+        self.writeInt(3)
+        self.writeInt(3)
+
+        self.writeBoolean(False) # Club
+
+        self.writeString()
         self.writeInt(0)
         self.writeInt(0)
-        self.writeInt(0)
-
-        self.writeBoolean(False)
-
-        self.writeString()
-        self.writeInt(0)
-
-        self.writeBoolean(True)  # ?? is a player?
-
-        self.writeString("Friendly bot")
-        self.writeVint(100)
-        self.writeVint(28000005)
-        self.writeVint(43000002)
-        self.writeVint(0)

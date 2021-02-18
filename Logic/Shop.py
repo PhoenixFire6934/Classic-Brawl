@@ -66,12 +66,7 @@ class Shop:
         {
             'Cost': 140,
             'Amount': 1200
-        },
-
-        {
-            'Cost': 280,
-            'Amount': 2600
-        },
+        }
 
     ]
 

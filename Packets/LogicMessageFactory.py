@@ -12,8 +12,6 @@ from Packets.Messages.Client.Battle.AskForBattleEndMessage import AskForBattleEn
 from Packets.Messages.Client.SetNameMessage import SetNameMessage
 from Packets.Messages.Client.Home.GetLeaderboardMessage import GetLeaderboardMessage
 from Packets.Messages.Client.Home.AvatarNameCheckRequestMessage import AvatarNameCheckRequestMessage
-from Packets.Messages.Client.Gameroom.TeamUseGadgetMessage import TeamUseGadgetMessage
-from Packets.Messages.Client.Gameroom.Do_Not_Distrub_Message import DoNotDistrubMessage
 from Packets.Messages.Client.Gameroom.TeamSetRankedLocationMessage import TeamSetRankedLocationMessage
 from Packets.Messages.Client.Home.PlayerStatusMessage import PlayerStatusMessage
 from Packets.Messages.Client.ClientCapabilities import ClientCapabilities
@@ -34,7 +32,6 @@ from Packets.Messages.Client.Alliance.Edit_Settings_Message import Edit_Settings
 # Accept or decline request
 # Invite member
 from Packets.Messages.Client.Alliance.Search_Message import Search_Message
-from Packets.Messages.Client.Alliance.Send_Club_Mail_Message import SendClubMail
 
 # Friend
 from Packets.Messages.Client.Friend.AddFriend import AddFriend
@@ -78,7 +75,6 @@ packets = {
     # 14322: Invite_Member_Message,
     # 14323: Accept_Join_Invite_Message,
     14324: Search_Message,
-    14330: SendClubMail,
 
     # Friendly battle lobby
     14350: TeamCreateMessage,
@@ -88,9 +84,7 @@ packets = {
     14362: TeamSetRankedLocationMessage,
     14363: TeamSetLocationMessage,
     14366: PlayerStatusMessage,
-    14372: TeamUseGadgetMessage,
 
     14403: GetLeaderboardMessage,
     14600: AvatarNameCheckRequestMessage,
-    14777: DoNotDistrubMessage
 }

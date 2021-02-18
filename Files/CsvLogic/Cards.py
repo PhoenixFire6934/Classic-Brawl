@@ -52,13 +52,6 @@ class Cards:
                                     cards_file.close()
                                     return id
 
-                            elif type == 5:
-                                if row[3] == name and row[5].lower() == '5':
-                                    id = line_count - 3
-                                    char_file.close()
-                                    cards_file.close()
-                                    return id
-
 
     def get_unlocked_spg(self, brawler_id):
         char_file =  open('GameAssets/csv_logic/characters.csv')
@@ -104,7 +97,7 @@ class Cards:
                 if line_count == 0 or line_count == 1:
                     line_count += 1
                 else:
-                    if row[5].lower() == '0':
+                    if row[4].lower() == '0':
                         CardUnlockID.append(line_count - 2)
                     line_count += 1
 

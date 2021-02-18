@@ -1,10 +1,10 @@
 from Packets.Messages.Server.Login.LoginOkMessage import LoginOkMessage
 from Packets.Messages.Server.Home.OwnHomeDataMessage import OwnHomeDataMessage
 from Packets.Messages.Server.Alliance.My_Alliance_Message import MyAllianceMessage
-from Packets.Messages.Server.Gameroom.DoNotDistrubOkMessage import DoNotDistrubOkMessage
 from Packets.Messages.Server.Gameroom.TeamGameroomDataMessage import TeamGameroomDataMessage
 from Packets.Messages.Server.Alliance.AllianceStreamMessage import AllianceStreamMessage
 from Packets.Messages.Server.Friend.FriendListMessage import FriendListMessage
+from Packets.Messages.Server.UnknownServerPackets import UnknownServerPackets
 
 from Packets.Messages.Server.Login.LoginFailedMessage import LoginFailedMessage
 from Utils.Reader import BSMessageReader
@@ -21,15 +21,18 @@ class LoginMessage(BSMessageReader):
         self.player.high_id = self.read_int()
         self.player.low_id = self.read_int()
         self.player.token = self.read_string()
+
         self.major = self.read_int()
         self.minor = self.read_int()
         self.build = self.read_int()
+
         self.fingerprint_sha = self.read_string()
+
         self.read_int()
+
         OpenUDID = self.read_string()
         AndroidID = self.read_string()
         OSVersion = self.read_string()
-
 
     def process(self):
         if self.major != 15:
@@ -46,6 +49,7 @@ class LoginMessage(BSMessageReader):
             LoginOkMessage(self.client, self.player).send()
             DataBase.loadAccount(self) # load account
             OwnHomeDataMessage(self.client, self.player).send()
+            DataBase.loadGameroom(self)
             try:
                 MyAllianceMessage(self.client, self.player, self.player.club_low_id).send()
                 AllianceStreamMessage(self.client, self.player, self.player.club_low_id, 0).send()
@@ -53,10 +57,9 @@ class LoginMessage(BSMessageReader):
             except:
                 MyAllianceMessage(self.client, self.player, 0).send()
                 AllianceStreamMessage(self.client, self.player, 0, 0).send()
+
             FriendListMessage(self.client, self.player).send()
 
-            if self.player.do_not_distrub == 1:
-                DoNotDistrubOkMessage(self.client, self.player).send()
             if self.player.room_id > 0:
                 TeamGameroomDataMessage(self.client, self.player).send()
             
@@ -67,5 +70,4 @@ class LoginMessage(BSMessageReader):
 
             LoginOkMessage(self.client, self.player).send()
             OwnHomeDataMessage(self.client, self.player).send()
-            MyAllianceMessage(self.client, self.player, self.player.club_low_id).send()
-            
+            #MyAllianceMessage(self.client, self.player, self.player.club_low_id).send()

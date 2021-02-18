@@ -54,10 +54,6 @@ class EndClientTurn(BSMessageReader):
             LogicPurchaseDoubleCoinsCommand.decode(self)
             LogicPurchaseDoubleCoinsCommand.process(self)
 
-        elif self.commandID == 527:
-            LogicSetPlayerNameColorCommand.decode(self)
-            LogicSetPlayerNameColorCommand.process(self)
-
         elif self.commandID == 529:
             LogicSetPlayerStarpowerCommand.decode(self)
             LogicSetPlayerStarpowerCommand.process(self)

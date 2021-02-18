@@ -9,5 +9,4 @@ class TeamLeftMessage(Writer):
         self.player = player
 
     def encode(self):
-        self.writeInt(0)
-
+        self.writeInt(0) # Error TID

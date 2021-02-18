@@ -84,7 +84,6 @@ class PlayerProfileMessage(Writer):
                 self.writeString(player["name"])
                 self.writeVint(100)
                 self.writeVint(28000000 + player["profileIcon"])  # Profile icon
-                self.writeVint(43000000 + player["namecolor"])  # Name color
 
                 if player["clubID"] != 0:
                     DataBase.loadClub(self, player["clubID"])

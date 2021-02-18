@@ -17,10 +17,10 @@ class AllianceDataMessage(Writer):
     def encode(self):
         DataBase.loadClub(self, self.clubLowID)
 
-        if self.player.club_low_id != 0:
+        if self.player.club_low_id == 0:
             self.writeVint(0)
         else:
-            self.writeVint(2)
+            self.writeVint(1)
 
         # ClubID
         self.writeInt(0)                            # Club high id
@@ -44,8 +44,6 @@ class AllianceDataMessage(Writer):
         self.writeVint(0)
         self.writeString(self.clubregion)           # Region
         self.writeVint(0)
-        self.writeVint(self.clubfriendlyfamily)     # Family friendly status | 0 = Can be activated, 1 = Activated
-
         self.writeString(self.clubdescription)      # Description
 
         # Members list
@@ -54,15 +52,13 @@ class AllianceDataMessage(Writer):
         for id in self.plrids:
             DataBase.GetMemberData(self, id)
 
-            self.writeInt(0)                                    # High Id
-            self.writeInt(id)                      # Low Id
+            self.writeInt(0)  # High Id
+            self.writeInt(id) # Low Id
+            self.writeString(self.plrname)
 
             self.writeVint(self.plrrole)                        # player club role | 0 = Nothing, 1 = Member, 2 = President, 3 = Senior, 4 = Vice President
+            self.writeVint(0)
             self.writeVint(self.plrtrophies)                    # trophies
             self.writeVint(2)                                   # Player states | 0 = last online 1 hour ago, 1 = battling, 2 = menu, 4 = matchmaking, 6 = last online 1 month ago, 7 = spectating, 8 = practicing
             self.writeVint(0)
-            self.writeVint(0)
-            self.writeString(self.plrname)
-            self.writeVint(100)
-            self.writeVint(28000000 + self.plricon)
-            self.writeVint(43000000 + self.plrnamecolor)
+            self.writeScId(28, self.plricon)

@@ -7,14 +7,14 @@ class TeamGameroomDataMessage(Writer):
         super().__init__(client)
         self.id = 24124
         self.player = player
-        self.playerCount = 2
+        self.playerCount = 1
 
     def encode(self):
         DataBase.loadGameroom(self)
         if self.player.room_id != 0:
-            self.writeVint(1)
+            self.writeVint(self.roomType)
             self.writeVint(0)
-            self.writeVint(1)
+            self.writeVint(10)
             self.writeVint(0)
             self.writeVint(0)
             self.writeVint(0)
@@ -30,15 +30,18 @@ class TeamGameroomDataMessage(Writer):
 
             self.writeScId(15, self.mapID)               # MapID
 
+            self.writeVint(self.playerCount)
+
             for player,values in self.playersdata.items():
                 # Player
-                self.writeVint(self.playerCount)
                 self.writeVint(self.playersdata[player]["IsHost"])       # Gameroom owner boolean
                 self.writeInt(0)                                      # HighID
                 self.writeInt(int(self.playersdata[player]["LowID"]))         # LowID
+                self.writeString(self.playersdata[player]["name"])                  # Player name
+                self.writeVint(3)
 
                 self.writeScId(16, self.playersdata[player]["brawlerID"])             # BrawlerID
-                self.writeVint(0)                                    #
+                self.writeScId(29, self.playersdata[player]["skinID"])                                 #
                 self.writeVint(99999)                                    # Unknown
                 self.writeVint(99999)                                    # Unknown
                 self.writeVint(10)                                   # Power level
@@ -47,22 +50,14 @@ class TeamGameroomDataMessage(Writer):
                 self.writeVint(self.playersdata[player]["Ready"])    # Is ready
                 self.writeVint(self.playersdata[player]["Team"])     # Team | 0: Blue, 1: Red
                 self.writeVint(0)
-                self.writeVint(2)
 
-                self.writeString(self.playersdata[player]["name"])                  # Player name
-                self.writeVint(100)
-                self.writeVint(28000000 + self.playersdata[player]["profileIcon"])  # Player icon
-                self.writeVint(43000000 + self.playersdata[player]["namecolor"])    # Player name color
-
-                self.writeScId(23, self.playersdata[player]["starpower"])       # Starpower
-                self.writeScId(23, self.playersdata[player]["gadget"])          # Gadget                                        # Gadget
+                self.writeVint(0)
+                self.writeVint(0)
+                self.writeVint(0)
 
             self.writeVint(0)
             self.writeVint(0)
-            self.writeVint(0)
-            if self.useGadget:
-                self.writeVint(6)
-            else:
-                self.writeVint(2)
+
+            self.writeBoolean(False)
         else:
             print(self.player.room_id)

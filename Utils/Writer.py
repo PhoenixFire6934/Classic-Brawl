@@ -46,7 +46,7 @@ class Writer:
             self.writeInt16(self.version)
         else:
             self.writeInt16(0)
-        self.buffer += packet + b'\xff\xff\x00\x00\x00\x00\x00'
+        self.buffer += packet
         self.client.send(self.buffer)
         if packet_settings["ShowPacketsInLog"] == True:
             print(self.id, self.__class__.__name__)
@@ -61,7 +61,7 @@ class Writer:
                 self.writeInt16(self.version)
             else:
                 self.writeInt16(0)
-            self.buffer += packet + b'\xff\xff\x00\x00\x00\x00\x00'
+            self.buffer += packet
             for Client in range(self.player.ClientDict["ClientCounts"]):
                 for client_id, value in self.player.ClientDict["Clients"].items():
                     DataBase.loadOtherAccount(self, int(client_id))
@@ -80,7 +80,7 @@ class Writer:
             self.writeInt16(self.version)
         else:
             self.writeInt16(0)
-        self.buffer += packet + b'\xff\xff\x00\x00\x00\x00\x00'
+        self.buffer += packet
         for Client in range(self.player.ClientDict["ClientCounts"]):
             for client_id, value in self.player.ClientDict["Clients"].items():
                 DataBase.loadOtherAccount(self, int(client_id))
@@ -100,7 +100,7 @@ class Writer:
                 self.writeInt16(self.version)
             else:
                 self.writeInt16(0)
-            self.buffer += packet + b'\xff\xff\x00\x00\x00\x00\x00'
+            self.buffer += packet
             for PlayerSocket in range(self.player.ClientDict["ClientCounts"]):
                 self.player.ClientDict["Clients"][str(low_id)]["SocketInfo"].send(self.buffer)
                 break

@@ -1,4 +1,4 @@
-from Packets.Messages.Server.Home.AvatarNameCheckResponseMessage import AvatarNameCheckResponseMessage
+from Packets.Commands.Server.LogicChangeAvatarNameCommand import LogicChangeAvatarNameCommand
 
 from Utils.Reader import BSMessageReader
 
@@ -13,4 +13,4 @@ class AvatarNameCheckRequestMessage(BSMessageReader):
         self.player.name = self.read_string()
 
     def process(self):
-        AvatarNameCheckResponseMessage(self.client, self.player).send()
+        LogicChangeAvatarNameCommand(self.client, self.player, 1).send()
