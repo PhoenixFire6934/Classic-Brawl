@@ -82,7 +82,7 @@ class Players:
 		brawlers_skins.update({f'{id}': 0})
 
 	name = "Guest"
-	player_experience = 0
+	player_experience = 999999
 	profile_icon = 0
 	name_color = 0
 	do_not_distrub = 0

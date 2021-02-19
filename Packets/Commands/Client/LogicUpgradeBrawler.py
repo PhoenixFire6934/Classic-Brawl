@@ -16,7 +16,6 @@ class Upgrade_Brawler(BSMessageReader):
         self.read_Vint()                  # csvID
         self.BrawlerID = self.read_Vint() # BrawlerID
 
-
     def process(self):
         self.player.Brawler_level[str(self.BrawlerID)] += 1
         DataBase.replaceValue(self, 'brawlerPowerLevel', self.player.Brawler_level)

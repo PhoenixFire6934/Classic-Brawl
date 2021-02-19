@@ -11,7 +11,8 @@ class GetLeaderboardGlobalOkMessage(Writer):
         self.players = players
 
     def encode(self):
-        self.writeBoolean(True)
+        self.indexOfPlayer = 1
+        self.writeVint(1)
         self.writeVint(0)
         self.writeVint(0)
         self.writeString()
@@ -20,16 +21,22 @@ class GetLeaderboardGlobalOkMessage(Writer):
         self.writeVint(len(self.players)) # Players Count
 
         for player in self.players:
-
+            if player["lowID"] == self.player.low_id:
+                self.indexOfPlayer = self.players.index(player) + 1
             self.writeVint(0) # High ID
-            self.writeVint(1) # Low ID
+            self.writeVint(player['lowID']) # Low ID
 
             self.writeVint(1)
             self.writeVint(player['trophies']) # Player Trophies
 
             self.writeVint(1)
 
-            self.writeString() # Club Name
+            if player['clubID'] > 0:
+                DataBase.loadClub(self, player['clubID'])
+                self.writeString(self.clubName)  # Club Name
+            else:
+                self.writeString()  # Club Name
+
             self.writeString(player['name']) # Player Name
 
             self.writeVint(1) # Player Level
@@ -39,8 +46,7 @@ class GetLeaderboardGlobalOkMessage(Writer):
 
 
         self.writeVint(0)
+        self.writeVint(self.indexOfPlayer)
         self.writeVint(0)
         self.writeVint(0)
-        self.writeVint(0)
-
         self.writeString("RO")

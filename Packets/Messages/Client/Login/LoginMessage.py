@@ -21,11 +21,15 @@ class LoginMessage(BSMessageReader):
         self.player.high_id = self.read_int()
         self.player.low_id = self.read_int()
         self.player.token = self.read_string()
+
         self.major = self.read_int()
         self.minor = self.read_int()
         self.build = self.read_int()
+
         self.fingerprint_sha = self.read_string()
+
         self.read_int()
+
         OpenUDID = self.read_string()
         AndroidID = self.read_string()
         OSVersion = self.read_string()
@@ -53,13 +57,17 @@ class LoginMessage(BSMessageReader):
             except:
                 MyAllianceMessage(self.client, self.player, 0).send()
                 AllianceStreamMessage(self.client, self.player, 0, 0).send()
+
             FriendListMessage(self.client, self.player).send()
 
             if self.player.do_not_distrub == 1:
                 DoNotDistrubOkMessage(self.client, self.player).send()
-            if self.player.room_id > 0:
-                TeamGameroomDataMessage(self.client, self.player).send()
-            
+            try:
+                DataBase.loadGameroom(self)
+                if self.player.room_id > 0:
+                    TeamGameroomDataMessage(self.client, self.player).send()
+            except:
+                pass
         else:
             self.player.low_id = Helpers.randomID(self)
             self.player.high_id = 0

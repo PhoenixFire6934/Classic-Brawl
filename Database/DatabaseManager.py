@@ -139,8 +139,8 @@ class DataBase:
         data = { 
             "room_id": self.player.room_id,
             "info": {
+                "roomType": self.roomType,
                 "mapID": self.player.map_id,
-                "useGadget": 1,
                 "PlayerCount": 1,
                 self.player.low_id: {
                     "host": 1,
@@ -164,11 +164,11 @@ class DataBase:
 
         self.playersdata = {}
         if gameroom_data:
+            self.roomType = gameroom_data[0]["info"]["roomType"]
             self.mapID = gameroom_data[0]["info"]["mapID"]
-            self.useGadget = gameroom_data[0]["info"]["useGadget"]
             self.playerCount = gameroom_data[0]["info"]["PlayerCount"]
             for Players,info in gameroom_data[0]["info"].items():
-                if Players != "PlayerCount" and Players != "mapID" and Players != "useGadget":
+                if Players != "PlayerCount" and Players != "mapID" and Players != "roomType":
                     self.playersdata[Players] = {}
                     self.playersdata[Players]["IsHost"] = info["host"]
                     self.playersdata[Players]["name"] = info["name"]

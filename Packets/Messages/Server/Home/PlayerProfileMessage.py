@@ -34,7 +34,7 @@ class PlayerProfileMessage(Writer):
                     self.writeVint(player["brawlersTrophies"][str(brawler_id)])  # Trophies
                     self.writeVint(player["brawlerPowerLevel"][str(brawler_id)])  # power lvl
 
-                self.writeVint(15)
+                self.writeVint(14)
 
                 self.writeVint(1)
                 self.writeVint(player["3vs3Wins"])  # 3v3 victories
@@ -51,8 +51,11 @@ class PlayerProfileMessage(Writer):
                 self.writeVint(5)
                 self.writeVint(len(self.UnlockedBrawlersList))  # Brawlers list
 
+                self.writeVint(6)
+                self.writeVint(0)
+
                 self.writeVint(7)
-                self.writeVint(28000000 + player["profileIcon"])  # Profile icon??
+                self.writeVint(1)  # Profile icon??
 
                 self.writeVint(8)
                 self.writeVint(player["soloWins"])  # Solo victories
@@ -74,12 +77,6 @@ class PlayerProfileMessage(Writer):
 
                 self.writeVint(14)
                 self.writeVint(1)  # Highest power play rank
-
-                self.writeVint(15)
-                self.writeVint(15)  # most challenge wins
-
-                self.writeVint(16)
-                self.writeVint(20)
 
                 self.writeString(player["name"])
                 self.writeVint(100)
