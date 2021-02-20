@@ -13,11 +13,11 @@ class LoginOkMessage(Writer):
     def encode(self):
         # Account ID
         self.writeInt(self.player.high_id)
-        self.writeInt(1)
+        self.writeInt(self.player.low_id)
 
         # Home ID
         self.writeInt(self.player.high_id)
-        self.writeInt(1)
+        self.writeInt(self.player.low_id)
 
         self.writeString(self.player.token)  # Pass Token
         self.writeString() # Facebook ID
