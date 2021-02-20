@@ -18,9 +18,9 @@ class AllianceDataMessage(Writer):
         DataBase.loadClub(self, self.clubLowID)
 
         if self.player.club_low_id != 0:
-            self.writeVint(0)
+            self.writeBoolean(False)
         else:
-            self.writeVint(2)
+            self.writeBoolean(True)
 
         # ClubID
         self.writeInt(0)                            # Club high id
@@ -29,22 +29,20 @@ class AllianceDataMessage(Writer):
         self.writeString(self.clubName)             # Club name
 
         # Badge
-        self.writeVint(8)
-        self.writeVint(self.clubbadgeID)            # Club badge id
+        self.writeScId(8, self.clubbadgeID) # Club badge id
 
-        # Club settings
+        # Club data
         self.writeVint(self.clubtype)               # Club type [1 = open, 2 = invite only, 3 = closed]
-        self.writeVint(len(self.plrids))        # Club members count
-
-        # Club trophies
+        self.writeVint(len(self.plrids))            # Club members count
         self.writeVint(self.clubtrophies)           # Club total trophies
         self.writeVint(self.clubtrophiesneeded)     # Club required trophies
 
+        self.writeScId(25, 0) # SCID
+
         # Club Info
-        self.writeVint(0)
         self.writeString(self.clubregion)           # Region
+
         self.writeVint(0)
-        self.writeVint(self.clubfriendlyfamily)     # Family friendly status | 0 = Can be activated, 1 = Activated
 
         self.writeString(self.clubdescription)      # Description
 
@@ -54,14 +52,15 @@ class AllianceDataMessage(Writer):
         for id in self.plrids:
             DataBase.GetMemberData(self, id)
 
-            self.writeInt(0)                                    # High Id
-            self.writeInt(id)                      # Low Id
+            self.writeInt(0)  # High Id
+            self.writeInt(id) # Low Id
 
-            self.writeVint(self.plrrole)                        # player club role | 0 = Nothing, 1 = Member, 2 = President, 3 = Senior, 4 = Vice President
-            self.writeVint(self.plrtrophies)                    # trophies
-            self.writeVint(2)                                   # Player states | 0 = last online 1 hour ago, 1 = battling, 2 = menu, 4 = matchmaking, 6 = last online 1 month ago, 7 = spectating, 8 = practicing
+            self.writeVint(self.plrrole)     # player club role | 0 = Nothing, 1 = Member, 2 = President, 3 = Senior, 4 = Vice President
+            self.writeVint(self.plrtrophies) # trophies
+            self.writeVint(2)                # Player states | 0 = last online 1 hour ago, 1 = battling, 2 = menu, 4 = matchmaking, 6 = last online 1 month ago, 7 = spectating, 8 = practicing
             self.writeVint(0)
-            self.writeVint(0)
+            self.writeBoolean(False) # Do not disturb
+
             self.writeString(self.plrname)
             self.writeVint(100)
             self.writeVint(28000000 + self.plricon)

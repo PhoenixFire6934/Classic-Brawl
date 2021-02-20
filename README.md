@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to Classic-Brawl 👋</h1>
 
-Open source Brawl Stars server emulator for version 26 of the game!
+Open source Brawl Stars server emulator for version 24 of the game!
 
 
 ![ScreenShot](https://cdn.discordapp.com/attachments/704364452891590778/789482341209866280/Screenshot_20201218-151815_Brawl_Client.jpg) 

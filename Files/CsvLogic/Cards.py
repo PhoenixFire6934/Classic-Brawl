@@ -14,7 +14,7 @@ class Cards:
                 if line_count == 0 or line_count == 1:
                     line_count += 1
                 else:
-                    if row[5].lower() == '4' or row[5].lower() == '5':
+                    if row[5].lower() == '4' or row[4].lower() != 'true':
                         CardSkillsID.append(line_count - 2)
                     line_count += 1
 
@@ -84,7 +84,7 @@ class Cards:
                             line_count += 1
                         else:
                             line_count += 1
-                            if row[5].lower() == '4' and row[3] == name and row[4] != "true" or row[3] == name and row[5].lower() == '5' and row[4] != "true":
+                            if row[5].lower() == '4' and row[3] == name and row[4] != "true":
                                 id.append(line_count - 3)
 
                     return id

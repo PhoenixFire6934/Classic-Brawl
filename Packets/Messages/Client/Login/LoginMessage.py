@@ -21,18 +21,22 @@ class LoginMessage(BSMessageReader):
         self.player.high_id = self.read_int()
         self.player.low_id = self.read_int()
         self.player.token = self.read_string()
+
         self.major = self.read_int()
         self.minor = self.read_int()
         self.build = self.read_int()
+        print(self.major, self.minor, self.build)
         self.fingerprint_sha = self.read_string()
+
         self.read_int()
+
         OpenUDID = self.read_string()
         AndroidID = self.read_string()
         OSVersion = self.read_string()
 
 
     def process(self):
-        if self.major != 26:
+        if self.major != 24:
             self.player.err_code = 8
             LoginFailedMessage(self.client, self.player, "Your client is outdated, click below to download the new version!").send()
 
@@ -46,6 +50,7 @@ class LoginMessage(BSMessageReader):
             LoginOkMessage(self.client, self.player).send()
             DataBase.loadAccount(self) # load account
             OwnHomeDataMessage(self.client, self.player).send()
+
             try:
                 MyAllianceMessage(self.client, self.player, self.player.club_low_id).send()
                 AllianceStreamMessage(self.client, self.player, self.player.club_low_id, 0).send()
@@ -53,12 +58,17 @@ class LoginMessage(BSMessageReader):
             except:
                 MyAllianceMessage(self.client, self.player, 0).send()
                 AllianceStreamMessage(self.client, self.player, 0, 0).send()
+
             FriendListMessage(self.client, self.player).send()
 
             if self.player.do_not_distrub == 1:
                 DoNotDistrubOkMessage(self.client, self.player).send()
-            if self.player.room_id > 0:
-                TeamGameroomDataMessage(self.client, self.player).send()
+            try:
+                DataBase.loadGameroom(self)
+                if self.player.room_id > 0:
+                    TeamGameroomDataMessage(self.client, self.player).send()
+            except:
+                pass
             
         else:
             self.player.low_id = Helpers.randomID(self)
@@ -68,4 +78,3 @@ class LoginMessage(BSMessageReader):
             LoginOkMessage(self.client, self.player).send()
             OwnHomeDataMessage(self.client, self.player).send()
             MyAllianceMessage(self.client, self.player, self.player.club_low_id).send()
-            

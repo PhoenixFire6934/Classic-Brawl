@@ -12,8 +12,8 @@
     "SupportedContentCreator": "",
     "Maintenance": false,
     "Patch": false,
-    "PatchUrl": "http://192.168.0.103:8080/",
-    "UpdateUrl": "https://github.com/PhoenixFire6879/Classic-Brawl/tree/main",
+    "PatchUrl": "http://192.168.1.98:8080/",
+    "UpdateUrl": "https://github.com/PhoenixFire6879/Classic-Brawl/tree/v24",
     "BrawlerTrophies": 0,
     "BrawlerTrophiesForRank": 0,
     "BrawlerPowerLevel": 0,
@@ -26,7 +26,7 @@
             "Off": "off is like the original brawl stars so you you're brawlers will save and you can get it from boxes or offers and club bot"
         }
     ],
-    "UnlockedBrawlersOption": "Off",
+    "UnlockedBrawlersOption": "All",
     "UnlockedBrawler":[
         {
             "shelly": 1,
@@ -60,10 +60,7 @@
             "sandy": 0, 
             "bea": 0,
             "emz": 0,
-            "mr.p": 0,
-            "max": 0,
-            "jacky": 0, 
-            "sprout": 0
+            "max": 0
         }
     ]
   }

@@ -34,4 +34,3 @@ class JoinableAllianceListMessage(Writer):
 
             self.writeString(self.clubregion)                # Region
             self.writeVint(self.clubmembercount)             # Members online
-            self.writeVint(self.clubfriendlyfamily)          # Family friendly

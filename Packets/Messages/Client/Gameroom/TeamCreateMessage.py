@@ -16,15 +16,17 @@ class TeamCreateMessage(BSMessageReader):
         self.mapSlot = self.read_Vint()
         self.player.map_id = self.read_Vint()
         self.roomType = self.read_Vint()
+        self.player.room_id = random.randint(0, 2147483647)
 
-        if self.player.map_id == -64:
+        print(self.player.map_id, self.mapSlot, self.roomType)
+
+        if self.player.map_id == -64 or self.mapSlot == -64:
             self.mapSlot = 0
-            self.mapID = 7
+            self.player.map_id = 7
         else:
             self.player.map_id = EventSlots.maps[self.mapSlot - 1]['ID']
 
     def process(self):
-        self.player.room_id = random.randint(0, 2147483647)
         DataBase.replaceValue(self, 'roomID', self.player.room_id)
 
         DataBase.createGameroomDB(self)

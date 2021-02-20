@@ -2,7 +2,7 @@ import time
 
 class EventSlots:
     Timer = 86400
-
+    # map id + 3
     maps = [
         # Status = [3 = Nothing, 2 = Star Token, 1 = New Event]
         {
@@ -27,14 +27,14 @@ class EventSlots:
         },
 
         {
-            'ID': 0,
+            'ID': 21,
             'Status': 3,
             'Ended': False,
             'Modifier': 0
         },
 
         {
-            'ID': 38,
+            'ID': 35,
             'Status': 3,
             'Ended': False,
             'Modifier': 0
@@ -48,25 +48,10 @@ class EventSlots:
         },
 
         {
-            'ID': 202,
+            'ID': 187,
             'Status': 3,
             'Ended': False,
-            'Modifier': 0
-        },
-
-        {
-            'ID': 97,
-            'Status': 3,
-            'Ended': False,
-            'Modifier': 0
-        },
-
-        {
-            'ID': 167,
-            'Status': 100,
-            'Ended': True,
             'Modifier': 0
         }
-
 
     ]
