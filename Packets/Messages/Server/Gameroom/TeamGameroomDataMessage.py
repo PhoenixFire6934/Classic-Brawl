@@ -7,7 +7,7 @@ class TeamGameroomDataMessage(Writer):
         super().__init__(client)
         self.id = 24124
         self.player = player
-        self.playerCount = 2
+        self.playerCount = 1
 
     def encode(self):
         DataBase.loadGameroom(self)
