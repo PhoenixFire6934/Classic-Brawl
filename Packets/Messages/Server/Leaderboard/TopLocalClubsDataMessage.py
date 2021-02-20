@@ -11,6 +11,7 @@ class GetLeaderboardClubLocalOkMessage(Writer):
         self.type = type
 
     def encode(self):
+        self.indexOfClub = 0
         self.writeVint(2)
         self.writeVint(0)
         self.writeVint(0)
