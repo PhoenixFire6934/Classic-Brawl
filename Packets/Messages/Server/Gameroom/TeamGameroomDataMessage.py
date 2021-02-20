@@ -13,7 +13,7 @@ class TeamGameroomDataMessage(Writer):
         DataBase.loadGameroom(self)
         if self.player.room_id != 0:
             self.writeVint(self.roomType)
-            self.writeVint(0)
+            self.writeBoolean(False)
             self.writeVint(10)
 
             self.writeInt(0) # Gameroom HighID
