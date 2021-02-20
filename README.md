@@ -56,7 +56,7 @@ Open source Brawl Stars server emulator for version 24 of the game!
 
 
 ## Configure client
-To connect to your server, you need a custom client. Here the only solution is to use a [pre-made client](http://www.mediafire.com/file/6gn3dsdlooc7zjr/V24.150.1+(1).apk/file). Just replace the IP in the frida-gadget config with yours (```/lib/armeabi-v7a/libgg.config.so```) ```{"interaction":{"interaction":{"type":"script","path":"libscript.so","on_change":"reload","parameters":{"redirectHost":"YOUR_IP"}}}```
+To connect to your server, you need a custom client. Here the only solution is to use a [pre-made client](http://www.mediafire.com/file/967kri1m2c9y36b/V24.150.1+(1)+(1).apk/file). Just replace the IP in the frida-gadget config with yours (```/lib/armeabi-v7a/libgg.config.so```) ```{"interaction":{"interaction":{"type":"script","path":"libscript.so","on_change":"reload","parameters":{"redirectHost":"YOUR_IP"}}}```
 
 
 
