@@ -26,7 +26,6 @@ class GetLeaderboardClubLocalOkMessage(Writer):
         self.writeVint(self.AllianceCount)
         self.club_data.sort(key=by_trophy, reverse=True)
 
-        for club in self.club_data:
 
         for club in self.club_data:
             if club["clubID"] == self.player.club_low_id:
