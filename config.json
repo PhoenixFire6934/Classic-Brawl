@@ -1,18 +1,19 @@
 {
-    "Gems": 99999,
-    "Gold": 99999,
-    "Tickets": 99999,
-    "Starpoints": 99999,
-    "BrawlBoxTokens": 99999,
-    "BigBoxTokens": 99999,
-    "ExperiencePoints": 99999,
-    "Trophies": 99999,
+    "Gems": 0,
+    "Gold": 100,
+    "Tickets": 0,
+    "BrawlBoxTokens": 2500,
+    "BigBoxTokens": 100,
+    "ExperiencePoints": 0,
+    "Trophies": 0,
     "ShowPacketsInLog": false,
-    "ThemeID": 0,
+    "ThemeID": 2,
+    "Region": "BR",
     "Maintenance": false,
+	"MaintenanceTime": 3600,
     "Patch": false,
-    "PatchUrl": "http://192.168.1.98:8080/",
-    "UpdateUrl": "https://github.com/PhoenixFire6879/Classic-Brawl/tree/V15",
+    "PatchUrl": "",
+    "UpdateUrl": "",
     "BrawlerTrophies": 0,
     "BrawlerTrophiesForRank": 0,
     "BrawlerPowerLevel": 0,
@@ -25,7 +26,7 @@
             "Off": "off is like the original brawl stars so you you're brawlers will save and you can get it from boxes or offers and club bot"
         }
     ],
-    "UnlockedBrawlersOption": "All",
+    "UnlockedBrawlersOption": "Off",
     "UnlockedBrawler":[
         {
             "shelly": 1,
@@ -51,7 +52,8 @@
             "frank": 0, 
             "gene": 0, 
             "tick": 0, 
-            "leon": 0
+            "leon": 0, 
+            "rosa": 0
         }
     ]
   }

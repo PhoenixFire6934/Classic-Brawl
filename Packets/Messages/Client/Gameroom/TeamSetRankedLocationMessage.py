@@ -11,9 +11,16 @@ class TeamSetRankedLocationMessage(BSMessageReader):
         self.client = client
 
     def decode(self):
-        self.player.slot_index = self.read_Vint()
+        self.player.csv_id = self.read_Vint()
         self.player.map_id = EventSlots.maps[self.player.slot_index - 1]["ID"]
-
+        
+        if self.player.csv_id == 15:
+            self.roomType = 1
+        else:
+            self.roomType = 0
+            
+            
     def process(self):
         DataBase.replaceGameroomValue(self, 'mapID', self.player.map_id, "room")
+        DataBase.replaceGameroomValue(self, 'roomType', self.roomType, "room")
         TeamGameroomDataMessage(self.client, self.player).send()

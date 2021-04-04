@@ -27,14 +27,10 @@ class GetLeaderboardMessage(BSMessageReader):
             players = DataBase.getAllPlayers(self)
             players.sort(key = by_trophy, reverse=True)
 
-            for plr in players:
-                if plr['lowID'] == self.player.low_id:
-                    Localindex = players.index(plr)
-
             if self.is_local == 1 or self.type == 0:
-                GetLeaderboardLocalOkMessage(self.client, self.player, players, Localindex + 1).send()
+                GetLeaderboardLocalOkMessage(self.client, self.player, players).send()
             else:
-                GetLeaderboardGlobalOkMessage(self.client, self.player, players, Localindex + 1).send()
+                GetLeaderboardGlobalOkMessage(self.client, self.player, players).send()
 
 
         elif self.type == 2:

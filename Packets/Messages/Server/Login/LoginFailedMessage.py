@@ -29,22 +29,29 @@ class LoginFailedMessage(Writer):
         self.writeInt(self.player.err_code)
 
         self.writeString(self.fingerprint)
+
         self.writeString() # Server Host
+
         self.writeString(self.player.patch_url)
         self.writeString(self.player.update_url)
         self.writeString(self.msg)
 
         self.writeInt(self.player.maintenance_time)
-        self.writeBoolean(False) # Show helpshift support
+        self.writeBoolean(False) # Show support page
 
         self.writeString()
-        self.writeInt(0)
+        self.writeString()
 
         self.writeInt(0)
         self.writeInt(3)
 
         self.writeString()
+        self.writeString()
+
         self.writeInt(0)
+        self.writeInt(0)
+
+        self.writeBoolean(False)
         self.writeBoolean(False)
 
 

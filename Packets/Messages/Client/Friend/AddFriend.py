@@ -1,3 +1,4 @@
+from Database.DatabaseManager import DataBase
 from Utils.Reader import BSMessageReader
 
 from Packets.Messages.Server.Friend.Events.AddFriendFailedMessage import AddFriendFailedMessage
@@ -16,6 +17,11 @@ class AddFriend(BSMessageReader):
         self.LowID = self.read_int()
 
     def process(self):
+        def by_trophy(plr):
+                return plr['trophies']
+                
+        players = DataBase.getAllPlayers(self)
+        players.sort(key = by_trophy, reverse=True)
         print(self.HighID, self.LowID)
-        FriendListUpdateMessage(self.client, self.player, self.LowID).send()
+        FriendListUpdateMessage(self.client, self.player, self.LowID, players).send()
         #AddFriendFailedMessage(self.client, self.player).send()

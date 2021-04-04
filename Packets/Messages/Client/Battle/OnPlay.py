@@ -1,4 +1,5 @@
 from Packets.Messages.Server.OutOfSyncMessage import OutOfSyncMessage
+from Packets.Messages.Server.Battle.BattleTestMessage import BattleTestMessage
 
 from Utils.Reader import BSMessageReader
 
@@ -20,4 +21,10 @@ class OnPlay(BSMessageReader):
         print(self.CardID, self.MapIndex)
 
     def process(self):
-        pass
+        if self.MapIndex in [1, 3, 4]:
+            self.player.mmplayers = 6
+        if self.MapIndex in [2, 5]:
+            self.player.mmplayers = 10
+        if self.MapIndex == 6:
+            self.player.mmplayers = 6
+        BattleTestMessage(self.client, self.player, 0).send()

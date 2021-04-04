@@ -23,15 +23,15 @@ class LoginOkMessage(Writer):
         self.writeString() # Facebook ID
         self.writeString() # Gamecenter ID
 
-        self.writeInt(15)   # Major Version
-        self.writeInt(140)  # Build
+        self.writeInt(20)   # Major Version
+        self.writeInt(93)  # Build
         self.writeInt(1)    # Minor Version
 
-        self.writeString("prod")  # Environment
+        self.writeString("dev")  # Environment
 
-        self.writeInt(1)  # Session Count
+        self.writeInt(0)  # Session Count
         self.writeInt(0)  # Play Time Seconds
-        self.writeInt(0)  # Days Since Started Playing
+        self.writeInt(0) # Days Since Started Playing
 
         self.writeString()  
         self.writeString() 
@@ -40,7 +40,8 @@ class LoginOkMessage(Writer):
         self.writeInt(0)
 
         self.writeString()
-        self.writeString("RO") # Region
+
+        self.writeString("RU") # Region
         self.writeString()
 
         self.writeInt(1)

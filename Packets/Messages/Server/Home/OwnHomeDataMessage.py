@@ -4,6 +4,7 @@ from Files.CsvLogic.Cards import Cards
 from datetime import datetime
 
 from Utils.Writer import Writer
+from Utils.Helpers import Helpers
 from Database.DatabaseManager import DataBase
 
 from Logic.Shop import Shop
@@ -26,7 +27,7 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(self.player.highest_trophies)  # Player Max Reached Trophies
 
         self.writeVint(0)
-        self.writeVint(1)  # Trophy Road Reward
+        self.writeVint(self.player.trophy_road)  # Trophy Road Reward
 
         self.writeVint(99999)  # Player exp set to high number because of the name and bot battle level restriction
 
@@ -45,8 +46,8 @@ class OwnHomeDataMessage(Writer):
         for skin_id in self.player.skins_id:
             self.writeScId(29, skin_id)
 
-        self.writeVint(0)
-        self.writeVint(0)
+        self.writeBoolean(False)
+        self.writeVint(0) 
         self.writeVint(0)
 
         self.writeBoolean(False)  # "token limit reached message" if true
@@ -54,7 +55,7 @@ class OwnHomeDataMessage(Writer):
         self.writeBoolean(True)
 
         self.writeVint(self.player.tokensdoubler)  # Token doubler ammount
-        self.writeVint(240123)  # Season End Timer
+        self.writeVint(Helpers.LeaderboardTimer(self))  # Season End Timer
 
         self.writeVint(8)  # related to shop token doubler
         self.writeBoolean(True)
@@ -64,27 +65,7 @@ class OwnHomeDataMessage(Writer):
         self.writeBoolean(False) # ???
 
         #region Shop
-        self.writeVint(1)
-
-        self.writeVint(1)
-
-        self.writeVint(1)
-        self.writeVint(1)
-        self.writeVint(0)
-        self.writeVint(0)
-        self.writeVint(0)
-
-        self.writeVint(1)
-        self.writeVint(1)
-
-        self.writeVint(1)
-        self.writeVint(100)
-        self.writeVint(0)
-
-        self.writeBoolean(False)
-        self.writeVint(1)
-        self.writeBoolean(False)
-        self.writeInt(0)
+        Shop.EncodeShopOffers(self)
         #endregion
 
         self.writeVint(1) # Unknow array
@@ -92,7 +73,7 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(20)
         self.writeVint(30)
 
-        self.writeVint(200) # Battle tokens
+        self.writeVint(self.player.battle_tokens) # Battle tokens
         self.writeVint(0)  # Time till Bonus Tokens (seconds)
 
         self.writeVint(0)  # array
@@ -102,7 +83,7 @@ class OwnHomeDataMessage(Writer):
 
         self.writeScId(16, self.player.brawler_id)  # Selected Brawler
 
-        self.writeString("RO")  # Location
+        self.writeString(self.player.region)  # Location
 
         self.writeBoolean(False)
 
@@ -138,9 +119,9 @@ class OwnHomeDataMessage(Writer):
             self.writeVint(EventSlots.maps.index(map) + 1)
             self.writeVint(EventSlots.maps.index(map) + 1)
             self.writeVint(map['Ended'])  # IsActive | 0 = Active, 1 = Disabled
-            self.writeVint(EventSlots.Timer)  # Timer
+            self.writeVint(Helpers.EventTimer(self))  # Timer
 
-            self.writeVint(0)
+            self.writeVint(map['Tokens'])
             self.writeScId(15, map['ID'])
 
             self.writeVint(map['Status'])
@@ -156,7 +137,7 @@ class OwnHomeDataMessage(Writer):
 
             self.writeVint(0)
 
-        self.writeVint(0)  # array
+        self.writeVint(0)
 
         # Logic Shop
 
@@ -205,8 +186,8 @@ class OwnHomeDataMessage(Writer):
         self.writeInt(1)
         self.writeInt(self.player.theme_id)  # Theme ID
 
-        self.writeInt(0)
-        self.writeInt(1)
+        self.writeInt(self.player.high_id)
+        self.writeInt(self.player.low_id)
 
         self.writeVint(0)
 
@@ -218,11 +199,11 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(self.player.high_id)  # High Id
         self.writeVint(self.player.low_id)  # Low Id
 
-        self.writeVint(0)
-        self.writeVint(0)
+        self.writeVint(self.player.high_id)  # High Id
+        self.writeVint(self.player.low_id)  # Low Id
 
-        self.writeVint(0)
-        self.writeVint(0)
+        self.writeVint(self.player.high_id)  # High Id
+        self.writeVint(self.player.low_id)  # Low Id
 
         if self.player.name == "Guest":
             self.writeString("Guest")  # Player Name
@@ -248,7 +229,7 @@ class OwnHomeDataMessage(Writer):
                 self.writeVint(1)
 
             if index == 21:
-                index += 2
+                index += 1
             else:
                 index += 1
 
@@ -295,25 +276,18 @@ class OwnHomeDataMessage(Writer):
             self.writeVint(self.player.Brawler_level[str(brawler_id)])
 
         # Gadgets and Star Powers array
-        spgList = []
-        for id, level in self.player.Brawler_level.items():
-            if level == 8:
-                spg = Cards.get_unlocked_spg(self, int(id))
-                for i in range(len(spg)):
-                    spgList.append(spg[i])
+        self.writeVint(len(self.player.brawlers_id))  # brawlers count
 
-        self.writeVint(len(self.player.card_skills_id))  # count
-
-        for skill_id in self.player.card_skills_id:
-            self.writeVint(23)
-            self.writeVint(skill_id)
-            if skill_id in spgList:
-                self.writeVint(1)
-            else:
-                self.writeVint(0)
+        for brawler_id in self.player.brawlers_id:
+            self.writeScId(16, brawler_id)
+            self.writeVint(self.player.Brawler_starPower[str(brawler_id)])
 
         # "new" Brawler Tag array
-        self.writeVint(0)  # brawlers count
+        self.writeVint(len(self.player.brawlers_id))  # brawlers count
+
+        for brawler_id in self.player.brawlers_id:
+            self.writeScId(16, brawler_id)
+            self.writeVint(self.player.Brawler_newTag[str(brawler_id)])
 
         self.writeVint(self.player.gems)  # gems
         self.writeVint(0)
@@ -325,5 +299,5 @@ class OwnHomeDataMessage(Writer):
         self.writeVint(0)
         self.writeVint(0)
         self.writeVint(0)
-        self.writeVint(2)
+        self.writeVint(self.player.tutorial)
         self.writeVint(1550832808)

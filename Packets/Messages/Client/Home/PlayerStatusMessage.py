@@ -1,5 +1,8 @@
-from Packets.Messages.Server.Battle.MatchMakingCancelledMessage import MatchMakingCancelledMessage
+from random import choice
+from string import ascii_uppercase
+import json
 
+from Logic.Player import Players
 
 from Utils.Reader import BSMessageReader
 
@@ -15,6 +18,5 @@ class PlayerStatusMessage(BSMessageReader):
         self.status = self.read_Vint()
 
     def process(self):
-        if self.status == 4 or self.status == 12:
-            MatchMakingCancelledMessage(self.client, self.player).send()
+        pass
 

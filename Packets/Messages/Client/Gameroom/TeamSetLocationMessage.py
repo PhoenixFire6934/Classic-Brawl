@@ -10,9 +10,14 @@ class TeamSetLocationMessage(BSMessageReader):
         self.client = client
 
     def decode(self):
-        self.csvID = self.read_Vint()
+        self.player.csv_id = self.read_Vint()
         self.player.map_id = self.read_Vint()
-        self.roomType = 1
+        if self.player.csv_id == 15:
+            self.roomType = 1
+        else:
+            self.roomType = 0
+            
+        print("CSVID", self.player.csv_id)
 
     def process(self):
         DataBase.replaceGameroomValue(self, 'mapID', self.player.map_id, "room")

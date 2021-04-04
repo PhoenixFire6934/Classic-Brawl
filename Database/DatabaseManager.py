@@ -16,29 +16,30 @@ class DataBase:
             self.player.FacebookID = user_data[0]["info"]["facebookID"]
             self.player.club_low_id = user_data[0]["info"]["clubID"]
             self.player.club_role = user_data[0]["info"]["clubRole"]
+            self.player.tutorial = user_data[0]["info"]["tutorial"]
+            self.player.trophy_road = user_data[0]["info"]["leagueReward"]
             self.player.player_experience = user_data[0]["info"]["playerExp"]
+            self.player.collected_experience = user_data[0]["info"]["cappedExp"]
             self.player.solo_wins = user_data[0]["info"]["soloWins"]
             self.player.duo_wins = user_data[0]["info"]["duoWins"]
             self.player.ThreeVSThree_wins = user_data[0]["info"]["3vs3Wins"]
             self.player.gems = user_data[0]["info"]["gems"]
             self.player.gold = user_data[0]["info"]["gold"]
-            self.player.star_points = user_data[0]["info"]["starpoints"]
             self.player.tickets = user_data[0]["info"]["tickets"]
             self.player.tokensdoubler = user_data[0]["info"]["tokensdoubler"]
-            self.player.player_tokens = user_data[0]["info"]["playerTokens"]
+            self.player.battle_tokens = user_data[0]["info"]["availableTokens"]
             self.player.brawler_id = user_data[0]["info"]["brawlerID"]
             self.player.skin_id = user_data[0]["info"]["skinID"]
             self.player.profile_icon = user_data[0]["info"]["profileIcon"]
             self.player.brawl_boxes = user_data[0]["info"]["brawlBoxes"]
             self.player.big_boxes = user_data[0]["info"]["bigBoxes"]
             self.player.brawlers_skins = user_data[0]["info"]["brawlersSkins"]
-            self.player.name_color = user_data[0]["info"]["namecolor"]
-            self.player.starpower = user_data[0]["info"]["starpower"]
-            self.player.DoNotDistrubMessage = user_data[0]["info"]["DoNotDistrub"]
             self.player.room_id = user_data[0]["info"]["roomID"]
             self.player.brawlers_trophies_in_rank = user_data[0]["info"]["brawlersTrophiesForRank"]
             self.player.brawlers_upgradium = user_data[0]["info"]["brawlersUpgradePoints"]
             self.player.Brawler_level = user_data[0]["info"]["brawlerPowerLevel"]
+            self.player.Brawler_starPower = user_data[0]["info"]["brawlerStarPower"]
+            self.player.Brawler_newTag = user_data[0]["info"]["brawlerNewTag"]
             self.player.brawlers_trophies = user_data[0]["info"]["brawlersTrophies"]
 
             if self.player.UnlockType == "Off":
@@ -72,32 +73,33 @@ class DataBase:
                     "clubRole": 0,
                     "isFBLinked": 0,
                     "facebookID": self.player.FacebookID,
+                    "tutorial": self.player.tutorial,
+                    "leagueReward": self.player.trophy_road,
                     "playerExp": self.player.player_experience,
+                    "cappedExp": self.player.collected_experience,
                     "soloWins": self.player.solo_wins,
                     "duoWins": self.player.duo_wins,
                     "3vs3Wins": self.player.ThreeVSThree_wins,
                     "gems": self.player.gems,
                     "gold": self.player.gold,
-                    "starpoints": self.player.star_points,
                     "tokensdoubler": self.player.tokensdoubler,
-                    "playerTokens": self.player.player_tokens,
+                    "availableTokens": self.player.battle_tokens,
                     "tickets": self.player.tickets,
                     "brawlerID": 0,
                     "skinID": 0,
                     "trophies": self.player.trophies,
                     "highesttrophies": self.player.trophies,
                     "profileIcon": 0,
-                    "namecolor": self.player.name_color,
                     "brawlBoxes": self.player.brawl_boxes,
                     "bigBoxes": self.player.big_boxes,
-                    "starpower": 76,
-                    "DoNotDistrub": 0,
                     "roomID": 0,
                     "brawlersSkins": self.player.brawlers_skins,
                     "brawlersTrophies": self.player.brawlers_trophies,
                     "brawlersTrophiesForRank": self.player.brawlers_trophies_in_rank,
                     "brawlersUpgradePoints": self.player.brawlers_upgradium,
                     "brawlerPowerLevel": self.player.Brawler_level,
+                    "brawlerStarPower": self.player.Brawler_starPower,
+                    "brawlerNewTag": self.player.Brawler_newTag,
                     "UnlockedBrawlers": self.player.BrawlersUnlockedState
                 }
         }
@@ -220,9 +222,8 @@ class DataBase:
         gameroom_data["info"][str(low_id)]["Ready"] = self.player.isReady
         gameroom_data["info"][str(low_id)]["brawlerID"] = self.player.brawler_id
         gameroom_data["info"][str(low_id)]["skinID"] = self.player.skin_id
-        gameroom_data["info"][str(low_id)]["starpower"] = self.player.starpower
         gameroom_data["info"][str(low_id)]["profileIcon"] = self.player.profile_icon
-        gameroom_data["info"][str(low_id)]["namecolor"] = self.player.name_color
+        gameroom_data["info"][str(low_id)]["starpower"] = self.player.starpower
 
         db.update(gameroom_data, query.room_id == self.player.room_id)
 
@@ -237,7 +238,7 @@ class DataBase:
                 "clubID": clubid,
                 "name": self.clubName,                          
                 "description": self.clubdescription,
-                "region": "RO",
+                "region": self.player.region,
                 "badgeID": self.clubbadgeID,
                 "type": self.clubtype,
                 "trophiesneeded": self.clubtrophiesneeded,
@@ -280,6 +281,10 @@ class DataBase:
                     self.club_list.append(club_id)
                     self.club_data.append(clubInfo)
                     self.AllianceCount += 1
+            else:
+                break
+            #if info["members"]["totalmembers"] >= minMembers and info["members"]["totalmembers"] < maxMembers and info["type"] <= clubType and self.AllianceCount <= maxListLength:
+            
     
     def loadClub(self, clubid):
         db = TinyDB('Database/Club/club.db')
@@ -340,7 +345,6 @@ class DataBase:
                     self.plrtrophies = self.players[i]["trophies"]
                     self.plrname = self.players[i]["name"]
                     self.plricon = self.players[i]["profileIcon"]
-                    self.plrnamecolor = self.players[i]["namecolor"]
                     break
 
 
@@ -363,7 +367,6 @@ class DataBase:
         club_data["info"]['badgeID'] = inf2
         club_data["info"]['type'] = inf3
         club_data["info"]['trophiesneeded'] = inf4
-        club_data["info"]['friendlyfamily'] = inf5
 
         db.update(club_data, query.clubID == self.player.club_low_id)
 

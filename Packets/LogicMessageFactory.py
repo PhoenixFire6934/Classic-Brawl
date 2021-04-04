@@ -7,6 +7,7 @@ from Packets.Messages.Client.Gameroom.TeamLeaveMessage import TeamLeaveMessage
 from Packets.Messages.Client.Home.AskProfileMessage import AskProfileMessage
 from Packets.Messages.Client.Gameroom.TeamSetLocationMessage import TeamSetLocationMessage
 from Packets.Messages.Client.Gameroom.TeamChangeMemberSettingsMessage import TeamChangeMemberSettingsMessage
+from Packets.Messages.Client.Gameroom.TeamSetMemberReadyMessage import TeamSetMemberReadyMessage
 from Packets.Messages.Client.AnalyticsEventMessage import AnalyticsEventMessage
 from Packets.Messages.Client.Battle.AskForBattleEndMessage import AskForBattleEndMessage
 from Packets.Messages.Client.SetNameMessage import SetNameMessage
@@ -16,8 +17,10 @@ from Packets.Messages.Client.Gameroom.TeamSetRankedLocationMessage import TeamSe
 from Packets.Messages.Client.Home.PlayerStatusMessage import PlayerStatusMessage
 from Packets.Messages.Client.ClientCapabilities import ClientCapabilities
 from Packets.LogicCommandManager import EndClientTurn
-from Packets.Messages.Client.Battle.Cancel_Matchmaking import CancelMatchMaking
 from Packets.Messages.Client.Battle.OnPlay import OnPlay
+from Packets.Messages.Client.Battle.Cancel_Matchmaking import CancelMatchMaking
+from Packets.Messages.Client.Battle.PlayAgainMessage import PlayAgainMessage
+from Packets.Messages.Client.Battle.HomeBattleReplayMessage import HomeBattleReplayMessage
 
 # Alliances
 from Packets.Messages.Client.Alliance.Create_Message import Create_Message
@@ -32,6 +35,7 @@ from Packets.Messages.Client.Alliance.Edit_Settings_Message import Edit_Settings
 # Accept or decline request
 # Invite member
 from Packets.Messages.Client.Alliance.Search_Message import Search_Message
+from Packets.Messages.Client.Alliance.Send_Club_Mail_Message import SendClubMail
 
 # Friend
 from Packets.Messages.Client.Friend.AddFriend import AddFriend
@@ -56,6 +60,8 @@ packets = {
     14109: GoHomeFromOfflinePractiseMessage,
     14110: AskForBattleEndMessage,
     14113: AskProfileMessage,
+    14114: HomeBattleReplayMessage,
+    14177: PlayAgainMessage,
     14201: FacebookConnect,
     14211: UnlinkFacebookAcount,
 
@@ -75,12 +81,14 @@ packets = {
     # 14322: Invite_Member_Message,
     # 14323: Accept_Join_Invite_Message,
     14324: Search_Message,
+    14330: SendClubMail,
 
     # Friendly battle lobby
     14350: TeamCreateMessage,
     14353: TeamLeaveMessage,
     14363: TeamSetLocationMessage,
     14354: TeamChangeMemberSettingsMessage,
+    14355: TeamSetMemberReadyMessage,
     14362: TeamSetRankedLocationMessage,
     14363: TeamSetLocationMessage,
     14366: PlayerStatusMessage,

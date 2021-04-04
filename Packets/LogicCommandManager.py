@@ -3,12 +3,14 @@ from Packets.Commands.Client.LogicUpgradeBrawler import Upgrade_Brawler
 from Packets.Commands.Client.LogicSetPlayerThumbnailCommand import LogicSetPlayerThumbnailCommand
 from Packets.Commands.Client.LogicSetPlayerNameColorCommand import LogicSetPlayerNameColorCommand
 from Packets.Commands.Client.LogicPurchaseBoxCommand import LogicPurchaseBoxCommand
+from Packets.Commands.Client.LogicPurchaseBoxCommand2 import LogicPurchaseBoxCommand2
 from Packets.Commands.Client.LogicPurchaseOfferCommand import LogicPurchaseOfferCommand
 from Packets.Commands.Client.LogicSelectSkinCommand import LogicSelectSkinCommand
 from Packets.Commands.Client.LogicSetPlayerStarpowerCommand import LogicSetPlayerStarpowerCommand
 from Packets.Commands.Client.LogicPurchaseHeroLvlUpMaterialCommand import LogicPurchaseHeroLvlUpMaterialCommand
 from Packets.Commands.Client.LogicPurchaseDoubleCoinsCommand import LogicPurchaseDoubleCoinsCommand
-
+from Packets.Commands.Client.LogicRemoveNewTagBrawler import LogicRemoveNewTagBrawler
+from Database.DatabaseManager import DataBase
 
 
 class EndClientTurn(BSMessageReader):
@@ -33,7 +35,11 @@ class EndClientTurn(BSMessageReader):
         elif self.commandID == 519:
             LogicPurchaseOfferCommand.decode(self)
             LogicPurchaseOfferCommand.process(self)
-
+            
+        elif self.commandID == 203:
+            LogicPurchaseBoxCommand2.decode(self)
+            LogicPurchaseBoxCommand2.process(self)
+            
         elif self.commandID == 505:
             LogicSetPlayerThumbnailCommand.decode(self)
             LogicSetPlayerThumbnailCommand.process(self)
@@ -50,9 +56,17 @@ class EndClientTurn(BSMessageReader):
             LogicPurchaseHeroLvlUpMaterialCommand.decode(self)
             LogicPurchaseHeroLvlUpMaterialCommand.process(self)
 
+        elif self.commandID == 522:
+            LogicRemoveNewTagBrawler.decode(self)
+            LogicRemoveNewTagBrawler.process(self)
+
         elif self.commandID == 509:
             LogicPurchaseDoubleCoinsCommand.decode(self)
             LogicPurchaseDoubleCoinsCommand.process(self)
+
+        elif self.commandID == 527:
+            LogicSetPlayerNameColorCommand.decode(self)
+            LogicSetPlayerNameColorCommand.process(self)
 
         elif self.commandID == 529:
             LogicSetPlayerStarpowerCommand.decode(self)

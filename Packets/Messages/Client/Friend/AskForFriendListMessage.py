@@ -1,4 +1,5 @@
 from Packets.Messages.Server.Friend.FriendListMessage import FriendListMessage
+from Database.DatabaseManager import DataBase
 from Utils.Reader import BSMessageReader
 
 class AskForFriendListMessage(BSMessageReader):
@@ -12,4 +13,10 @@ class AskForFriendListMessage(BSMessageReader):
         pass
 
     def process(self):
-        FriendListMessage(self.client, self.player).send()
+        def by_trophy(plr):
+                return plr['trophies']
+                
+        players = DataBase.getAllPlayers(self)
+        players.sort(key = by_trophy, reverse=True)
+        FriendListMessage(self.client, self.player, players).send()
+        print("HHH")

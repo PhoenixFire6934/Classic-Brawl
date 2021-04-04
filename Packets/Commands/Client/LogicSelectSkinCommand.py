@@ -1,5 +1,4 @@
 from Database.DatabaseManager import DataBase
-from Packets.Messages.Server.Gameroom.TeamGameroomDataMessage import TeamGameroomDataMessage
 
 from Utils.Reader import BSMessageReader
 from Files.CsvLogic.Cards import Cards
@@ -32,11 +31,9 @@ class LogicSelectSkinCommand(BSMessageReader):
         DataBase.replaceValue(self, 'brawlersSkins', self.player.brawlers_skins)
 
         self.player.starpower = Cards.get_spg_by_brawler_id(self, self.player.brawler_id, 4)
+        self.player.gadget = Cards.get_spg_by_brawler_id(self, self.player.brawler_id, 5)
 
         DataBase.replaceValue(self, 'starpower', self.player.starpower)
+        DataBase.replaceValue(self, 'gadget', self.player.gadget)
 
         DataBase.replaceValue(self, 'brawlerID', self.player.brawler_id)
-
-        if self.player.room_id != 0:
-            DataBase.UpdateGameroomPlayerInfo(self, self.player.low_id)
-            TeamGameroomDataMessage(self.client, self.player).send()

@@ -67,6 +67,8 @@ class Players:
 
 
 	brawler_power_level = settings['BrawlerPowerLevel']
+	brawler_star_power = 0
+	brawler_new_tag = 1
 	brawler_trophies_for_rank = settings['BrawlerTrophiesForRank']
 	brawler_trophies = settings['BrawlerTrophies']
 	brawler_upgrade_points = settings['BrawlerUpgradePoints']
@@ -82,26 +84,26 @@ class Players:
 		brawlers_skins.update({f'{id}': 0})
 
 	name = "Guest"
+	tutorial = 1
+	trophy_road = 64
 	player_experience = 0
+	collected_experience = 0
 	profile_icon = 0
-	name_color = 0
-	do_not_distrub = 0
 	brawl_boxes = settings['BrawlBoxTokens']
 	big_boxes = settings['BigBoxTokens']
-	star_points = settings['Starpoints']
 	highest_trophies = 0
 	trophies = settings['Trophies']
 	solo_wins = 0
 	duo_wins = 0
 	ThreeVSThree_wins = 0
 	tokensdoubler = 0
-	player_tokens = 0
+	battle_tokens = 200
 	gems = settings['Gems']
 	gold = settings['Gold']
 	tickets = settings['Tickets']
 	exp_points = settings['ExperiencePoints']
 	theme_id = 41000000 + settings['ThemeID']
-	tokens = 0
+	region = settings['Region']
 
 	# Alliances
 	club_high_id = 0
@@ -209,12 +211,71 @@ class Players:
 		'23': brawler_power_level
 	}
 
+	Brawler_starPower = {
+		'0':  brawler_star_power,
+		'1':  brawler_star_power,
+		'2':  brawler_star_power,
+		'3':  brawler_star_power,
+		'4':  brawler_star_power,
+		'5':  brawler_star_power,
+		'6':  brawler_star_power,
+		'7':  brawler_star_power,
+		'8':  brawler_star_power,
+		'9':  brawler_star_power,
+		'10': brawler_star_power,
+		'11': brawler_star_power,
+		'12': brawler_star_power,
+		'13': brawler_star_power,
+		'14': brawler_star_power,
+		'15': brawler_star_power,
+		'16': brawler_star_power,
+		'17': brawler_star_power,
+		'18': brawler_star_power,
+		'19': brawler_star_power,
+		'20': brawler_star_power,
+		'21': brawler_star_power,
+		'23': brawler_star_power
+	}
+
+	Brawler_newTag = {
+		'0':  brawler_new_tag,
+		'1':  brawler_new_tag,
+		'2':  brawler_new_tag,
+		'3':  brawler_new_tag,
+		'4':  brawler_new_tag,
+		'5':  brawler_new_tag,
+		'6':  brawler_new_tag,
+		'7':  brawler_new_tag,
+		'8':  brawler_new_tag,
+		'9':  brawler_new_tag,
+		'10': brawler_new_tag,
+		'11': brawler_new_tag,
+		'12': brawler_new_tag,
+		'13': brawler_new_tag,
+		'14': brawler_new_tag,
+		'15': brawler_new_tag,
+		'16': brawler_new_tag,
+		'17': brawler_new_tag,
+		'18': brawler_new_tag,
+		'19': brawler_new_tag,
+		'20': brawler_new_tag,
+		'21': brawler_new_tag,
+		'23': brawler_new_tag
+	}
+
     # Friendly game (Teams, info, result)
 	battle_result = 0
+	csv_id = 0
 	game_type = 0
 	rank = 0
 	team = 0
 	isReady = 0
+	result = 0
+	mmplayers = 0
+	players = 0
+	skin = 0
+	selected_brawler = 0
+	battle_tick = 0
 
 	bot1 = 0
 	bot1_n = None
@@ -226,6 +287,19 @@ class Players:
 	bot4_n = None
 	bot5 = 0
 	bot5_n = None
+	bot6 = 0
+	bot6_n = None
+	bot7 = 0
+	bot7_n = None
+	bot8 = 0
+	bot8_n = None
+	bot9 = 0
+	bot9_n = None
+
+	tokens_gained = 0
+	startokens_gained = 0
+	trophies_gained = 0
+	tokens_used_in_battles = 0
 
 	def CreateNewBrawlersList():
 		Players.BrawlersUnlockedState = {}

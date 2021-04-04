@@ -18,7 +18,7 @@ class AllianceChatMessage(BSMessageReader):
         self.msg = self.read_string()
 
         if self.msg.lower() == '/stats':
-            self.bot_msg = f'Server status:\nBuild version: 1.1 (for v26.165)\nFingerprint SHA: {self.player.patch_sha}'
+            self.bot_msg = f'Server status:\nBuild version: 1.1 (for v20.93)\nFingerprint SHA: {self.player.patch_sha}'
             self.IsAcmd = True
 
         elif self.msg.lower() == '/reset':

@@ -27,25 +27,25 @@ class Shop:
     offers = [
 
         {
-            'ID': 6,
-            'OfferTitle': 'SPECIAL OFFER',
+            'ID': 4,
+            'OfferTitle': 'Coins',
+            'Cost': 2,
+            'Multiplier': 1,
+            'SkinID': 52,
+            'ShopType': 6,
+            'ShopDisplay': 0,
+            'Timer': 69420
+        },
+        
+        {
+            'ID': 10,
+            'OfferTitle': 'Coins',
             'Cost': 20,
             'Multiplier': 1,
             'SkinID': 0,
             'ShopType': 0,
-            'ShopDisplay': 0,
-            'Timer': 99999
-        },
-
-        {
-            'ID': 10,
-            'OfferTitle': 'SPECIAL OFFER',
-            'Cost': 1500,
-            'Multiplier': 1,
-            'SkinID': 0,
-            'ShopType': 3,
-            'ShopDisplay': 0,
-            'Timer': 99999
+            'ShopDisplay': 1,
+            'Timer': 69420
         },
 
 
@@ -93,3 +93,28 @@ class Shop:
     }
 
 
+    def EncodeShopOffers(self):
+        count = len(Shop.offers)
+        self.writeVint(count)
+        for i in range(count):
+            item = Shop.offers[i]
+
+            self.writeVint(1)
+
+            self.writeVint(item['ID']) # ItemID
+            self.writeVint(item['Multiplier']) # Ammount
+            self.writeVint(0)
+            self.writeVint(item['SkinID'])
+            self.writeVint(item['ShopType'])  # [0 = Offer, 2 = Skins 3 = Star Shop]
+
+            self.writeVint(item['Cost'])  # Cost
+            self.writeVint(item['Timer']) # Timer
+
+            self.writeVint(1)
+            self.writeVint(100)
+            self.writeVint(0)  # is Offer Purchased
+
+            self.writeBoolean(True)
+            self.writeVint(item['ShopDisplay'])  # [0 = Normal, 1 = Daily Deals]
+            self.writeBoolean(True)
+            self.writeInt(0)

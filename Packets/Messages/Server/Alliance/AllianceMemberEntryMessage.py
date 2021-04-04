@@ -16,7 +16,7 @@ class AllianceMemberEntryMessage(Writer):
         self.writeInt(self.player.HighID)
         self.writeInt(self.player.LowID)
         self.writeString(self.player.name) # Player name
-        self.writeVint(100)
-        self.writeVint(28000000 + self.player.profileIcon) # Profile icon
-        self.writeVint(43000000 + self.player.namecolor) # Name color
+        self.writeVint(0)
+        self.writeVint(28)
+        self.writeVint(self.player.profile_icon) # Profile icon
         self.writeHexa('''7F''')

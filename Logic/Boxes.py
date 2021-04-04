@@ -5,8 +5,8 @@ class Boxes:
             'Name': 'Brawl Box',
             'NewCharPosition': "Start",
             'MaxUpgradePoints': 2,
-            'Coins': [13, 80],
-            'UpgradePoints': [4, 50],
+            'Coins': [13, 70],
+            'UpgradePoints': [4, 25],
             'Tickets': [1, 2, 3],
             'Gems': [3, 5, 6, 8, 12],
             'TokensDoubler': [200]
@@ -16,8 +16,8 @@ class Boxes:
             'Name': 'Big Box',
             'NewCharPosition': "Middle",
             'MaxUpgradePoints': 3,
-            'Coins': [25, 150],
-            'UpgradePoints': [20, 150],
+            'Coins': [25, 105],
+            'UpgradePoints': [5, 30],
             'Gems': [3, 5, 6, 8, 12],
             'Tickets': [1, 2, 3, 5],
             'TokensDoubler': [200, 400]
@@ -28,8 +28,8 @@ class Boxes:
             'NewCharPosition': "Middle",
             'MaxUpgradePoints': 3,
             'Price': 30,
-            'Coins': [25, 150],
-            'UpgradePoints': [20, 150],
+            'Coins': [25, 105],
+            'UpgradePoints': [5, 30],
             'Gems': [3, 5, 6, 8, 12],
             'Tickets': [1, 2, 3, 5],
             'TokensDoubler': [200, 400]
@@ -40,8 +40,8 @@ class Boxes:
             'MaxUpgradePoints': 5,
             'NewCharPosition': "End",
             'Price': 80,
-            'Coins': [150, 1200],
-            'UpgradePoints': [25, 200],
+            'Coins': [100, 250],
+            'UpgradePoints': [5, 50],
             'Tickets': [1, 2, 3, 5],
             'Gems': [3, 5, 6, 8, 12],
             'TokensDoubler': [200, 400, 600]

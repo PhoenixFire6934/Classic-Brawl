@@ -58,7 +58,6 @@ class LoginMessage(BSMessageReader):
                 MyAllianceMessage(self.client, self.player, 0).send()
                 AllianceStreamMessage(self.client, self.player, 0, 0).send()
 
-            FriendListMessage(self.client, self.player).send()
 
             if self.player.room_id > 0:
                 TeamGameroomDataMessage(self.client, self.player).send()

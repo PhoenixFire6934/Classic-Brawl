@@ -12,7 +12,7 @@ class BotProfileMessage(Writer):
         self.writeVint(1)  # High Id
         self.writeVint(1)  # Low Id
 
-        self.writeBoolean(False)
+        self.writeBoolean(True)
 
         self.writeVint(len(self.player.brawlers_id))  # Unlocked Brawlers Array
 

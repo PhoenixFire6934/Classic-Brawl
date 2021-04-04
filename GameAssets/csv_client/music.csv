@@ -3,6 +3,7 @@
 "BattleMusic","music/Slugfest_ingame_02.ogg",70,"true",,,60
 ,"music/Slugfest_ingame_03.ogg",70,"true",,,90
 ,"music/Slugfest_ingame_04.ogg",70,"true",,,57
+,"music/Slugfest_ingame_05.ogg",120,"true",,,60
 ,"music/Slugfest_ingame_06.ogg",70,"true",,,75
 ,"music/Slugfest_ingame_01.ogg",70,"true",,,60
 ,"music/Slugfest_ingame_07.ogg",70,"true",,,71
@@ -12,8 +13,14 @@
 ,"music/Snow_brawl_03.ogg",70,"true",,,57
 "Cny_levels","music/cny_ingame_01.ogg",70,"true",,,64
 ,"music/cny_ingame_02.ogg",70,"true",,,56
+"Retropolis_battle","music/retro_brawl_ingame_02.ogg",70,"true",,,65
+,"music/retro_brawl_ingame_01.ogg",70,"true",,,55
+"Retropolis_menu","music/brawl_retro_menu_01.ogg",60,"true",,,66
 "MenuMusic","music/brawl_stars_menu_01.ogg",60,"true",,,153
+"MechMenuMusic","music/mech_menu_01.ogg",60,"true",,,78
 "Cnymenu_music","music/cny_brawl_menu_01.ogg",60,"true",,,178
+"Brawl_royale_menu_music","music/royale_brawl_menu_01.ogg",60,"true",,,91
+"Brawl_dawgs_menu","music/brawl_dawgs_menu_01.ogg",60,"true",,,95
 "WinJingle","music/slugfest_game_won_01.ogg",80,,1,,
 "LoseJingle","music/slugfest_game_lost_01.ogg",70,,1,,
 "DrawJingle","music/laser_game_draw_01.ogg",70,,1,,
