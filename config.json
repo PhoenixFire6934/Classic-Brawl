@@ -14,6 +14,13 @@
     "Patch": false,
     "PatchUrl": "http://192.168.0.103:8080/",
     "UpdateUrl": "https://github.com/PhoenixFire6879/Classic-Brawl/tree/main",
+    "Region": "TR",
+    "Environment": "dev",
+    "RedirectFromOnlineToOfflineGame": false,
+
+    "_READ_ME_": "The below option disables everything else in the server and shows a pop up instead of logging in, please leave it as is if you don't want it",
+    "PopUpMessage": "",    
+    
     "BrawlerTrophies": 0,
     "BrawlerTrophiesForRank": 0,
     "BrawlerPowerLevel": 0,
