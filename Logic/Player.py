@@ -41,6 +41,9 @@ class Players:
 	card_unlock_id = Cards.get_brawler_unlock()
 
 	# General player (Brawler, Currency, etc..)
+	display_message = settings["PopUpMessage"]
+	env = settings["Environment"]
+	region = settings["Region"]
 	UnlockType = settings['UnlockedBrawlersOption']
 	BrawlersDict = json.loads(json.dumps(settings['UnlockedBrawler'][0]))
 	BrawlersUnlockedState = {}
@@ -255,7 +258,7 @@ class Players:
 	rank = 0
 	team = 0
 	isReady = 0
-
+	shouldRedirect = settings['RedirectFromOnlineToOfflineGame']
 	bot1 = 0
 	bot1_n = None
 	bot2 = 0
