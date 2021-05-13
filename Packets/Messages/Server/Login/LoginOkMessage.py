@@ -27,7 +27,7 @@ class LoginOkMessage(Writer):
         self.writeInt(165)  # Build
         self.writeInt(1)    # Minor Version
 
-        self.writeString("dev")  # Environment
+        self.writeString(self.player.env)  # Environment
 
         self.writeInt(0)  # Session Count
         self.writeInt(0)  # Play Time Seconds
@@ -41,7 +41,7 @@ class LoginOkMessage(Writer):
 
         self.writeString()
 
-        self.writeString("RO") # Region
+        self.writeString(self.player.region) # Region
         self.writeString()
 
         self.writeInt(1)

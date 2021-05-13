@@ -1,6 +1,9 @@
-from Packets.Messages.Server.OutOfSyncMessage import OutOfSyncMessage
-
 from Utils.Reader import BSMessageReader
+from Packets.Messages.Server.Gameroom.TeamGameroomDataMessage import TeamGameroomDataMessage
+from Packets.Messages.Server.OutOfSyncMessage import OutOfSyncMessage
+from Database.DatabaseManager import DataBase
+from Logic.EventSlots import EventSlots
+import random
 
 
 class OnPlay(BSMessageReader):
@@ -20,4 +23,10 @@ class OnPlay(BSMessageReader):
         print(self.CardID, self.MapIndex)
 
     def process(self):
-        pass
+        if self.player.shouldRedirect:
+            self.roomType = 1
+            self.player.room_id = random.randint(0, 2147483647)
+            DataBase.replaceValue(self, 'roomID', self.player.room_id)
+            self.player.map_id = EventSlots.maps[self.MapIndex- 1]['ID']
+            DataBase.createGameroomDB(self)
+            TeamGameroomDataMessage(self.client, self.player).send()

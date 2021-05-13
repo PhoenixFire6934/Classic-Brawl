@@ -17,6 +17,11 @@ class LoginMessage(BSMessageReader):
         self.player = player
         self.client = client
 
+        if self.player.display_message != "":
+            self.shouldDisplayMessage = True
+        else:
+            self.shouldDisplayMessage = False
+
     def decode(self):
         self.player.high_id = self.read_int()
         self.player.low_id = self.read_int()
@@ -30,8 +35,14 @@ class LoginMessage(BSMessageReader):
         AndroidID = self.read_string()
         OSVersion = self.read_string()
 
-
     def process(self):
+
+        if self.shouldDisplayMessage:
+            print("[INFO] Displaying message")
+            self.player.err_code = 1
+            LoginFailedMessage(self.client, self.player, self.player.display_message).send() 
+            return
+           
         if self.major != 26:
             self.player.err_code = 8
             LoginFailedMessage(self.client, self.player, "Your client is outdated, click below to download the new version!").send()
@@ -40,6 +51,7 @@ class LoginMessage(BSMessageReader):
             LoginFailedMessage(self.client, self.player, "").send()
 
         if self.fingerprint_sha != self.player.patch_sha and self.player.patch:
+            self.player.err_code = 7
             LoginFailedMessage(self.client, self.player, "").send()
 
         elif self.player.low_id != 0:
