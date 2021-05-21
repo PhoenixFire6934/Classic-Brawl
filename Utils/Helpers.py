@@ -9,7 +9,7 @@ class Helpers:
         return ''.join(random.choice(lettersAndDigits) for i in range(40))
 
     def randomID(self):
-        length = 9
+        length = 7
         return int(''.join([str(random.randint(0, 10)) for _ in range(length)]))
 
     def randomClubID(self):

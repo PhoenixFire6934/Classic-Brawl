@@ -124,7 +124,7 @@ class OwnHomeDataMessage(Writer):
 
         self.writeScId(16, self.player.brawler_id)  # Selected Brawler
 
-        self.writeString("RO")  # Location
+        self.writeString(self.player.region)  # Location
         self.writeString("Classic Brawl")  # Supported Content Creator
 
         self.writeVint(0)  # array
