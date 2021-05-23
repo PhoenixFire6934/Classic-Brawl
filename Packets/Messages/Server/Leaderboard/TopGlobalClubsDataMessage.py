@@ -42,7 +42,16 @@ class  GetLeaderboardClubGlobalOkMessage(Writer):
 
 
         self.writeVint(0)
-        self.writeVint(0)
+        
+        check = False
+        for club in self.club_data:
+            if self.player.club_low_id == club['clubID']:
+                self.writeVint(self.club_data.index(club) + 1)
+                check = True
+                
+        if not check:
+            self.writeVint(0)
+            
         self.writeVint(0)
         self.writeVint(0)
 

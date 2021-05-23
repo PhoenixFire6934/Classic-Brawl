@@ -238,8 +238,8 @@ class OwnHomeDataMessage(Writer):
 
         self.writeVint(0)  # array
 
-        self.writeInt(0)
-        self.writeInt(1)
+        self.writeInt(self.player.high_id)
+        self.writeInt(self.player.low_id)
 
         self.writeVint(0)  # array
 

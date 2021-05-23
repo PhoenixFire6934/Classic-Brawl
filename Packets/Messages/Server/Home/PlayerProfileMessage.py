@@ -15,9 +15,11 @@ class PlayerProfileMessage(Writer):
 
     def encode(self):
         for player in self.players:
+            print(self.low_id, player["lowID"])
             if self.low_id == player["lowID"]:
                 self.UnlockedBrawlersList = []
                 for brawler_id in player["UnlockedBrawlers"]:
+                    print(brawler_id)
                     if player["UnlockedBrawlers"][str(brawler_id)] == 1:
                         self.UnlockedBrawlersList.append(int(brawler_id))
 
@@ -25,7 +27,8 @@ class PlayerProfileMessage(Writer):
                 self.writeVint(self.low_id)  # Low Id
                 self.writeVint(0)  # Unknown
 
-                self.writeVint(len(self.UnlockedBrawlersList))  # Brawlers array
+                self.writeVint(len(self.UnlockedBrawlersList))  # Brawlers arra
+                #print(UnlockedBrawlersList)
 
                 for brawler_id in self.UnlockedBrawlersList:
                     self.writeScId(16, int(brawler_id))

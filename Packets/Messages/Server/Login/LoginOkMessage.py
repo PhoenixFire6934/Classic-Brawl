@@ -1,6 +1,7 @@
 import time
 
 from Utils.Writer import Writer
+from Database.DatabaseManager import DataBase
 
 
 class LoginOkMessage(Writer):
@@ -11,6 +12,7 @@ class LoginOkMessage(Writer):
         self.version = 1
 
     def encode(self):
+        DataBase.loadAccount(self)
         # Account ID
         self.writeInt(self.player.high_id)
         self.writeInt(self.player.low_id)

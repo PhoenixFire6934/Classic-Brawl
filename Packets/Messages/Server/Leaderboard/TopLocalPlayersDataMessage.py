@@ -22,7 +22,7 @@ class GetLeaderboardLocalOkMessage(Writer):
         for player in self.players:
 
             self.writeVint(0) # High ID
-            self.writeVint(1) # Low ID
+            self.writeVint(player['lowID']) # Low ID
 
             self.writeVint(1)
             self.writeVint(player['trophies']) # Player Trophies
@@ -36,10 +36,19 @@ class GetLeaderboardLocalOkMessage(Writer):
             self.writeVint(28000000 + player['profileIcon'])
             self.writeVint(43000000 + player['namecolor'])
             self.writeVint(0)
-
+      
 
         self.writeVint(0)
-        self.writeVint(0)
+        
+        check = False
+        for player in self.players:
+            if self.player.low_id == player['lowID']:
+                self.writeVint(self.players.index(player) + 1)
+                check = True
+                
+        if not check:
+            self.writeVint(0)
+            
         self.writeVint(0)
         self.writeVint(0)
 
