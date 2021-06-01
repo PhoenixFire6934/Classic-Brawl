@@ -56,7 +56,11 @@ Open source Brawl Stars server emulator for version 26 of the game!
 
 
 ## Configure client
-To connect to your server, you need a custom client. Here the only solution is to use a [pre-made client](https://mega.nz/file/iGIGkT7S#PnbYOskUa0PGtbry4dcK1ugViwRsbGiDzP92i39KvH4). Just replace the IP in the frida-gadget config with yours (```/lib/armeabi-v7a/libcb.config.so```) ```{"interaction":{"interaction":{"type":"script","path":"libcb.script.so","on_change":"reload","parameters":{"redirectHost":"YOUR_IP"}}}```
+To connect to your server, you need a custom client APK:
+- [v26.165](https://mega.nz/file/iGIGkT7S#PnbYOskUa0PGtbry4dcK1ugViwRsbGiDzP92i39KvH4)
+- [v26.184](https://mega.nz/file/mXIUjDjK#P6JHhl3au9-0Oa9UoCq8mdW3Vg0dhz9Fsohde1DEi9E)
+
+You'll have to replace the IP in the frida-gadget config with yours (```/lib/armeabi-v7a/libcb.config.so```) ```{"interaction":{"interaction":{"type":"script","path":"libcb.script.so","on_change":"reload","parameters":{"redirectHost":"YOUR_IP"}}}```
 
 
 
