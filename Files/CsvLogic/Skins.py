@@ -1,23 +1,11 @@
-import csv
+from Files.CsvReader import CsvReader
 
 class Skins:
-
-    def get_skins_id():
-
+    def get_skins_id(self):
         SkinsID = []
+        reader = CsvReader()
+        rowData = reader.readCsv('GameAssets/csv_logic/skins.csv')
+        for row in rowData:
+            SkinsID.append(rowData.index(row))
 
-        with open('GameAssets/csv_logic/skins.csv') as csv_file:
-            csv_reader = csv.reader(csv_file, delimiter=',')
-            line_count = 0
-            for row in csv_reader:
-
-                if line_count == 0 or line_count == 1:
-                    line_count += 1
-                else:
-                    SkinsID.append(line_count - 2)
-                    line_count += 1
-
-
-            return SkinsID
-
-
+        return SkinsID
