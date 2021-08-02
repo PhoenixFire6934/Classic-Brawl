@@ -43,12 +43,8 @@ class LoginFailedMessage(Writer):
 
         self.writeString(self.player.patch_url)
         self.writeString(self.player.update_url)
-        # i am leaving these 2 above, they don't really consume much data
 
-        if self.player.err_code == 1:
-            self.writeString(self.msg)
-        else:
-            self.writeString()
+        self.writeString(self.msg)
 
         self.writeInt(self.player.maintenance_time)
         self.writeBoolean(False)
