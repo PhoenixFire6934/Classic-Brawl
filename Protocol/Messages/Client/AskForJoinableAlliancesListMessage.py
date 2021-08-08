@@ -12,5 +12,6 @@ class AskForJoinableAlliancesListMessage(Reader):
 
     def process(self, db):
         clubs = db.load_all_clubs_sorted({}, 'Trophies')
+        clubs.reverse()
 
         JoinableAllianceListMessage(self.client, self.player, clubs).send()
