@@ -6,7 +6,7 @@ class Cards:
         reader = CsvReader()
         rowData = reader.readCsv('GameAssets/csv_logic/cards.csv')
         for row in rowData:
-            if row[6].lower() == '4' or row[5].lower() == '5':
+            if row[5].lower() == '4' or row[5].lower() == '5':
                 CardSkillsID.append(rowData.index(row))
         return CardSkillsID
 
