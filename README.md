@@ -21,7 +21,7 @@ To connect to your server, a **patched client** is required.
 Download this [base APK](https://mega.nz/file/OL5SAD6Q#70_56frFtBDO5DC-g1qOzuzFv4txx_rT6Sr4m49-0NA) and change the IP in `libcb.config.so`
 
 ### Need help?
-Open an issue or contact me on **Discord**: PhoenixFire#6879
+Join us on [Discord](https://discord.gg/FdppDWGRbY)
 
 ### Special thanks
 - [athemm](https://github.com/athemm) - for making the patcher.
