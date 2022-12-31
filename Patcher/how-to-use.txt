@@ -1,5 +1,0 @@
-1. Put your files in Patch/Gamefiles folder + fingerprint.json
-2. Run Patch.py
-3. Copy the link from Patch.py. Example: "http://192.168.0.19:8080/"
-4. Open server config.json and paste the link from Patch.py in "PatchUrl": "Your_Link", and set boolean "Patch" to true
-5. Restart the server and have fun!
