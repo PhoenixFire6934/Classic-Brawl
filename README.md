@@ -25,3 +25,6 @@ Join us on [Discord](https://discord.gg/FdppDWGRbY)
 
 ### Special thanks
 - [athemm](https://github.com/athemm) - for making the patcher.
+
+### Was this useful? Support the developer with a coffee ☕
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/decosoftapps)
