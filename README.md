@@ -18,7 +18,7 @@ In a terminal, type __`pip install -r requirements.txt`__ then __`python main.py
 
 ### Configuring the client app
 To connect to your server, a **patched client** is required. 
-Download this [base APK](https://mega.nz/file/iPoQnS5Y#RPPryi677acOPd2R2TqoYYE2GLmraNa07_0NkWK4D_I) and change the IP in `libcb.config.so`
+Download this [base APK](https://mega.nz/file/CCo1VLyT#Dn2LtctiZ1DvexkaQ4uP5NCww5CsrNdkzcieaS7dDVY) and change the IP in `libcb.config.so`
 
 #### The APK was recently updated to support Android 13+
 
