@@ -3,7 +3,7 @@
 Open source Brawl Stars server emulator for version 15 of the game!
 
 
-![ScreenShot](https://media.discordapp.net/attachments/711412740199022603/811768907920179271/Screenshot_20210217-201941_ObjectBrawl.png) 
+![ScreenShot](v15screenshot.png) 
 
 
 ## What's working ?
