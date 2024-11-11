@@ -56,7 +56,7 @@ Open source Brawl Stars server emulator for version 15 of the game!
 
 
 ## Configure client
-To connect to your server, you need a custom client. Here the only solution is to use a [pre-made client](http://www.mediafire.com/file/pvwbej7vhlo07wt/Classic_Brawl_v15.apk/file). Just replace the IP in the frida-gadget config with yours (```/lib/armeabi-v7a/libmrvitalik.config.so or /lib/arm64-v8a/libmrvitalik.config.so```) ```{"interaction":{"interaction":{"type":"script","path":"libmrvitalik.script.so","on_change":"reload","parameters":{"redirectHost":"YOUR_IP","relocate":true}}}```
+To connect to your server, you need a custom client. Here the only solution is to use a [pre-made client](http://www.mediafire.com/file/pvwbej7vhlo07wt/Classic_Brawl_v15.apk/file). Just replace the IP in the frida-gadget config with yours (```/lib/armeabi-v7a/libmrvitalik.config.so or /lib/arm64-v8a/libmrvitalik.config.so```) ```{"interaction":{"interaction":{"type":"script","path":"libmrvitalik.script.so","on_change":"reload","parameters":{"redirectHost":"YOUR_IP","relocate":true}}}```, you can use "127.0.0.1" if you're hosting locally on your phone, if not, use your IPv4 
 
 
 
