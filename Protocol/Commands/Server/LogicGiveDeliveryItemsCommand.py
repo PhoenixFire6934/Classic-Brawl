@@ -14,7 +14,7 @@ class LogicGiveDeliveryItemsCommand(Writer):
             # DeliveryUnit
             self.writeVInt(y)
             if y != 100:
-                rewards = LogicBoxData.randomize(self, y)['Rewards']
+                rewards = LogicBoxData(self.player).randomize(y)['Rewards']
             else:
                 rewards = self.player.delivery_items['Items']
 

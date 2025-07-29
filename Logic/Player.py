@@ -96,12 +96,20 @@ class Player:
     brawlers_level = {}
     for x in brawlers_id:
         brawlers_level.update({f'{x}': def_level})
+    # Ensure brawlers_level is initialized for all unlocked brawlers
+    for x in brawlers_unlocked:
+        if str(x) not in brawlers_level:
+            brawlers_level.update({f'{x}': def_level})
 
     def_pp = 0
 
     brawlers_powerpoints = {}
     for x in brawlers_id:
         brawlers_powerpoints.update({f'{x}': def_pp})
+    # Ensure brawlers_powerpoints is initialized for all unlocked brawlers
+    for x in brawlers_unlocked:
+        if str(x) not in brawlers_powerpoints:
+            brawlers_powerpoints.update({f'{x}': def_pp})
 
 
     club_id = 0
