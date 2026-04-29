@@ -6,113 +6,120 @@ from Files.CsvLogic.Skins import Skins
 from Files.CsvLogic.Cards import Cards
 
 class Player:
-    try:
-        config = open('config.json', 'r')
-        content = config.read()
-    except FileNotFoundError:
-        Helpers().create_config()
-        config = open('config.json', 'r')
-        content = config.read()
-
-    settings = json.loads(content)
-
-    skins_id = Skins().get_skins_id()
-    brawlers_id = Characters().get_brawlers_id()
-
-    ID = 0
-    token = None
-
-    trophies = settings['Trophies']
-    tickets = settings['Tickets']
-    gems = settings['Gems']
-    resources = [{'ID': 1, 'Amount': settings['BrawlBoxTokens']}, {'ID': 8, 'Amount': settings['Gold']}, {'ID': 9, 'Amount': settings['BigBoxTokens']}, {'ID': 10, 'Amount': settings['StarPoints']}]
-    high_trophies = settings["Trophies"]
-    trophy_reward = 1
-    exp_points = settings['ExperiencePoints']
-    profile_icon = 0
-    name_color = 0
-    selected_brawler = 0
-    region = settings['Region']
-    content_creator = "Classic Brawl"
-    name_set = False
-    name = 'Guest'
-    map_id = 0
-    use_gadget = True
-    starpower = 76
-    gadget = 255
-    home_brawler = 0
-    home_skin = 0
-    leaderboard_type = 0
-    leaderboard_is_global = False
-    bp_activated = False
-    token_doubler = 0
-    welcome_msg_viewed = False
-    theme_id = settings['ThemeID']
-    content_creator_codes = settings['ContentCreatorCodes']
-    maintenance = settings['Maintenance']
-    maintenance_time  = settings['SecondsTillMaintenanceOver']
-    patch = settings['Patch']
-    patch_url = settings['PatchURL']
-    patch_sha = Fingerprint.loadFinger("GameAssets/fingerprint.json")
-    update_url = settings['UpdateURL']
-    clubWarsEnabled = settings["ClubWarsEnabled"] # Inefficient but the easiest i can do right now
-    status: int = 0
-    leaderboardData: list = [] # python is dumb
-
-    delivery_items = {}
-    box_rewards = {}
-
-    db = None
-
-    battle_tick = 0
-
-    unlocked_skins = []#skins_id
-
-    selected_skins = {}
-    for id in brawlers_id:
-        selected_skins.update({f"{id}": 0})
-
-    brawlers_unlocked = [0, 1]
-
-    brawlers_card_id = []
-    for x in brawlers_unlocked:
-        brawlers_card_id.append(Cards().get_unlock_by_brawler_id(x))
-
-    brawlers_spg = Cards().get_spg_id()
-
-    def_trophies = 0
-    def_high_trophies = 99999
-
-    brawlers_trophies = {}
-    for x in brawlers_id:
-        brawlers_trophies.update({f'{x}': def_trophies})
-
-    brawlers_high_trophies = {}
-    for x in brawlers_id:
-        brawlers_high_trophies.update({f'{x}': def_high_trophies})
-
-    def_level = 0
-
-    brawlers_level = {}
-    for x in brawlers_id:
-        brawlers_level.update({f'{x}': def_level})
-
-    def_pp = 0
-
-    brawlers_powerpoints = {}
-    for x in brawlers_id:
-        brawlers_powerpoints.update({f'{x}': def_pp})
-
-
-    club_id = 0
-    club_role = 0
-
-    message_tick = 0
-
-    clients = {}
-
-
     def __init__(self, device):
         self.device = device
-
-
+        
+        # Loading settings from config.json
+        try:
+            with open('config.json', 'r') as f:
+                config_content = f.read()
+        except FileNotFoundError:
+            Helpers().create_config()
+            with open('config.json', 'r') as f:
+                config_content = f.read()
+        
+        settings = json.loads(config_content)
+        
+        # Store lists as instance attributes (needed for ClientAvatar and other places)
+        self.skins_id = Skins().get_skins_id()
+        self.brawlers_id = Characters().get_brawlers_id()
+        
+        # === Account Settings ===
+        self.ID = 0
+        self.token = None
+        
+        # Resources (initial values ​​from the config, then overwritten from the database)
+        self.trophies = settings.get('Trophies', 0)
+        self.tickets = settings.get('Tickets', 0)
+        self.gems = settings.get('Gems', 0)
+        self.resources = [
+            {'ID': 1, 'Amount': settings.get('BrawlBoxTokens', 0)},
+            {'ID': 8, 'Amount': settings.get('Gold', 0)},
+            {'ID': 9, 'Amount': settings.get('BigBoxTokens', 0)},
+            {'ID': 10, 'Amount': settings.get('StarPoints', 0)}
+        ]
+        self.high_trophies = settings.get('Trophies', 0)
+        self.trophy_reward = 1
+        self.exp_points = settings.get('ExperiencePoints', 0)
+        self.profile_icon = 0
+        self.name_color = 0
+        self.selected_brawler = 0
+        self.region = settings.get('Region', 'RU')
+        self.content_creator = ""
+        self.name_set = False
+        self.name = 'Guest'
+        self.map_id = 0
+        self.use_gadget = True
+        self.starpower = None
+        self.gadget = None
+        self.home_brawler = 0
+        self.home_skin = 0
+        self.leaderboard_type = 0
+        self.leaderboard_is_global = False
+        self.bp_activated = False
+        self.token_doubler = 0
+        self.welcome_msg_viewed = False
+        
+        # Server settings (from the config)
+        self.theme_id = settings.get('ThemeID', 0)
+        self.content_creator_codes = settings.get('ContentCreatorCodes', [])
+        self.maintenance = settings.get('Maintenance', False)
+        self.maintenance_time = settings.get('SecondsTillMaintenanceOver', 3600)
+        self.patch = settings.get('Patch', False)
+        self.patch_url = settings.get('PatchURL', '')
+        self.patch_sha = Fingerprint.loadFinger("GameAssets/fingerprint.json")
+        self.update_url = settings.get('UpdateURL', '')
+        self.clubWarsEnabled = settings.get('ClubWarsEnabled', False)
+        self.status = 0
+        self.leaderboardData = []
+        
+        self.delivery_items = {}
+        self.box_rewards = {}
+        
+        self.db = None
+        self.battle_tick = 0
+        
+        # Skins
+        self.unlocked_skins = []
+        
+        self.selected_skins = {}
+        for id in self.brawlers_id:
+            self.selected_skins[f"{id}"] = 0
+        
+        # Brawlers
+        self.brawlers_unlocked = [0]
+        
+        self.brawlers_card_id = []
+        for x in self.brawlers_unlocked:
+            self.brawlers_card_id.append(Cards().get_unlock_by_brawler_id(x))
+        
+        self.brawlers_spg = []
+        
+        def_trophies = 0
+        def_high_trophies = 0
+        
+        self.brawlers_trophies = {}
+        for x in self.brawlers_id:
+            self.brawlers_trophies[f'{x}'] = def_trophies
+        
+        self.brawlers_high_trophies = {}
+        for x in self.brawlers_id:
+            self.brawlers_high_trophies[f'{x}'] = def_high_trophies
+        
+        def_level = 0
+        
+        self.brawlers_level = {}
+        for x in self.brawlers_id:
+            self.brawlers_level[f'{x}'] = def_level
+        
+        def_pp = 0
+        
+        self.brawlers_powerpoints = {}
+        for x in self.brawlers_id:
+            self.brawlers_powerpoints[f'{x}'] = def_pp
+        
+        self.club_id = 0
+        self.club_role = 0
+        self.message_tick = 0
+        
+        self.clients = {}

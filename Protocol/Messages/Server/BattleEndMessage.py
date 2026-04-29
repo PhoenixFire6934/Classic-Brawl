@@ -1,79 +1,101 @@
 from ByteStream.Writer import Writer
 
 class BattleEndMessage(Writer):
-    def __init__(self, client, player, gamemode: int, result: int, players: list):
+    def __init__(self, client, player, gamemode: int, result: int, players: list, 
+                 trophy_change: int = 0, new_trophies: int = 0,
+                 tokens_gained: int = 0, exp_gained: int = 0):
         super().__init__(client)
         self.id = 23456
         self.player  = player
         self.gamemode    = gamemode
         self.result  = result
         self.players = players
+        self.trophy_change = trophy_change
+        self.new_trophies = new_trophies
+        self.tokens_gained = tokens_gained
+        self.exp_gained = exp_gained
 
     def encode(self):
-        # Mostly taken from Icaro (IsaaSooBarr) as the comments are quite useful for everyone
-        self.writeVInt(self.gamemode)  # Battle End Game Mode, 0 = 3vs3, 2 = Showdown, 3 = Robo Rumble, 4 = Big Game, 5 = Duo Showdown, 6 = Boss Fight
-        self.writeVInt(self.result)  # Result (Victory/Defeat/Draw/Rank Score)
-        self.writeVInt(0)  # Tokens Gained
-        self.writeVInt(0)  # Trophies Result
+        current_brawler = str(self.player.home_brawler)
+        
+        self.writeVInt(self.gamemode)
+        self.writeVInt(self.result)
+        self.writeVInt(self.tokens_gained)  # Tokens Gained
+        self.writeVInt(self.trophy_change)  # Trophies Result
         self.writeVInt(0)  # Power Play Points Gained
         self.writeVInt(0)  # Doubled Tokens
         self.writeVInt(0)  # Double Token Event
-        self.writeVInt(0)  # Token Doubler Remaining
-        self.writeVInt(0)  # Big Game/Robo Rumble Time and Boss Fight Level Cleared
-        self.writeVInt(0)  # Epic Win Power Play Points Gained
+        self.writeVInt(self.player.token_doubler)  # Token Doubler Remaining
+        self.writeVInt(0)  # Big Game/Robo Rumble Time
+        self.writeVInt(0)  # Epic Win Power Play Points
         self.writeVInt(0)  # Championship Level Passed
-        self.writeVInt(0)  # Challenge Reward Type (0 = Star Points, 1 = Star Tokens)
+        self.writeVInt(0)  # Challenge Reward Type
         self.writeVInt(0)  # Challenge Reward Amount
         self.writeVInt(0)  # Championship Losses Left
         self.writeVInt(0)  # Championship Maximum Losses
         self.writeVInt(0)  # Coin Shower Event
         self.writeVInt(0)  # Underdog Trophies
-        # Maybe here I could write a few uint8s... but not very ideal
-        self.writeVInt(
-            32)  # Battle Result Type ((-16)-(-1) = Power Play Battle End, 0-15 = Practice and Championship Battle End, 16-31 = Matchmaking Battle End, 32-47 = Friendly Game Battle End, 48-63  = Spectate and Replay Battle End, 64-79 = Championship Battle End)
+        
+        # Battle Result Type
+        if self.gamemode == 2 or self.gamemode == 5:  # Showdown
+            self.writeVInt(31)
+        else:
+            self.writeVInt(16)
+
         self.writeVInt(0)  # Championship Challenge Type
-        self.writeVInt(0)  # Championship Cleared and Beta Quests
+        self.writeVInt(0)  # Championship Cleared
 
         # Players Array
-        self.writeVInt(len(self.players))  # Players
+        self.writeVInt(len(self.players))
         for hero in self.players:
             team: int = 0
-            if hero["isPlayer"] == 1 and hero["team"] == 1: team += 1
-            if hero["team"] != self.players[0]["team"]: team += 2
-            self.writeVInt(team)  # Player Team and Star Player Type
-            self.writeDataReference(*hero["id"])  # Player Brawler
-            self.writeDataReference(*hero["skin"])  # Player Skin
-            self.writeVInt(0)  # Brawler Trophies
-            self.writeVInt(0)  # Player Power Play Points
+            if hero["isPlayer"] == 1 and hero["team"] == 1: 
+                team += 1
+            if hero["team"] != self.players[0]["team"]: 
+                team += 2
+            
+            self.writeVInt(team)
+            self.writeDataReference(*hero["id"])
+            self.writeDataReference(*hero["skin"])
+            
+            if hero["isPlayer"] == 1:
+                self.writeVInt(self.new_trophies)  # Player trophies
+            else:
+                self.writeVInt(0)  # Bot trophies
+            
+            self.writeVInt(0)  # Power Play Points
             self.writeVInt(1)  # Brawler Power Level
-            self.writeBoolean(hero["isPlayer"] == 1)  # Player HighID and LowID Array
+            self.writeBoolean(hero["isPlayer"] == 1)
+            
             if hero["isPlayer"] == 1:
                 self.writeLong(self.player.ID)
-            self.writeString(hero["name"])  # Player Name
-            self.writeVInt(0)  # Player Experience Level
-            self.writeVInt(28000000)  # Player Profile Icon
-            self.writeVInt(43000000)  # Player Name Color
+            
+            self.writeString(hero["name"])
+            self.writeVInt(self.player.exp_points // 100)  # Experience Level
+            self.writeVInt(28000000)  # Profile Icon
+            self.writeVInt(43000000)  # Name Color
 
         # Experience Array
-        self.writeVInt(2)  # Count
-        for x in range(1):
+        if self.gamemode in [2, 5]:  # Showdown
+            self.writeVInt(1)
             self.writeVInt(0)  # Normal Experience ID
-            self.writeVInt(0)  # Normal Experience Gained
-            self.writeVInt(8)  # Star Player Experience ID
-            self.writeVInt(0)  # Star Player Experience Gained
+            self.writeVInt(self.exp_gained)  # Normal Experience Gained
+        else:  # 3v3
+            self.writeVInt(1)  # Was 0, became 1
+            self.writeVInt(0)  # Normal Experience ID
+            self.writeVInt(self.exp_gained)  # Normal Experience Gained
 
         # Rank Up and Level Up Bonus Array
-        self.writeVInt(0)  # Count
+        self.writeVInt(0)
 
-        # Trophies and Experience Bars Array
-        self.writeVInt(2)  # Count
-        for x in range(1):
-            self.writeVInt(1)  # Trophies Bar Milestone ID
-            self.writeVInt(0)  # Brawler Trophies
-            self.writeVInt(0)  # Brawler Trophies for Rank
-            self.writeVInt(5)  # Experience Bar Milestone ID
-            self.writeVInt(0)  # Player Experience
-            self.writeVInt(0)  # Player Experience for Level
+        # Trophies and Experience Bars
+        self.writeVInt(1)
+        self.writeVInt(1)  # Trophies Bar Milestone ID
+        self.writeVInt(self.new_trophies)  # Brawler Trophies
+        self.writeVInt(self.player.brawlers_high_trophies.get(current_brawler, 0))  # Brawler Trophies for Rank
+        self.writeVInt(5)  # Experience Bar Milestone ID
+        self.writeVInt(self.player.exp_points)  # Player Experience
+        self.writeVInt(self.player.exp_points)  # Player Experience for Level
 
-        self.writeDataReference(28, 0)  # Player Profile Icon
+        self.writeDataReference(28, self.player.profile_icon)
         self.writeBoolean(False)  # Play Again Entry

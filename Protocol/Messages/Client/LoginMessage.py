@@ -13,58 +13,56 @@ class LoginMessage(Reader):
         super().__init__(initial_bytes)
         self.player = player
         self.client = client
-        self.helpers = Helpers()
 
     def decode(self):
-
         self.account_id    = self.readLong()
         self.account_token = self.readString()
         self.game_major    = self.readInt()
         self.game_minor    = self.readInt()
         self.game_build    = self.readInt()
-
         self.fingerprint_sha = self.readString()
-
 
     def process(self, db):
         if self.player.status == 3: return
-
+        
         if self.player.maintenance:
             self.player.err_code = 10
             LoginFailedMessage(self.client, self.player, None).send()
             return
-
+        
         if self.fingerprint_sha != self.player.patch_sha and self.player.patch:
             self.player.err_code = 7
             LoginFailedMessage(self.client, self.player, None).send()
             return
-
+        
         if self.account_id == 0:
-            self.player.ID    = self.helpers.randomID()
-            self.player.token = self.helpers.randomToken()
+            self.player.ID    = Helpers.randomID()
+            self.player.token = Helpers.randomToken()
             db.create_player_account(self.player.ID, self.player.token)
-
         else:
             self.player.ID = self.account_id
             self.player.token = self.account_token
-
+            
             player_data = db.load_player_account(self.player.ID, self.player.token)
-
+            
             if player_data:
-                Helpers.load_account(self, player_data)
-                club_data = db.load_club(self.player.club_id)
-                Helpers.load_club(self, club_data)
+                Helpers.load_account(self.player, player_data)
+                
+                if self.player.club_id != 0:
+                    club_data = db.load_club(self.player.club_id)
+                    Helpers.load_club(self.player, club_data)
             else:
                 self.player.err_code = 1
                 LoginFailedMessage(self.client, self.player, "Account not found in database!\nPlease clear app data.").send()
                 return
-
+        
         self.player.status = 3
         LoginOkMessage(self.client, self.player, self.player.ID, self.player.token).send()
         OwnHomeDataMessage(self.client, self.player).send()
-
+        
         if self.player.club_id != 0:
             club_data = db.load_club(self.player.club_id)
             MyAllianceMessage(self.client, self.player, club_data).send()
-            if self.player.clubWarsEnabled: AllianceWarMessage(self.client, self.player).send()
+            if self.player.clubWarsEnabled:
+                AllianceWarMessage(self.client, self.player).send()
             AllianceStreamMessage(self.client, self.player, club_data['Messages']).send()

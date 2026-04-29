@@ -2,16 +2,13 @@ import sys
 import pymongo
 import datetime
 from DataBase.MongoUtils import MongoUtils
-from Logic.Player import Player
 import json
-import bson
 from Utils.Helpers import Helpers
 
 
 class MongoDB:
     def __init__(self, conn_str):
-        self.player = Player
-        self.client = pymongo.MongoClient(conn_str, serverSelectionTimeoutMS = 5000)
+        self.client = pymongo.MongoClient(conn_str, serverSelectionTimeoutMS=5000)
         try:
             print(f"{Helpers.cyan}[DEBUG] Connecting to Mongo DataBase...")
             self.client.server_info()
@@ -24,32 +21,40 @@ class MongoDB:
         self.clubs = self.database['Clubs']
         self.mongo_utils = MongoUtils()
 
+        with open('config.json', 'r') as f:
+            self.config = json.load(f)
+
         self.data = {
             'Name': 'Guest',
             'NameSet': False,
-            'Gems': Player.gems,
-            'Trophies': Player.trophies,
-            'Tickets': Player.tickets,
-            'Resources': Player.resources,
+            'Gems': self.config['Gems'],
+            'Trophies': self.config['Trophies'],
+            'Tickets': self.config['Tickets'],
+            'Resources': [
+                {'ID': 1, 'Amount': self.config['BrawlBoxTokens']},
+                {'ID': 8, 'Amount': self.config['Gold']},
+                {'ID': 9, 'Amount': self.config['BigBoxTokens']},
+                {'ID': 10, 'Amount': self.config['StarPoints']}
+            ],
             'TokenDoubler': 0,
-            'HighestTrophies': Player.high_trophies,
+            'HighestTrophies': self.config['Trophies'],
             'HomeBrawler': 0,
             'TrophyRoadReward': 1,
-            'ExperiencePoints': Player.exp_points,
+            'ExperiencePoints': self.config['ExperiencePoints'],
             'ProfileIcon': 0,
             'NameColor': 0,
-            'UnlockedBrawlers': Player.brawlers_unlocked,
-            'BrawlersTrophies': Player.brawlers_trophies,
-            'BrawlersHighestTrophies': Player.brawlers_high_trophies,
-            'BrawlersLevel': Player.brawlers_level,
-            'BrawlersPowerPoints': Player.brawlers_powerpoints,
-            'UnlockedSkins': Player.unlocked_skins,
-            'SelectedSkins': Player.selected_skins,
+            'UnlockedBrawlers': [0],
+            'BrawlersTrophies': {},
+            'BrawlersHighestTrophies': {},
+            'BrawlersLevel': {},
+            'BrawlersPowerPoints': {},
+            'UnlockedSkins': [],
+            'SelectedSkins': {},
             'SelectedBrawler': 0,
-            'Region': Player.region,
+            'Region': self.config['Region'],
             'SupportedContentCreator': "Classic Brawl",
-            'StarPower': Player.starpower,
-            'Gadget': Player.gadget,
+            'StarPower': None,
+            'Gadget': None,
             'BrawlPassActivated': False,
             'WelcomeMessageViewed': False,
             'ClubID': 0,
@@ -73,17 +78,21 @@ class MongoDB:
     def merge(self, dict1, dict2):
         return (dict1.update(dict2))
 
-
     def create_player_account(self, id, token):
         auth = {
             'ID': id,
             'Token': token,
         }
-
         auth.update(self.data)
 
-        self.mongo_utils.insert_data(self.players, auth)
+        from Files.CsvLogic.Characters import Characters
+        brawlers_id = Characters().get_brawlers_id()
+        selected_skins = {}
+        for id in brawlers_id:
+            selected_skins[f"{id}"] = 0
+        auth['SelectedSkins'] = selected_skins
 
+        self.mongo_utils.insert_data(self.players, auth)
 
     def load_player_account(self, id, token):
         query = {"Token": token}
@@ -99,7 +108,6 @@ class MongoDB:
 
             return result
 
-
     def load_player_account_by_id(self, id):
         query = {"ID": id}
         result = self.mongo_utils.load_document(self.players, query)
@@ -107,49 +115,37 @@ class MongoDB:
         if result:
             return result
 
-
     def update_player_account(self, token, item, value):
         query = {"Token": token}
         self.mongo_utils.update_document(self.players, query, item, value)
 
-
     def update_all_players(self, query, item, value):
         self.mongo_utils.update_all_documents(self.players, query, item, value)
 
-
     def delete_all_players(self, args):
         self.mongo_utils.delete_all_documents(self.players, args)
-
 
     def delete_player(self, token):
         query = {"Token": token}
         self.mongo_utils.delete_document(self.players, query)
 
-
     def load_all_players(self, args):
         result = self.mongo_utils.load_all_documents(self.players, args)
-
         return result
-
 
     def load_all_players_sorted(self, args, element, element2: str = None):
         return self.mongo_utils.load_all_documents_sorted(self.players, args, element, element2)
-
 
     def create_club(self, id, data):
         auth = {
             'ID': id,
         }
-
         auth.update(data)
-
         self.mongo_utils.insert_data(self.clubs, auth)
-
 
     def update_club(self, id, item, value):
         query = {"ID": id}
         self.mongo_utils.update_document(self.clubs, query, item, value)
-
 
     def load_club(self, id):
         query = {"ID": id}
@@ -165,15 +161,12 @@ class MongoDB:
 
             return result
 
-
     def load_all_clubs_sorted(self, args, element):
         result = self.mongo_utils.load_all_documents_sorted(self.clubs, args, element, None)
-
         return result
 
     def load_all_clubs(self, args):
         result = self.mongo_utils.load_all_documents(self.clubs, args)
-
         return result
 
     def delete_club(self, id):

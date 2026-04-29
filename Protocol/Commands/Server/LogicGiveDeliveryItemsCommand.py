@@ -4,24 +4,25 @@ from Logic.Home.LogicBoxData import LogicBoxData
 class LogicGiveDeliveryItemsCommand(Writer):
 
     def encode(self):
-        if self.player.delivery_items["DeliveryTypes"] != [100]: # Check if there's other delivery types to reverse the order
+        if self.player.delivery_items["DeliveryTypes"] != [100]:
             self.player.delivery_items['DeliveryTypes'] = list(reversed(self.player.delivery_items['DeliveryTypes']))
 
         self.writeVInt(0)
-        self.writeVInt(len(self.player.delivery_items['DeliveryTypes'])) # Amount
+        self.writeVInt(len(self.player.delivery_items['DeliveryTypes']))
 
         for y in self.player.delivery_items['DeliveryTypes']:
-            # DeliveryUnit
             self.writeVInt(y)
             if y != 100:
-                rewards = LogicBoxData.randomize(self, y)['Rewards']
+                box_data = LogicBoxData()
+                box_data.player = self.player
+                box_data.player.db = self.player.db 
+                rewards = box_data.randomize(y)['Rewards']
             else:
                 rewards = self.player.delivery_items['Items']
 
             self.writeVInt(len(rewards))
 
             for x in rewards:
-                # GatchaDrop::encode
                 self.writeVInt(x['Amount'])
                 self.writeDataReference(*x.get("DataRef", [0, 0]))
                 self.writeVInt(x['Value'])
@@ -29,13 +30,11 @@ class LogicGiveDeliveryItemsCommand(Writer):
                 self.writeDataReference(*x.get("SPGID", [0, 0]))
                 self.writeVInt(0)
 
-        self.writeBoolean(True) # ForcedDrops
-
+        self.writeBoolean(True)
         self.writeVInt(1)
         self.writeVInt(1)
         self.writeVInt(0)
         self.writeVInt(0)
-        # LogicServerCommand::encode
         self.writeVInt(0)
         self.writeVInt(0)
         self.writeLogicLong(0)

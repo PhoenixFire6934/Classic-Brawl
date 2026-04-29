@@ -3,7 +3,6 @@ class LogicPlayerStats:
     def getPlayerStats(self, accountData):
 
         playerStats = {
-
             '3v3Victories': 0,
             'ExperiencePoints': accountData['ExperiencePoints'],
             'Trophies': accountData['Trophies'],
@@ -12,14 +11,13 @@ class LogicPlayerStats:
             'Unknown2': 0,
             'ProfileIconID': 28000000 + accountData['ProfileIcon'],
             'SoloVictories': 0,
-            'BestRoboRumbleTime': 9999,
-            'BestTimeAsBigBrawler': 99999,
+            'BestRoboRumbleTime': 0,
+            'BestTimeAsBigBrawler': 0,
             'DuoVictories': 0,
-            'HighestBossFightLvlPassed': 21,
+            'HighestBossFightLvlPassed': 0,
             'Unknown4': 0,
-            'PowerPlayRank': 1,
+            'PowerPlayRank': 0,
             'MostChallengeWins': 0
-
         }
 
         return playerStats

@@ -22,9 +22,10 @@ class PlayerProfileMessage(Writer):
             # HeroEntry::encode
             self.writeDataReference(16, x)
             self.writeDataReference(0, 0)
-            self.writeVInt(self.player_data['BrawlersTrophies'][str(x)])
-            self.writeVInt(self.player_data['BrawlersHighestTrophies'][str(x)])
-            self.writeVInt(self.player_data['BrawlersLevel'][str(x)] + 2)
+            # Using .get() for secure access
+            self.writeVInt(self.player_data['BrawlersTrophies'].get(str(x), 0))
+            self.writeVInt(self.player_data['BrawlersHighestTrophies'].get(str(x), 99999))
+            self.writeVInt(self.player_data['BrawlersLevel'].get(str(x), 0) + 2)
 
         self.playerStats = LogicPlayerStats.getPlayerStats(self, self.player_data)
 

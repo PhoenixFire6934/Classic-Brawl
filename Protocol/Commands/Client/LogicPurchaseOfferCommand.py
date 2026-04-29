@@ -10,6 +10,9 @@ class LogicPurchaseOfferCommand(Reader):
         self.client = client
         self.offer_index: int = 0
         self.brawler: int = 0
+        
+        # Brawlers from the Road of Glory (not sold in the store)
+        self.TrophyRoadBrawlers = [0, 1, 2, 3, 7, 8, 9, 14, 22, 27, 30]
 
     def decode(self):
         self.readVInt()
@@ -25,7 +28,6 @@ class LogicPurchaseOfferCommand(Reader):
         offer_cost     = LogicShopData.offers[self.offer_index]["Cost"]
 
         if not LogicShopData.offers[self.offer_index].get("Claimed", False):
-
 
             self.player.delivery_items = {
                 "DeliveryTypes": [100],
@@ -63,10 +65,27 @@ class LogicPurchaseOfferCommand(Reader):
 
                 elif item["OfferID"] == 3:
                     delivery = {'Amount': item.get("Amount", 1), 'DataRef': item.get("CharacterID", [16, 0]), 'Value':1 }
+                    brawler_id = delivery["DataRef"][1]
+                    
+                    if brawler_id in self.TrophyRoadBrawlers:
+                        print(f"Brawler {brawler_id} is a Trophy Road brawler, cannot be purchased!")
+                        continue
+                    
                     self.player.delivery_items['Items'].append(delivery)
-                    if delivery["DataRef"] not in self.player.brawlers_unlocked:
-                        self.player.brawlers_unlocked.append(delivery["DataRef"])
+                    if brawler_id not in self.player.brawlers_unlocked:
+                        self.player.brawlers_unlocked.append(brawler_id)
                         db.update_player_account(self.player.token, 'UnlockedBrawlers', self.player.brawlers_unlocked)
+                        
+                        # Initializing trophies and levels for the new brawler
+                        self.player.brawlers_trophies[str(brawler_id)] = 0
+                        self.player.brawlers_high_trophies[str(brawler_id)] = 0
+                        self.player.brawlers_level[str(brawler_id)] = 0
+                        self.player.brawlers_powerpoints[str(brawler_id)] = 0
+                        
+                        db.update_player_account(self.player.token, 'BrawlersTrophies', self.player.brawlers_trophies)
+                        db.update_player_account(self.player.token, 'BrawlersHighestTrophies', self.player.brawlers_high_trophies)
+                        db.update_player_account(self.player.token, 'BrawlersLevel', self.player.brawlers_level)
+                        db.update_player_account(self.player.token, 'BrawlersPowerPoints', self.player.brawlers_powerpoints)
 
                 elif item["OfferID"] == 12:
                     delivery = {'Amount': item.get("Amount", 1), 'DataRef': [16, self.brawler], 'Value':6 }

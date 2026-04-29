@@ -72,7 +72,7 @@ class LogicDailyData:
             self.writeVInt(0)
             self.writeVInt(0)
 
-        self.writeVInt(200) # Available Battle Tokens
+        self.writeVInt(777) # Available Battle Tokens
         self.writeVInt(0)   # Time till Bonus Tokens
 
         self.writeVInt(0)  # Unknown Array
