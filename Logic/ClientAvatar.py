@@ -36,12 +36,12 @@ class LogicClientAvatar:
         self.writeVInt(len(self.player.brawlers_id))
         for x in self.player.brawlers_id:
             self.writeDataReference(16, x)
-            self.writeVInt(self.player.brawlers_trophies[str(x)])
+            self.writeVInt(self.player.brawlers_trophies.get(str(x), 0))
 
         self.writeVInt(len(self.player.brawlers_id))
         for x in self.player.brawlers_id:
             self.writeDataReference(16, x)
-            self.writeVInt(self.player.brawlers_high_trophies[str(x)])
+            self.writeVInt(self.player.brawlers_high_trophies.get(str(x), 0))
 
         self.writeVInt(0)
         for x in range(0):
@@ -51,12 +51,12 @@ class LogicClientAvatar:
         self.writeVInt(len(self.player.brawlers_unlocked))
         for x in self.player.brawlers_unlocked:
             self.writeDataReference(16, x)
-            self.writeVInt(self.player.brawlers_powerpoints[str(x)])
+            self.writeVInt(self.player.brawlers_powerpoints.get(str(x), 0))
 
         self.writeVInt(len(self.player.brawlers_id))
         for x in self.player.brawlers_id:
             self.writeDataReference(16, x)
-            self.writeVInt(self.player.brawlers_level[str(x)])
+            self.writeVInt(self.player.brawlers_level.get(str(x), 0))
 
         self.writeVInt(len(self.player.brawlers_spg))
         for x in self.player.brawlers_spg:

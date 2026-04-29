@@ -11,7 +11,10 @@ class PlayerStatusMessage(Reader):
         self.status = self.readVInt()
 
     def process(self, db):
-        if self.status == self.player.status: return
-        if self.status == 4294967295: self.status = 8
-
+        if self.status == self.player.status: 
+            return
+        
+        if self.status == 4294967295: 
+            self.status = 8
+        
         self.player.status = self.status
